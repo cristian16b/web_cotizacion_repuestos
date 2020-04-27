@@ -3,7 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <!-- Bootstrap core CSS -->
+            <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <!-- Custom styles for this template -->
+            <link href="assets/css/shop-item.css" rel="stylesheet">
+        {% endblock %}
     </head>
     <body>
         {% block body %}
