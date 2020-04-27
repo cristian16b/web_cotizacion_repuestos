@@ -5,9 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <!-- Bootstrap core CSS -->
-            <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-            <!-- Custom styles for this template -->
-            <link href="assets/css/shop-item.css" rel="stylesheet">
+            <link href="{{ asset('./bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         {% endblock %}
     </head>
     <body>
@@ -15,6 +13,9 @@
         {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('./build/app.js') }}"></script>
+            <!-- Bootstrap core JavaScript -->
+            <script src="{{ asset('./bootstrap/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('./bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>
