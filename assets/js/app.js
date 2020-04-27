@@ -4,6 +4,7 @@ import BarraSuperior from './Components/barra superior/barraSuperior';
 require("../css/app.css");
 import 'bootstrap/dist/css/bootstrap.css';
 import PiePagina from './Components/pie de pagina/piePagina';
+import Home from './Components/home/home';
  
 class App extends React.Component {
 
@@ -11,11 +12,9 @@ class App extends React.Component {
     render() {
       return (
         <div>
-            <div className="container">
-              <div className="row">
-                <p></p>
-              </div>
-            </div>
+          <BarraSuperior />
+          <Home />
+          <PiePagina />
         </div>
       );
     }
@@ -24,14 +23,4 @@ class App extends React.Component {
 ReactDOM.render(
     <App />,
     document.getElementById('root')
-);
-
-ReactDOM.render(
-  <BarraSuperior />,
-  document.getElementById('barraSuperior')
-);
-
-ReactDOM.render(
-  <PiePagina />,
-  document.getElementById('piePagina')
 );
