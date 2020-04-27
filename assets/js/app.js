@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import BarraSuperior from './Components/barra superior/barraSuperior';
 require("../css/app.css");
 import 'bootstrap/dist/css/bootstrap.css';
+import PiePagina from './Components/pie de pagina/piePagina';
  
 class App extends React.Component {
 
@@ -16,6 +17,8 @@ class App extends React.Component {
                 <p></p>
               </div>
             </div>
+            
+            <PiePagina></PiePagina>
         </div>
       );
     }
