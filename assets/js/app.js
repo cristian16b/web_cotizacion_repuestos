@@ -11,14 +11,11 @@ class App extends React.Component {
     render() {
       return (
         <div>
-          <BarraSuperior></BarraSuperior>
             <div className="container">
               <div className="row">
                 <p></p>
               </div>
             </div>
-            
-            <PiePagina></PiePagina>
         </div>
       );
     }
@@ -27,4 +24,14 @@ class App extends React.Component {
 ReactDOM.render(
     <App />,
     document.getElementById('root')
+);
+
+ReactDOM.render(
+  <BarraSuperior />,
+  document.getElementById('barraSuperior')
+);
+
+ReactDOM.render(
+  <PiePagina />,
+  document.getElementById('piePagina')
 );
