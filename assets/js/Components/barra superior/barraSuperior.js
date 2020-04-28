@@ -66,6 +66,9 @@ class BarraSuperior extends React.Component {
                     <a className="nav-link" href="#">Mi perfil</a>
                 </li>
                 <li className="nav-item">
+                    <a className="nav-link" href="#">Registrarme</a>
+                </li>
+                <li className="nav-item">
                     <a className="nav-link" href="#">¿Dudas? ¿Consultas?</a>
                 </li>
                 </ul>
