@@ -8,6 +8,7 @@ Encore
 
     // Nuestro archivo app.js, que será compilado y almacenado en /web/build/app.js
     .addEntry('app', './assets/js/app.js')
+    .addEntry('buscarRepuesto', './assets/js/buscarRepuesto.js')
 
     // Habilitar el mapeo de recursos en Desarrollo.
     .enableSourceMaps(!Encore.isProduction())

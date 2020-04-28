@@ -3,5 +3,8 @@
  {% block title %} Symfony React Starter {% endblock %}
  
  {% block body %}
-   <div id="root"></div>
+  <div id="root"></div>
+ {% endblock %}
+ {% block javascripts %}
+  <script src="{{ asset('./build/app.js') }}"></script>
  {% endblock %}
