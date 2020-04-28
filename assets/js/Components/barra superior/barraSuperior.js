@@ -54,22 +54,22 @@ class BarraSuperior extends React.Component {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">¿Quienes somos?<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="./">¿Quienes somos?<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Buscar un repuesto</a>
+                    <a class="nav-link" href="./buscar/repuesto">Buscar un repuesto</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Mis cotizaciones</a>
+                    <a className="nav-link" href="./mis/cotizaciones">Mis cotizaciones</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Mi perfil</a>
+                    <a className="nav-link" href="./mis/perfil">Mi perfil</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Registrarme</a>
+                    <a className="nav-link" href="./registrarme">Registrarme</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">¿Dudas? ¿Consultas?</a>
+                    <a className="nav-link" href="./contacto">¿Dudas? ¿Consultas?</a>
                 </li>
                 </ul>
             </div>
