@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+* @Route("/perfil")
+*/
 class MisPerfilController extends AbstractController
 {
     /**
-     * @Route("/mis/perfil", name="mis_perfil")
+     * @Route("/", name="mi_perfil")
      */
     public function index()
     {

@@ -57,13 +57,13 @@ class BarraSuperior extends React.Component {
                     <a class="nav-link" href="./">¿Quienes somos?<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./buscar/repuesto">Buscar un repuesto</a>
+                    <a class="nav-link" href="./repuesto">Buscar un repuesto</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="./mis/cotizaciones">Mis cotizaciones</a>
+                    <a className="nav-link" href="./cotizaciones">Mis cotizaciones</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="./mis/perfil">Mi perfil</a>
+                    <a className="nav-link" href="./perfil">Mi perfil</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="./registrarme">Registrarme</a>
