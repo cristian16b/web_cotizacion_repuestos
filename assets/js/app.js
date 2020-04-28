@@ -11,16 +11,18 @@ class App extends React.Component {
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
     render() {
       return (
-        <div>
+        <>
           <BarraSuperior />
-          <Home />
+          <div className="container">
+            <Home />
+          </div>
           <PiePagina />
-        </div>
+        </>
       );
     }
 }
 
 ReactDOM.render(
-    <App />,
+    <App></App>,
     document.getElementById('root')
 );
