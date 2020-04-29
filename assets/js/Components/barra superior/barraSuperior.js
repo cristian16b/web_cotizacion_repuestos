@@ -1,11 +1,12 @@
 import React , { Component } from 'react';
+import {  Link } from 'react-router-dom';
 
 class BarraSuperior extends React.Component {
 
   constructor(props){
     super(props);
   }
-  
+
   render() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,7 +18,7 @@ class BarraSuperior extends React.Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                    <a className="nav-link" href="./">¿Quienes somos?<span className="sr-only">(current)</span></a>
+                    <a className="nav-link" href="/">¿Quienes somos?<span className="sr-only">(current)</span></a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="./repuesto">Buscar un repuesto</a>
