@@ -18,8 +18,8 @@ class App extends React.Component {
           <BrowserRouter>
             <div>
               <NavBar />   
-              <Route exact path="/" component={Home} />
-              <Route path="/repuesto" component={BuscarRepuesto} />
+              <Route path="/" component={Home} />
+              <Route exact path="/repuesto" component={BuscarRepuesto} />
               <PiePagina />
             </div>
           </BrowserRouter>
