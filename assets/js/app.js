@@ -16,12 +16,18 @@ class App extends React.Component {
       return (
         <>
           <BrowserRouter>
-            <div>
-              <NavBar />   
-                <Route exact path="/" component={Home} />
-                <Route path="/repuesto" component={BuscarRepuesto} />
+            <>
+              <NavBar />
+                {/* <div className="container">
+                  <div className="row justify-content-center">
+                    <div className="col-12"> */}
+                      <Route exact path="/" component={Home} />
+                      <Route path="/repuesto" component={BuscarRepuesto} />
+                    {/* </div>
+                  </div>
+                </div>    */}
               <PiePagina />
-            </div>
+            </>
           </BrowserRouter>
         </>
       );
