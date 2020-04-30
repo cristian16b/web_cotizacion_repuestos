@@ -22,22 +22,22 @@ Encore
     // Activa React
     .enableReactPreset()
 
-    .configureBabel(function(babelConfig) {
-        // add additional presets
-        babelConfig.presets.push('@babel/preset-flow');
+    // .configureBabel(function(babelConfig) {
+    //     // add additional presets
+    //     babelConfig.presets.push('@babel/preset-flow');
 
-        // no plugins are added by default, but you can add some
-        babelConfig.plugins.push('styled-jsx/babel');
-    }, {
-        // node_modules is not processed through Babel by default
-        // but you can whitelist specific modules to process
-        includeNodeModules: ['foundation-sites'],
+    //     // no plugins are added by default, but you can add some
+    //     babelConfig.plugins.push('styled-jsx/babel');
+    // }, {
+    //     // node_modules is not processed through Babel by default
+    //     // but you can whitelist specific modules to process
+    //     includeNodeModules: ['foundation-sites'],
 
-        // or completely control the exclude rule (note that you
-        // can't use both "includeNodeModules" and "exclude" at
-        // the same time)
-        exclude: /bower_components/
-    })
+    //     // or completely control the exclude rule (note that you
+    //     // can't use both "includeNodeModules" and "exclude" at
+    //     // the same time)
+    //     exclude: /bower_components/
+    // })
 ;
 
 // Exporta la configuración final

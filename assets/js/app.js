@@ -14,18 +14,18 @@ class App extends React.Component {
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
     render() {
       return (
-        <div>
+        <>
           <BrowserRouter>
             <div>
               <NavBar />   
               <Route exact path="/" component={Home} />
               <Route path="/repuesto" component={BuscarRepuesto} />
+              <PiePagina />
             </div>
           </BrowserRouter>
-        </div>
+        </>
       );
     }
-
 }
 
 ReactDOM.render(
