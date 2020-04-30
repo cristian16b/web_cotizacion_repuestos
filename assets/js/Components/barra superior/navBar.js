@@ -8,8 +8,8 @@ class Navbar extends React.Component {
 
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <Link to="/" className="navbar-brand"><span className="navbar-brand">Demo</span></Link>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <Link to="/" className="navbar-brand"><span className="navbar-brand"></span></Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -21,11 +21,17 @@ class Navbar extends React.Component {
                         <li className={this.getNavLinkClass("/repuesto")}>
                             <Link to="/repuesto" className="navbar-brand"><spam className="nav-link">Buscar un repuesto</spam></Link>
                         </li>
-                        <li className="nav-item dropdown bg-dark">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <spam cass="nav-link">Mis datos</spam>
-                            </a>
-                            <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                        <li className={this.getNavLinkClass("/registrarme")}>
+                            <Link to="/registrarme" className="navbar-brand"><spam className="nav-link">Registrarme</spam></Link>
+                        </li>
+                        <li className={this.getNavLinkClass("/contacto")}>
+                            <Link to="/contacto" className="navbar-brand"><spam className="nav-link">¿Dudas, Consultas?</spam></Link>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <li className="dropdown-toggle" id="navbarDropdownMenuLink"  data-toggle="dropdown" >
+                                <Link to="/" className="navbar-brand"><spam className="nav-link">Mis datos</spam></Link>
+                            </li>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li className={this.getNavLinkClass("/cotizaciones")}>
                                     <Link to="/cotizaciones" className="navbar-brand"><spam className="nav-link">Mis cotizaciones</spam></Link>
                                 </li>
@@ -33,12 +39,6 @@ class Navbar extends React.Component {
                                     <Link to="/perfil" className="navbar-brand"><spam className="nav-link">Mi perfil</spam></Link>
                                 </li>
                             </div>
-                        </li>
-                        <li className={this.getNavLinkClass("/registrarme")}>
-                            <Link to="/registrarme" className="navbar-brand"><spam className="nav-link">Registrarme</spam></Link>
-                        </li>
-                        <li className={this.getNavLinkClass("/contacto")}>
-                            <Link to="/contacto" className="navbar-brand"><spam className="nav-link">¿Dudas, Consultas?</spam></Link>
                         </li>
                     </ul>
                 </div>
