@@ -10,35 +10,41 @@ class Navbar extends React.Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <Link to="/" className="navbar-brand"><span className="navbar-brand"></span></Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav">
-                        <li className={this.getNavLinkClass("/")}>
+                        {/* 
+                            los siguientes elemetos incrustados en los <li> son para que cuando
+                            se haga click el menu se cierre
+
+                            data-toggle="collapse" data-target=".navbar-collapse"
+                        */}
+                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
                             <Link to="/" className="navbar-brand"><span className="nav-link">¿Quienes somos?</span></Link>
                         </li>
-                        <li className={this.getNavLinkClass("/repuesto")}>
+                        <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
                             <Link to="/repuesto" className="navbar-brand"><span className="nav-link">Buscar un repuesto</span></Link>
                         </li>
                         {/* nota: react por algun motivo raro (no se cual) no acepta e anidamiento de listas li (una dentro de otra) */}
                         <div className="nav-item dropdown">
-                            <li className="dropdown-toggle" id="navbarDropdownMenuLink"  data-toggle="dropdown" >
+                            <li data-toggle="collapse" className="dropdown-toggle" id="navbarDropdownMenuLink"  data-toggle="dropdown" >
                                 <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mis datos</span></Link>
                             </li>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li className={this.getNavLinkClass("/cotizaciones")}>
+                                <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
                                     <Link to="/cotizaciones" className="navbar-brand"><span className="nav-link">Mis cotizaciones</span></Link>
                                 </li>
-                                <li className={this.getNavLinkClass("/perfil")}>
+                                <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
                                     <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mi perfil</span></Link>
                                 </li>
                             </div>
                         </div>
-                        <li className={this.getNavLinkClass("/registrarme")}>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/registrarme")}>
                             <Link to="/registrarme" className="navbar-brand"><span className="nav-link">Registrarme</span></Link>
                         </li>
-                        <li className={this.getNavLinkClass("/contacto")}>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/contacto")}>
                             <Link to="/contacto" className="navbar-brand"><span className="nav-link">¿Dudas, Consultas?</span></Link>
                         </li>
                     </ul>
