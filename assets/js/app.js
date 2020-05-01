@@ -18,14 +18,10 @@ class App extends React.Component {
           <BrowserRouter>
             <>
               <NavBar />
-                {/* <div className="container">
-                  <div className="row justify-content-center">
-                    <div className="col-12"> */}
+                <div className="container">
                       <Route exact path="/" component={Home} />
                       <Route path="/repuesto" component={BuscarRepuesto} />
-                    {/* </div>
-                  </div>
-                </div>    */}
+                </div>   
               <PiePagina />
             </>
           </BrowserRouter>
