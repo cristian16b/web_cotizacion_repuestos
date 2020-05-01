@@ -23,7 +23,7 @@ class Navbar extends React.Component {
                         </li>
                         <li className="nav-item dropdown">
                             <li className="dropdown-toggle" id="navbarDropdownMenuLink"  data-toggle="dropdown" >
-                                <Link to="/" className="navbar-brand"><span className="nav-link">Mis datos</span></Link>
+                                <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mis datos</span></Link>
                             </li>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li className={this.getNavLinkClass("/cotizaciones")}>

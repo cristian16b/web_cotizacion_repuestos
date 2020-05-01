@@ -7,7 +7,7 @@ import PiePagina from './Components/pie de pagina/piePagina';
 import Home from './Components/home/home';
 import BuscarRepuesto from './Components/buscar repuesto/buscarRepuesto';
 
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
 
@@ -18,10 +18,10 @@ class App extends React.Component {
           <BrowserRouter>
             <>
               <NavBar />
-                <div className="container">
-                      <Route exact path="/" component={Home} />
-                      <Route path="/repuesto" component={BuscarRepuesto} />
-                </div>   
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/repuesto" component={BuscarRepuesto} />
+              </Switch> 
               <PiePagina />
             </>
           </BrowserRouter>

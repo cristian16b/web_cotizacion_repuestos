@@ -12,11 +12,6 @@ class BuscarRepuesto extends React.Component {
     }
 }
 
-// ReactDOM.render(
-//     <BuscarRepuesto />,
-//     document.getElementById('rootBuscarRepuesto')
-// );
-
 export default BuscarRepuesto;
 
 
