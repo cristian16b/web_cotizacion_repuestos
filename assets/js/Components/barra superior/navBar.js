@@ -21,7 +21,8 @@ class Navbar extends React.Component {
                         <li className={this.getNavLinkClass("/repuesto")}>
                             <Link to="/repuesto" className="navbar-brand"><span className="nav-link">Buscar un repuesto</span></Link>
                         </li>
-                        <li className="nav-item dropdown">
+                        {/* nota: react por algun motivo raro (no se cual) no acepta e anidamiento de listas li (una dentro de otra) */}
+                        <div className="nav-item dropdown">
                             <li className="dropdown-toggle" id="navbarDropdownMenuLink"  data-toggle="dropdown" >
                                 <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mis datos</span></Link>
                             </li>
@@ -33,7 +34,7 @@ class Navbar extends React.Component {
                                     <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mi perfil</span></Link>
                                 </li>
                             </div>
-                        </li>
+                        </div>
                         <li className={this.getNavLinkClass("/registrarme")}>
                             <Link to="/registrarme" className="navbar-brand"><span className="nav-link">Registrarme</span></Link>
                         </li>
