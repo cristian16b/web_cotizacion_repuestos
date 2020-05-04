@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Entity\Usuario;
-
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * LoginController.php
@@ -75,7 +75,7 @@ class LoginController extends AbstractController
     public function getLoginCheckAction() {}
  
     /**
-     * @Rest\Post("register", name="user_register")
+     * @Rest\Post("/register", name="user_register")
      *
      * @SWG\Response(
      *     response=201,
@@ -122,7 +122,7 @@ class LoginController extends AbstractController
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $encoder) {
         // die;
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
         $em = $this->getDoctrine()->getManager();
  
         $user = [];
