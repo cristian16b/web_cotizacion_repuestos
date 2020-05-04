@@ -87,7 +87,7 @@ class Usuario implements UserInterface
     /**
      * @return mixed
      */
-    public function getName()
+    public function getNombre()
     {
         return $this->nombre;
     }
@@ -96,7 +96,7 @@ class Usuario implements UserInterface
      * @param mixed $nombre
      * @return self
      */
-    public function setName($nombre)
+    public function setNombre($nombre)
     {
         $this->nombre = $nombre;
  
