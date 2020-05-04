@@ -10,7 +10,7 @@ import Contacto from './Components/contacto/contacto';
 import MiPerfil from './Components/mi perfil/miPerfil';
 import MisCotizaciones from './Components/mis cotizaciones/misCotizaciones';
 import Registrarme from './Components/registrarme/registrarme';
-
+import Login from './Components/login/login';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
@@ -30,6 +30,7 @@ class App extends React.Component {
                     <Route path="/cotizaciones" component={MisCotizaciones} />
                     <Route path="/registrarme" component={Registrarme} />
                     <Route path="/contacto" component={Contacto} />
+                    <Route path="/login" component={Login} />
                   </Switch>
                 </div>
               <PiePagina />

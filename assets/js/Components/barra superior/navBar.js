@@ -28,7 +28,7 @@ class Navbar extends React.Component {
                             <Link to="/repuesto" className="navbar-brand"><span className="nav-link">Buscar un repuesto</span></Link>
                         </li>
                         {/* nota: react por algun motivo raro (no se cual) no acepta e anidamiento de listas li (una dentro de otra) */}
-                        <div className="nav-item dropdown">
+                        {/* <div className="nav-item dropdown">
                             <li data-toggle="collapse" className="dropdown-toggle" id="navbarDropdownMenuLink"  data-toggle="dropdown" >
                                 <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mis datos</span></Link>
                             </li>
@@ -39,8 +39,14 @@ class Navbar extends React.Component {
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
                                     <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mi perfil</span></Link>
                                 </li>
+                                <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/salir")}>
+                                    <Link to="/salir" className="navbar-brand"><span className="nav-link">Salir</span></Link>
+                                </li>
                             </div>
-                        </div>
+                        </div> */}
+                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/login")}>
+                            <Link to="/login" className="navbar-brand"><span className="nav-link">Ingresar</span></Link>
+                        </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/registrarme")}>
                             <Link to="/registrarme" className="navbar-brand"><span className="nav-link">Registrarme</span></Link>
                         </li>
