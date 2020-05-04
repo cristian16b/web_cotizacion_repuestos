@@ -31,6 +31,11 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class LoginController extends AbstractController
 {
+    private $userAdminDefultd = "USER_ADMIN";
+    private $userRolUsuario = ["ROLE_USER"];
+    private $userRolComerciante = ["ROLE_COMERCIANTE"];
+    private $userRolAdmin = ["ROLE_ADMIN"];
+
     /**
      * @Route("/login", name="login")
      */
@@ -143,7 +148,9 @@ class LoginController extends AbstractController
             $user->setUsername($username);
             $user->setPlainPassword($password);
             $user->setPassword($encoder->encodePassword($user, $password));
- 
+            $user->setRoles($this->userRolAdmin);
+            $user->setUsuarioUltimaModificacion($username);
+
             $em->persist($user);
             $em->flush();
  
