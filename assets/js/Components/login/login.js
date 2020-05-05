@@ -13,7 +13,7 @@ class Login extends React.Component {
             username:'',
             password:'',
             errors: {},
-            formularioValido: false
+            errorApi: ''
         })
 
         this.cambioUsername = this.cambioUsername.bind(this);
@@ -66,30 +66,19 @@ class Login extends React.Component {
             "_username":this.state.username,
             "_password":this.state.password,
         }
+        var self = this;
         axios.post(API_LOGIN, payload)
             .then(function (response) {
-                console.log(response);
-                if(response.data.code === 200){
-                    // setState(prevState => ({
-                    //     ...prevState,
-                    //     'successMessage' : 'Login successful. Redirecting to home page..'
-                    // }))
-                    // redirectToHome();
-                    // props.showError(null)
-                    console.log('logueado');
-                    console.log(response);
-                }
-                else if(response.data.code === 204){
-                    // props.showError("Username and password do not match");
-                    console.log('usuario o contraseña erroneas');
-                }
-                else{
-                    // props.showError("Username does not exists");
-                    console.log('otro error');
-                }
+                self.setState({errorApi: response.data})
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch(function (e) {
+                console.log(e);
+                let error = '';
+                if(e.response)
+                {
+                    let error = e.response.message;
+                }
+                self.setState({errorApi: error})
             });
     }
 
