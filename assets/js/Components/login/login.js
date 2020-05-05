@@ -1,6 +1,8 @@
 import React , { Component } from 'react';
 require("../login/login.css");
-import {Link}  from 'react-router-dom'
+import {Link}  from 'react-router-dom';
+import {API_LOGIN} from '../../Constantes/constantes';
+import axios from 'axios';
 
 class Login extends React.Component {
 
@@ -20,9 +22,8 @@ class Login extends React.Component {
     }
 
     handleSubmit(event) {
-        this.validarFormulario();
         if(this.validarFormulario() == true) {
-
+            this.consumirApiLogin();
         }
         // alert('los errores encontrados son :' + this.state.errors);
         event.preventDefault();
@@ -60,26 +61,31 @@ class Login extends React.Component {
         })
     }
 
-    consumirApi() {
+    consumirApiLogin() {
         const payload={
-            "email":state.email,
-            "password":state.password,
+            "_username":this.state.username,
+            "_password":this.state.password,
         }
-        axios.post(API_BASE_URL+'login', payload)
+        axios.post(API_LOGIN, payload)
             .then(function (response) {
+                console.log(response);
                 if(response.data.code === 200){
-                    setState(prevState => ({
-                        ...prevState,
-                        'successMessage' : 'Login successful. Redirecting to home page..'
-                    }))
-                    redirectToHome();
-                    props.showError(null)
+                    // setState(prevState => ({
+                    //     ...prevState,
+                    //     'successMessage' : 'Login successful. Redirecting to home page..'
+                    // }))
+                    // redirectToHome();
+                    // props.showError(null)
+                    console.log('logueado');
+                    console.log(response);
                 }
                 else if(response.data.code === 204){
-                    props.showError("Username and password do not match");
+                    // props.showError("Username and password do not match");
+                    console.log('usuario o contraseña erroneas');
                 }
                 else{
-                    props.showError("Username does not exists");
+                    // props.showError("Username does not exists");
+                    console.log('otro error');
                 }
             })
             .catch(function (error) {
