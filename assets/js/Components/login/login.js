@@ -20,21 +20,29 @@ class Login extends React.Component {
     }
 
     handleSubmit(event) {
+        this.validarFormulario();
+        // alert('los errores encontrados son :' + this.state.errors);
+        event.preventDefault();
+    }
+
+    validarFormulario() {
+        let formularioValido = true;
         let errors = {};
         //alert('A name was submitted: ' + this.state.username + ' ' + this.state.password);
         if(this.state.username.length == 0) {
             errors["username"] = "El usuario no puede estar vacio";
+            formularioValido = false;
         }
         if(this.state.password.length == 0) {
             errors["password"] = "La contraseña no puede estar vacia";
+            formularioValido = false;
         }
 
         this.setState({
             errors: errors
         })
 
-        // alert('los errores encontrados son :' + this.state.errors);
-        event.preventDefault();
+        return formularioValido;
     }
 
     cambioPassword(e) {
