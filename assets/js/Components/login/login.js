@@ -9,7 +9,9 @@ class Login extends React.Component {
 
         this.state = ({
             username:'',
-            password:''
+            password:'',
+            errors: {},
+            formularioValido: false
         })
 
         this.cambioUsername = this.cambioUsername.bind(this);
@@ -18,7 +20,20 @@ class Login extends React.Component {
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.username + ' ' + this.state.password);
+        let errors = {};
+        //alert('A name was submitted: ' + this.state.username + ' ' + this.state.password);
+        if(this.state.username.length == 0) {
+            errors["username"] = "El usuario no puede estar vacio";
+        }
+        if(this.state.password.length == 0) {
+            errors["password"] = "La contraseña no puede estar vacia";
+        }
+
+        this.setState({
+            errors: errors
+        })
+
+        // alert('los errores encontrados son :' + this.state.errors);
         event.preventDefault();
     }
 
@@ -38,7 +53,7 @@ class Login extends React.Component {
         return (
             <div className="row justify-content-center">
                 <div className="col-lg-5">
-                    <form action="/examples/actions/confirmation.php" method="post" onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit}>
                         <h2 className="text-center">Iniciar sesión</h2>   
                         <div className="form-group">
                             <div className="input-group">
@@ -46,16 +61,22 @@ class Login extends React.Component {
                                 {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                                 <input type="text" className="form-control" name="username" 
                                         defaultValue={this.state.username} onChange={this.cambioUsername}
-                                        placeholder="Ingrese su nombre de usuario" required="required" />
+                                        placeholder="Ingrese su nombre de usuario"/>
                             </div>
+                            <span id="passwordHelp" className="text-danger error_negrita">
+                                {this.state.errors["username"]}
+                            </span> 
                         </div>
                         <div className="form-group">
                             <div className="input-group">
                                 <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                                 <input type="password" className="form-control" name="password" 
                                         defaultValue = {this.state.password} onChange={this.cambioPassword}
-                                        placeholder="Ingrese su contraseña" required="required" />	
+                                        placeholder="Ingrese su contraseña" />	
                             </div>
+                            <span id="passwordHelp" className="text-danger error_negrita">
+                                {this.state.errors["password"]}
+                            </span> 
                         </div>        
                         <div className="form-group">
                             <button type="submit" className="btn btn-primary login-btn btn-block">Ingresar</button>
