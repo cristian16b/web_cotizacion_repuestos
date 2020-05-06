@@ -19,13 +19,14 @@ class Login extends React.Component {
         this.cambioUsername = this.cambioUsername.bind(this);
         this.cambioPassword = this.cambioPassword.bind(this);
         this.handleSubmit   = this.handleSubmit.bind(this); 
+        this.consumirApiLogin = this.consumirApiLogin.bind(this);
+        this.validarFormulario = this.validarFormulario.bind(this);
     }
 
     handleSubmit(event) {
         if(this.validarFormulario() == true) {
             this.consumirApiLogin();
         }
-        // alert('los errores encontrados son :' + this.state.errors);
         event.preventDefault();
     }
 
@@ -66,19 +67,19 @@ class Login extends React.Component {
             "_username":this.state.username,
             "_password":this.state.password,
         }
-        var self = this;
         axios.post(API_LOGIN, payload)
-            .then(function (response) {
-                self.setState({errorApi: response.data})
+            .then(response => {
+                console.log(response.data.token);
+                // this.setState({errorApi: response.data})
+                // console.log(this.state.errorApi);
             })
-            .catch(function (e) {
-                console.log(e);
-                let error = '';
+            .catch(e => {
                 if(e.response)
                 {
-                    let error = e.response.message;
+                    let error = '';
+                    error = e.response.data.message;
+                    this.setState({errorApi: error});
                 }
-                self.setState({errorApi: error})
             });
     }
 
@@ -92,7 +93,12 @@ class Login extends React.Component {
             <div className="row justify-content-center">
                 <div className="col-lg-5">
                     <form onSubmit={this.handleSubmit}>
-                        <h2 className="text-center">Iniciar sesión</h2>   
+                        <h2 className="text-center">Iniciar sesión</h2>
+                        <div className="form-group">
+                            <span className="text-danger error_negrita">
+                                {this.state.errorApi}
+                            </span>
+                        </div>   
                         <div className="form-group">
                             <div className="input-group">
                                 <span className="input-group-addon"><i className="fa fa-user"></i></span>
