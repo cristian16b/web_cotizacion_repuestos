@@ -25,12 +25,12 @@ class App extends React.Component {
                 <div className="container">
                   <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route path="/repuesto" component={BuscarRepuesto} />
-                    <Route path="/perfil" component={MiPerfil} />
-                    <Route path="/cotizaciones" component={MisCotizaciones} />
-                    <Route path="/registrarme" component={Registrarme} />
-                    <Route path="/contacto" component={Contacto} />
-                    <Route path="/login" component={Login} />
+                    <Route exact path="/repuesto" component={BuscarRepuesto} />
+                    <Route exact path="/perfil" component={MiPerfil} />
+                    <Route exact path="/cotizaciones" component={MisCotizaciones} />
+                    <Route exact path="/registrarme" component={Registrarme} />
+                    <Route exact path="/contacto" component={Contacto} />
+                    <Route exact path="/login" component={Login} />
                   </Switch>
                 </div>
               <PiePagina />
