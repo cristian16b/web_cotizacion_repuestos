@@ -1,12 +1,11 @@
-import React , { Component } from 'react';
+import React , { Component  } from 'react';
 require("../login/login.css");
 import {Link}  from 'react-router-dom';
 import {API_LOGIN} from '../../Constantes/constantes';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
 
 class Login extends React.Component {
-
+    
     constructor(props){
         super(props);
 
@@ -22,9 +21,6 @@ class Login extends React.Component {
         this.handleSubmit   = this.handleSubmit.bind(this); 
         this.consumirApiLogin = this.consumirApiLogin.bind(this);
         this.validarFormulario = this.validarFormulario.bind(this);
-
-        
-
     }
 
     handleSubmit(event) {
@@ -77,6 +73,8 @@ class Login extends React.Component {
                 // this.setState({errorApi: response.data})
                 // console.log(this.state.errorApi);
                 sessionStorage.setItem('AccessToken', response.data.token);
+                alert('hijo');
+                this.props.callbackFromParent('hijo');
                 this.navigateToHome();
             })
             .catch(e => {

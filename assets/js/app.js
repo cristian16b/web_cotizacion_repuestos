@@ -15,6 +15,22 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
 
+
+  constructor(props){
+    super(props);
+
+    this.state = ({
+      isUserLogin: false
+    })
+
+    this.myCallback = this.myCallback.bind(this);
+}
+
+  myCallback = (dataFromChild) => {
+    //  [...we will use the dataFromChild here...]
+    alert('soy el padre');
+  }
+
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
     render() {
       return (
@@ -30,7 +46,7 @@ class App extends React.Component {
                     <Route exact path="/cotizaciones" component={MisCotizaciones} />
                     <Route exact path="/registrarme" component={Registrarme} />
                     <Route exact path="/contacto" component={Contacto} />
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" render={() => <Login callbackFromParent={this.myCallback}/>} />
                   </Switch>
                 </div>
               <PiePagina />
@@ -40,6 +56,7 @@ class App extends React.Component {
       );
     }
 }
+
 
 ReactDOM.render(
     <App />,
