@@ -3,6 +3,7 @@ require("../login/login.css");
 import {Link}  from 'react-router-dom';
 import {API_LOGIN} from '../../Constantes/constantes';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 class Login extends React.Component {
     
@@ -69,12 +70,9 @@ class Login extends React.Component {
         }
         axios.post(API_LOGIN, payload)
             .then(response => {
-                // console.log(response.data.token);
-                // this.setState({errorApi: response.data})
-                // console.log(this.state.errorApi);
-                //sessionStorage.setItem('AccessToken', response.data.token);
-                // alert('hijo');
+                alert('login ok');
                 this.props.obtenerTokenPadre(true,response.data.token);
+                // this.navigateToHome();
             })
             .catch(e => {
                 if(e.response)
