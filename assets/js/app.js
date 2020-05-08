@@ -45,7 +45,7 @@ class App extends React.Component {
               <Route exact path="/cotizaciones" component={MisCotizaciones} />
               <Route exact path="/registrarme" component={Registrarme} />
               <Route exact path="/contacto" component={Contacto} />
-              {/* <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} /> */}
+              <Route exact path="/salir" component={Salir} />
             </Switch>
           </div>
         </>
@@ -60,8 +60,6 @@ class App extends React.Component {
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/repuesto" component={BuscarRepuesto} />
-                      {/* <Route exact path="/perfil" component={MiPerfil} /> */}
-                      {/* <Route exact path="/cotizaciones" component={MisCotizaciones} /> */}
                     <Route exact path="/registrarme" component={Registrarme} />
                     <Route exact path="/contacto" component={Contacto} />
                     <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
