@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink, withRouter, Link}  from 'react-router-dom'
-class Navbar extends React.Component {
+class NavbarLogueado extends React.Component {
     
     getNavLinkClass = (path) => {
         return this.props.location.pathname === path ? 'active' : '';
@@ -28,7 +28,7 @@ class Navbar extends React.Component {
                             <Link to="/repuesto" className="navbar-brand"><span className="nav-link">Buscar un repuesto</span></Link>
                         </li>
                         {/* nota: react por algun motivo raro (no se cual) no acepta e anidamiento de listas li (una dentro de otra) */}
-                        {/* <div className="nav-item dropdown">
+                        <div className="nav-item dropdown">
                             <li data-toggle="collapse" className="dropdown-toggle" id="navbarDropdownMenuLink"  data-toggle="dropdown" >
                                 <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mis datos</span></Link>
                             </li>
@@ -43,13 +43,13 @@ class Navbar extends React.Component {
                                     <Link to="/salir" className="navbar-brand"><span className="nav-link">Salir</span></Link>
                                 </li>
                             </div>
-                        </div> */}
-                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/login")}>
+                        </div>
+                        {/* <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/login")}>
                             <Link to="/login" className="navbar-brand"><span className="nav-link">Ingresar</span></Link>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/registrarme")}>
                             <Link to="/registrarme" className="navbar-brand"><span className="nav-link">Registrarme</span></Link>
-                        </li>
+                        </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/contacto")}>
                             <Link to="/contacto" className="navbar-brand"><span className="nav-link">¿Dudas, Consultas?</span></Link>
                         </li>
@@ -59,5 +59,5 @@ class Navbar extends React.Component {
         )
     }
 };
-Navbar = withRouter(Navbar);
-export default Navbar;
+NavbarLogueado = withRouter(NavbarLogueado);
+export default NavbarLogueado;

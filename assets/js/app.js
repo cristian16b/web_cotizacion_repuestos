@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavBar from './Components/barra superior/navBar';
 require("../css/app.css");
 import 'bootstrap/dist/css/bootstrap.css';
 import PiePagina from './Components/pie de pagina/piePagina';
@@ -12,6 +11,8 @@ import MisCotizaciones from './Components/mis cotizaciones/misCotizaciones';
 import Registrarme from './Components/registrarme/registrarme';
 import Login from './Components/login/login';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import NavbarNoLogueado from './Components/barra superior/navBarNoLogueado';
+import NavbarLogueado from './Components/barra superior/navBarLogueado';
 
 class App extends React.Component {
 
@@ -34,7 +35,7 @@ class App extends React.Component {
 
     // alert(this.state.isUserLogin);
     // alert(this.state.token);
-    
+
     this.navigateToHome();
   }
 
@@ -49,7 +50,13 @@ class App extends React.Component {
         <>
           <BrowserRouter>
             <>
-              <NavBar />
+                {
+                  this.state.isUserLogin 
+                  ?
+                    <NavbarLogueado></NavbarLogueado>
+                  :
+                    <NavbarNoLogueado></NavbarNoLogueado>
+                }
                 <div className="container">
                   <Switch>
                     <Route exact path="/" component={Home} />
