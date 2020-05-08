@@ -23,12 +23,24 @@ class App extends React.Component {
       isUserLogin: false
     })
 
-    this.myCallback = this.myCallback.bind(this);
+    this.obtenerToken = this.obtenerToken.bind(this);
 }
 
-  myCallback = (dataFromChild) => {
-    //  [...we will use the dataFromChild here...]
-    alert('soy el padre');
+  obtenerToken = (bandera,tokenObtenido) => {
+
+    this.setState({
+      isUserLogin: bandera, token: tokenObtenido
+    })
+
+    // alert(this.state.isUserLogin);
+    // alert(this.state.token);
+    
+    this.navigateToHome();
+  }
+
+  navigateToHome() {
+    const { history } = this.props;
+    history.push("/");
   }
 
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
@@ -46,7 +58,7 @@ class App extends React.Component {
                     <Route exact path="/cotizaciones" component={MisCotizaciones} />
                     <Route exact path="/registrarme" component={Registrarme} />
                     <Route exact path="/contacto" component={Contacto} />
-                    <Route exact path="/login" render={() => <Login callbackFromParent={this.myCallback}/>} />
+                    <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
                   </Switch>
                 </div>
               <PiePagina />

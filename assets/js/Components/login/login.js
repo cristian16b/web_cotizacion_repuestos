@@ -72,10 +72,9 @@ class Login extends React.Component {
                 // console.log(response.data.token);
                 // this.setState({errorApi: response.data})
                 // console.log(this.state.errorApi);
-                sessionStorage.setItem('AccessToken', response.data.token);
-                alert('hijo');
-                this.props.callbackFromParent('hijo');
-                this.navigateToHome();
+                //sessionStorage.setItem('AccessToken', response.data.token);
+                // alert('hijo');
+                this.props.obtenerTokenPadre(true,response.data.token);
             })
             .catch(e => {
                 if(e.response)
@@ -85,11 +84,6 @@ class Login extends React.Component {
                     this.setState({errorApi: error});
                 }
             });
-    }
-
-    navigateToHome() {
-        const { history } = this.props;
-        history.push("/");
     }
 
     render() {
