@@ -33,6 +33,44 @@ class App extends React.Component {
     })
   }
 
+  returnTemplateLogueado = () => {
+    return (
+        <>
+          <NavbarLogueado></NavbarLogueado>
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/repuesto" component={BuscarRepuesto} />
+              <Route exact path="/perfil" component={MiPerfil} />
+              <Route exact path="/cotizaciones" component={MisCotizaciones} />
+              <Route exact path="/registrarme" component={Registrarme} />
+              <Route exact path="/contacto" component={Contacto} />
+              {/* <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} /> */}
+            </Switch>
+          </div>
+        </>
+    );
+  }
+
+  returnTemplateNoLogueado = () => {
+    return (
+            <>
+              <NavbarNoLogueado></NavbarNoLogueado>
+                <div className="container">
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/repuesto" component={BuscarRepuesto} />
+                      {/* <Route exact path="/perfil" component={MiPerfil} /> */}
+                      {/* <Route exact path="/cotizaciones" component={MisCotizaciones} /> */}
+                    <Route exact path="/registrarme" component={Registrarme} />
+                    <Route exact path="/contacto" component={Contacto} />
+                    <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
+                  </Switch>
+                </div> 
+            </>
+    );
+  }
+
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
     render() {
       return (
@@ -42,35 +80,9 @@ class App extends React.Component {
                 {
                   this.state.isUserLogin 
                   ?
-                  <>
-                    <NavbarLogueado></NavbarLogueado>
-                    <div className="container">
-                      <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/repuesto" component={BuscarRepuesto} />
-                        <Route exact path="/perfil" component={MiPerfil} />
-                        <Route exact path="/cotizaciones" component={MisCotizaciones} />
-                        <Route exact path="/registrarme" component={Registrarme} />
-                        <Route exact path="/contacto" component={Contacto} />
-                        {/* <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} /> */}
-                      </Switch>
-                    </div>
-                  </>
+                    <>{ this.returnTemplateLogueado() }</>   
                   :
-                  <>
-                    <NavbarNoLogueado></NavbarNoLogueado>
-                    <div className="container">
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <Route exact path="/repuesto" component={BuscarRepuesto} />
-                      {/* <Route exact path="/perfil" component={MiPerfil} /> */}
-                      {/* <Route exact path="/cotizaciones" component={MisCotizaciones} /> */}
-                      <Route exact path="/registrarme" component={Registrarme} />
-                      <Route exact path="/contacto" component={Contacto} />
-                      <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
-                    </Switch>
-                  </div> 
-                  </>         
+                    <>{ this.returnTemplateNoLogueado() }</>         
                 }              
               <PiePagina />
             </>
