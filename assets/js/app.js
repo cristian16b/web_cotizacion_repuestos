@@ -14,6 +14,7 @@ import { BrowserRouter, Route, Switch , Redirect } from 'react-router-dom';
 import NavbarNoLogueado from './Components/barra superior/navBarNoLogueado';
 import NavbarLogueado from './Components/barra superior/navBarLogueado';
 import Salir from './Components/salir/salir';
+import RecuperarContrasenia from './Components/recuperar/recuperarContrasenia';
 
 class App extends React.Component {
 
@@ -63,6 +64,7 @@ class App extends React.Component {
                     <Route exact path="/repuesto" component={BuscarRepuesto} />
                     <Route exact path="/registrarme" component={Registrarme} />
                     <Route exact path="/contacto" component={Contacto} />
+                    <Route exact path="/recuperarContrasenia" component={RecuperarContrasenia} />
                     <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
                   </Switch>
                 </div> 
