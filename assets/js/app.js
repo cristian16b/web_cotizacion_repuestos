@@ -13,6 +13,7 @@ import Login from './Components/login/login';
 import { BrowserRouter, Route, Switch , Redirect } from 'react-router-dom';
 import NavbarNoLogueado from './Components/barra superior/navBarNoLogueado';
 import NavbarLogueado from './Components/barra superior/navBarLogueado';
+import Salir from './Components/salir/salir';
 
 class App extends React.Component {
 
@@ -31,6 +32,7 @@ class App extends React.Component {
     this.setState({
       isUserLogin: bandera, token: tokenObtenido
     })
+    alert(this.state.isUserLogin);
   }
 
   returnTemplateLogueado = () => {
@@ -43,9 +45,8 @@ class App extends React.Component {
               <Route exact path="/repuesto" component={BuscarRepuesto} />
               <Route exact path="/perfil" component={MiPerfil} />
               <Route exact path="/cotizaciones" component={MisCotizaciones} />
-              <Route exact path="/registrarme" component={Registrarme} />
               <Route exact path="/contacto" component={Contacto} />
-              <Route exact path="/salir" component={Salir} />
+              <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
             </Switch>
           </div>
         </>
