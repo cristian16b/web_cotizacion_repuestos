@@ -130,20 +130,6 @@ render() {
                       </span> 
                   </div>
                 </div>
-                {/* <div className="col-lg-6">
-                  <div className="form-group">
-                  <label htmlFor="password2">Contraseña</label>
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                        <input type="password" className="form-control" name="password2" 
-                                                    defaultValue = {this.state.password2} onChange={this.cambioPassword}
-                                                    placeholder="Ingrese nuevamente su contraseña" />	
-                      </div>
-                      <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["password"]}
-                      </span> 
-                  </div>
-                </div> */}
               </div>
 
           <div className="row">
