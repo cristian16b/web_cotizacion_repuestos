@@ -126,7 +126,7 @@ class LoginController extends AbstractController
      * @SWG\Tag(name="User")
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $encoder) {
-        // die;
+        die;
         $serializer = $this->get('serializer');
         $em = $this->getDoctrine()->getManager();
  

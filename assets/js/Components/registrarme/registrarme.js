@@ -1,5 +1,7 @@
 import React , { Component } from 'react';
-import {API_REGISTER} from '../../Constantes/constantes';
+import {API_REGISTER,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
+import axios from 'axios';
+import ReCAPTCHA from "react-google-recaptcha";
 
 class Registrarme extends React.Component {
 
@@ -21,12 +23,21 @@ class Registrarme extends React.Component {
         password2: '',
         errors: {},
         errorApi: '',
-
+        // 
+        catchaValido: false,
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
     this.validarFormulario = this.validarFormulario.bind(this);
     this.consumirApiRegister = this.consumirApiRegister.bind(this);
+    this.cambioApellido = this.cambioApellido.bind(this);
+    this.cambioCodArea = this.cambioCodArea.bind(this);
+    this.cambioContraseña = this.cambioContraseña.bind(this);
+    this.cambioContraseña2 = this.cambioContraseña2.bind(this);
+    this.cambioEmail = this.cambioEmail.bind(this);
+    this.cambioNombre = this.cambioNombre.bind(this);
+    this.cambioTelefono = this.cambioTelefono.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 }
 
 validarFormulario () {
@@ -70,7 +81,7 @@ validarFormulario () {
 }
 
 handleSubmit(event) {
-  if(this.validarFormulario() == true) {
+  if(this.validarFormulario() == true && this.state.catchaValido == true) {
     this.consumirApiRegister();
   }
 
@@ -79,7 +90,7 @@ handleSubmit(event) {
 
 
 consumirApiRegister(){
-  const data={
+  const payload={
     "apellido":this.state.apellido,
     "nombre":this.state.nombre,
     "codArea":this.state.codArea,
@@ -88,11 +99,12 @@ consumirApiRegister(){
     "password2":this.state.password2,
     "email":this.state.email
   }
-  axios.post(API_REGISTER, payload)
+  axios.post(API_REGISTER,payload)
       .then(response => {
-
+          console.log(response);
       })
       .catch(e => {
+          console.log(e);
           if(e.response)
           {
               let error = '';
@@ -101,6 +113,7 @@ consumirApiRegister(){
           }
           // alert('Ocurrio un error al consultar al servidor, intente nuevamente');
   });
+  event.preventDefault();
 }
 
 cambioApellido(e) {
@@ -145,6 +158,13 @@ cambioContraseña2(e) {
   })
 }
 
+handleChange = value => {
+  this.setState({
+    catchaValido: true
+  })
+  //alert(this.state.catchaValido);
+};
+
 render() {
   return (        
       <div className="row justify-content-center">
@@ -181,7 +201,7 @@ render() {
                       <span className="input-group-addon"><i className="fa fa-user"></i></span>
                         {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                         <input type="text" className="form-control" name="nombre" 
-                                                    defaultValue={this.state.apellido} onChange={this.cambioNombre}
+                                                    defaultValue={this.state.nombre} onChange={this.cambioNombre}
                                                     placeholder="Ingrese su nombre"/>
                     </div>
                     <span id="passwordHelp" className="text-danger error_negrita">
@@ -228,8 +248,8 @@ render() {
                     <label htmlFor="email">Email</label>
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                        <input type="text" className="form-control" name="password" 
-                                                    defaultValue = {this.state.email} onChange={this.cambioPassword}
+                        <input type="text" className="form-control" name="email" 
+                                                    defaultValue = {this.state.email} onChange={this.cambioEmail}
                                                     placeholder="Ingrese su email" />	
                       </div>
                       <span id="passwordHelp" className="text-danger error_negrita">
@@ -269,7 +289,16 @@ render() {
                   </div>
                 </div>
               </div>
-
+             <div className="row">
+                <div className="col-lg-6">
+                  <div className="form-group">
+                    <ReCAPTCHA
+                      sitekey={API_CAPTCHA_PUBLIC}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div> 
+              </div> 
           
               <div className="row">
                 <div className="col-lg-6">
