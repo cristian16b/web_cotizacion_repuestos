@@ -134,6 +134,9 @@ class LoginController extends AbstractController
         $message = "";
  
         try {
+
+            dump($request->request);die;
+
             $code = 200;
             $error = false;
  

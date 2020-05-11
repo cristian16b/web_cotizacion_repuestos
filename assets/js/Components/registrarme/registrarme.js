@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import {API_REGISTER} from '../../Constantes/constantes';
 
 class Registrarme extends React.Component {
 
@@ -25,17 +26,123 @@ class Registrarme extends React.Component {
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
     this.validarFormulario = this.validarFormulario.bind(this);
+    this.consumirApiRegister = this.consumirApiRegister.bind(this);
+}
+
+validarFormulario () {
+  let formularioValido = true;
+  let errors = {};
+  //alert('A name was submitted: ' + this.state.username + ' ' + this.state.password);
+  if(this.state.password2.length == 0) {
+    errors["password2"] = "Debe ingresar nuevamente la contraseña";
+    formularioValido = false;
+  }
+  if(this.state.password.length == 0) {
+    errors["password"] = "La contraseña no puede estar vacia";
+    formularioValido = false;
+  }
+  if(this.state.apellido.length == 0) {
+    errors["apellido"] = "Debes completar tu apellido";
+    formularioValido = false;
+  }
+  if(this.state.nombre.length == 0) {
+    errors["nombre"] = "Debes completar tu nombre";
+    formularioValido = false;
+  }
+  if(this.state.codArea.length == 0) {
+    errors["codArea"] = "Debe ingresar el cod. de área";
+    formularioValido = false;
+  }
+  if(this.state.telefono.length == 0) {
+    errors["telefono"] = "Debe ingresar su teléfono";
+    formularioValido = false;
+  }
+  if(this.state.email.length == 0) {
+    errors["email"] = "Debe completar su e-mail";
+    formularioValido = false;
+  }
+
+  this.setState({
+    errors: errors
+  });
+
+  return formularioValido;
 }
 
 handleSubmit(event) {
   if(this.validarFormulario() == true) {
-      this.consumirApiLogin();
+    this.consumirApiRegister();
   }
+
   event.preventDefault();
 }
 
-validarFormulario() {
 
+consumirApiRegister(){
+  const data={
+    "apellido":this.state.apellido,
+    "nombre":this.state.nombre,
+    "codArea":this.state.codArea,
+    "telefono":this.state.telefono,
+    "password":this.state.password,
+    "password2":this.state.password2,
+    "email":this.state.email
+  }
+  axios.post(API_REGISTER, payload)
+      .then(response => {
+
+      })
+      .catch(e => {
+          if(e.response)
+          {
+              let error = '';
+              error = e.response.data.message;
+              this.setState({errorApi: error});
+          }
+          // alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+  });
+}
+
+cambioApellido(e) {
+  this.setState({
+      apellido: e.target.value
+  })
+}
+
+cambioNombre(e) {
+  this.setState({
+      nombre: e.target.value
+  })
+}
+
+cambioCodArea(e) {
+  this.setState({
+      codArea: e.target.value
+  })
+}
+
+cambioTelefono(e) {
+  this.setState({
+      telefono: e.target.value
+  })
+}
+
+cambioEmail(e) {
+  this.setState({
+      email: e.target.value
+  })
+}
+
+cambioContraseña(e) {
+  this.setState({
+      password: e.target.value
+  })
+}
+
+cambioContraseña2(e) {
+  this.setState({
+      password2: e.target.value
+  })
 }
 
 render() {
@@ -59,7 +166,7 @@ render() {
                       <span className="input-group-addon"><i className="fa fa-user"></i></span>
                         {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                         <input type="text" className="form-control" name="apellido" 
-                                                    defaultValue={this.state.apellido} onChange={this.cambioUsername}
+                                                    defaultValue={this.state.apellido} onChange={this.cambioApellido}
                                                     placeholder="Ingrese su apellido"/>
                     </div>
                     <span id="passwordHelp" className="text-danger error_negrita">
@@ -74,7 +181,7 @@ render() {
                       <span className="input-group-addon"><i className="fa fa-user"></i></span>
                         {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                         <input type="text" className="form-control" name="nombre" 
-                                                    defaultValue={this.state.apellido} onChange={this.cambioUsername}
+                                                    defaultValue={this.state.apellido} onChange={this.cambioNombre}
                                                     placeholder="Ingrese su nombre"/>
                     </div>
                     <span id="passwordHelp" className="text-danger error_negrita">
@@ -91,7 +198,7 @@ render() {
                   <div className="input-group">
                     <span className="input-group-addon"><i className="fa fa-user"></i></span>
                         <input type="text" className="form-control" name="codArea" 
-                                                    defaultValue={this.state.codArea} onChange={this.cambioUsername}
+                                                    defaultValue={this.state.codArea} onChange={this.cambioCodArea}
                                                     placeholder="Ingrese su Código de área"/>
                     </div>
                     <span id="passwordHelp" className="text-danger error_negrita">
@@ -105,7 +212,7 @@ render() {
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                         <input type="text" className="form-control" name="telefono" 
-                                                    defaultValue = {this.state.telefono} onChange={this.cambioPassword}
+                                                    defaultValue = {this.state.telefono} onChange={this.cambioTelefono}
                                                     placeholder="Ingrese su Telefóno" />	
                       </div>
                       <span id="passwordHelp" className="text-danger error_negrita">
@@ -139,7 +246,7 @@ render() {
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                         <input type="password" className="form-control" name="password" 
-                                                    defaultValue = {this.state.password} onChange={this.cambioPassword}
+                                                    defaultValue = {this.state.password} onChange={this.cambioContraseña}
                                                     placeholder="Ingrese su contraseña" />	
                       </div>
                       <span id="passwordHelp" className="text-danger error_negrita">
@@ -153,12 +260,12 @@ render() {
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                         <input type="password" className="form-control" name="password2" 
-                                                    defaultValue = {this.state.password2} onChange={this.cambioPassword}
+                                                    defaultValue = {this.state.password2} onChange={this.cambioContraseña2}
                                                     placeholder="Ingrese nuevamente su contraseña" />	
                       </div>
-                      {/* <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["password"]}
-                      </span>  */}
+                      <span id="passwordHelp" className="text-danger error_negrita">
+                        {this.state.errors["password2"]}
+                      </span> 
                   </div>
                 </div>
               </div>
