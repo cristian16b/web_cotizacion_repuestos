@@ -49,7 +49,8 @@ class App extends React.Component {
               <Route exact path="/contacto" component={Contacto} />
               <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
             </Switch>
-          </div>
+          </div> 
+          <PiePagina />
         </>
     );
   }
@@ -67,7 +68,8 @@ class App extends React.Component {
                     <Route exact path="/recuperarContrasenia" component={RecuperarContrasenia} />
                     <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
                   </Switch>
-                </div> 
+                </div>
+                <PiePagina /> 
             </>
     );
   }
@@ -84,8 +86,7 @@ class App extends React.Component {
                     <>{ this.returnTemplateLogueado() }</>   
                   :
                     <>{ this.returnTemplateNoLogueado() }</>         
-                }              
-              <PiePagina />
+                }
             </>
           </BrowserRouter>
         </>
