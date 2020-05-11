@@ -289,6 +289,15 @@ render() {
                   </div>
                 </div>
               </div>
+{/* 
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="form-group">
+                    
+                  </div>
+                </div> 
+              </div>
+               */}
              <div className="row">
                 <div className="col-lg-6">
                   <div className="form-group">
