@@ -70,6 +70,21 @@ class Usuario implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $usuarioUltimaModificacion;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $apellido;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $codArea;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $telefono;
     
     public function __construct()
     {
@@ -270,6 +285,42 @@ class Usuario implements UserInterface
     public function setUsuarioUltimaModificacion(string $usuarioUltimaModificacion): self
     {
         $this->usuarioUltimaModificacion = $usuarioUltimaModificacion;
+
+        return $this;
+    }
+
+    public function getApellido(): ?string
+    {
+        return $this->apellido;
+    }
+
+    public function setApellido(string $apellido): self
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
+
+    public function getCodArea(): ?string
+    {
+        return $this->codArea;
+    }
+
+    public function setCodArea(string $codArea): self
+    {
+        $this->codArea = $codArea;
+
+        return $this;
+    }
+
+    public function getTelefono(): ?string
+    {
+        return $this->telefono;
+    }
+
+    public function setTelefono(string $telefono): self
+    {
+        $this->telefono = $telefono;
 
         return $this;
     }

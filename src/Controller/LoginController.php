@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Entity\Usuario;
-use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * LoginController.php
@@ -51,11 +51,11 @@ class LoginController extends AbstractController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="User was logged in successfully"
+     *     description="Se ha ingresado correctamente"
      * )
      * @SWG\Response(
      *     response=500,
-     *     description="User was not logged in successfully"
+     *     description="No fue posible iniciar sesión. Intente nuevamente!"
      * )
      *
      * @SWG\Parameter(
@@ -84,12 +84,12 @@ class LoginController extends AbstractController
      *
      * @SWG\Response(
      *     response=201,
-     *     description="User was successfully registered"
+     *     description="El usuario ha sido registrado."
      * )
      *
      * @SWG\Response(
      *     response=500,
-     *     description="User was not successfully registered"
+     *     description="El usuario no pude ser registrado."
      * )
      *
      * @SWG\Parameter(
@@ -126,7 +126,7 @@ class LoginController extends AbstractController
      * @SWG\Tag(name="User")
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $encoder) {
-        die;
+        // die;
         $serializer = $this->get('serializer');
         $em = $this->getDoctrine()->getManager();
  
@@ -134,33 +134,47 @@ class LoginController extends AbstractController
         $message = "";
  
         try {
-
-            dump($request->request);die;
-
+    
             $code = 200;
             $error = false;
- 
+
+            // ejemplo de como vienen los datos desde el front-end
+            //   [         
+            //     "apellido" => "ooso"
+            //     "nombre" => "oso"
+            //     "codArea" => "oso"
+            //     "telefono" => "ososo"
+            //     "password" => "sooso"
+            //     "password2" => "sooo"
+            //     "email" => "sooso"
+            //   ]
+
+            $apellido = $request->request->get('apellido');
             $name = $request->request->get('nombre');
             $email = $request->request->get('email');
-            $username = $request->request->get('username');
             $password = $request->request->get('password');
+            $codArea = $request->request->get('codArea');
+            $telefono = $request->request->get('telefono');
+            $pass2 = $request->request->get('password2');
  
             $user = new Usuario();
             $user->setNombre($name);
             $user->setEmail($email);
-            $user->setUsername($username);
+            $user->setUsername($email);
             $user->setPlainPassword($password);
             $user->setPassword($encoder->encodePassword($user, $password));
             $user->setRoles($this->userRolAdmin);
-            $user->setUsuarioUltimaModificacion($username);
-
+            $user->setUsuarioUltimaModificacion($email);
+            $user->setApellido($apellido);
+            $user->setCodArea($codArea);
+            $user->setTelefono($telefono);
             $em->persist($user);
             $em->flush();
  
         } catch (Exception $ex) {
             $code = 500;
             $error = true;
-            $message = "An error has occurred trying to register the user - Error: {$ex->getMessage()}";
+            $message = "Ocurrio un error al intentar agregar al usuario - Error: {$ex->getMessage()}";
         }
  
         $response = [
