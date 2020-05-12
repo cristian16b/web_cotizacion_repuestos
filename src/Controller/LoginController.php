@@ -15,6 +15,10 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Entity\Usuario;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use AppBundle\Validator\Constraints as AppAssert;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 /**
  * LoginController.php
@@ -125,7 +129,7 @@ class LoginController extends AbstractController
      *
      * @SWG\Tag(name="User")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder) {
+    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder,ValidatorInterface $validator) {
         // die;
         $serializer = $this->get('serializer');
         $em = $this->getDoctrine()->getManager();
@@ -145,7 +149,6 @@ class LoginController extends AbstractController
             //     "codArea" => "oso"
             //     "telefono" => "ososo"
             //     "password" => "sooso"
-            //     "password2" => "sooo"
             //     "email" => "sooso"
             //   ]
 
@@ -155,7 +158,6 @@ class LoginController extends AbstractController
             $password = $request->request->get('password');
             $codArea = $request->request->get('codArea');
             $telefono = $request->request->get('telefono');
-            $pass2 = $request->request->get('password2');
  
             $user = new Usuario();
             $user->setNombre($name);
@@ -168,6 +170,39 @@ class LoginController extends AbstractController
             $user->setApellido($apellido);
             $user->setCodArea($codArea);
             $user->setTelefono($telefono);
+
+
+            $nombreError = $validator->validateProperty($user, 'nombre');
+            $apellidoError = $validator->validateProperty($user, 'apellido');
+            $emailError = $validator->validateProperty($user, 'email');
+            $passwordError = $validator->validateProperty($user, '');
+            $codtelError = $validator->validateProperty($user, 'nombre');
+            $telefonoError = $validator->validateProperty($user, 'nombre');
+       
+            $formErrors = [];
+            if(count($nombreError)>0){
+                $formErrors['nombre'] =  $nombreError[0]->getMessage();
+            }
+            if(count($apellidoError)>0){
+                $formErrors['apellido'] =  $apellidoError[0]->getMessage();
+            }
+            if(count($emailError)>0){
+                $formErrors['email'] =  $emailError[0]->getMessage();
+            }
+            if(count($passwordError)>0){
+                $formErrors['password'] =  $passwordError[0]->getMessage();
+            }
+            if(count($codtelError)>0){
+                $formErrors['codArea'] =  $codtelError[0]->getMessage();
+            }
+            if(count($telefonoError)>0){
+                $formErrors['telefono'] =  $telefonoError[0]->getMessage();
+            }
+            
+            if($formErrors) {
+                return new JsonResponse($formErrors);
+            }
+
             $em->persist($user);
             $em->flush();
  
