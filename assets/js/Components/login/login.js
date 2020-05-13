@@ -4,6 +4,15 @@ import {Link}  from 'react-router-dom';
 import {API_LOGIN} from '../../Constantes/constantes';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import SocialButton from '../social button/SocialButton'
+ 
+const handleSocialLogin = (user) => {
+  console.log(user)
+}
+ 
+const handleSocialLoginFailure = (err) => {
+  console.error(err)
+}
 
 class Login extends React.Component {
     
@@ -135,8 +144,17 @@ class Login extends React.Component {
                                     <hr />
                                 </div>
                                 <p className="text-center">O ingresar con tu red social</p>
-                                <div className="text-center social-btn">
-                                    <a href="#" className="btn btn-primary"><i className="fa fa-facebook"></i>&nbsp; Facebook</a>
+                                <div className="text-center social-btn"> 
+                                        <>
+                                            <SocialButton
+                                                provider='facebook'
+                                                appId='245924643289636'
+                                                onLoginSuccess={handleSocialLogin}
+                                                onLoginFailure={handleSocialLoginFailure}
+                                                >
+                                                Facebook
+                                            </SocialButton>
+                                        </>   
                                     {/* <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
                                     <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a> */}
                                 </div>
