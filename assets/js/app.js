@@ -33,7 +33,7 @@ class App extends React.Component {
     this.setState({
       isUserLogin: bandera, token: tokenObtenido
     })
-    alert(this.state.isUserLogin);
+    // alert(this.state.isUserLogin);
   }
 
   returnTemplateLogueado = () => {
