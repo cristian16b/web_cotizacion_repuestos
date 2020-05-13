@@ -4,7 +4,8 @@ import {Link}  from 'react-router-dom';
 import {API_LOGIN} from '../../Constantes/constantes';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import SocialButton from '../social button/SocialButton'
+// import SocialButton from '../social button/SocialButton'
+import { OldSocialLogin as SocialLogin } from 'react-social-login'
  
 const handleSocialLogin = (user) => {
   console.log(user)
@@ -146,14 +147,23 @@ class Login extends React.Component {
                                 <p className="text-center">O ingresar con tu red social</p>
                                 <div className="text-center social-btn"> 
                                         <>
-                                            <SocialButton
+                                            {/* <SocialButton
                                                 provider='facebook'
                                                 appId='245924643289636'
                                                 onLoginSuccess={handleSocialLogin}
-                                                onLoginFailure={handleSocialLoginFailure}
+                                                // onLoginFailure={handleSocialLoginFailure}
                                                 >
                                                 Facebook
-                                            </SocialButton>
+                                            </SocialButton> */}
+                                            <div>
+                                                <SocialLogin
+                                                provider='facebook'
+                                                appId='245924643289636'
+                                                callback={handleSocialLogin}
+                                                >
+                                                <button>Facebook</button>
+                                                </SocialLogin>
+                                            </div>
                                         </>   
                                     {/* <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
                                     <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a> */}
