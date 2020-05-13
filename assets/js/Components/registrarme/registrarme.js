@@ -79,6 +79,10 @@ validarFormulario () {
     errors["captcha"] = "Debe completar el captcha";
     formularioValido = false;
   }
+  if(this.state.password != this.state.password2) {
+    errors["passdistintas"] = "Las contraseñas ingresadas son diferentes";
+    formularioValido = false;
+  }
 
   this.setState({
     errors: errors
@@ -289,6 +293,11 @@ render() {
                 <div className="col-lg-6">
                   <div className="form-group">
                     <label htmlFor="password">Contraseña</label>
+                    <div className="input-group">
+                      <span id="passwordHelp" className="text-danger error_negrita">
+                        {this.state.errors["passdistintas"]}
+                      </span> 
+                    </div>
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                         <input type="password" className="form-control" name="password" 
