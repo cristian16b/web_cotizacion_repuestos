@@ -3,9 +3,9 @@ require("../login/login.css");
 import {Link}  from 'react-router-dom';
 import {API_LOGIN} from '../../Constantes/constantes';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
 // import SocialButton from '../social button/SocialButton'
-import { OldSocialLogin as SocialLogin } from 'react-social-login'
+import { OldSocialLogin as SocialLogin } from 'react-social-login';
+import { FacebookLoginButton } from "react-social-login-buttons";
  
 const handleSocialLogin = (user) => {
   console.log(user)
@@ -145,34 +145,36 @@ class Login extends React.Component {
                                     <hr />
                                 </div>
                                 <p className="text-center">O ingresar con tu red social</p>
-                                <div className="text-center social-btn"> 
-                                        <>
-                                            {/* <SocialButton
-                                                provider='facebook'
-                                                appId='245924643289636'
-                                                onLoginSuccess={handleSocialLogin}
-                                                // onLoginFailure={handleSocialLoginFailure}
-                                                >
-                                                Facebook
-                                            </SocialButton> */}
-                                            <div>
-                                                <SocialLogin
-                                                provider='facebook'
-                                                appId='245924643289636'
-                                                callback={handleSocialLogin}
-                                                >
-                                                <button>Facebook</button>
-                                                </SocialLogin>
-                                            </div>
-                                        </>   
-                                    {/* <a href="#" className="btn btn-info"><i className="fa fa-twitter"></i>&nbsp; Twitter</a>
-                                    <a href="#" className="btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a> */}
+                                <div className="text-center social-btn">
+                                            <div className="row justify-content-center">
+                                                <div className="col-lg-5">
+                                                    {/* <SocialButton
+                                                        provider='facebook'
+                                                        appId='245924643289636'
+                                                        onLoginSuccess={handleSocialLogin}
+                                                        // onLoginFailure={handleSocialLoginFailure}
+                                                        >
+                                                        Facebook
+                                                    </SocialButton> */}
+                                                    <SocialLogin
+                                                        provider='facebook'
+                                                        appId='245924643289636'
+                                                        callback={handleSocialLogin}
+                                                        >
+                                                        {/* <button>Facebook</button> */}
+                                                        <FacebookLoginButton>
+                                                            Facebook
+                                                        </FacebookLoginButton>
+                                                    </SocialLogin>
+                                                </div>
+                                            </div> 
+                                               
                                 </div>
                             </form>
-                            <p className="text-center text-muted small">¿No tienes una cuenta? 
-                                <Link to="/registrarme" className="navbar-brand">
-                                    <span className="small"> 
-                                        Registrate!
+                            <p className="text-center">¿No tienes una cuenta?&nbsp;  
+                                <Link to="/registrarme">
+                                    <span> 
+                                         Registrate!
                                     </span>
                                 </Link>
                             </p>
