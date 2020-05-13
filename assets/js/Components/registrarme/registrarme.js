@@ -75,6 +75,10 @@ validarFormulario () {
     errors["email"] = "Debe completar su e-mail";
     formularioValido = false;
   }
+  if(this.state.catchaValido == false) {
+    errors["captcha"] = "Debe completar el captcha";
+    formularioValido = false;
+  }
 
   this.setState({
     errors: errors
@@ -100,7 +104,7 @@ habilitarBotones() {
 
 handleSubmit(event) {
   this.habilitarBotones();
-  if(this.validarFormulario() == true && this.state.catchaValido == true) {
+  if(this.validarFormulario() == true) {
     this.consumirApiRegister();
   }
   this.habilitarBotones();
@@ -327,6 +331,9 @@ render() {
                       sitekey={API_CAPTCHA_PUBLIC}
                       onChange={this.handleChange}
                     />
+                    <span id="passwordHelp" className="text-danger error_negrita">
+                      {this.state.errors["captcha"]}
+                    </span> 
                   </div>
                 </div> 
               </div> 
