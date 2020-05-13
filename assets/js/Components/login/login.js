@@ -11,9 +11,9 @@ const handleSocialLogin = (user) => {
   console.log(user)
 }
  
-const handleSocialLoginFailure = (err) => {
-  console.error(err)
-}
+// const handleSocialLoginFailure = (err) => {
+//   console.error(err)
+// }
 
 class Login extends React.Component {
     
