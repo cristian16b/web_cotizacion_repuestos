@@ -175,9 +175,9 @@ class LoginController extends AbstractController
             $nombreError = $validator->validateProperty($user, 'nombre');
             $apellidoError = $validator->validateProperty($user, 'apellido');
             $emailError = $validator->validateProperty($user, 'email');
-            $passwordError = $validator->validateProperty($user, '');
-            $codtelError = $validator->validateProperty($user, 'nombre');
-            $telefonoError = $validator->validateProperty($user, 'nombre');
+            $passwordError = $validator->validateProperty($user, 'password');
+            $codtelError = $validator->validateProperty($user, 'codArea');
+            $telefonoError = $validator->validateProperty($user, 'telefono');
        
             $formErrors = [];
             if(count($nombreError)>0){
@@ -198,6 +198,8 @@ class LoginController extends AbstractController
             if(count($telefonoError)>0){
                 $formErrors['telefono'] =  $telefonoError[0]->getMessage();
             }
+
+            dump($emailError);die;
             
             if($formErrors) {
                 return new JsonResponse($formErrors);

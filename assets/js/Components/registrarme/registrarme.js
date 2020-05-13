@@ -25,6 +25,8 @@ class Registrarme extends React.Component {
         errorApi: '',
         // 
         catchaValido: false,
+        //
+        botonesHabilitados: false
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -38,6 +40,7 @@ class Registrarme extends React.Component {
     this.cambioNombre = this.cambioNombre.bind(this);
     this.cambioTelefono = this.cambioTelefono.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.habilitarBotones = this.habilitarBotones.bind(this);
 }
 
 validarFormulario () {
@@ -80,11 +83,27 @@ validarFormulario () {
   return formularioValido;
 }
 
+habilitarBotones() {
+
+  if(this.state.botonesHabilitados == true) {
+    this.setState({
+      botonesHabilitados: false
+    });
+  }
+  else {
+    this.setState({
+      botonesHabilitados: true
+    });
+  }
+  // alert('disabled = ' + this.state.botonesHabilitados);
+}
+
 handleSubmit(event) {
+  this.habilitarBotones();
   if(this.validarFormulario() == true && this.state.catchaValido == true) {
     this.consumirApiRegister();
   }
-
+  this.habilitarBotones();
   event.preventDefault();
 }
 
@@ -101,15 +120,18 @@ consumirApiRegister(){
   }
   axios.post(API_REGISTER,payload)
       .then(response => {
+          console.log('entro e then');
           console.log(response);
       })
       .catch(e => {
-          console.log(e);
-          if(e.response)
+          // console.log(e);
+          console.log('entra en catch');
+          if(e.response.data)
           {
-              let error = '';
-              error = e.response.data.message;
-              this.setState({errorApi: error});
+              console.log(e.response.data);
+              // let error = '';
+              // error = e.response.data.message;
+              // this.setState({errorApi: error});
           }
           // alert('Ocurrio un error al consultar al servidor, intente nuevamente');
   });
@@ -312,12 +334,17 @@ render() {
               <div className="row">
                 <div className="col-lg-6">
                   <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-block">Registrarme</button>
+                    <button type="submit" 
+                            className="btn btn-primary btn-block"
+                            disabled={this.state.botonesHabilitados}
+                            >Registrarme</button>
                   </div>
                 </div>
                 <div className="col-lg-6">
                   <div className="form-group">
-                    <button type="reset" className="btn btn-light btn-block">Cancelar</button>
+                    <button type="reset" 
+                            // disabled={this.state.botonesHabilitados}
+                            className="btn btn-light btn-block">Cancelar</button>
                   </div>
                 </div>  
               </div> 

@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"email"},message="El e-mail ingresado ya se encuentra registrado")
  */
 class Usuario implements UserInterface
 {
@@ -44,9 +45,6 @@ class Usuario implements UserInterface
      * @Assert\NotBlank(message="Debes completar tu e-mail")
      * @Assert\Email(
      *     message="El formato del e-mail no es valido"
-     * )
-     * @Assert\Unique(
-     *      message="El e-mail ingresado ya se encuentra registrado"
      * )
      */
     protected $email;
@@ -134,8 +132,8 @@ class Usuario implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Debes completar tu teléfono")
      * @Assert\Length(
-     *     min = 2,
-     *     minMessage="El teléfono debe tener al menos dos números",
+     *     min = 6,
+     *     minMessage="El teléfono debe tener al menos seis números",
      *     max = 15,
      *     maxMessage="El teléfono no puede tener una longitud mayor a 15 números"
      * )
