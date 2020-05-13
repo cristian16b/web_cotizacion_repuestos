@@ -40,7 +40,9 @@ class Registrarme extends React.Component {
     this.cambioNombre = this.cambioNombre.bind(this);
     this.cambioTelefono = this.cambioTelefono.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.habilitarBotones = this.habilitarBotones.bind(this);
+    this.isHabilitado = this.isHabilitado.bind(this);
+    this.cambioHabilitado = this.cambioHabilitado.bind(this);
+
 }
 
 validarFormulario () {
@@ -91,27 +93,14 @@ validarFormulario () {
   return formularioValido;
 }
 
-habilitarBotones() {
-
-  if(this.state.botonesHabilitados == true) {
-    this.setState({
-      botonesHabilitados: false
-    });
-  }
-  else {
-    this.setState({
-      botonesHabilitados: true
-    });
-  }
-  // alert('disabled = ' + this.state.botonesHabilitados);
-}
+isHabilitado = () => { return this.state.botonesHabilitados}
 
 handleSubmit(event) {
-  this.habilitarBotones();
+  // this.habilitarBotones();
   if(this.validarFormulario() == true) {
     this.consumirApiRegister();
-  }
-  this.habilitarBotones();
+  } 
+  this.cambioHabilitado();
   event.preventDefault();
 }
 
@@ -194,6 +183,20 @@ handleChange = value => {
   })
   //alert(this.state.catchaValido);
 };
+
+cambioHabilitado = () => { 
+  if(this.state.botonesHabilitados == true) {
+    this.setState({
+      botonesHabilitados: false
+    });
+  }
+  else {
+    this.setState({
+      botonesHabilitados: true
+    });
+  }
+  // console.log(this.state.botonesHabilitados);
+}
 
 render() {
   return (        
@@ -352,7 +355,8 @@ render() {
                   <div className="form-group">
                     <button type="submit" 
                             className="btn btn-primary btn-block"
-                            disabled={this.state.botonesHabilitados}
+                            disabled={this.isHabilitado()}
+                            onClick={this.cambioHabilitado}
                             >Registrarme</button>
                   </div>
                 </div>
