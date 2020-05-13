@@ -36,9 +36,9 @@ use Doctrine\ORM\EntityManagerInterface;
 class LoginController extends AbstractController
 {
     private $userAdminDefultd = "USER_ADMIN";
-    private $userRolUsuario = ["ROLE_USER"];
-    private $userRolComerciante = ["ROLE_COMERCIANTE"];
-    private $userRolAdmin = ["ROLE_ADMIN"];
+    private $userRolUsuario = "ROLE_USER";
+    private $userRolComerciante = "ROLE_COMERCIANTE";
+    private $userRolAdmin = "ROLE_ADMIN";
 
     /**
      * @Route("/login", name="login")
@@ -165,7 +165,7 @@ class LoginController extends AbstractController
             $user->setUsername($email);
             $user->setPlainPassword($password);
             $user->setPassword($encoder->encodePassword($user, $password));
-            $user->setRoles($this->userRolAdmin);
+            $user->setRoles($this->userRolUsuario);
             $user->setUsuarioUltimaModificacion($email);
             $user->setApellido($apellido);
             $user->setCodArea($codArea);
@@ -199,10 +199,12 @@ class LoginController extends AbstractController
                 $formErrors['telefono'] =  $telefonoError[0]->getMessage();
             }
 
-            dump($emailError);die;
-            
             if($formErrors) {
-                return new JsonResponse($formErrors);
+                $response = [
+                    'code' => 0,
+                    'error' => $error,
+                ];
+                return new JsonResponse($response);
             }
 
             $em->persist($user);
@@ -217,7 +219,7 @@ class LoginController extends AbstractController
         $response = [
             'code' => $code,
             'error' => $error,
-            'data' => $code == 200 ? $user : $message,
+            // 'data' => $code == 200 ? $user : $message,
         ];
  
         return new Response($serializer->serialize($response, "json"));

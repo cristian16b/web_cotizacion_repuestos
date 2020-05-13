@@ -2,6 +2,7 @@ import React , { Component } from 'react';
 import {API_REGISTER,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
+import { Redirect } from 'react-router-dom'
 
 class Registrarme extends React.Component {
 
@@ -26,7 +27,9 @@ class Registrarme extends React.Component {
         // 
         catchaValido: false,
         //
-        botonesHabilitados: false
+        botonesHabilitados: false,
+        // <-- initialize the signup state as false
+        isSignedUp: false, 
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -117,22 +120,28 @@ consumirApiRegister(){
   }
   axios.post(API_REGISTER,payload)
       .then(response => {
-          console.log('entro e then');
-          console.log(response);
+          let code = response.data.code;
+          if(code == 200){
+            this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+          }
+          this.mostrarErroresApi(response);
       })
       .catch(e => {
-          // console.log(e);
-          console.log('entra en catch');
-          if(e.response.data)
-          {
-              console.log(e.response.data);
-              // let error = '';
-              // error = e.response.data.message;
-              // this.setState({errorApi: error});
-          }
-          // alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+          alert('Ocurrio un error al consultar al servidor, intente nuevamente');
   });
   event.preventDefault();
+}
+
+mostrarErroresApi = (response) => {
+  let mensajes = response.data;
+  let errors = {};
+  for (const prop in mensajes) {
+    // console.log(`obj.${prop} = ${mensajes[prop]}`);
+    errors[prop] = mensajes[prop];
+  }
+  this.setState({
+    errors: errors
+  });
 }
 
 cambioApellido(e) {
@@ -198,9 +207,21 @@ cambioHabilitado = () => {
   // console.log(this.state.botonesHabilitados);
 }
 
+redirectToLogin = () => {
+  if (this.state.isSignedUp) {
+    // redirect to home if signed up
+    return <Redirect to = {{ pathname: "/login" }} />;
+  }
+}
+
 render() {
+
   return (        
       <div className="row justify-content-center">
+        {
+          // si se logueo correctamente se redirige al login
+          this.redirectToLogin()
+        }
         <div className="col-lg-9">
           <div className="card">
             <div className="card-body">
