@@ -36,8 +36,6 @@ class App extends React.Component {
     // 
     if(code == 200) {
 
-      php bin/console make:entity
-
       this.setState({
         isUserLogin: bandera,
         token: tokenObtenido,

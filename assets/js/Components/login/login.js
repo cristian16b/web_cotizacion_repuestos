@@ -3,48 +3,42 @@ require("../login/login.css");
 import {Link}  from 'react-router-dom';
 import {API_LOGIN,API_LOGIN_SOCIAL} from '../../Constantes/constantes';
 import axios from 'axios';
-// import SocialButton from '../social button/SocialButton'
-import { OldSocialLogin as SocialLogin } from 'react-social-login';
+import SocialButton from '../social button/SocialButton';
 import { FacebookLoginButton } from "react-social-login-buttons";
  
-// Login implementado con facebook
-const handleSocialLogin = (user) => {
-  let email = user.profile.email;
-  let nombre = user.profile.name;
-  let apellido = user.profile.lastName;
-  let id = user.profile.id;
-  let token = user.token.accessToken;
-
-  const payload = {
-      email,
-      nombre,
-      apellido,
-      id,
-      token
-  };
-
-  axios.post(API_LOGIN_SOCIAL, payload)
-    .then(response => {
-        let rol = response.data.rol;
-        let token = response.data.token;
-        let code = response.data.code;
-        this.props.obtenerTokenPadre(true,rol,token,code);
-    })
-    .catch(e => {
-        if(e.response)
-        {
-            let error = '';
-            error = e.response.data.message;
-            this.setState({errorApi: error});
-        }
-    });
-}
- 
-// const handleSocialLoginFailure = (err) => {
-//   console.error(err)
-// }
-
 class Login extends React.Component {
+
+    handleSocialLogin = (user) => {
+          let email = user.profile.email;
+          let nombre = user.profile.name;
+          let apellido = user.profile.lastName;
+          let id = user.profile.id;
+          let token = user.token.accessToken;
+        
+          const payload = {
+              email,
+              nombre,
+              apellido,
+              id,
+              token
+          };
+        
+          axios.post(API_LOGIN_SOCIAL, payload)
+            .then(response => {
+                let rol = response.data.rol;
+                let token = response.data.token;
+                let code = response.data.code;
+                this.props.obtenerTokenPadre(true,rol,token,code);
+            })
+            .catch(e => {
+                if(e.response)
+                {
+                    let error = '';
+                    error = e.response.data.message;
+                    this.setState({errorApi: error});
+                }
+            });
+        }
     
     constructor(props){
         super(props);
@@ -179,24 +173,25 @@ class Login extends React.Component {
                             <div className="text-center social-btn">
                                             <div className="row justify-content-center">
                                                 <div className="col-lg-5 col-md-5">
-                                                    {/* <SocialButton
+                                                    <SocialButton
                                                         provider='facebook'
                                                         appId='245924643289636'
-                                                        onLoginSuccess={handleSocialLogin}
+                                                        onLoginSuccess={this.handleSocialLogin}
                                                         // onLoginFailure={handleSocialLoginFailure}
                                                         >
-                                                        Facebook
-                                                    </SocialButton> */}
-                                                    <SocialLogin
-                                                        provider='facebook'
-                                                        appId='245924643289636'
-                                                        callback={handleSocialLogin}
-                                                        >
-                                                        {/* <button>Facebook</button> */}
                                                         <FacebookLoginButton>
                                                             Facebook
                                                         </FacebookLoginButton>
-                                                    </SocialLogin>
+                                                    </SocialButton>
+                                                    {/* <SocialLogin
+                                                        provider='facebook'
+                                                        appId='245924643289636'
+                                                        callback={this.handleSocialLogin}
+                                                        >
+                                                        <FacebookLoginButton>
+                                                            Facebook
+                                                        </FacebookLoginButton>
+                                                    </SocialLogin> */}
                                                 </div>
                                             </div>          
                                 </div>
