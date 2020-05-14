@@ -8,38 +8,6 @@ import { FacebookLoginButton } from "react-social-login-buttons";
  
 class Login extends React.Component {
 
-    handleSocialLogin = (user) => {
-          let email = user.profile.email;
-          let nombre = user.profile.name;
-          let apellido = user.profile.lastName;
-          let id = user.profile.id;
-          let token = user.token.accessToken;
-        
-          const payload = {
-              email,
-              nombre,
-              apellido,
-              id,
-              token
-          };
-        
-          axios.post(API_LOGIN_SOCIAL, payload)
-            .then(response => {
-                let rol = response.data.rol;
-                let token = response.data.token;
-                let code = response.data.code;
-                this.props.obtenerTokenPadre(true,rol,token,code);
-            })
-            .catch(e => {
-                if(e.response)
-                {
-                    let error = '';
-                    error = e.response.data.message;
-                    this.setState({errorApi: error});
-                }
-            });
-        }
-    
     constructor(props){
         super(props);
 
@@ -96,26 +64,52 @@ class Login extends React.Component {
         })
     }
 
+    // login con user/pass
     consumirApiLogin() {
         const payload={
             "_username":this.state.username,
             "_password":this.state.password,
         }
-        axios.post(API_LOGIN, payload)
-            .then(response => {
-                let rol = response.data.rol;
-                let token = response.data.token;
-                let code = response.data.code;
-                this.props.obtenerTokenPadre(true,rol,token,code);
-            })
-            .catch(e => {
-                if(e.response)
-                {
-                    let error = '';
-                    error = e.response.data.message;
-                    this.setState({errorApi: error});
-                }
-            });
+        this.consumirAxios(API_LOGIN,payload);
+    }
+
+    // login con facebook
+    handleSocialLogin = (user) => {
+        let email = user.profile.email;
+        let nombre = user.profile.name;
+        let apellido = user.profile.lastName;
+        let id = user.profile.id;
+        let token = user.token.accessToken;
+      
+        const payload = {
+            email,
+            nombre,
+            apellido,
+            id,
+            token
+        };
+      
+        this.consumirAxios(API_LOGIN_SOCIAL,payload);
+    }
+
+    //adaptador para hacer petición http
+    consumirAxios = (url,payload) => {
+        axios.post(url,payload)
+        .then(response => {
+            let rol = response.data.rol;
+            let token = response.data.token;
+            let code = response.data.code;
+            // Llamo al componente app para que muestre habilite rutas segun corresponda por el rol
+            this.props.obtenerTokenPadre(true,rol,token,code);
+        })
+        .catch(e => {
+            if(e.response)
+            {
+                let error = '';
+                error = e.response.data.message;
+                this.setState({errorApi: error});
+            }
+        });
     }
 
     render() {
