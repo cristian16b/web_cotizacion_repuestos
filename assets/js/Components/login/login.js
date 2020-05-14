@@ -9,11 +9,11 @@ import { FacebookLoginButton } from "react-social-login-buttons";
  
 // Login implementado con facebook
 const handleSocialLogin = (user) => {
-  let email = user._profile.email;
-  let nombre = user._profile.name;
-  let apellido = user._profile.lastName;
-  let id = user._profile.id;
-  let token = user._token.accessToken;
+  let email = user.profile.email;
+  let nombre = user.profile.name;
+  let apellido = user.profile.lastName;
+  let id = user.profile.id;
+  let token = user.token.accessToken;
 
   const payload = {
       email,
@@ -23,7 +23,21 @@ const handleSocialLogin = (user) => {
       token
   };
 
-  this.consumirApiLoginSocial(payload)
+  axios.post(API_LOGIN_SOCIAL, payload)
+    .then(response => {
+        let rol = response.data.rol;
+        let token = response.data.token;
+        let code = response.data.code;
+        this.props.obtenerTokenPadre(true,rol,token,code);
+    })
+    .catch(e => {
+        if(e.response)
+        {
+            let error = '';
+            error = e.response.data.message;
+            this.setState({errorApi: error});
+        }
+    });
 }
  
 // const handleSocialLoginFailure = (err) => {
@@ -110,28 +124,6 @@ class Login extends React.Component {
             });
     }
 
-    consumirApiLoginSocial(payload) {
-        // const payload={
-        //     "_username":this.state.username,
-        //     "_password":this.state.password,
-        // }
-        axios.post(API_LOGIN, payload)
-            .then(response => {
-                let rol = response.data.rol;
-                let token = response.data.token;
-                let code = response.data.code;
-                this.props.obtenerTokenPadre(true,rol,token,code);
-            })
-            .catch(e => {
-                if(e.response)
-                {
-                    let error = '';
-                    error = e.response.data.message;
-                    this.setState({errorApi: error});
-                }
-            });
-    }
-
     render() {
         return (
             <div className="row justify-content-center">
@@ -185,7 +177,7 @@ class Login extends React.Component {
                                 <p className="text-center">O ingresar con tu red social</p>
                                 <div className="text-center social-btn">
                                             <div className="row justify-content-center">
-                                                <div className="col-lg-5">
+                                                <div className="col-lg-5 col-md-5">
                                                     {/* <SocialButton
                                                         provider='facebook'
                                                         appId='245924643289636'

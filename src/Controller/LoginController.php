@@ -40,6 +40,9 @@ class LoginController extends AbstractController
     private $userRolComerciante = "ROLE_COMERCIANTE";
     private $userRolAdmin = "ROLE_ADMIN";
 
+    private $datoNoInformado = "NO INFORMADO";
+    private $providerFacebook = "FACEBOOK";
+
     // /**
     //  * @Route("/login", name="login")
     //  */
@@ -73,6 +76,77 @@ class LoginController extends AbstractController
      */
     public function getLoginCheckAction() {}
      
+    /**
+     * @Rest\Post("/login_social", name="login_social")
+     *
+     **/
+    public function getLogiSocialAction(Request $request, UserPasswordEncoderInterface $encoder) {
+
+        $serializer = $this->get('serializer');
+        $repository = $this->getDoctrine()->getRepository(Usuario::class);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        /*
+        los datos vienen
+            apellido
+            email
+            id
+            nombre
+            token
+        */
+
+        try {
+            $apellido = $request->request->get('apellido');
+            $email = $request->request->get('email');
+            $idSocial = $request->request->get('id');
+            $nombre = $request->request->get('nombre');
+            $token = $request->request->get('token');
+
+            $usuario = $repository->findOneBy([
+                'email' => $email,
+            ]);
+            
+            //dump($usuario);
+            
+            if(is_null($usuario)) {
+                $user = new Usuario();
+                $user->setNombre($nombre);
+                $user->setEmail($email);
+                $user->setUsername($email);
+                $user->setPlainPassword($idSocial);
+                $user->setPassword($encoder->encodePassword($user, $idSocial));
+                $user->setRoles($this->userRolUsuario);
+                $user->setUsuarioUltimaModificacion($email);
+                $user->setApellido($apellido);
+                $user->setCodArea($this->datoNoInformado);
+                $user->setTelefono($this->datoNoInformado);
+            }
+
+            $user->setSocialToken($token);
+            $user->setSocialProvider($this->providerFacebook);
+            $user->setSocialId($idSocial);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+        catch (Exception $ex) {
+            $code = 500;
+            $error = true;
+            $message = "Ocurrio un error al intentar agregar al usuario - Error: {$ex->getMessage()}";
+        }
+
+    
+        $code = 200;
+        $error = [];
+        $response = [
+            'code' => $code,
+            'error' => $error,
+            // 'data' => $code == 200 ? $user : $message,
+        ];
+ 
+        return new Response($serializer->serialize($response, "json"));
+    }
+    
     /**
      * @Rest\Post("/register", name="user_register")
      *
