@@ -102,13 +102,12 @@ class LoginController extends AbstractController
             $nombre = $request->request->get('nombre');
             $token = $request->request->get('token');
 
-            $usuario = $repository->findOneBy([
+            $user = $repository->findOneBy([
                 'email' => $email,
             ]);
             
-            //dump($usuario);
             
-            if(is_null($usuario)) {
+            if(is_null($user)) {
                 $user = new Usuario();
                 $user->setNombre($nombre);
                 $user->setEmail($email);
@@ -146,7 +145,7 @@ class LoginController extends AbstractController
  
         return new Response($serializer->serialize($response, "json"));
     }
-    
+
     /**
      * @Rest\Post("/register", name="user_register")
      *

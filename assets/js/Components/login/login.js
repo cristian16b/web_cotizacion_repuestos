@@ -163,19 +163,20 @@ class Login extends React.Component {
                                 <div className="form-group">
                                     <button type="submit" className="btn btn-primary login-btn btn-block">Ingresar</button>
                                 </div>
-                                <div className="clearfix">
+                            </form>
+                            <div className="clearfix">
                                     {/* <label className="pull-left checkbox-inline"><input type="checkbox" /> Remember me</label> */}
                                     <Link to="/recuperarContrasenia" className="navbar-brand">
                                         <span className="small"> 
                                             ¿Olvidaste tu contraseña?
                                         </span>
                                     </Link>
-                                </div>
-                                <div className="clearfix">
-                                    <hr />
-                                </div>
-                                <p className="text-center">O ingresar con tu red social</p>
-                                <div className="text-center social-btn">
+                            </div>
+                            <div className="clearfix">
+                                <hr />
+                            </div>
+                            <p className="text-center">O ingresar con tu red social</p>
+                            <div className="text-center social-btn">
                                             <div className="row justify-content-center">
                                                 <div className="col-lg-5 col-md-5">
                                                     {/* <SocialButton
@@ -197,10 +198,8 @@ class Login extends React.Component {
                                                         </FacebookLoginButton>
                                                     </SocialLogin>
                                                 </div>
-                                            </div> 
-                                               
+                                            </div>          
                                 </div>
-                            </form>
                             <p className="text-center">¿No tienes una cuenta?&nbsp;  
                                 <Link to="/registrarme">
                                     <span> 
