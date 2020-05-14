@@ -1,14 +1,29 @@
 import React , { Component  } from 'react';
 require("../login/login.css");
 import {Link}  from 'react-router-dom';
-import {API_LOGIN} from '../../Constantes/constantes';
+import {API_LOGIN,API_LOGIN_SOCIAL} from '../../Constantes/constantes';
 import axios from 'axios';
 // import SocialButton from '../social button/SocialButton'
 import { OldSocialLogin as SocialLogin } from 'react-social-login';
 import { FacebookLoginButton } from "react-social-login-buttons";
  
+// Login implementado con facebook
 const handleSocialLogin = (user) => {
-  console.log(user)
+  let email = user._profile.email;
+  let nombre = user._profile.name;
+  let apellido = user._profile.lastName;
+  let id = user._profile.id;
+  let token = user._token.accessToken;
+
+  const payload = {
+      email,
+      nombre,
+      apellido,
+      id,
+      token
+  };
+
+  this.consumirApiLoginSocial(payload)
 }
  
 // const handleSocialLoginFailure = (err) => {
@@ -78,6 +93,28 @@ class Login extends React.Component {
             "_username":this.state.username,
             "_password":this.state.password,
         }
+        axios.post(API_LOGIN, payload)
+            .then(response => {
+                let rol = response.data.rol;
+                let token = response.data.token;
+                let code = response.data.code;
+                this.props.obtenerTokenPadre(true,rol,token,code);
+            })
+            .catch(e => {
+                if(e.response)
+                {
+                    let error = '';
+                    error = e.response.data.message;
+                    this.setState({errorApi: error});
+                }
+            });
+    }
+
+    consumirApiLoginSocial(payload) {
+        // const payload={
+        //     "_username":this.state.username,
+        //     "_password":this.state.password,
+        // }
         axios.post(API_LOGIN, payload)
             .then(response => {
                 let rol = response.data.rol;

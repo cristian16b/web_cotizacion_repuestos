@@ -34,7 +34,7 @@ class App extends React.Component {
   obtenerToken = (bandera,rolObtenido,tokenObtenido,code) => {
     if(code == 200) {
 
-      // console.log(rolObtenido);console.log(tokenObtenido);
+      // console.log(rolObtenido);console.log(tokenObtenido);php bin/console make:entity
 
       this.setState({
         isUserLogin: bandera,
