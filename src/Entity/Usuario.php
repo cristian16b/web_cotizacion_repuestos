@@ -144,6 +144,21 @@ class Usuario implements UserInterface
      * ) 
      */
     private $telefono;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $socialProvider;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $socialId;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $socialToken;
     
     public function __construct()
     {
@@ -380,6 +395,42 @@ class Usuario implements UserInterface
     public function setTelefono(string $telefono): self
     {
         $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    public function getSocialProvider(): ?string
+    {
+        return $this->socialProvider;
+    }
+
+    public function setSocialProvider(?string $socialProvider): self
+    {
+        $this->socialProvider = $socialProvider;
+
+        return $this;
+    }
+
+    public function getSocialId(): ?string
+    {
+        return $this->socialId;
+    }
+
+    public function setSocialId(?string $socialId): self
+    {
+        $this->socialId = $socialId;
+
+        return $this;
+    }
+
+    public function getSocialToken(): ?string
+    {
+        return $this->socialToken;
+    }
+
+    public function setSocialToken(?string $socialToken): self
+    {
+        $this->socialToken = $socialToken;
 
         return $this;
     }
