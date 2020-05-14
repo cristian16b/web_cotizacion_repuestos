@@ -3,8 +3,9 @@ require("../login/login.css");
 import {Link}  from 'react-router-dom';
 import {API_LOGIN,API_LOGIN_SOCIAL} from '../../Constantes/constantes';
 import axios from 'axios';
-import SocialButton from '../social button/SocialButton';
+// import SocialButton from '../social button/SocialButton';
 import { FacebookLoginButton } from "react-social-login-buttons";
+import { OldSocialLogin as SocialLogin } from 'react-social-login'
  
 class Login extends React.Component {
 
@@ -167,7 +168,7 @@ class Login extends React.Component {
                             <div className="text-center social-btn">
                                             <div className="row justify-content-center">
                                                 <div className="col-lg-5 col-md-5">
-                                                    <SocialButton
+                                                    {/* <SocialButton
                                                         provider='facebook'
                                                         appId='245924643289636'
                                                         onLoginSuccess={this.handleSocialLogin}
@@ -176,8 +177,8 @@ class Login extends React.Component {
                                                         <FacebookLoginButton>
                                                             Facebook
                                                         </FacebookLoginButton>
-                                                    </SocialButton>
-                                                    {/* <SocialLogin
+                                                    </SocialButton> */}
+                                                    <SocialLogin
                                                         provider='facebook'
                                                         appId='245924643289636'
                                                         callback={this.handleSocialLogin}
@@ -185,7 +186,7 @@ class Login extends React.Component {
                                                         <FacebookLoginButton>
                                                             Facebook
                                                         </FacebookLoginButton>
-                                                    </SocialLogin> */}
+                                                    </SocialLogin>
                                                 </div>
                                             </div>          
                                 </div>
