@@ -23,16 +23,25 @@ class App extends React.Component {
     super(props);
 
     this.state = ({
-      isUserLogin: false
+      isUserLogin: false,
+      token: '',
+      rol: '',
     })
 
     this.obtenerToken = this.obtenerToken.bind(this);
   }
 
-  obtenerToken = (bandera,tokenObtenido) => {
-    this.setState({
-      isUserLogin: bandera, token: tokenObtenido
-    })
+  obtenerToken = (bandera,rolObtenido,tokenObtenido,code) => {
+    if(code == 200) {
+
+      // console.log(rolObtenido);console.log(tokenObtenido);
+
+      this.setState({
+        isUserLogin: bandera,
+        token: tokenObtenido,
+        rol: rolObtenido
+      })
+    }
     // alert(this.state.isUserLogin);
   }
 

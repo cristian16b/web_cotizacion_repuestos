@@ -80,7 +80,10 @@ class Login extends React.Component {
         }
         axios.post(API_LOGIN, payload)
             .then(response => {
-                this.props.obtenerTokenPadre(true,response.data.token);
+                let rol = response.data.rol;
+                let token = response.data.token;
+                let code = response.data.code;
+                this.props.obtenerTokenPadre(true,rol,token,code);
             })
             .catch(e => {
                 if(e.response)

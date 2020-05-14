@@ -13,8 +13,8 @@ class AuthenticationSuccessListener
     {
         $event->setData([
             'code' => 200,
-            'user' => $event->getUser()->getRoles(),
-            'payload' => $event->getData(),
+            'rol' => $event->getUser()->getRoles(),
+            'token' => $event->getData(),
         ]);
     }
 
