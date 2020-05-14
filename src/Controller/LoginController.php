@@ -40,15 +40,15 @@ class LoginController extends AbstractController
     private $userRolComerciante = "ROLE_COMERCIANTE";
     private $userRolAdmin = "ROLE_ADMIN";
 
-    /**
-     * @Route("/login", name="login")
-     */
-    public function index()
-    {
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'LoginController',
-        ]);
-    }
+    // /**
+    //  * @Route("/login", name="login")
+    //  */
+    // public function index()
+    // {
+    //     return $this->render('login/index.html.twig', [
+    //         'controller_name' => 'LoginController',
+    //     ]);
+    // }
 
     /**
      * @Rest\Post("/login_check", name="user_login_check")
@@ -70,19 +70,9 @@ class LoginController extends AbstractController
      *     schema={
      *     }
      * )
-     *
-     * @SWG\Parameter(
-     *     name="_password",
-     *     in="body",
-     *     type="string",
-     *     description="The password",
-     *     schema={}
-     * )
-     *
-     * @SWG\Tag(name="User")
      */
     public function getLoginCheckAction() {}
- 
+     
     /**
      * @Rest\Post("/register", name="user_register")
      *

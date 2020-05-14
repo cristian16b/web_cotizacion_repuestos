@@ -41,15 +41,15 @@ class App extends React.Component {
         <>
           <NavbarLogueado></NavbarLogueado>
           <div className="container">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/repuesto" component={BuscarRepuesto} />
-              <Route exact path="/perfil" component={MiPerfil} />
-              <Route exact path="/cotizaciones" component={MisCotizaciones} />
-              <Route exact path="/contacto" component={Contacto} />
-              <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
-            </Switch>
-          </div> 
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/repuesto" component={BuscarRepuesto} />
+                <Route exact path="/perfil" component={MiPerfil} />
+                <Route exact path="/cotizaciones" component={MisCotizaciones} />
+                <Route exact path="/contacto" component={Contacto} />
+                <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
+              </Switch>
+            </div>
           <PiePagina />
         </>
     );
