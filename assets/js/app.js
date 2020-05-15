@@ -15,6 +15,7 @@ import NavbarNoLogueado from './Components/barra superior/navBarNoLogueado';
 import NavbarLogueado from './Components/barra superior/navBarLogueado';
 import Salir from './Components/salir/salir';
 import RecuperarContrasenia from './Components/recuperar/recuperarContrasenia';
+import NotFound from './Components/not found/notfound';
 
 class App extends React.Component {
 
@@ -57,6 +58,7 @@ class App extends React.Component {
                 <Route exact path="/cotizaciones" component={MisCotizaciones} />
                 <Route exact path="/contacto" component={Contacto} />
                 <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
+                <Route component={NotFound}/>
               </Switch>
             </div>
           <PiePagina />
@@ -76,6 +78,7 @@ class App extends React.Component {
                     <Route exact path="/contacto" component={Contacto} />
                     <Route exact path="/recuperarContrasenia" component={RecuperarContrasenia} />
                     <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
+                    <Route component={NotFound}/>
                   </Switch>
                 </div>
                 <PiePagina />   
