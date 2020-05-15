@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   obtenerToken = (bandera,rolObtenido,tokenObtenido,code) => {
-    console.log(rolObtenido);console.log(tokenObtenido);
+    console.log(rolObtenido + ' ' + tokenObtenido + ' ' + code);
     // 
     if(code == 200) {
 

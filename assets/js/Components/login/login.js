@@ -81,7 +81,7 @@ class Login extends React.Component {
         let apellido = user.profile.lastName;
         let id = user.profile.id;
         let token = user.token.accessToken;
-      
+
         const payload = {
             email,
             nombre,
@@ -89,7 +89,6 @@ class Login extends React.Component {
             id,
             token
         };
-      
         this.consumirAxios(API_LOGIN_SOCIAL,payload);
     }
 
@@ -100,6 +99,7 @@ class Login extends React.Component {
             let rol = response.data.rol;
             let token = response.data.token;
             let code = response.data.code;
+            // console.log(rol + ' ' + code );
             // Llamo al componente app para que muestre habilite rutas segun corresponda por el rol
             this.props.obtenerTokenPadre(true,rol,token,code);
         })

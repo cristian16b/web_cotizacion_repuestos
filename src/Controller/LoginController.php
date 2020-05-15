@@ -18,7 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
-
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 /**
  * LoginController.php
@@ -80,11 +82,14 @@ class LoginController extends AbstractController
      * @Rest\Post("/login_social", name="login_social")
      *
      **/
-    public function getLogiSocialAction(Request $request, UserPasswordEncoderInterface $encoder) {
+    public function getLogiSocialAction(Request $request, UserPasswordEncoderInterface $encoder, JWTTokenManagerInterface $JWTManager) {
 
         $serializer = $this->get('serializer');
         $repository = $this->getDoctrine()->getRepository(Usuario::class);
         $entityManager = $this->getDoctrine()->getManager();
+
+        $code = 200;
+        $error = [];
 
         /*
         los datos vienen
@@ -101,6 +106,12 @@ class LoginController extends AbstractController
             $idSocial = $request->request->get('id');
             $nombre = $request->request->get('nombre');
             $token = $request->request->get('token');
+
+            // si uno de los datos viene vacios 
+            if(!$token || !$apellido || !$email || !$idSocial || !$nombre) 
+            {
+                throw new AccessDeniedException('Bad credentials.'); 
+            }
 
             $user = $repository->findOneBy([
                 'email' => $email,
@@ -127,6 +138,14 @@ class LoginController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+            return new JsonResponse(
+                [
+                    'token' => $JWTManager->create($user),
+                    'code' => 200,
+                    'rol' => $user->getRoles(),
+                ]);
+
         }
         catch (Exception $ex) {
             $code = 500;
@@ -135,8 +154,6 @@ class LoginController extends AbstractController
         }
 
     
-        $code = 200;
-        $error = [];
         $response = [
             'code' => $code,
             'error' => $error,
