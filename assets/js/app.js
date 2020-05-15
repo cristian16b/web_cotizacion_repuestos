@@ -52,6 +52,7 @@ class App extends React.Component {
           <NavbarLogueado></NavbarLogueado>
           <div className="container">
               <Switch>
+                <Redirect exact from='/login' to='/repuesto'/>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/repuesto" component={BuscarRepuesto} />
                 <Route exact path="/perfil" component={MiPerfil} />
