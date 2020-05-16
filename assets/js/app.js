@@ -4,7 +4,7 @@ require("../css/app.css");
 import 'bootstrap/dist/css/bootstrap.css';
 import PiePagina from './Components/pie de pagina/piePagina';
 import Home from './Components/home/home';
-import BuscarRepuesto from './Components/buscar repuesto/buscarRepuesto';
+import BuscarRepuesto from './Components/buscar repuesto/buscarRepuestos';
 import Contacto from './Components/contacto/contacto';
 import MiPerfil from './Components/mi perfil/miPerfil';
 import MisCotizaciones from './Components/mis cotizaciones/misCotizaciones';
