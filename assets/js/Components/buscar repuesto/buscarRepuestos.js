@@ -8,30 +8,30 @@ class BuscarRepuesto extends React.Component {
     return (
             <div className="row">
               <div className="col-lg-4">
-                {/* <select className="browser-default custom-select">
+                <select className="browser-default custom-select">
                   <option defaultValue>Seleccione la marca</option>
                   <option value="1">Bmw</option>
                   <option value="2">Audi</option>
                   <option value="3">Ejemplo</option>
-                </select> */}
+                </select>
                 {/* fin 1era columna */}
               </div>
               <div className="col-lg-4">
-              {/* <select className="browser-default custom-select">
+                <select className="browser-default custom-select">
                   <option defaultValue>Seleccione el modelo</option>
                   <option value="1">2020</option>
                   <option value="2">Uno xx</option>
                   <option value="3">Ejemplo modelo</option>
-                </select> */}
+                </select>
                 {/* fin 2da columna */}
               </div>
               <div className="col-lg-4">  
-              {/* <select className="browser-default custom-select">
+                <select className="browser-default custom-select">
                   <option defaultValue>Seleccione tipo de repuesto</option>
                   <option value="1">Bujia</option>
                   <option value="2">Correa</option>
                   <option value="3">Bateria</option>
-                </select> */}
+                </select>
                 {/* fin 3era columna */}
               </div>
             </div>
