@@ -50,3 +50,9 @@ body
   cursor:pointer;
   font-size:15px;
 }
+
+.boton_carga_imagen {
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}

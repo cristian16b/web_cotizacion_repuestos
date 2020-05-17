@@ -83,7 +83,6 @@ class BuscarRepuesto extends React.Component {
 //  </div><!-- row -->
 // </div><!-- container -->
 
-
   renderSubidaPrevisualizacionFotos = () => {
     return (
             <div className="container">
@@ -91,7 +90,12 @@ class BuscarRepuesto extends React.Component {
                 <div className="col-sm-2 imgUp">
                   <div className="imagePreview"></div>
                     <label className="btn btn-primary">
-                      {/* Upload<input type="file" className="uploadFile img"  style="width: 0px;height: 0px;overflow: hidden;" /> */}
+                      Agregar foto
+                      <input  
+                          type="file" 
+                          className="uploadFile img"
+                          style = {{ width: "0px",height: "0px",overflow: "hidden" }}
+                      />
                     </label>
                   </div>
                 <i className="fa fa-plus imgAdd"></i>
@@ -108,10 +112,10 @@ class BuscarRepuesto extends React.Component {
             <div className="card">
               <div className="card-body">
                 <h1 className="my-4">Buscar un repuesto</h1>
-                <>{this.renderSelect()}</>
-                <>{this.renderObservaciones()}</>
+                {/* <>{this.renderSelect()}</> */}
+                {/* <>{this.renderObservaciones()}</> */}
                 <>{this.renderSubidaPrevisualizacionFotos()}</>
-                <>{this.renderBotones()}</>
+                {/* <>{this.renderBotones()}</> */}
                 {/* FIN CARDBODY */}
               </div>
               {/* FIN CARD */}
