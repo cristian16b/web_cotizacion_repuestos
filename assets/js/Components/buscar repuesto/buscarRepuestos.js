@@ -149,6 +149,7 @@ class BuscarRepuesto extends React.Component {
               <div className="col-lg-12 col-md-8">
                 <div className="card">
                   <div className="card-body">
+                    <p>Debe adjuntar al menos una foto del repuesto solicitado. Como máximo se aceptarán cuatro.</p>
                     <MultipleImageUploadComponent />
                   </div>
                 </div>
