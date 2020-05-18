@@ -116,7 +116,7 @@ class Login extends React.Component {
     render() {
         return (
             <div className="row justify-content-center">
-                <div className="col-lg-5">
+                <div className="col-lg-5 col-md-6">
                     <div className="card">
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
@@ -167,7 +167,7 @@ class Login extends React.Component {
                             <p className="text-center">O ingresar con tu red social</p>
                             <div className="text-center social-btn">
                                             <div className="row justify-content-center">
-                                                <div className="col-lg-5 col-md-5">
+                                                <div className="col-lg-5 col-md-6">
                                                     {/* <SocialButton
                                                         provider='facebook'
                                                         appId='245924643289636'

@@ -13,7 +13,7 @@ const boton_carga_imagen = {
 
 const imagePreview = {
   width: '100%',
-  height: '100px',
+  height: '300px',
   backgroundPosition: 'center center',
   background:'url(' + 'http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg' + ')',
   backgroundColor: '#fff',
@@ -146,6 +146,7 @@ class BuscarRepuesto extends React.Component {
     return (
             // <div className="container">
               <div className="row justify-content-center">
+                <br />
                 <div className="col-lg-6 col-md-6 imgUp">
                 {/* <div className="col-lg-12" style={imgUp}> */}
                   <div className="imagePreview" style={imagePreview}>
@@ -161,6 +162,7 @@ class BuscarRepuesto extends React.Component {
                     <i className="fa fa-plus imgAdd"></i>
                   </div>
                 {/* <i className="fa fa-plus imgAdd" style={imgAdd}></i> */}
+                <br />
               </div>
             // </div>
     );
