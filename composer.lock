@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28023c176a21168359612bd8eb2e328d",
+    "content-hash": "be03f20477fc63ef3a8a54d1eb7d7a94",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4448,7 +4448,7 @@
         },
         {
             "name": "symfony/dotenv",
-            "version": "v5.0.7",
+            "version": "v5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",

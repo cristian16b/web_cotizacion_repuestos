@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 // import './buscar repuesto/buscarRepuestos.css';
 // no funciona la importacion
 // require("../buscar repuesto/buscarRepuestos.css");
+import MultipleImageUploadComponent from './MultipleImageUploadComponent';
 
 // 
 const boton_carga_imagen = {
@@ -144,28 +145,16 @@ class BuscarRepuesto extends React.Component {
 
   renderSubidaPrevisualizacionFotos = () => {
     return (
-            // <div className="container">
-              <div className="row justify-content-center">
-                <br />
-                <div className="col-lg-6 col-md-6 imgUp">
-                {/* <div className="col-lg-12" style={imgUp}> */}
-                  <div className="imagePreview" style={imagePreview}>
+            <div className="row">
+              <div className="col-lg-12 col-md-8">
+                <div className="card">
+                  <div className="card-body">
+                    <MultipleImageUploadComponent />
                   </div>
-                    <label className="btn btn-info" style={ btnPrimary }>
-                      Agregar foto
-                      <input  
-                          type="file" 
-                          className="uploadFile img"
-                          style = {boton_carga_imagen}
-                      />
-                    </label>
-                    <i className="fa fa-plus imgAdd"></i>
-                  </div>
-                {/* <i className="fa fa-plus imgAdd" style={imgAdd}></i> */}
-                <br />
+                </div>
               </div>
-            // </div>
-    );
+            </div>
+      );
   }
 
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
