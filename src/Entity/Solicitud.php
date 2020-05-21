@@ -53,9 +53,15 @@ class Solicitud
      */
     private $recursos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cotizacion", mappedBy="solicitud", orphanRemoval=true)
+     */
+    private $cotizaciones;
+
     public function __construct()
     {
         $this->recursos = new ArrayCollection();
+        $this->cotizaciones = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +166,37 @@ class Solicitud
             // set the owning side to null (unless already changed)
             if ($recurso->getSolicitud() === $this) {
                 $recurso->setSolicitud(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cotizacion[]
+     */
+    public function getCotizaciones(): Collection
+    {
+        return $this->cotizaciones;
+    }
+
+    public function addCotizacione(Cotizacion $cotizacione): self
+    {
+        if (!$this->cotizaciones->contains($cotizacione)) {
+            $this->cotizaciones[] = $cotizacione;
+            $cotizacione->setSolicitud($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCotizacione(Cotizacion $cotizacione): self
+    {
+        if ($this->cotizaciones->contains($cotizacione)) {
+            $this->cotizaciones->removeElement($cotizacione);
+            // set the owning side to null (unless already changed)
+            if ($cotizacione->getSolicitud() === $this) {
+                $cotizacione->setSolicitud(null);
             }
         }
 
