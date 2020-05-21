@@ -41,9 +41,11 @@ class ModeloAuto
     private $fechaBaja;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MarcaAuto", mappedBy="modeloAuto")
+     * @ORM\ManyToOne(targetEntity="App\Entity\MarcaAuto", inversedBy="modelos")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $marcaAuto;
+
 
     public function __construct()
     {
@@ -103,37 +105,6 @@ class ModeloAuto
         return $this;
     }
 
-    /**
-     * @return Collection|MarcaAuto[]
-     */
-    public function getMarcaAuto(): Collection
-    {
-        return $this->marcaAuto;
-    }
-
-    public function addMarcaAuto(MarcaAuto $marcaAuto): self
-    {
-        if (!$this->marcaAuto->contains($marcaAuto)) {
-            $this->marcaAuto[] = $marcaAuto;
-            $marcaAuto->setModeloAuto($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMarcaAuto(MarcaAuto $marcaAuto): self
-    {
-        if ($this->marcaAuto->contains($marcaAuto)) {
-            $this->marcaAuto->removeElement($marcaAuto);
-            // set the owning side to null (unless already changed)
-            if ($marcaAuto->getModeloAuto() === $this) {
-                $marcaAuto->setModeloAuto(null);
-            }
-        }
-
-        return $this;
-    }
-
         /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -145,5 +116,17 @@ class ModeloAuto
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    public function getMarcaAuto()
+    {
+        return $this->marcaAuto;
+    }
+
+    public function setMarcaAuto(?MarcaAuto $marcaAuto): self
+    {
+        $this->marcaAuto = $marcaAuto;
+
+        return $this;
     }
 }

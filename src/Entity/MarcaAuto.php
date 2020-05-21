@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -39,10 +41,14 @@ class MarcaAuto
     private $fechaBaja;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ModeloAuto", inversedBy="marcaAuto")
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloAuto", mappedBy="marcaAuto")
      */
-    private $modeloAuto;
+    private $modelos;
 
+    public function __construct()
+    {
+        $this->modelos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,18 +103,6 @@ class MarcaAuto
         return $this;
     }
 
-    public function getModeloAuto(): ?ModeloAuto
-    {
-        return $this->modeloAuto;
-    }
-
-    public function setModeloAuto(?ModeloAuto $modeloAuto): self
-    {
-        $this->modeloAuto = $modeloAuto;
-
-        return $this;
-    }
-
         /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -120,6 +114,37 @@ class MarcaAuto
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    /**
+     * @return Collection|ModeloAuto[]
+     */
+    public function getModelos(): Collection
+    {
+        return $this->modelos;
+    }
+
+    public function addModelo(ModeloAuto $modelo): self
+    {
+        if (!$this->modelos->contains($modelo)) {
+            $this->modelos[] = $modelo;
+            $modelo->setMarcaAuto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelo(ModeloAuto $modelo): self
+    {
+        if ($this->modelos->contains($modelo)) {
+            $this->modelos->removeElement($modelo);
+            // set the owning side to null (unless already changed)
+            if ($modelo->getMarcaAuto() === $this) {
+                $modelo->setMarcaAuto(null);
+            }
+        }
+
+        return $this;
     }
 
 }
