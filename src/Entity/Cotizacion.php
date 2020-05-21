@@ -41,6 +41,12 @@ class Cotizacion
      */
     private $estado;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Solicitud", inversedBy="cotizaciones")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $solicitud;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,5 +111,17 @@ class Cotizacion
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    public function getSolicitud(): ?Solicitud
+    {
+        return $this->solicitud;
+    }
+
+    public function setSolicitud(?Solicitud $solicitud): self
+    {
+        $this->solicitud = $solicitud;
+
+        return $this;
     }
 }
