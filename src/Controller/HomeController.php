@@ -29,9 +29,17 @@ class HomeController extends AbstractController
         $data = file_get_contents('./../mla/marcasAutos.json');
         $dataJson = json_decode($data,true);
         $marcas = $dataJson['children_categories'];
+        $m = new MarcaAuto();
+        $entityManager = $this->getDoctrine()->getManager();
         foreach($marcas as $marca){
-            dump($marca);
+            $m->setName($marca['name']);
+            $m->setMlaId($marca['id']);
+            // dump($marca);
+            $entityManager->persist($m);
+            $entityManager->flush();
+            $entityManager->clear();
         }
+        dump('importacion finalizada,ver en phpmyadmin');
         die;
         // return $this->render('home/index.html.twig', [
         //     'controller_name' => 'HomeController',
