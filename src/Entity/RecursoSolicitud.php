@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,16 @@ class RecursoSolicitud
      * @ORM\Column(type="string", length=255)
      */
     private $pesoMega;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Solicitud", mappedBy="recursoSolicitud")
+     */
+    private $solicitud;
+
+    public function __construct()
+    {
+        $this->solicitud = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +114,37 @@ class RecursoSolicitud
     public function setPesoMega(string $pesoMega): self
     {
         $this->pesoMega = $pesoMega;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Solicitud[]
+     */
+    public function getSolicitud(): Collection
+    {
+        return $this->solicitud;
+    }
+
+    public function addSolicitud(Solicitud $solicitud): self
+    {
+        if (!$this->solicitud->contains($solicitud)) {
+            $this->solicitud[] = $solicitud;
+            $solicitud->setRecursoSolicitud($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSolicitud(Solicitud $solicitud): self
+    {
+        if ($this->solicitud->contains($solicitud)) {
+            $this->solicitud->removeElement($solicitud);
+            // set the owning side to null (unless already changed)
+            if ($solicitud->getRecursoSolicitud() === $this) {
+                $solicitud->setRecursoSolicitud(null);
+            }
+        }
 
         return $this;
     }

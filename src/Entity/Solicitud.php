@@ -36,6 +36,16 @@ class Solicitud
      */
     private $tipoRepuesto;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ModeloAuto", cascade={"persist", "remove"})
+     */
+    private $modeloAuto;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\RecursoSolicitud", inversedBy="solicitud")
+     */
+    private $recursoSolicitud;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +95,30 @@ class Solicitud
     public function setTipoRepuesto(?TipoRepuesto $tipoRepuesto): self
     {
         $this->tipoRepuesto = $tipoRepuesto;
+
+        return $this;
+    }
+
+    public function getModeloAuto(): ?ModeloAuto
+    {
+        return $this->modeloAuto;
+    }
+
+    public function setModeloAuto(?ModeloAuto $modeloAuto): self
+    {
+        $this->modeloAuto = $modeloAuto;
+
+        return $this;
+    }
+
+    public function getRecursoSolicitud(): ?RecursoSolicitud
+    {
+        return $this->recursoSolicitud;
+    }
+
+    public function setRecursoSolicitud(?RecursoSolicitud $recursoSolicitud): self
+    {
+        $this->recursoSolicitud = $recursoSolicitud;
 
         return $this;
     }
