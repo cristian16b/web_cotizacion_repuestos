@@ -31,6 +31,11 @@ class Solicitud
      */
     private $fechaBaja;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\TipoRepuesto", cascade={"persist", "remove"})
+     */
+    private $tipoRepuesto;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Solicitud
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
+
+        return $this;
+    }
+
+    public function getTipoRepuesto(): ?TipoRepuesto
+    {
+        return $this->tipoRepuesto;
+    }
+
+    public function setTipoRepuesto(?TipoRepuesto $tipoRepuesto): self
+    {
+        $this->tipoRepuesto = $tipoRepuesto;
 
         return $this;
     }

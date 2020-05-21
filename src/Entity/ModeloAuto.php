@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class ModeloAuto
      * @ORM\Column(type="date", nullable=true)
      */
     private $fechaBaja;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MarcaAuto", mappedBy="modeloAuto")
+     */
+    private $marcaAuto;
+
+    public function __construct()
+    {
+        $this->marcaAuto = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +97,37 @@ class ModeloAuto
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MarcaAuto[]
+     */
+    public function getMarcaAuto(): Collection
+    {
+        return $this->marcaAuto;
+    }
+
+    public function addMarcaAuto(MarcaAuto $marcaAuto): self
+    {
+        if (!$this->marcaAuto->contains($marcaAuto)) {
+            $this->marcaAuto[] = $marcaAuto;
+            $marcaAuto->setModeloAuto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMarcaAuto(MarcaAuto $marcaAuto): self
+    {
+        if ($this->marcaAuto->contains($marcaAuto)) {
+            $this->marcaAuto->removeElement($marcaAuto);
+            // set the owning side to null (unless already changed)
+            if ($marcaAuto->getModeloAuto() === $this) {
+                $marcaAuto->setModeloAuto(null);
+            }
+        }
 
         return $this;
     }

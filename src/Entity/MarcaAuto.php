@@ -36,6 +36,11 @@ class MarcaAuto
      */
     private $fechaBaja;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ModeloAuto", inversedBy="marcaAuto")
+     */
+    private $modeloAuto;
+
 
     public function getId(): ?int
     {
@@ -86,6 +91,18 @@ class MarcaAuto
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
+
+        return $this;
+    }
+
+    public function getModeloAuto(): ?ModeloAuto
+    {
+        return $this->modeloAuto;
+    }
+
+    public function setModeloAuto(?ModeloAuto $modeloAuto): self
+    {
+        $this->modeloAuto = $modeloAuto;
 
         return $this;
     }
