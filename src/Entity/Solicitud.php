@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,19 +44,19 @@ class Solicitud
     private $modeloAuto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\RecursoSolicitud", inversedBy="solicitud")
-     */
-    private $recursoSolicitud;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Compra", cascade={"persist", "remove"})
      */
     private $compra;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Cotizacion", inversedBy="solicitud")
+     * @ORM\OneToMany(targetEntity="App\Entity\RecursoSolicitud", mappedBy="solicitud", orphanRemoval=true)
      */
-    private $cotizaciones;
+    private $recursos;
+
+    public function __construct()
+    {
+        $this->recursos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,18 +123,6 @@ class Solicitud
         return $this;
     }
 
-    public function getRecursoSolicitud(): ?RecursoSolicitud
-    {
-        return $this->recursoSolicitud;
-    }
-
-    public function setRecursoSolicitud(?RecursoSolicitud $recursoSolicitud): self
-    {
-        $this->recursoSolicitud = $recursoSolicitud;
-
-        return $this;
-    }
-
     public function getCompra(): ?Compra
     {
         return $this->compra;
@@ -145,15 +135,35 @@ class Solicitud
         return $this;
     }
 
-    public function getCotizaciones(): ?Cotizacion
+    /**
+     * @return Collection|Recurso[]
+     */
+    public function getRecursos(): Collection
     {
-        return $this->cotizaciones;
+        return $this->recursos;
     }
 
-    public function setCotizaciones(?Cotizacion $cotizaciones): self
+    public function addRecurso(RecursoSolicitud $recurso): self
     {
-        $this->cotizaciones = $cotizaciones;
+        if (!$this->recursos->contains($recurso)) {
+            $this->recursos[] = $recurso;
+            $recurso->setSolicitud($this);
+        }
 
         return $this;
     }
+
+    public function removeRecurso(RecursoSolicitud $recurso): self
+    {
+        if ($this->recursos->contains($recurso)) {
+            $this->recursos->removeElement($recurso);
+            // set the owning side to null (unless already changed)
+            if ($recurso->getSolicitud() === $this) {
+                $recurso->setSolicitud(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

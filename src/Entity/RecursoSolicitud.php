@@ -44,14 +44,10 @@ class RecursoSolicitud
     private $pesoMega;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Solicitud", mappedBy="recursoSolicitud")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Solicitud", inversedBy="recursos")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $solicitud;
-
-    public function __construct()
-    {
-        $this->solicitud = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -114,37 +110,18 @@ class RecursoSolicitud
     public function setPesoMega(string $pesoMega): self
     {
         $this->pesoMega = $pesoMega;
-
+    
         return $this;
     }
 
-    /**
-     * @return Collection|Solicitud[]
-     */
-    public function getSolicitud(): Collection
+    public function getSolicitud(): ?Solicitud
     {
         return $this->solicitud;
     }
 
-    public function addSolicitud(Solicitud $solicitud): self
+    public function setSolicitud(?Solicitud $solicitud): self
     {
-        if (!$this->solicitud->contains($solicitud)) {
-            $this->solicitud[] = $solicitud;
-            $solicitud->setRecursoSolicitud($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSolicitud(Solicitud $solicitud): self
-    {
-        if ($this->solicitud->contains($solicitud)) {
-            $this->solicitud->removeElement($solicitud);
-            // set the owning side to null (unless already changed)
-            if ($solicitud->getRecursoSolicitud() === $this) {
-                $solicitud->setRecursoSolicitud(null);
-            }
-        }
+        $this->solicitud = $solicitud;
 
         return $this;
     }

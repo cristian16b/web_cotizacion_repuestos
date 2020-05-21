@@ -39,16 +39,6 @@ class Cotizacion
      */
     private $estado;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Solicitud", mappedBy="cotizaciones")
-     */
-    private $solicitud;
-
-    public function __construct()
-    {
-        $this->solicitud = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -108,28 +98,5 @@ class Cotizacion
     public function getSolicitud(): Collection
     {
         return $this->solicitud;
-    }
-
-    public function addSolicitud(Solicitud $solicitud): self
-    {
-        if (!$this->solicitud->contains($solicitud)) {
-            $this->solicitud[] = $solicitud;
-            $solicitud->setCotizaciones($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSolicitud(Solicitud $solicitud): self
-    {
-        if ($this->solicitud->contains($solicitud)) {
-            $this->solicitud->removeElement($solicitud);
-            // set the owning side to null (unless already changed)
-            if ($solicitud->getCotizaciones() === $this) {
-                $solicitud->setCotizaciones(null);
-            }
-        }
-
-        return $this;
     }
 }
