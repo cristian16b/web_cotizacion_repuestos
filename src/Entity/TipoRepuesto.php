@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Entity;
+use DateTime;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TipoRepuestoRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class TipoRepuesto
 {
@@ -87,5 +89,18 @@ class TipoRepuesto
         $this->mlaId = $mlaId;
 
         return $this;
+    }
+
+        /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setFechaAlta($dateTimeNow);
+        if ($this->getFechaAlta() === null) {
+            $this->setFechaAlta($dateTimeNow);
+        }
     }
 }

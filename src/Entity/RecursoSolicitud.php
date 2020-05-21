@@ -5,9 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecursoSolicitudRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class RecursoSolicitud
 {
@@ -124,5 +126,18 @@ class RecursoSolicitud
         $this->solicitud = $solicitud;
 
         return $this;
+    }
+
+        /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setFechaAlta($dateTimeNow);
+        if ($this->getFechaAlta() === null) {
+            $this->setFechaAlta($dateTimeNow);
+        }
     }
 }

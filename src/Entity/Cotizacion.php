@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CotizacionRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Cotizacion
 {
@@ -98,18 +100,31 @@ class Cotizacion
         return $this;
     }
 
+    // /**
+    //  * @return Collection|Solicitud[]
+    //  */
+    // public function getSolicitud(): Collection
+    // {
+    //     return $this->solicitud;
+    // }
+
+    // public function setSolicitud(?Solicitud $solicitud): self
+    // {
+    //     $this->solicitud = $solicitud;
+
+    //     return $this;
+    // }
+
     /**
-     * @return Collection|Solicitud[]
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
-    public function getSolicitud(): Collection
+    public function updatedTimestamps()
     {
-        return $this->solicitud;
-    }
-
-    public function setSolicitud(?Solicitud $solicitud): self
-    {
-        $this->solicitud = $solicitud;
-
-        return $this;
+        $dateTimeNow = new DateTime('now');
+        $this->setFechaAlta($dateTimeNow);
+        if ($this->getFechaAlta() === null) {
+            $this->setFechaAlta($dateTimeNow);
+        }
     }
 }

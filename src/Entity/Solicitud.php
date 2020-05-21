@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Entity;
-
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SolicitudRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Solicitud
 {
@@ -203,4 +204,16 @@ class Solicitud
         return $this;
     }
 
+            /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setFechaAlta($dateTimeNow);
+        if ($this->getFechaAlta() === null) {
+            $this->setFechaAlta($dateTimeNow);
+        }
+    }
 }
