@@ -46,6 +46,16 @@ class Solicitud
      */
     private $recursoSolicitud;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Compra", cascade={"persist", "remove"})
+     */
+    private $compra;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Cotizacion", inversedBy="solicitud")
+     */
+    private $cotizaciones;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +129,30 @@ class Solicitud
     public function setRecursoSolicitud(?RecursoSolicitud $recursoSolicitud): self
     {
         $this->recursoSolicitud = $recursoSolicitud;
+
+        return $this;
+    }
+
+    public function getCompra(): ?Compra
+    {
+        return $this->compra;
+    }
+
+    public function setCompra(?Compra $compra): self
+    {
+        $this->compra = $compra;
+
+        return $this;
+    }
+
+    public function getCotizaciones(): ?Cotizacion
+    {
+        return $this->cotizaciones;
+    }
+
+    public function setCotizaciones(?Cotizacion $cotizaciones): self
+    {
+        $this->cotizaciones = $cotizaciones;
 
         return $this;
     }
