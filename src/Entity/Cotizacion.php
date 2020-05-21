@@ -41,12 +41,6 @@ class Cotizacion
      */
     private $estado;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Solicitud", inversedBy="cotizaciones")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $solicitud;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -99,21 +93,6 @@ class Cotizacion
 
         return $this;
     }
-
-    // /**
-    //  * @return Collection|Solicitud[]
-    //  */
-    // public function getSolicitud(): Collection
-    // {
-    //     return $this->solicitud;
-    // }
-
-    // public function setSolicitud(?Solicitud $solicitud): self
-    // {
-    //     $this->solicitud = $solicitud;
-
-    //     return $this;
-    // }
 
     /**
      * @ORM\PrePersist
