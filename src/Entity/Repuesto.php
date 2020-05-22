@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RepuestoRepository")
@@ -105,5 +106,18 @@ class Repuesto
         $this->tipoRepuesto = $tipoRepuesto;
 
         return $this;
+    }
+
+        /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setFechaAlta($dateTimeNow);
+        if ($this->getFechaAlta() === null) {
+            $this->setFechaAlta($dateTimeNow);
+        }
     }
 }

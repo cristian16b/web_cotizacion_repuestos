@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\MarcaAuto;
 use App\Entity\TipoRepuesto;
+use App\Entity\Repuesto;
+use APP\Repository\TipoRepuestoRepository;
 
 class HomeController extends AbstractController
 {
@@ -30,9 +32,9 @@ class HomeController extends AbstractController
         die;
     }
 
-    /**
-     * @Route("/descargar/archivos/repuesto", name="descargar_archivos_repuestos")
-    */
+    // /**
+    //  * @Route("/descargar/archivos/repuesto", name="descargar_archivos_repuestos")
+    // */
     public function descargarArchivosRepuestosAction(){
 
         $data = file_get_contents('./../mla/categoriasRepuestos.json');
@@ -54,6 +56,63 @@ class HomeController extends AbstractController
         $data = file_get_contents($url);
         $pathArchivo = './../mla/' . $nombreArchivo;
         file_put_contents($pathArchivo,$data);
+    }
+
+    private function leerArchivo($path) {
+        $data = file_get_contents($path);
+        $dataJson = json_decode($data,true);
+        return $dataJson;
+    }
+
+    /**
+     * @Route("/importar/repuestos", name="descargar_categoria")
+    */
+    public function importarRepuestosAction(){
+        
+        $cantidad = 21; //sacado a ojo mirando la cantidad de filas insertadas,todo automatizar
+        for($i=0;$i<$cantidad;$i++){
+            $path = './../mla/repuesto_'. $i .'.json';
+            // dump($path);
+            $json = $this->leerArchivo($path);
+            $this->guardarRepuesto($json);
+            // dump($json);
+            die;
+        }
+
+
+        die('end');
+    }
+
+    private function guardarRepuesto($json){
+        $mlaTipoRepuesto = $json['id'];
+        $name = $json['name'];
+        // dump($name);
+        $repuestos = $json['children_categories'];    
+        $repuesto = new Repuesto();
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // or find by name and price
+        $tipoRepuesto = $this->getDoctrine()
+                             ->getRepository(TipoRepuesto::class)
+                             ->findOneByMla($mlaTipoRepuesto);
+                             
+        dump($mlaTipoRepuesto);
+        dump($tipoRepuesto);
+        foreach($repuestos as $r){
+            $repuesto->setMlaId($r['id']);
+            $descripcion = $r['name'];
+            if($descripcion == "Otros") {
+                $repuesto->setName($name . ' - ' . $descripcion);
+            } else {
+                $repuesto->setName($descripcion);
+            }
+            $repuesto->setTipoRepuesto($tipoRepuesto);
+            dump($repuesto);
+            // $entityManager->persist($repuesto);
+            // $entityManager->flush();
+            // $entityManager->clear();
+        }
     }
 
     // /**

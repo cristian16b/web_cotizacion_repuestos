@@ -19,6 +19,16 @@ class TipoRepuestoRepository extends ServiceEntityRepository
         parent::__construct($registry, TipoRepuesto::class);
     }
 
+    public function findOneByMla($value): ?TipoRepuesto
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.mlaId = :val')
+            ->setParameter('val', '%'. $value . '%')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return TipoRepuesto[] Returns an array of TipoRepuesto objects
     //  */
