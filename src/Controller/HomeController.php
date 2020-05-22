@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\MarcaAuto;
+use App\Entity\TipoRepuesto;
 
 class HomeController extends AbstractController
 {
@@ -26,6 +27,28 @@ class HomeController extends AbstractController
         $url = 'https://api.mercadolibre.com/categories/MLA1747?fbclid=IwAR1-kxVLDOzlNLoYhoTKT7Qrcvrltb3h96UnhljGr6T6OzWrGyUa6WaQ6_A';
         $data = file_get_contents($url);
         file_put_contents('./../mla/categoriasRepuestos.json',$data);
+        die;
+    }
+
+    // /**
+    //  * @Route("/importar/categorias", name="descargar_categoria")
+    // */
+    public function importatCategoriasAction(){
+        dump('importo categorias');
+        $data = file_get_contents('./../mla/categoriasRepuestos.json');
+        $dataJson = json_decode($data,true);
+        $categorias = $dataJson['children_categories'];
+        $tr = new TipoRepuesto();
+        $entityManager = $this->getDoctrine()->getManager();
+        foreach($categorias as $cat){
+            $tr->setName($cat['name']);
+            $tr->setMlaId($cat['id']);
+            // dump($marca);
+            $entityManager->persist($tr);
+            $entityManager->flush();
+            $entityManager->clear();
+        }
+        dump('end');
         die;
     }
 
