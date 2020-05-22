@@ -7,6 +7,7 @@ use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RepuestoRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Repuesto
 {
@@ -38,8 +39,8 @@ class Repuesto
     private $mlaId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TipoRepuesto", inversedBy="repuestos")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoRepuesto",cascade={"persist"})
+     * @ORM\JoinColumn(name="tipo_repuesto_id", referencedColumnName="id")
      */
     private $tipoRepuesto;
 
@@ -96,18 +97,6 @@ class Repuesto
         return $this;
     }
 
-    public function getTipoRepuesto(): ?TipoRepuesto
-    {
-        return $this->tipoRepuesto;
-    }
-
-    public function setTipoRepuesto(?TipoRepuesto $tipoRepuesto): self
-    {
-        $this->tipoRepuesto = $tipoRepuesto;
-
-        return $this;
-    }
-
         /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -119,5 +108,17 @@ class Repuesto
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    public function getTipoRepuesto()
+    {
+        return $this->tipoRepuesto;
+    }
+
+    public function setTipoRepuesto(TipoRepuesto $tipoRepuesto)
+    {
+        $this->tipoRepuesto = $tipoRepuesto;
+
+        return $this;
     }
 }

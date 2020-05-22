@@ -70,17 +70,21 @@ class HomeController extends AbstractController
     public function importarRepuestosAction(){
         
         $cantidad = 21; //sacado a ojo mirando la cantidad de filas insertadas,todo automatizar
-        for($i=0;$i<$cantidad;$i++){
+        $this->ejecutarImportacion(0,1);
+
+
+        die('revisar phpmyadmin');
+
+    }
+
+    private function ejecutarImportacion($desde,$hasta){
+        for($i=$desde;$i<$hasta;$i++){
             $path = './../mla/repuesto_'. $i .'.json';
             // dump($path);
             $json = $this->leerArchivo($path);
             $this->guardarRepuesto($json);
             // dump($json);
-            die;
         }
-
-
-        die('end');
     }
 
     private function guardarRepuesto($json){
@@ -95,10 +99,14 @@ class HomeController extends AbstractController
         // or find by name and price
         $tipoRepuesto = $this->getDoctrine()
                              ->getRepository(TipoRepuesto::class)
-                             ->findOneByMla($mlaTipoRepuesto);
-                             
-        dump($mlaTipoRepuesto);
-        dump($tipoRepuesto);
+                             ->findOneByMla($mlaTipoRepuesto);//funciona pero muestra un warnign, resolver!!!
+
+        // die;
+        $tp = $this->getDoctrine()
+        ->getRepository(TipoRepuesto::class)->find($tipoRepuesto->getId());
+
+        // dump($tp);die;
+        $repuesto->setTipoRepuesto($tp);
         foreach($repuestos as $r){
             $repuesto->setMlaId($r['id']);
             $descripcion = $r['name'];
@@ -107,12 +115,14 @@ class HomeController extends AbstractController
             } else {
                 $repuesto->setName($descripcion);
             }
-            $repuesto->setTipoRepuesto($tipoRepuesto);
-            dump($repuesto);
-            // $entityManager->persist($repuesto);
-            // $entityManager->flush();
-            // $entityManager->clear();
+            
+            $entityManager->persist($repuesto);
+            // dump($repuesto);
+
         }
+        
+        $entityManager->flush();
+        $entityManager->clear();
     }
 
     // /**

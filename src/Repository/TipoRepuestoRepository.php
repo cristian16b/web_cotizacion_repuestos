@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TipoRepuesto|null findOneBy(array $criteria, array $orderBy = null)
  * @method TipoRepuesto[]    findAll()
  * @method TipoRepuesto[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TipoRepuesto[]    findOneByMla($value)
  */
 class TipoRepuestoRepository extends ServiceEntityRepository
 {
@@ -21,11 +22,12 @@ class TipoRepuestoRepository extends ServiceEntityRepository
 
     public function findOneByMla($value): ?TipoRepuesto
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.mlaId = :val')
-            ->setParameter('val', '%'. $value . '%')
-            ->getQuery()
-            ->getOneOrNullResult()
+        return 
+             $this->createQueryBuilder('t')
+                ->andWhere('t.mlaId LIKE :val')
+                ->setParameter('val', '%'. $value . '%')
+                ->getQuery()
+                ->getOneOrNullResult()
         ;
     }
 
