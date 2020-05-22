@@ -1,17 +1,13 @@
 <?php
 
 namespace App\Entity;
-use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TipoRepuestoRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="App\Repository\RepuestoRepository")
  */
-class TipoRepuesto
+class Repuesto
 {
     /**
      * @ORM\Id()
@@ -41,14 +37,10 @@ class TipoRepuesto
     private $mlaId;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Repuesto", mappedBy="tipoRepuesto")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoRepuesto", inversedBy="repuestos")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $repuestos;
-
-    public function __construct()
-    {
-        $this->repuestos = new ArrayCollection();
-    }
+    private $tipoRepuesto;
 
     public function getId(): ?int
     {
@@ -103,46 +95,14 @@ class TipoRepuesto
         return $this;
     }
 
-        /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updatedTimestamps()
+    public function getTipoRepuesto(): ?TipoRepuesto
     {
-        $dateTimeNow = new DateTime('now');
-        $this->setFechaAlta($dateTimeNow);
-        if ($this->getFechaAlta() === null) {
-            $this->setFechaAlta($dateTimeNow);
-        }
+        return $this->tipoRepuesto;
     }
 
-    /**
-     * @return Collection|Repuesto[]
-     */
-    public function getRepuestos(): Collection
+    public function setTipoRepuesto(?TipoRepuesto $tipoRepuesto): self
     {
-        return $this->repuestos;
-    }
-
-    public function addRepuesto(Repuesto $repuesto): self
-    {
-        if (!$this->repuestos->contains($repuesto)) {
-            $this->repuestos[] = $repuesto;
-            $repuesto->setTipoRepuesto($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRepuesto(Repuesto $repuesto): self
-    {
-        if ($this->repuestos->contains($repuesto)) {
-            $this->repuestos->removeElement($repuesto);
-            // set the owning side to null (unless already changed)
-            if ($repuesto->getTipoRepuesto() === $this) {
-                $repuesto->setTipoRepuesto(null);
-            }
-        }
+        $this->tipoRepuesto = $tipoRepuesto;
 
         return $this;
     }
