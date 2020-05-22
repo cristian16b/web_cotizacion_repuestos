@@ -35,11 +35,6 @@ class Solicitud
     private $fechaBaja;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\TipoRepuesto", cascade={"persist", "remove"})
-     */
-    private $tipoRepuesto;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\ModeloAuto", cascade={"persist", "remove"})
      */
     private $modeloAuto;
@@ -58,6 +53,12 @@ class Solicitud
      * @ORM\OneToMany(targetEntity="App\Entity\Cotizacion", mappedBy="solicitud")
      */
     private $cotizaciones;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="solicitudesCotizacion")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $solicitante;
 
     public function __construct()
     {
@@ -102,18 +103,6 @@ class Solicitud
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
-
-        return $this;
-    }
-
-    public function getTipoRepuesto(): ?TipoRepuesto
-    {
-        return $this->tipoRepuesto;
-    }
-
-    public function setTipoRepuesto(?TipoRepuesto $tipoRepuesto): self
-    {
-        $this->tipoRepuesto = $tipoRepuesto;
 
         return $this;
     }
@@ -213,6 +202,18 @@ class Solicitud
                 $cotizacione->setSolicitud(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSolicitante(): ?Usuario
+    {
+        return $this->solicitante;
+    }
+
+    public function setSolicitante(?Usuario $solicitante): self
+    {
+        $this->solicitante = $solicitante;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -159,10 +160,16 @@ class Usuario implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $socialToken;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Solicitud", mappedBy="solicitante")
+     */
+    private $solicitudesCotizacion;
     
     public function __construct()
     {
         $this->boards = new ArrayCollection();
+        $this->solicitudesCotizacion = new ArrayCollection();
     }
  
     /**
@@ -431,6 +438,37 @@ class Usuario implements UserInterface
     public function setSocialToken(?string $socialToken): self
     {
         $this->socialToken = $socialToken;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Solicitud[]
+     */
+    public function getSolicitudesCotizacion(): Collection
+    {
+        return $this->solicitudesCotizacion;
+    }
+
+    public function addSolicitudesCotizacion(Solicitud $solicitudesCotizacion): self
+    {
+        if (!$this->solicitudesCotizacion->contains($solicitudesCotizacion)) {
+            $this->solicitudesCotizacion[] = $solicitudesCotizacion;
+            $solicitudesCotizacion->setSolicitante($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSolicitudesCotizacion(Solicitud $solicitudesCotizacion): self
+    {
+        if ($this->solicitudesCotizacion->contains($solicitudesCotizacion)) {
+            $this->solicitudesCotizacion->removeElement($solicitudesCotizacion);
+            // set the owning side to null (unless already changed)
+            if ($solicitudesCotizacion->getSolicitante() === $this) {
+                $solicitudesCotizacion->setSolicitante(null);
+            }
+        }
 
         return $this;
     }
