@@ -30,6 +30,32 @@ class HomeController extends AbstractController
         die;
     }
 
+    /**
+     * @Route("/descargar/archivos/repuesto", name="descargar_archivos_repuestos")
+    */
+    public function descargarArchivosRepuestosAction(){
+
+        $data = file_get_contents('./../mla/categoriasRepuestos.json');
+        $dataJson = json_decode($data,true);
+        $categorias = $dataJson['children_categories'];
+        $urlbase = 'https://api.mercadolibre.com/categories/';
+        foreach($categorias as $key=> $cat){
+            $id = $cat['id'];
+            $url = $urlbase . $id;
+            $nombreArchivo = 'repuesto_'.$key.'.json';
+            // dump($url);
+            // dump($nombreArchivo);
+            $this->guardarArchivo($url,$nombreArchivo);
+        }
+        die('end');
+    }
+
+    private function guardarArchivo($url,$nombreArchivo){
+        $data = file_get_contents($url);
+        $pathArchivo = './../mla/' . $nombreArchivo;
+        file_put_contents($pathArchivo,$data);
+    }
+
     // /**
     //  * @Route("/importar/categorias", name="descargar_categoria")
     // */
