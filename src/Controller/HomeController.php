@@ -20,6 +20,16 @@ class HomeController extends AbstractController
     }
 
     // /**
+    //  * @Route("/descargar/categorias", name="descargar_categoria")
+    // */
+    public function descargarCategoriasAction(){
+        $url = 'https://api.mercadolibre.com/categories/MLA1747?fbclid=IwAR1-kxVLDOzlNLoYhoTKT7Qrcvrltb3h96UnhljGr6T6OzWrGyUa6WaQ6_A';
+        $data = file_get_contents($url);
+        file_put_contents('./../mla/categoriasRepuestos.json',$data);
+        die;
+    }
+
+    // /**
     //  * @Route("/importar/auto/marca", name="importar_auto_marca")
     //  */
     public function importarAction()
