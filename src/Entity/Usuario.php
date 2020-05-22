@@ -165,11 +165,17 @@ class Usuario implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Solicitud", mappedBy="solicitante")
      */
     private $solicitudesCotizacion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cotizacion", mappedBy="oferente")
+     */
+    private $cotizacionesRealizadas;
     
     public function __construct()
     {
         $this->boards = new ArrayCollection();
         $this->solicitudesCotizacion = new ArrayCollection();
+        $this->cotizacionesRealizadas = new ArrayCollection();
     }
  
     /**
@@ -467,6 +473,37 @@ class Usuario implements UserInterface
             // set the owning side to null (unless already changed)
             if ($solicitudesCotizacion->getSolicitante() === $this) {
                 $solicitudesCotizacion->setSolicitante(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cotizacion[]
+     */
+    public function getCotizacionesRealizadas(): Collection
+    {
+        return $this->cotizacionesRealizadas;
+    }
+
+    public function addCotizacionesRealizada(Cotizacion $cotizacionesRealizada): self
+    {
+        if (!$this->cotizacionesRealizadas->contains($cotizacionesRealizada)) {
+            $this->cotizacionesRealizadas[] = $cotizacionesRealizada;
+            $cotizacionesRealizada->setOferente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCotizacionesRealizada(Cotizacion $cotizacionesRealizada): self
+    {
+        if ($this->cotizacionesRealizadas->contains($cotizacionesRealizada)) {
+            $this->cotizacionesRealizadas->removeElement($cotizacionesRealizada);
+            // set the owning side to null (unless already changed)
+            if ($cotizacionesRealizada->getOferente() === $this) {
+                $cotizacionesRealizada->setOferente(null);
             }
         }
 

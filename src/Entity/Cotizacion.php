@@ -47,6 +47,12 @@ class Cotizacion
      */
     private $solicitud;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="cotizacionesRealizadas")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $oferente;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +127,18 @@ class Cotizacion
     public function setSolicitud(?Solicitud $solicitud): self
     {
         $this->solicitud = $solicitud;
+
+        return $this;
+    }
+
+    public function getOferente(): ?Usuario
+    {
+        return $this->oferente;
+    }
+
+    public function setOferente(?Usuario $oferente): self
+    {
+        $this->oferente = $oferente;
 
         return $this;
     }
