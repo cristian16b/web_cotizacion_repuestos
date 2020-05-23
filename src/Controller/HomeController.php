@@ -64,23 +64,27 @@ class HomeController extends AbstractController
         return $dataJson;
     }
 
-    /**
-     * @Route("/importar/repuestos", name="descargar_categoria")
-    */
+    // /**
+    //  * @Route("/importar/repuestos", name="descargar_categoria")
+    // */
     public function importarRepuestosAction(){
         
         $cantidad = 21; //sacado a ojo mirando la cantidad de filas insertadas,todo automatizar
-        $this->ejecutarImportacion(0,1);
+        // $this->ejecutarImportacion(0,1);
+        // $this->ejecutarImportacion(1,2);
+        // $this->ejecutarImportacion(1,11);
+        // $this->ejecutarImportacion(12,15);
+        // $this->ejecutarImportacion(15,21);
+        // importacion completada
 
-
-        die('revisar phpmyadmin');
+        die('revisar phpmyadmin!!!!!!');
 
     }
 
     private function ejecutarImportacion($desde,$hasta){
         for($i=$desde;$i<$hasta;$i++){
             $path = './../mla/repuesto_'. $i .'.json';
-            // dump($path);
+            dump($path);
             $json = $this->leerArchivo($path);
             $this->guardarRepuesto($json);
             // dump($json);
@@ -92,37 +96,45 @@ class HomeController extends AbstractController
         $name = $json['name'];
         // dump($name);
         $repuestos = $json['children_categories'];    
-        $repuesto = new Repuesto();
-
+    
         $entityManager = $this->getDoctrine()->getManager();
 
-        // or find by name and price
-        $tipoRepuesto = $this->getDoctrine()
-                             ->getRepository(TipoRepuesto::class)
-                             ->findOneByMla($mlaTipoRepuesto);//funciona pero muestra un warnign, resolver!!!
+        $repository = $this->getDoctrine()->getRepository(TipoRepuesto::class);
+        $tipoRepuesto = $repository->findOneBy(
+            [
+                'mlaId' => $mlaTipoRepuesto
+            ]
+        );
+        // dump($tipoRepuesto);die;
 
-        // die;
-        $tp = $this->getDoctrine()
-        ->getRepository(TipoRepuesto::class)->find($tipoRepuesto->getId());
+        if(empty($repuestos)){
 
-        // dump($tp);die;
-        $repuesto->setTipoRepuesto($tp);
-        foreach($repuestos as $r){
-            $repuesto->setMlaId($r['id']);
-            $descripcion = $r['name'];
-            if($descripcion == "Otros") {
-                $repuesto->setName($name . ' - ' . $descripcion);
-            } else {
-                $repuesto->setName($descripcion);
-            }
-            
-            $entityManager->persist($repuesto);
-            // dump($repuesto);
-
+            $repuesto = new Repuesto();
+            $repuesto->setTipoRepuesto($tipoRepuesto);
+            $repuesto->setName($name);
+            $repuesto->setMlaId($mlaTipoRepuesto);
+            $this->guardarRep($repuesto,$entityManager);
         }
-        
+        else {
+            foreach($repuestos as $r){
+                $repuesto = new Repuesto();
+                $repuesto->setTipoRepuesto($tipoRepuesto);
+                // dump($r);
+                $repuesto->setMlaId($r['id']);
+                $descripcion = $r['name'];
+                if($descripcion == "Otros") {
+                    $repuesto->setName($name . ' - ' . $descripcion);
+                } else {
+                    $repuesto->setName($descripcion);
+                }
+                $this->guardarRep($repuesto,$entityManager);
+            }
+        }
+    }
+
+    private function guardarRep($respuesto,$entityManager) {
+        $entityManager->persist($respuesto);
         $entityManager->flush();
-        $entityManager->clear();
     }
 
     // /**

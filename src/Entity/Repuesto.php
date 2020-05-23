@@ -39,8 +39,8 @@ class Repuesto
     private $mlaId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TipoRepuesto",cascade={"persist"})
-     * @ORM\JoinColumn(name="tipo_repuesto_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoRepuesto", inversedBy="repuestos")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $tipoRepuesto;
 
@@ -110,12 +110,12 @@ class Repuesto
         }
     }
 
-    public function getTipoRepuesto()
+    public function getTipoRepuesto(): ?TipoRepuesto
     {
         return $this->tipoRepuesto;
     }
 
-    public function setTipoRepuesto(TipoRepuesto $tipoRepuesto)
+    public function setTipoRepuesto(?TipoRepuesto $tipoRepuesto): self
     {
         $this->tipoRepuesto = $tipoRepuesto;
 

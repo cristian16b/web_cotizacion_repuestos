@@ -39,6 +39,12 @@ class TipoRepuesto
      */
     private $mlaId;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Repuesto", mappedBy="tipoRepuesto",cascade={"persist"})
+     */
+    private $repuestos;
+
+
     public function __construct()
     {
         $this->repuestos = new ArrayCollection();
@@ -108,5 +114,36 @@ class TipoRepuesto
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    /**
+     * @return Collection|Repuesto[]
+     */
+    public function getRepuestos(): Collection
+    {
+        return $this->repuestos;
+    }
+
+    public function addRepuesto(Repuesto $repuesto): self
+    {
+        if (!$this->repuestos->contains($repuesto)) {
+            $this->repuestos[] = $repuesto;
+            $repuesto->setTipoRepuesto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepuesto(Repuesto $repuesto): self
+    {
+        if ($this->repuestos->contains($repuesto)) {
+            $this->repuestos->removeElement($repuesto);
+            // set the owning side to null (unless already changed)
+            if ($repuesto->getTipoRepuesto() === $this) {
+                $repuesto->setTipoRepuesto(null);
+            }
+        }
+
+        return $this;
     }
 }
