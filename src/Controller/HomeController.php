@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\MarcaAuto;
+use App\Entity\ModeloAuto;
 use App\Entity\TipoRepuesto;
 use App\Entity\Repuesto;
 use APP\Repository\TipoRepuestoRepository;
@@ -91,6 +92,21 @@ class HomeController extends AbstractController
     }
 
     // /**
+    //  * @Route("/importar/modelos", name="descargar_categoria")
+    // */
+    public function importarModelosAction(){
+        $cantidad = 64; //sacado a ojo mirando la cantidad de filas insertadas,todo automatizar
+        // $this->ejecutarImportacionMarca(0,1);
+        // $this->ejecutarImportacionMarca(1,20);
+        // $this->ejecutarImportacionMarca(20,40);
+        // $this->ejecutarImportacionMarca(40,64);
+        $this->ejecutarImportacionMarca(64,65);
+        // importacion completada
+
+        die('revisar phpmyadmin!!!!!!');
+    }
+
+    // /**
     //  * @Route("/importar/repuestos", name="descargar_categoria")
     // */
     public function importarRepuestosAction(){
@@ -104,7 +120,57 @@ class HomeController extends AbstractController
         // importacion completada
 
         die('revisar phpmyadmin!!!!!!');
+    }
 
+    private function ejecutarImportacionMarca($desde,$hasta){
+        for($i=$desde;$i<$hasta;$i++){
+            $path = './../mla/marca_auto_'. $i .'.json';
+            // dump($path);
+            $json = $this->leerArchivo($path);
+            $this->guardarMarcaAuto($json);
+            // dump($json);
+        }
+    }
+
+    private function guardarMarcaAuto($json){
+        $mlaTipoRepuesto = $json['id'];
+        $name = $json['name'];
+        // dump($name);
+        $modelos = $json['children_categories'];    
+    
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $repository = $this->getDoctrine()->getRepository(MarcaAuto::class);
+        $marca = $repository->findOneBy(
+            [
+                'mlaId' => $mlaTipoRepuesto
+            ]
+        );
+        // dump($marca);die;
+
+        if(empty($modelos)){
+
+            $modelo = new ModeloAuto();
+            $modelo->setMarcaAuto($marca);
+            $modelo->setName($name);
+            $modelo->setMlaId($mlaTipoRepuesto);
+            $this->guardarRep($modelo,$entityManager);
+        }
+        else {
+            foreach($modelos as $r){
+                $modelo = new ModeloAuto();
+                $modelo->setMarcaAuto($marca);
+                // dump($r);
+                $modelo->setMlaId($r['id']);
+                $descripcion = $r['name'];
+                if($descripcion == "Otros") {
+                    $modelo->setName($name . ' - ' . $descripcion);
+                } else {
+                    $modelo->setName($descripcion);
+                }
+                $this->guardarRep($modelo,$entityManager);
+            }
+        }
     }
 
     private function ejecutarImportacion($desde,$hasta){
