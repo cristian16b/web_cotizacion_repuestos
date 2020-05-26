@@ -65,6 +65,32 @@ class HomeController extends AbstractController
     }
 
     // /**
+    //  * @Route("/descargar/archivos/marcas", name="descargar_archivos_marcas")
+    // */
+    public function descargarArchivosMarcasAction(){
+
+        $data = file_get_contents('./../mla/marcasAutos.json');
+        $dataJson = json_decode($data,true);
+        $categorias = $dataJson['children_categories'];
+        $urlbase = 'https://api.mercadolibre.com/categories/';
+        foreach($categorias as $key=> $cat){
+            $id = $cat['id'];
+            $url = $urlbase . $id;
+            $nombreArchivo = 'marca_auto_'.$key.'.json';
+            // dump($url);
+            // dump($nombreArchivo);
+            // $this->guardarArchivo($url,$nombreArchivo);
+            // se descargaron los primeros 47 archivos y fallo por timeout
+            // se agrega lo siguiente para descargar los que faltan
+            if($key > 47) {
+                // dump($nombreArchivo);
+                $this->guardarArchivo($url,$nombreArchivo);
+            }
+        }
+        die('end');
+    }
+
+    // /**
     //  * @Route("/importar/repuestos", name="descargar_categoria")
     // */
     public function importarRepuestosAction(){
