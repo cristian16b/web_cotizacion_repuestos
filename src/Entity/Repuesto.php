@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -43,6 +45,16 @@ class Repuesto
      * @ORM\JoinColumn(nullable=false)
      */
     private $tipoRepuesto;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Solicitud", mappedBy="repuesto")
+     */
+    private $solicitudes;
+
+    public function __construct()
+    {
+        $this->solicitudes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -118,6 +130,37 @@ class Repuesto
     public function setTipoRepuesto(?TipoRepuesto $tipoRepuesto): self
     {
         $this->tipoRepuesto = $tipoRepuesto;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Solicitud[]
+     */
+    public function getSolicitudes(): Collection
+    {
+        return $this->solicitudes;
+    }
+
+    public function addSolicitude(Solicitud $solicitude): self
+    {
+        if (!$this->solicitudes->contains($solicitude)) {
+            $this->solicitudes[] = $solicitude;
+            $solicitude->setRepuesto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSolicitude(Solicitud $solicitude): self
+    {
+        if ($this->solicitudes->contains($solicitude)) {
+            $this->solicitudes->removeElement($solicitude);
+            // set the owning side to null (unless already changed)
+            if ($solicitude->getRepuesto() === $this) {
+                $solicitude->setRepuesto(null);
+            }
+        }
 
         return $this;
     }

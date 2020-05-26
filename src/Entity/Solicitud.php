@@ -60,6 +60,12 @@ class Solicitud
      */
     private $solicitante;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Repuesto", inversedBy="solicitudes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $repuesto;
+
     public function __construct()
     {
         $this->recursos = new ArrayCollection();
@@ -214,6 +220,18 @@ class Solicitud
     public function setSolicitante(?Usuario $solicitante): self
     {
         $this->solicitante = $solicitante;
+
+        return $this;
+    }
+
+    public function getRepuesto(): ?Repuesto
+    {
+        return $this->repuesto;
+    }
+
+    public function setRepuesto(?Repuesto $repuesto): self
+    {
+        $this->repuesto = $repuesto;
 
         return $this;
     }
