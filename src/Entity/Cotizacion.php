@@ -36,7 +36,7 @@ class Cotizacion
     private $monto;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\EstadoCotizacion", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\EstadoCotizacion")
      * @ORM\JoinColumn(nullable=false)
      */
     private $estado;
