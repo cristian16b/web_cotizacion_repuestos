@@ -10,11 +10,15 @@ class Home extends React.Component {
     return (        
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <h1 className="my-4">Nombre del sitio o marca o descripción (definir)</h1>
-          <img className="card-img-top img-fluid" src="img/foto_quienes_somos.png" alt=""></img>
+          <h1 className="my-4">Eisen Part</h1>
+            <img  className="card-img-top img-fluid"
+                  src="https://i.ibb.co/pzH2yTP/Eisen-Aplicativo03.jpg" 
+                  alt="Cargando..." 
+                  border="0">
+            </img> 
           <div className="card">
             <div className="card-body">
-              <p className="card-text">Descripción y demas .... (DEFINIR)</p>
+              <p className="card-text">Descripción</p>
             </div>
           </div>
         </div>

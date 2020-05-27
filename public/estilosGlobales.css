@@ -1,0 +1,13 @@
+body {
+    font-family: 'Montserrat';
+}
+
+.nav-link {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
