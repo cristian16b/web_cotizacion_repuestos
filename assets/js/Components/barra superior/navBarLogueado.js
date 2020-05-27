@@ -8,9 +8,9 @@ class NavbarLogueado extends React.Component {
 
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar-custom navbar navbar-expand-lg">
                 <Link to="/" className="navbar-brand"><span className="navbar-brand"></span></Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,13 +34,13 @@ class NavbarLogueado extends React.Component {
                             </li>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
-                                    <Link to="/cotizaciones" className="navbar-brand"><span className="nav-link">Mis cotizaciones</span></Link>
+                                    <Link to="/cotizaciones" className="navbar-brand"><span className="nav-link nav-link-blanco">Mis cotizaciones</span></Link>
                                 </li>
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
-                                    <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mi perfil</span></Link>
+                                    <Link to="/perfil" className="navbar-brand"><span className="nav-link nav-link-blanco">Mi perfil</span></Link>
                                 </li>
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/salir")}>
-                                    <Link to="/salir" className="navbar-brand"><span className="nav-link">Salir</span></Link>
+                                    <Link to="/salir" className="navbar-brand"><span className="nav-link nav-link-blanco">Salir</span></Link>
                                 </li>
                             </div>
                         </div>
