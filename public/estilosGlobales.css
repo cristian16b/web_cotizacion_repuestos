@@ -14,5 +14,16 @@ h1,h2,h3 {
 }
 
 .btn-primary, .login-btn, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-block {
-    background-color: #53595F !important;
+    background-color: #53595F 
+} 
+
+/* Modify the backgorund color */ 
+.navbar-custom { 
+	background-color: rgb(21, 61, 67); 
+} 
+
+/* Modify brand and text color */ 
+.navbar-custom .navbar-brand, 
+.navbar-custom .navbar-text { 
+	color: white; 
 } 
