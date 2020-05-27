@@ -10,7 +10,7 @@ class PiePagina extends React.Component {
     return (
         <footer className="py-1 bg-dark fixed-bottom">
             <div className="container">
-                <p className="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+                <p className="m-0 text-center text-white"></p>
             </div>
         </footer>
     );

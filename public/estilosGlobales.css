@@ -7,7 +7,12 @@ body {
     font-weight: bold;
 }
 
-h1 {
+h1,h2,h3 {
     text-transform: uppercase;
     font-weight: bold;
+    color: rgb(21, 61, 67);
 }
+
+.btn-primary, .login-btn, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-block {
+    background-color: #53595F !important;
+} 
