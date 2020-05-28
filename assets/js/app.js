@@ -50,7 +50,7 @@ class App extends React.Component {
     return (
         <>
           <NavbarLogueado></NavbarLogueado>
-          <div className="container">
+          <div className="container containerCentral">
               <Switch>
                 <Redirect exact from='/login' to='/repuesto'/>
                 <Route exact path="/" component={Home} />
@@ -71,7 +71,7 @@ class App extends React.Component {
     return (
             <>
               <NavbarNoLogueado></NavbarNoLogueado>
-                <div className="container">
+                <div className="container containerCentral">
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/repuesto" component={BuscarRepuesto} />

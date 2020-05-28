@@ -2,6 +2,19 @@ body {
     font-family: 'Montserrat';
 }
 
+.containerCentral {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+footer {
+    width: 100%;
+    height: 3%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
 .nav-link {
     text-transform: uppercase;
     font-weight: bold;
