@@ -12,7 +12,7 @@ class Home extends React.Component {
         <div className="col-lg-9">
           <h1 className="my-4">Eisen Part</h1>
             <img  className="card-img-top img-fluid"
-                  src="https://i.ibb.co/pzH2yTP/Eisen-Aplicativo03.jpg" 
+                  src="public\Eisen_Aplicativo03.jpg" 
                   alt="Cargando..." 
                   border="0">
             </img> 
