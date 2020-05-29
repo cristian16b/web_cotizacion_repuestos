@@ -15,9 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 
 
@@ -26,12 +24,11 @@ use JMS\Serializer\SerializerInterface;
 */
 class RepuestoController extends AbstractController
 {
-    // dans ta classe
-    private $serializer;
-
-    public function __construct( SerializerInterface $serializer)
+    // resuelto usando lo siguiente
+    // https://github.com/schmittjoh/JMSSerializerBundle/issues/713
+    public static function getSubscribedServices() 
     {
-        $this->serialize = $serializer;
+        return array_merge(parent::getSubscribedServices(), [ 'jms_serializer' => '?'.SerializerInterface::class, ]); 
     }
 
     // /**
@@ -61,7 +58,7 @@ class RepuestoController extends AbstractController
      */
     public function getByNameAction(Request $request)
     {
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->container->get('jms_serializer');
         $repuestos = [];
         $message = "";
 
