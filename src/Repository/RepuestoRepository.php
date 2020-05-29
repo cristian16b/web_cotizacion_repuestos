@@ -19,6 +19,17 @@ class RepuestoRepository extends ServiceEntityRepository
         parent::__construct($registry, Repuesto::class);
     }
 
+    public function buscarPorNombre($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.name LIKE :val')
+            ->setParameter('val','%'. $value . '%')
+            ->orderBy('r.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Repuesto[] Returns an array of Repuesto objects
     //  */
