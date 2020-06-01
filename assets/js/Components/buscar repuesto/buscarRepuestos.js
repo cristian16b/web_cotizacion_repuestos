@@ -24,7 +24,10 @@ class BuscarRepuesto extends React.Component {
     // es la forma mas facil que encontre para obtener los datos
     this.state = ({
       'token': this.props.getTokenPadre(),
-      'peticionActiva':false
+      'peticionActiva':false,
+      'repuestoSeleccionado': '',
+      'marcaSeleccionado': '',
+      'modeloSeleccionado': '',
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
@@ -78,14 +81,31 @@ class BuscarRepuesto extends React.Component {
   }
 
   loadMarcas = (name) => { 
-    let url = API_REPUESTOS_FILTER + `?name=${name}`; 
+    let url = API_AUTO_MARCA_FILTER + `?name=${name}`; 
     return this.consumirApi(name,url) 
   } 
   
   loadModelos = (name) => { 
-    let url = API_REPUESTOS_FILTER + `?name=${name}`; 
+    let url = API_AUTO_MODELO_FILTER + `?name=${name}`; 
     return this.consumirApi(name,url);
   }
+
+  handleChange = (e) => {
+    // If you are using babel, you can use ES 6 dictionary syntax
+    // let change = { [e.target.name] = e.target.value }
+    let change = {}
+    change[e.target.name] = e.target.value
+    this.setState(change)
+    alert(e.target.name + ' ' + e.target.value);
+  }
+
+  // solo para los selects
+  handleInputChange = (name) => {
+    console.log(name);
+    // const inputValue = newValue.replace(/\W/g, '');
+    // this.setState({ inputValue });
+    // return inputValue;
+  };
 
   renderSelect = () => {
     return (
@@ -99,7 +119,13 @@ class BuscarRepuesto extends React.Component {
                 {/* fin 2da columna */}
               </div>
               <div className="col-lg-4">  
-                <AsyncSelect cacheOptions defaultOptions loadOptions={this.loadRepuestos} />
+                <AsyncSelect 
+                  cacheOptions 
+                  defaultOptions 
+                  onInputChange={this.handleInputChange}
+                  placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
+                  noOptionsMessage= {() => "No se encontraron resultados"}
+                 />
                 {/* fin 3era columna */}
               </div>
             </div>
