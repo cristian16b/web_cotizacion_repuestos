@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './estilos.js';
-// no funciona la importacion
-// require("../buscar repuesto/buscarRepuestos.css");
 import MultipleImageUploadComponent from './MultipleImageUploadComponent';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
+import {API_REPUESTOS_FILTER} from '../../Constantes/constantes';
+import axios from 'axios';
 
-// 
-
-// 
 class BuscarRepuesto extends React.Component {
 
   constructor(props){
@@ -19,7 +16,8 @@ class BuscarRepuesto extends React.Component {
     // que tiene el metodo getToke y esta asociado a gettokenpadre
     // es la forma mas facil que encontre para obtener los datos
     this.state = ({
-      'token': this.props.getTokenPadre()
+      'token': this.props.getTokenPadre(),
+      'peticionActiva':false
     })
     
     // this.mostrarToken();
@@ -33,38 +31,70 @@ class BuscarRepuesto extends React.Component {
   // https://medium.com/@simonhoyos/ciclos-de-vida-de-los-componentes-de-react-e1bf48a5ff73
 
   componentDidMount() {
-    console.log('didmount');
-    this.mostrarToken();
+    // console.log('didmount');
+    // this.mostrarToken();
   }
+
+  promiseOptionsRepuestos = name =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve(this.filterRepuestos(name));
+    }, 2000);
+  });
+
+  filterRepuestos = (name) => {
+      // console.log(inputValue);
+      if(name.length > 3 && this.state.peticionActiva !== true) {
+        let url = API_REPUESTOS_FILTER;
+
+        this.consumirAxios(url,name);
+      }
+  }
+
+  consumirAxios = (urlBase,name) => {
+    const config = {
+      headers: { Authorization: `Bearer ${this.state.token['token']}` }
+    };
+
+    const bodyParameters = {
+      name: name
+    };
+    let url = urlBase + `?name=${name}`;
+    // console.log(this.state.token['token']);
+    this.setState({peticionActiva: true});
+    //seteo peticionActiva true para evitar que se desaten continuas peticiones
+      axios.get(url,config)
+        .then(response => {
+            this.setState({peticionActiva: false});
+            console.log(response.data.data);
+            return response.data.data;
+        })
+        .catch(e => {
+          this.setState({peticionActiva: false});
+          if(e.response)
+          {
+              let error = '';
+              error = e.response.data.message;
+              console.log(error);
+              // this.setState({errorApi: error});
+          }
+        });
+    }
+      
 
   renderSelect = () => {
     return (
             <div className="row">
               <div className="col-lg-4">
-                <select className="browser-default custom-select">
-                  <option defaultValue>Seleccione la marca</option>
-                  <option value="1">Bmw</option>
-                  <option value="2">Audi</option>
-                  <option value="3">Ejemplo</option>
-                </select>
+                {/* <AsyncSelect cacheOptions defaultOptions loadOptions={this.promiseOptionsMarcaAuto} /> */}
                 {/* fin 1era columna */}
               </div>
               <div className="col-lg-4">
-                <select className="browser-default custom-select">
-                  <option defaultValue>Seleccione el modelo</option>
-                  <option value="1">2020</option>
-                  <option value="2">Uno xx</option>
-                  <option value="3">Ejemplo modelo</option>
-                </select>
+                
                 {/* fin 2da columna */}
               </div>
               <div className="col-lg-4">  
-                <select className="browser-default custom-select">
-                  <option defaultValue>Seleccione tipo de repuesto</option>
-                  <option value="1">Bujia</option>
-                  <option value="2">Correa</option>
-                  <option value="3">Bateria</option>
-                </select>
+                <AsyncSelect label="Ingrese el repuesto que necesita" cacheOptions defaultOptions loadOptions={this.promiseOptionsRepuestos} />
                 {/* fin 3era columna */}
               </div>
             </div>
