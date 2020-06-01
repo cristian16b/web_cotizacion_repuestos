@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './buscarRepuestos.css';
+import './estilos.js';
 
 const multipreview = {
     maxWidth: "500px",
