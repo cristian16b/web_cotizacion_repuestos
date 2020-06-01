@@ -7,6 +7,13 @@ import AsyncSelect from 'react-select/async';
 import {API_REPUESTOS_FILTER} from '../../Constantes/constantes';
 import axios from 'axios';
 
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
+
 class BuscarRepuesto extends React.Component {
 
   constructor(props){
@@ -20,7 +27,7 @@ class BuscarRepuesto extends React.Component {
       'peticionActiva':false
     })
     
-    // this.mostrarToken();
+    this.loadRepuestos = this.loadRepuestos.bind(this);
   }
 
   mostrarToken = () => {
@@ -35,52 +42,50 @@ class BuscarRepuesto extends React.Component {
     // this.mostrarToken();
   }
 
-  promiseOptionsRepuestos = name =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        resolve(this.filterRepuestos(name));
-    }, 2000);
-  });
-
-  filterRepuestos = (name) => {
-      // console.log(inputValue);
+  consumirApi = (name,url) => {
       if(name.length > 3 && this.state.peticionActiva !== true) {
-        let url = API_REPUESTOS_FILTER;
-
-        this.consumirAxios(url,name);
+        const config = {
+          headers: { Authorization: `Bearer ${this.state.token['token']}` }
+        };
+        // console.log(this.state.token['token']);
+        this.setState({peticionActiva: true});
+        //seteo peticionActiva true para evitar que se desaten continuas peticiones
+        return  axios.get(url,config)
+              .then(response => {
+                  this.setState({peticionActiva: false});
+                  let lista = response.data.data;
+                  let options = lista.map(elemento => {    
+                    return { value:  `${elemento.id}`, label: `${elemento.name}` };
+                  });
+                  return options;
+              })
+              .catch(e => {
+                this.setState({peticionActiva: false});
+                if(e.response)
+                {
+                    let error = '';
+                    error = e.response.data.message;
+                    console.log(error);
+                    // this.setState({errorApi: error});
+                }
+              });
       }
   }
 
-  consumirAxios = (urlBase,name) => {
-    const config = {
-      headers: { Authorization: `Bearer ${this.state.token['token']}` }
-    };
+  loadRepuestos = (name) => { 
+    let url = API_REPUESTOS_FILTER + `?name=${name}`; 
+    return this.consumirApi(name,url) 
+  }
 
-    const bodyParameters = {
-      name: name
-    };
-    let url = urlBase + `?name=${name}`;
-    // console.log(this.state.token['token']);
-    this.setState({peticionActiva: true});
-    //seteo peticionActiva true para evitar que se desaten continuas peticiones
-      axios.get(url,config)
-        .then(response => {
-            this.setState({peticionActiva: false});
-            console.log(response.data.data);
-            return response.data.data;
-        })
-        .catch(e => {
-          this.setState({peticionActiva: false});
-          if(e.response)
-          {
-              let error = '';
-              error = e.response.data.message;
-              console.log(error);
-              // this.setState({errorApi: error});
-          }
-        });
-    }
-      
+  loadMarcas = (name) => { 
+    let url = API_REPUESTOS_FILTER + `?name=${name}`; 
+    return this.consumirApi(name,url) 
+  } 
+  
+  loadModelos = (name) => { 
+    let url = API_REPUESTOS_FILTER + `?name=${name}`; 
+    return this.consumirApi(name,url);
+  }
 
   renderSelect = () => {
     return (
@@ -94,7 +99,7 @@ class BuscarRepuesto extends React.Component {
                 {/* fin 2da columna */}
               </div>
               <div className="col-lg-4">  
-                <AsyncSelect label="Ingrese el repuesto que necesita" cacheOptions defaultOptions loadOptions={this.promiseOptionsRepuestos} />
+                <AsyncSelect cacheOptions defaultOptions loadOptions={this.loadRepuestos} />
                 {/* fin 3era columna */}
               </div>
             </div>
