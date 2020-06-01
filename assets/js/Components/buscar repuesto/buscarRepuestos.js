@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 // no funciona la importacion
 // require("../buscar repuesto/buscarRepuestos.css");
 import MultipleImageUploadComponent from './MultipleImageUploadComponent';
+import Select from 'react-select';
 
 // 
 const boton_carga_imagen = {
@@ -63,6 +64,31 @@ const btnPrimary =
 }
 // 
 class BuscarRepuesto extends React.Component {
+
+  constructor(props){
+    super(props);
+
+    // nota usando this.props.getTokenPadre() me comunico con el componente padre APP
+    // que tiene el metodo getToke y esta asociado a gettokenpadre
+    // es la forma mas facil que encontre para obtener los datos
+    this.state = ({
+      'token': this.props.getTokenPadre()
+    })
+    
+    // this.mostrarToken();
+  }
+
+  mostrarToken = () => {
+    console.log('mostramos token ');
+    console.log(this.state.token);
+  }
+
+  // https://medium.com/@simonhoyos/ciclos-de-vida-de-los-componentes-de-react-e1bf48a5ff73
+
+  componentDidMount() {
+    console.log('didmount');
+    this.mostrarToken();
+  }
 
   renderSelect = () => {
     return (
@@ -150,7 +176,7 @@ class BuscarRepuesto extends React.Component {
                 <div className="card">
                   <div className="card-body">
                     <p>Debe adjuntar al menos una foto del repuesto solicitado. Como máximo se aceptarán cuatro.</p>
-                    <MultipleImageUploadComponent />
+                    {/* <MultipleImageUploadComponent /> */}
                   </div>
                 </div>
               </div>

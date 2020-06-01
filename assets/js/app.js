@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   obtenerToken = (bandera,rolObtenido,tokenObtenido,code) => {
-    console.log(rolObtenido + ' ' + tokenObtenido + ' ' + code);
+    // console.log(rolObtenido + ' ' + tokenObtenido + ' ' + code);
     // 
     if(code == 200) {
 
@@ -46,6 +46,10 @@ class App extends React.Component {
     // alert(this.state.isUserLogin);
   }
 
+  getToken = () => {
+    return this.state.token;
+  }
+
   returnTemplateLogueado = () => {
     return (
         <>
@@ -54,7 +58,8 @@ class App extends React.Component {
               <Switch>
                 <Redirect exact from='/login' to='/repuesto'/>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/repuesto" component={BuscarRepuesto} />
+                {/* <Route exact path="/repuesto" component={BuscarRepuesto} /> */}
+                <Route exact path="/repuesto" render={() => <BuscarRepuesto getTokenPadre={this.getToken}/>} />
                 <Route exact path="/perfil" component={MiPerfil} />
                 <Route exact path="/cotizaciones" component={MisCotizaciones} />
                 <Route exact path="/contacto" component={Contacto} />

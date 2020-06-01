@@ -61,7 +61,15 @@ export default class MultipleImageUploadComponent extends Component {
                     <div className="col-lg-12">
                         <div className="form-group">
                             {(this.fileArray || []).map(url => (
-                                <img src={url} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <img src={url} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
+                                        <label className="btn btn-danger" style={ boton_subir_fotos }>
+                                    Agregar foto
+                                    <input  key={url} style={boton_carga_imagen} type="file" className="uploadFile img" onChange={this.uploadMultipleFiles} multiple />
+                                </label>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>
