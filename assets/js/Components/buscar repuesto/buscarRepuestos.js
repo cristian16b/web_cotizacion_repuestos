@@ -8,11 +8,6 @@ import {API_REPUESTOS_FILTER} from '../../Constantes/constantes';
 import axios from 'axios';
 
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-]
 
 class BuscarRepuesto extends React.Component {
 
@@ -90,45 +85,61 @@ class BuscarRepuesto extends React.Component {
     return this.consumirApi(name,url);
   }
 
-  handleChange = (e) => {
-    // If you are using babel, you can use ES 6 dictionary syntax
-    // let change = { [e.target.name] = e.target.value }
-    let change = {}
-    change[e.target.name] = e.target.value
-    this.setState(change)
-    alert(e.target.name + ' ' + e.target.value);
+  handleChangeSelectRepuesto = (e) => {
+    this.setState({ repuestoSeleccionado: e });
+    // console.log(`Option selected:`, e);
   }
 
-  // solo para los selects
-  handleInputChange = (name) => {
-    console.log(name);
-    // const inputValue = newValue.replace(/\W/g, '');
-    // this.setState({ inputValue });
-    // return inputValue;
-  };
+  handleChangeSelectMarca = (e) => {
+    this.setState({ marcaSeleccionado: e });
+    // console.log(`Option selected:`, e);
+  }
+
+  handleChangeSelectModelo = (e) => {
+    this.setState({ modeloSeleccionado: e });
+    // console.log(`Option selected:`, e);
+  }
 
   renderSelect = () => {
     return (
-            <div className="row">
-              <div className="col-lg-4">
-                {/* <AsyncSelect cacheOptions defaultOptions loadOptions={this.promiseOptionsMarcaAuto} /> */}
-                {/* fin 1era columna */}
+            <>
+              <div className="row">
+                <div className="col-lg-6">
+                  <AsyncSelect 
+                    cacheOptions 
+                    value = { this.state.marcaSeleccionado }
+                    loadOptions = {this.loadMarcas}
+                    onChange={this.handleChangeSelectMarca}
+                    placeholder={<div>Escriba la marca de su auto</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                  {/* fin 1era columna */}
+                </div>
+                <div className="col-lg-6">
+                  <AsyncSelect 
+                    cacheOptions 
+                    value = { this.state.modeloSeleccionado }
+                    loadOptions = {this.loadModelos}
+                    onChange={this.handleChangeSelect}
+                    placeholder={<div>Escriba el modelo de su auto</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                  {/* fin 2da columna */}
+                </div>
               </div>
-              <div className="col-lg-4">
-                
-                {/* fin 2da columna */}
+              <div className="row">
+                <div className="col-lg-8">  
+                  <AsyncSelect 
+                    cacheOptions 
+                    value = { this.state.repuestoSeleccionado }
+                    loadOptions = {this.loadRepuestos}
+                    onChange={this.handleChangeSelectRepuesto}
+                    placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                </div>
               </div>
-              <div className="col-lg-4">  
-                <AsyncSelect 
-                  cacheOptions 
-                  defaultOptions 
-                  onInputChange={this.handleInputChange}
-                  placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
-                  noOptionsMessage= {() => "No se encontraron resultados"}
-                 />
-                {/* fin 3era columna */}
-              </div>
-            </div>
+          </>
     );
   }
 
