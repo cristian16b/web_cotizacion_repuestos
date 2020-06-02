@@ -19,6 +19,17 @@ class MarcaAutoRepository extends ServiceEntityRepository
         parent::__construct($registry, MarcaAuto::class);
     }
 
+    public function buscarPorNombre($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.name LIKE :val')
+            ->setParameter('val','%'. $value . '%')
+            ->orderBy('r.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return MarcaAuto[] Returns an array of MarcaAuto objects
     //  */

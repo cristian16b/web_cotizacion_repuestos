@@ -4,7 +4,7 @@ import './estilos.js';
 import MultipleImageUploadComponent from './MultipleImageUploadComponent';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
-import {API_REPUESTOS_FILTER} from '../../Constantes/constantes';
+import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER} from '../../Constantes/constantes';
 import axios from 'axios';
 
 
@@ -40,8 +40,8 @@ class BuscarRepuesto extends React.Component {
     // this.mostrarToken();
   }
 
-  consumirApi = (name,url) => {
-      if(name.length > 3 && this.state.peticionActiva !== true) {
+  consumirApi = (name,url,minimaCantLetras) => {
+      if(name.length > minimaCantLetras && this.state.peticionActiva !== true) {
         const config = {
           headers: { Authorization: `Bearer ${this.state.token['token']}` }
         };
@@ -72,17 +72,18 @@ class BuscarRepuesto extends React.Component {
 
   loadRepuestos = (name) => { 
     let url = API_REPUESTOS_FILTER + `?name=${name}`; 
-    return this.consumirApi(name,url) 
+    return this.consumirApi(name,url,3) 
   }
 
   loadMarcas = (name) => { 
     let url = API_AUTO_MARCA_FILTER + `?name=${name}`; 
-    return this.consumirApi(name,url) 
+    return this.consumirApi(name,url,2) 
   } 
   
   loadModelos = (name) => { 
+    console.log(this.state.marcaSeleccionado);
     let url = API_AUTO_MODELO_FILTER + `?name=${name}`; 
-    return this.consumirApi(name,url);
+    return this.consumirApi(name,url,2);
   }
 
   handleChangeSelectRepuesto = (e) => {
