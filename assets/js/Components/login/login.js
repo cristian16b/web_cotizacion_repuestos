@@ -167,7 +167,7 @@ class Login extends React.Component {
                             <p className="text-center">O ingresar con tu red social</p>
                             <div className="text-center social-btn">
                                             <div className="row justify-content-center">
-                                                <div className="col-lg-5 col-md-6">
+                                                <div className="col-lg-7 col-md-7 col-xs-8">
                                                     {/* <SocialButton
                                                         provider='facebook'
                                                         appId='245924643289636'

@@ -100,12 +100,13 @@ class BuscarRepuesto extends React.Component {
     // console.log(`Option selected:`, e);
   }
 
-  renderSelect = () => {
+  renderSelectPrimerFila = () => {
     return (
-            <>
               <div className="row">
                 <div className="col-lg-6">
+                  <label forhtml="marca">Marca del auto</label>
                   <AsyncSelect 
+                    id="marca"
                     cacheOptions 
                     value = { this.state.marcaSeleccionado }
                     loadOptions = {this.loadMarcas}
@@ -116,7 +117,9 @@ class BuscarRepuesto extends React.Component {
                   {/* fin 1era columna */}
                 </div>
                 <div className="col-lg-6">
+                  <label forhtml="modelo">Modelo</label>
                   <AsyncSelect 
+                    id="modelo"
                     cacheOptions 
                     value = { this.state.modeloSeleccionado }
                     loadOptions = {this.loadModelos}
@@ -127,19 +130,25 @@ class BuscarRepuesto extends React.Component {
                   {/* fin 2da columna */}
                 </div>
               </div>
-              <div className="row">
-                <div className="col-lg-8">  
-                  <AsyncSelect 
-                    cacheOptions 
-                    value = { this.state.repuestoSeleccionado }
-                    loadOptions = {this.loadRepuestos}
-                    onChange={this.handleChangeSelectRepuesto}
-                    placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
-                    noOptionsMessage= {() => "No se encontraron resultados"}
-                  />
-                </div>
-              </div>
-          </>
+    );
+  }
+
+  renderSelectSegundaFila = () => {
+    return (
+      <div className="row">
+        <div className="col-lg-8">
+          <label forhtml="repuesto">Tipo repuesto</label>  
+          <AsyncSelect 
+            id="repuesto"
+            cacheOptions 
+            value = { this.state.repuestoSeleccionado }
+            loadOptions = {this.loadRepuestos}
+            onChange={this.handleChangeSelectRepuesto}
+            placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
+            noOptionsMessage= {() => "No se encontraron resultados"}
+          />
+        </div>
+      </div>
     );
   }
 
@@ -211,10 +220,12 @@ class BuscarRepuesto extends React.Component {
             <div className="card">
               <div className="card-body">
                 <h1 className="my-4">Buscar un repuesto</h1>
-                <>{this.renderSelect()}</>
-                <>{this.renderObservaciones()}</>
-                <>{this.renderSubidaPrevisualizacionFotos()}</>
-                <>{this.renderBotones()}</>
+                <h6>Para solicitar cotizaziones sobre un repuesto debe cargar los siguientes datos</h6>
+                  {this.renderSelectPrimerFila()}
+                  {this.renderSelectSegundaFila()}
+                  {this.renderObservaciones()}
+                  {this.renderSubidaPrevisualizacionFotos()}
+                  {this.renderBotones()}
                 {/* FIN CARDBODY */}
               </div>
               {/* FIN CARD */}
