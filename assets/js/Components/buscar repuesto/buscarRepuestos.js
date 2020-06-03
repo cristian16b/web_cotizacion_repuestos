@@ -1,13 +1,43 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import './estilos.js';
-import MultipleImageUploadComponent from './MultipleImageUploadComponent';
+// import MultipleImageUploadComponent from './MultipleImageUploadComponent';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER} from '../../Constantes/constantes';
 import axios from 'axios';
+import ImageUploading from 'react-images-uploading';
 
+const maxNumber = 4;
+const maxMbFileSize = 5 * 1024 * 1024; // 5Mb
 
+const multipreview = {
+    maxWidth: "300px",
+    width: '90%',
+    height: '90%',
+    backgroundPosition: 'center center',
+    background:'url(' + 'http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg' + ')',
+    backgroundColor: '#fff',
+    backgroundSize: 'cover',
+    backgroundRepeat:'no-repeat',
+    display: 'inline-block',
+    boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
+}
+
+const imgAdd = 
+{
+  width:'30px',
+  height:'30px',
+  borderRadius:'50%',
+  backgroundColor:'#4bd7ef',
+  color:'#fff',
+  boxShadow:'0px 0px 2px 1px rgba(0,0,0,0.2)',
+  textAlign:'center',
+  lineHeight:'30px',
+  marginTop:'0px',
+  cursor:'pointer',
+  fontSize:'15px'
+}
 
 class BuscarRepuesto extends React.Component {
 
@@ -27,6 +57,11 @@ class BuscarRepuesto extends React.Component {
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
   }
+
+  onChange = (imageList) => {
+    // data for submit
+    console.log(imageList);
+  };
 
   mostrarToken = () => {
     console.log('mostramos token ');
@@ -201,14 +236,42 @@ class BuscarRepuesto extends React.Component {
 
   renderSubidaPrevisualizacionFotos = () => {
     return (
-            <div className="row">
-              <div className="col-lg-12 col-md-8">
-                <div className="card">
-                  <div className="card-body">
+            <div className="row justify-content-center">
+              <div className="col-lg-12">
+                  <div className="form-group">
                     <p>Debe adjuntar al menos una foto del repuesto solicitado. Como máximo se aceptarán cuatro.</p>
-                    <MultipleImageUploadComponent />
+                      <ImageUploading
+                          onChange={this.onChange}
+                          maxNumber={maxNumber}
+                          multiple
+                          maxFileSize={maxMbFileSize}
+                          acceptType={["jpg", "gif", "png"]}
+                      >
+                          {({ imageList, onImageUpload, onImageRemoveAll }) => (
+                          // write your building UI
+                              <div>
+                                  <div className="row">
+                                      <div className="col-lg-12">
+                                          <button className="btn btn-danger" onClick={onImageUpload}>Agregar</button>
+                                          <button className="btn btn-secondary" onClick={onImageRemoveAll}>Borrar todas</button>
+                                      </div>
+                                  </div>
+                                  
+                                  <div className="row">
+                                      <div className="col-lg-12">
+                                          {imageList.map((image) => (
+                                              <div key={image.key}>
+                                                  <img src={image.dataURL} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
+                                                  {/* <button style={boton_carga_imagen} onClick={image.onUpdate}>Update</button> */}
+                                                  <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
+                                              </div>
+                                          ))}
+                                      </div>
+                                  </div>
+                              </div>
+                          )}
+                      </ImageUploading>
                   </div>
-                </div>
               </div>
             </div>
       );
