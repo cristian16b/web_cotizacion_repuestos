@@ -19,6 +19,20 @@ class ModeloAutoRepository extends ServiceEntityRepository
         parent::__construct($registry, ModeloAuto::class);
     }
 
+    public function buscarPorNombre($value,$id)
+    {
+        return $this->createQueryBuilder('r')
+            ->innerJoin('r.marcaAuto','m')
+            ->andWhere('r.name LIKE :val')
+            ->andWhere('m.id = :id')
+            ->setParameter('val','%'. $value . '%')
+            ->setParameter('id',$id)
+            ->orderBy('r.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return ModeloAuto[] Returns an array of ModeloAuto objects
     //  */

@@ -53,3 +53,29 @@ const btnPrimary =
   boxShadow:'0px 4px 6px 2px rgba(0,0,0,0.2)',
   marginTop:'-5px'
 }
+
+const multipreview = {
+  maxWidth: "500px",
+  width: '90%',
+  height: '90%',
+  backgroundPosition: 'center center',
+  background:'url(' + 'http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg' + ')',
+  backgroundColor: '#fff',
+  backgroundSize: 'cover',
+  backgroundRepeat:'no-repeat',
+  display: 'inline-block',
+  boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
+}
+//   style="width: 0px;height: 0px;overflow: hidden;"
+// const boton_carga_imagen = {
+//   width: '0px',
+//   height: '0px',
+//   overflow: 'hidden'
+// }
+
+const boton_subir_fotos = {
+  display:'block',
+  borderRadius:'0px',
+  boxShadow:'0px 4px 6px 2px rgba(0,0,0,0.2)',
+  marginTop:'-5px'
+}

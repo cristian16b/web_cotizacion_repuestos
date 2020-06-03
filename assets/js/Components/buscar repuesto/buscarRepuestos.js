@@ -81,8 +81,9 @@ class BuscarRepuesto extends React.Component {
   } 
   
   loadModelos = (name) => { 
-    console.log(this.state.marcaSeleccionado);
-    let url = API_AUTO_MODELO_FILTER + `?name=${name}`; 
+    // console.log(this.state.marcaSeleccionado);
+    let id = this.state.marcaSeleccionado.value;
+    let url = API_AUTO_MODELO_FILTER + `?name=${name}&idMarca=${id}`; 
     return this.consumirApi(name,url,2);
   }
 
@@ -124,7 +125,7 @@ class BuscarRepuesto extends React.Component {
                     cacheOptions 
                     value = { this.state.modeloSeleccionado }
                     loadOptions = {this.loadModelos}
-                    onChange={this.handleChangeSelect}
+                    onChange={this.handleChangeSelectModelo}
                     placeholder={<div>Escriba el modelo de su auto</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
@@ -205,7 +206,7 @@ class BuscarRepuesto extends React.Component {
                 <div className="card">
                   <div className="card-body">
                     <p>Debe adjuntar al menos una foto del repuesto solicitado. Como máximo se aceptarán cuatro.</p>
-                    {/* <MultipleImageUploadComponent /> */}
+                    <MultipleImageUploadComponent />
                   </div>
                 </div>
               </div>
