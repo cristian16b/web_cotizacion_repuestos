@@ -48,15 +48,38 @@ class BuscarRepuesto extends React.Component {
     // que tiene el metodo getToke y esta asociado a gettokenpadre
     // es la forma mas facil que encontre para obtener los datos
     this.state = ({
-      'token': this.props.getTokenPadre(),
-      'peticionActiva':false,
-      'repuestoSeleccionado': '',
-      'marcaSeleccionado': '',
-      'modeloSeleccionado': '',
-      'listadoImagenes': [],
+      token: this.props.getTokenPadre(),
+      peticionActiva:false,
+      repuestoSeleccionado: '',
+      marcaSeleccionado: '',
+      modeloSeleccionado: '',
+      listadoImagenes: [],
+      botonesHabilitados: false,
+      errors: {},
+      errorApi: '',
+      isSignedUp: false, 
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
+    this.loadMarcas = this.loadMarcas.bind(this);
+    this.loadModelos = this.loadModelos.bind(this);
+    this.handleSubmit   = this.handleSubmit.bind(this); 
+  }
+
+  isHabilitado = () => { return this.state.botonesHabilitados}
+
+  cambioHabilitado = () => { 
+    if(this.state.botonesHabilitados == true) {
+      this.setState({
+        botonesHabilitados: false
+      });
+    }
+    else {
+      this.setState({
+        botonesHabilitados: true
+      });
+    }
+    // console.log(this.state.botonesHabilitados);
   }
 
   // evento change de las fotos subidas
@@ -66,7 +89,101 @@ class BuscarRepuesto extends React.Component {
     this.setState({
       listadoImagenes: imageList
     })
-  };
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    // this.habilitarBotones();
+    console.log('entra');
+    if(this.validarFormulario() == true) {
+      this.consumirApiGuardarSolicitud();
+    } 
+    console.log('entra y falla');
+    this.cambioHabilitado();
+  }
+
+  redirectToLogin = () => {
+    if (this.state.isSignedUp) {
+      // redirect to home if signed up
+      return <Redirect to = {{ pathname: "/login" }} />;
+    }
+  }
+  
+  validarFormulario = () => {
+    let formularioValido = true;
+    let errors = {};
+    
+    if(this.state.token == '') {
+      this.redirectToLogin();
+    }
+
+    if(this.state.modeloSeleccionado == '') {
+      errors["modeloSeleccionado"] = "Debe seleccionar el modelo de su auto";
+      formularioValido = false;
+    }
+
+    if(this.state.marcaSeleccionada == '') {
+      errors["marcaSeleccionado"] = "Debe seleccionar la marca de su auto";
+      formularioValido = false;
+    }
+
+    if(this.state.repuestoSeleccionado == '') {
+      errors["repuestoSeleccionado"] = "Debe seleccionar el repuesto que necesita";
+      formularioValido = false;
+    }
+
+    if(this.state.observaciones == '') {
+      errors["observaciones"] = "Debe agregar una descripción breve";
+      formularioValido = false;
+    }
+
+    if(this.state.listadoImagenes == []) {
+      errors["listadoImagenes"] = "Debe cargar al menos una imagen del repuesto que necesita";
+      formularioValido = false;
+    }
+
+    this.setState({
+      errors: errors
+    });
+
+    return formularioValido;
+  }
+
+  consumirApiGuardarSolicitud(){
+    // const payload={
+    //   "apellido":this.state.apellido,
+    //   "nombre":this.state.nombre,
+    //   "codArea":this.state.codArea,
+    //   "telefono":this.state.telefono,
+    //   "password":this.state.password,
+    //   "password2":this.state.password2,
+    //   "email":this.state.email
+    // }
+    // axios.post(API_REGISTER,payload)
+    //     .then(response => {
+    //         let code = response.data.code;
+    //         if(code == 200){
+    //           this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+    //         }
+    //         this.mostrarErroresApi(response);
+    //     })
+    //     .catch(e => {
+    //         alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+    // });
+    event.preventDefault();
+  }
+  
+  mostrarErroresApi = (response) => {
+    let mensajes = response.data;
+    let errors = {};
+    for (const prop in mensajes) {
+      // console.log(`obj.${prop} = ${mensajes[prop]}`);
+      errors[prop] = mensajes[prop];
+    }
+    this.setState({
+      errors: errors
+    });
+  }
 
   mostrarToken = () => {
     console.log('mostramos token ');
@@ -156,6 +273,9 @@ class BuscarRepuesto extends React.Component {
                     placeholder={<div>Escriba la marca de su auto</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
+                  <span className="text-danger error_negrita">
+                    {this.state.errors["marcaSeleccionada"]}
+                  </span>
                   {/* fin 1era columna */}
                 </div>
                 <div className="col-lg-6">
@@ -169,6 +289,9 @@ class BuscarRepuesto extends React.Component {
                     placeholder={<div>Escriba el modelo de su auto</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
+                  <span className="text-danger error_negrita">
+                    {this.state.errors["modeloSeleccionado"]}
+                  </span>
                   {/* fin 2da columna */}
                 </div>
               </div>
@@ -189,6 +312,9 @@ class BuscarRepuesto extends React.Component {
             placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
             noOptionsMessage= {() => "No se encontraron resultados"}
           />
+          <span className="text-danger error_negrita">
+            {this.state.errors["repuestoSeleccionada"]}
+          </span>
         </div>
       </div>
     );
@@ -201,6 +327,9 @@ class BuscarRepuesto extends React.Component {
                         <label forhtml="message">Observaciones</label>
                         <textarea type="text" id="message" name="message" rows="2" className="form-control md-textarea">
                         </textarea>
+                        <span className="text-danger error_negrita">
+                          {this.state.errors["observaciones"]}
+                        </span>
                       </div>
                     </div>
     );
@@ -213,14 +342,17 @@ class BuscarRepuesto extends React.Component {
           <div className="form-group">
             <button type="submit" 
                     className="btn btn-primary btn-block"
-                    >Enviar</button>
+                    disabled={this.isHabilitado()}
+                    onClick={this.cambioHabilitado}
+                    >Enviar Pedido de cotización</button>
           </div>
         </div>
         <div className="col-lg-6">
           <div className="form-group">
             <button type="reset" 
-                    // disabled={this.state.botonesHabilitados}
-                    className="btn btn-light btn-block">Cancelar</button>
+                    disabled={this.isHabilitado()}
+                    className="btn btn-light btn-block">Cancelar
+            </button>
           </div>
         </div>  
       </div> 
@@ -276,6 +408,9 @@ class BuscarRepuesto extends React.Component {
                               </div>
                           )}
                       </ImageUploading>
+                      <span className="text-danger error_negrita">
+                        {this.state.errors["listadoImagenes"]}
+                      </span>
                   </div>
               </div>
             </div>
@@ -291,11 +426,13 @@ class BuscarRepuesto extends React.Component {
               <div className="card-body">
                 <h1 className="my-4">Buscar un repuesto</h1>
                 <h6>Para solicitar cotizaziones sobre un repuesto debe cargar los siguientes datos</h6>
+                <form onSubmit={this.handleSubmit}>
                   {this.renderSelectPrimerFila()}
                   {this.renderSelectSegundaFila()}
                   {this.renderObservaciones()}
                   {this.renderSubidaPrevisualizacionFotos()}
                   {this.renderBotones()}
+                </form>
                 {/* FIN CARDBODY */}
               </div>
               {/* FIN CARD */}
