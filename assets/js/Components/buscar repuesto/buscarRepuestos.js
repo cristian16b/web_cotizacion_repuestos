@@ -366,19 +366,6 @@ class BuscarRepuesto extends React.Component {
       </div> 
     );
   }
-
-// {/* <br><div class="container">
-//   <div class="row">
-//   <div class="col-sm-2 imgUp">
-//     <div class="imagePreview"></div>
-// <label class="btn btn-primary">
-// 										    			Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
-// 				</label>
-//   </div><!-- col-2 -->
-//   <i class="fa fa-plus imgAdd"></i>
-//  </div><!-- row -->
-// </div><!-- container --></div> */}
-
   renderSubidaPrevisualizacionFotos = () => {
     return (
             <div className="row justify-content-center">
@@ -434,13 +421,17 @@ class BuscarRepuesto extends React.Component {
               <div className="card-body">
                 <h1 className="my-4">Buscar un repuesto</h1>
                 <h6>Para solicitar cotizaziones sobre un repuesto debe cargar los siguientes datos</h6>
-                <form onSubmit={this.handleSubmit}>
                   {this.renderSelectPrimerFila()}
                   {this.renderSelectSegundaFila()}
                   {this.renderObservaciones()}
                   {this.renderSubidaPrevisualizacionFotos()}
-                  {this.renderBotones()}
-                </form>
+                    {/* Nota: si el html <form> engloba todos los campos, me genera un error
+                        al pulsar sobre <agregar imagen>, se valida el form y no es lo que se espera
+                        con esta modificacion funciona correctamente
+                    */}
+                    <form onSubmit={this.handleSubmit}>
+                      {this.renderBotones()}
+                    </form>
                 {/* FIN CARDBODY */}
               </div>
               {/* FIN CARD */}
