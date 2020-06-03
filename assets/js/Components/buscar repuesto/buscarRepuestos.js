@@ -53,14 +53,19 @@ class BuscarRepuesto extends React.Component {
       'repuestoSeleccionado': '',
       'marcaSeleccionado': '',
       'modeloSeleccionado': '',
+      'listadoImagenes': [],
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
   }
 
+  // evento change de las fotos subidas
   onChange = (imageList) => {
     // data for submit
     console.log(imageList);
+    this.setState({
+      listadoImagenes: imageList
+    })
   };
 
   mostrarToken = () => {
