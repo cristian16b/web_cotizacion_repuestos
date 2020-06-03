@@ -58,6 +58,7 @@ class BuscarRepuesto extends React.Component {
       errors: {},
       errorApi: '',
       isSignedUp: false, 
+      observaciones: '',
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
@@ -94,11 +95,11 @@ class BuscarRepuesto extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     // this.habilitarBotones();
-    console.log('entra');
+    // console.log('entra');
     if(this.validarFormulario() == true) {
       this.consumirApiGuardarSolicitud();
     } 
-    console.log('entra y falla');
+    // console.log('entra y falla');
     this.cambioHabilitado();
   }
 
@@ -112,32 +113,34 @@ class BuscarRepuesto extends React.Component {
   validarFormulario = () => {
     let formularioValido = true;
     let errors = {};
-    
+
+    console.log(this.state);
+
     if(this.state.token == '') {
       this.redirectToLogin();
     }
 
-    if(this.state.modeloSeleccionado == '') {
+    if(this.state.modeloSeleccionado.length === 0) {
       errors["modeloSeleccionado"] = "Debe seleccionar el modelo de su auto";
       formularioValido = false;
     }
 
-    if(this.state.marcaSeleccionada == '') {
+    if(this.state.marcaSeleccionado.length === 0) {
       errors["marcaSeleccionado"] = "Debe seleccionar la marca de su auto";
       formularioValido = false;
     }
 
-    if(this.state.repuestoSeleccionado == '') {
+    if(this.state.repuestoSeleccionado.length === 0) {
       errors["repuestoSeleccionado"] = "Debe seleccionar el repuesto que necesita";
       formularioValido = false;
     }
 
-    if(this.state.observaciones == '') {
-      errors["observaciones"] = "Debe agregar una descripción breve";
+    if(this.state.observaciones.length === 0 || this.state.observaciones.length > 100 ) {
+      errors["observaciones"] = "Debe agregar una descripción breve. Como minimo 10 caracteres y como maximo 100";
       formularioValido = false;
     }
 
-    if(this.state.listadoImagenes == []) {
+    if(this.state.listadoImagenes.length === 0) {
       errors["listadoImagenes"] = "Debe cargar al menos una imagen del repuesto que necesita";
       formularioValido = false;
     }
@@ -259,6 +262,11 @@ class BuscarRepuesto extends React.Component {
     // console.log(`Option selected:`, e);
   }
 
+  handleChangeObservaciones = (e) => {
+    this.setState({ observaciones: e });
+    // console.log(`Option selected:`, e);
+  }
+
   renderSelectPrimerFila = () => {
     return (
               <div className="row">
@@ -274,7 +282,7 @@ class BuscarRepuesto extends React.Component {
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
-                    {this.state.errors["marcaSeleccionada"]}
+                    {this.state.errors["marcaSeleccionado"]}
                   </span>
                   {/* fin 1era columna */}
                 </div>
@@ -313,7 +321,7 @@ class BuscarRepuesto extends React.Component {
             noOptionsMessage= {() => "No se encontraron resultados"}
           />
           <span className="text-danger error_negrita">
-            {this.state.errors["repuestoSeleccionada"]}
+            {this.state.errors["repuestoSeleccionado"]}
           </span>
         </div>
       </div>
@@ -325,7 +333,7 @@ class BuscarRepuesto extends React.Component {
                     <div className="row">
                       <div className="col-lg-12">
                         <label forhtml="message">Observaciones</label>
-                        <textarea type="text" id="message" name="message" rows="2" className="form-control md-textarea">
+                        <textarea onChange={this.handleChangeObservaciones} type="text" id="message" name="message" rows="2" className="form-control md-textarea">
                         </textarea>
                         <span className="text-danger error_negrita">
                           {this.state.errors["observaciones"]}
