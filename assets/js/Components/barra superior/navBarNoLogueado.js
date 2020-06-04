@@ -24,9 +24,9 @@ class NavbarNoLogueado extends React.Component {
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
                             <Link to="/" className="navbar-brand"><span className="nav-link">¿Quienes somos?</span></Link>
                         </li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
+                        {/* <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
                             <Link to="/login" className="navbar-brand"><span className="nav-link">Buscar un repuesto</span></Link>
-                        </li>
+                        </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/login")}>
                             <Link to="/login" className="navbar-brand"><span className="nav-link">Ingresar</span></Link>
                         </li>

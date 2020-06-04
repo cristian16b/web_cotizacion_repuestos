@@ -28,7 +28,7 @@ h1,h2,h3 {
 
 /* referencia: http://jotaj.blogspot.com/2017/01/cambiar-el-alto-de-un-navbar-de.html */
 .navbar-brand,.navbar-nav li a {
-    line-height: 90%;
+    line-height: 20%;
     height: 75px;
     padding-top: 0;
 }
