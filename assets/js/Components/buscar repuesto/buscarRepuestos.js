@@ -4,7 +4,7 @@ import './estilos.js';
 import MultipleImageUploadComponent from './subcomponentes/MultipleImageUploadComponent';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
-import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER} from '../../Constantes/constantes';
+import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER,API_GUARDAR_SOLICITUD_REPUESTO} from '../../Constantes/constantes';
 import axios from 'axios';
 import ImageUploading from 'react-images-uploading';
 
@@ -83,8 +83,6 @@ class BuscarRepuesto extends React.Component {
     let formularioValido = true;
     let errors = {};
 
-    console.log(this.state);
-
     if(this.state.token == '') {
       this.redirectToLogin();
     }
@@ -122,26 +120,28 @@ class BuscarRepuesto extends React.Component {
   }
 
   consumirApiGuardarSolicitud(){
-    // const payload={
-    //   "apellido":this.state.apellido,
-    //   "nombre":this.state.nombre,
-    //   "codArea":this.state.codArea,
-    //   "telefono":this.state.telefono,
-    //   "password":this.state.password,
-    //   "password2":this.state.password2,
-    //   "email":this.state.email
-    // }
-    // axios.post(API_REGISTER,payload)
-    //     .then(response => {
-    //         let code = response.data.code;
-    //         if(code == 200){
-    //           this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
-    //         }
-    //         this.mostrarErroresApi(response);
-    //     })
-    //     .catch(e => {
-    //         alert('Ocurrio un error al consultar al servidor, intente nuevamente');
-    // });
+    const payload={
+      "idMarca":this.state.marcaSeleccionado.value,
+      "idModelo":this.state.modeloSeleccionado.value,
+      "idRepuesto":this.state.repuestoSeleccionado.value,
+      "imagenes":this.state.listadoImagenes,
+      "observaciones":this.state.observaciones,
+    }
+    console.log(payload);
+    const config = {
+      headers: { Authorization: `Bearer ${this.state.token['token']}` }
+    };
+    axios.post(API_GUARDAR_SOLICITUD_REPUESTO,config,payload)
+        .then(response => {
+            let code = response.data.code;
+            if(code == 200){
+              this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+            }
+            this.mostrarErroresApi(response);
+        })
+        .catch(e => {
+            alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+    });
     event.preventDefault();
   }
   
@@ -286,6 +286,7 @@ class BuscarRepuesto extends React.Component {
             value = { this.state.repuestoSeleccionado }
             loadOptions = {this.loadRepuestos}
             onChange={this.handleChangeSelectRepuesto}
+            onKeyDown={this.handleChangeSelectRepuesto}
             placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
             noOptionsMessage= {() => "No se encontraron resultados"}
           />
