@@ -35,10 +35,25 @@ const imgAdd =
 
 class MultipleImageUploadComponent extends React.Component {
 
-    onChange = (imageList) => {
-        // data for submit
-        console.log(imageList);
-    };
+    constructor(props){
+        super(props);
+    
+        this.state = ({
+          listadoImagenes: []
+        })
+
+    }
+
+  onChangeI = (imageList) => {
+    // data for submit
+    console.log(imageList);
+    this.setState({
+      listadoImagenes: imageList
+    });
+    this.props.onChangeI('hola');
+  }
+
+  getImagenes = () => { return this.state.listadoImagenes }
 
     render() {
         return (
@@ -46,7 +61,7 @@ class MultipleImageUploadComponent extends React.Component {
                 <div className="col-lg-12">
                     <div className="form-group">
                         <ImageUploading
-                            onChange={this.onChange}
+                            onChange={this.onChangeI}
                             maxNumber={maxNumber}
                             multiple
                             maxFileSize={maxMbFileSize}
@@ -68,7 +83,7 @@ class MultipleImageUploadComponent extends React.Component {
                                                 <div key={image.key}>
                                                     <img src={image.dataURL} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
                                                     {/* <button style={boton_carga_imagen} onClick={image.onUpdate}>Update</button> */}
-                                                    <button className="btn btn-light" onClick={image.onRemove}>Eliminar</button>
+                                                    <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
                                                 </div>
                                             ))}
                                         </div>

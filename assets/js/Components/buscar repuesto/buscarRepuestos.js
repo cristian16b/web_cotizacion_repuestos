@@ -1,7 +1,7 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import './estilos.js';
-// import MultipleImageUploadComponent from './MultipleImageUploadComponent';
+import MultipleImageUploadComponent from './MultipleImageUploadComponent';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER} from '../../Constantes/constantes';
@@ -84,13 +84,13 @@ class BuscarRepuesto extends React.Component {
   }
 
   // evento change de las fotos subidas
-  onChange = (imageList) => {
-    // data for submit
-    console.log(imageList);
-    this.setState({
-      listadoImagenes: imageList
-    })
-  }
+  // onChange = (imageList) => {
+  //   // data for submit
+  //   console.log(imageList);
+  //   this.setState({
+  //     listadoImagenes: imageList
+  //   })
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -366,43 +366,18 @@ class BuscarRepuesto extends React.Component {
       </div> 
     );
   }
+
+  getImagen = (imagenes) => {
+    this.setState({listadoImagenes: imagenes});
+  }
+  
   renderSubidaPrevisualizacionFotos = () => {
     return (
             <div className="row justify-content-center">
               <div className="col-lg-12">
                   <div className="form-group">
                     <p>Debe adjuntar al menos una foto del repuesto solicitado. Como máximo se aceptarán cuatro.</p>
-                      <ImageUploading
-                          onChange={this.onChange}
-                          maxNumber={maxNumber}
-                          multiple
-                          maxFileSize={maxMbFileSize}
-                          acceptType={["jpg", "gif", "png"]}
-                      >
-                          {({ imageList, onImageUpload, onImageRemoveAll }) => (
-                          // write your building UI
-                              <div>
-                                  <div className="row">
-                                      <div className="col-lg-12">
-                                          <button className="btn btn-danger" onClick={onImageUpload}>Agregar</button>
-                                          <button className="btn btn-secondary" onClick={onImageRemoveAll}>Borrar todas</button>
-                                      </div>
-                                  </div>
-                                  
-                                  <div className="row">
-                                      <div className="col-lg-12">
-                                          {imageList.map((image) => (
-                                              <div key={image.key}>
-                                                  <img src={image.dataURL} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
-                                                  {/* <button style={boton_carga_imagen} onClick={image.onUpdate}>Update</button> */}
-                                                  <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
-                                              </div>
-                                          ))}
-                                      </div>
-                                  </div>
-                              </div>
-                          )}
-                      </ImageUploading>
+                      <MultipleImageUploadComponent onChangeI={this.getImagen}></MultipleImageUploadComponent>
                       <span className="text-danger error_negrita">
                         {this.state.errors["listadoImagenes"]}
                       </span>
