@@ -170,6 +170,7 @@ class BuscarRepuesto extends React.Component {
   }
 
   consumirApi = (name,url,minimaCantLetras) => {
+      // revisar evento onkey
       // if(name.length > minimaCantLetras && this.state.peticionActiva == true)
       if(name.length > minimaCantLetras) {
         const config = {
@@ -207,14 +208,14 @@ class BuscarRepuesto extends React.Component {
 
   loadMarcas = (name) => { 
     let url = API_AUTO_MARCA_FILTER + `?name=${name}`; 
-    return this.consumirApi(name,url,2) 
+    return this.consumirApi(name,url,1) 
   } 
   
   loadModelos = (name) => { 
     // console.log(this.state.marcaSeleccionado);
     let id = this.state.marcaSeleccionado.value;
     let url = API_AUTO_MODELO_FILTER + `?name=${name}&idMarca=${id}`; 
-    return this.consumirApi(name,url,2);
+    return this.consumirApi(name,url,1);
   }
 
   handleChangeSelectRepuesto = (e) => {
