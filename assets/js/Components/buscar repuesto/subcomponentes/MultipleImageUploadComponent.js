@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './estilos.js';
+import '../estilos.js';
 import ImageUploading from 'react-images-uploading';
 
 const maxNumber = 4;

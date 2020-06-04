@@ -1,43 +1,12 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import './estilos.js';
-import MultipleImageUploadComponent from './MultipleImageUploadComponent';
+import MultipleImageUploadComponent from './subcomponentes/MultipleImageUploadComponent';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER} from '../../Constantes/constantes';
 import axios from 'axios';
 import ImageUploading from 'react-images-uploading';
-
-const maxNumber = 4;
-const maxMbFileSize = 5 * 1024 * 1024; // 5Mb
-
-const multipreview = {
-    maxWidth: "300px",
-    width: '90%',
-    height: '90%',
-    backgroundPosition: 'center center',
-    background:'url(' + 'http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg' + ')',
-    backgroundColor: '#fff',
-    backgroundSize: 'cover',
-    backgroundRepeat:'no-repeat',
-    display: 'inline-block',
-    boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
-}
-
-const imgAdd = 
-{
-  width:'30px',
-  height:'30px',
-  borderRadius:'50%',
-  backgroundColor:'#4bd7ef',
-  color:'#fff',
-  boxShadow:'0px 0px 2px 1px rgba(0,0,0,0.2)',
-  textAlign:'center',
-  lineHeight:'30px',
-  marginTop:'0px',
-  cursor:'pointer',
-  fontSize:'15px'
-}
 
 class BuscarRepuesto extends React.Component {
 
