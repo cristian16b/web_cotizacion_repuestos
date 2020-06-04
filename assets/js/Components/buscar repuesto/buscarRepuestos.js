@@ -170,7 +170,8 @@ class BuscarRepuesto extends React.Component {
   }
 
   consumirApi = (name,url,minimaCantLetras) => {
-      if(name.length > minimaCantLetras && this.state.peticionActiva !== true) {
+      // if(name.length > minimaCantLetras && this.state.peticionActiva == true)
+      if(name.length > minimaCantLetras) {
         const config = {
           headers: { Authorization: `Bearer ${this.state.token['token']}` }
         };
@@ -286,7 +287,6 @@ class BuscarRepuesto extends React.Component {
             value = { this.state.repuestoSeleccionado }
             loadOptions = {this.loadRepuestos}
             onChange={this.handleChangeSelectRepuesto}
-            onKeyDown={this.handleChangeSelectRepuesto}
             placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
             noOptionsMessage= {() => "No se encontraron resultados"}
           />
@@ -297,6 +297,11 @@ class BuscarRepuesto extends React.Component {
       </div>
     );
   }
+
+  keydown = (e) => {
+    console.log(e);
+  }
+
 
   renderObservaciones = () => {
     return(
