@@ -35,22 +35,8 @@ const imgAdd =
 
 class MultipleImageUploadComponent extends React.Component {
 
-    constructor(props){
-        super(props);
-    
-        this.state = ({
-          listadoImagenes: []
-        })
-
-    }
-
   onChangeI = (imageList) => {
-    // data for submit
-    console.log(imageList);
-    this.setState({
-      listadoImagenes: imageList
-    });
-    this.props.onChangeI('hola');
+    this.props.onChangeI(imageList);
   }
 
   getImagenes = () => { return this.state.listadoImagenes }
