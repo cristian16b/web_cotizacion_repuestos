@@ -26,13 +26,6 @@ h1,h2,h3 {
     color: rgb(21, 61, 87);
 }
 
-/* referencia: http://jotaj.blogspot.com/2017/01/cambiar-el-alto-de-un-navbar-de.html */
-.navbar-brand,.navbar-nav li a {
-    line-height: 20%;
-    height: 75px;
-    padding-top: 0;
-}
-
 /* .btn-primary, .login-btn, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-block {
     background-color: #53595F 
 }  */
@@ -54,10 +47,12 @@ h1,h2,h3 {
 } 
 
 /* Modify brand and text color */ 
-.navbar-custom .navbar-brand, 
+.navbar-custom .navbar-brand,
+.navbar-brand,.navbar-nav li a, 
 .navbar-custom .navbar-text { 
     color: white; 
-    height: 15%;
+    height: 0%;
+    line-height: 95%;
 } 
 
 .nav-link-blanco {
