@@ -129,9 +129,11 @@ class BuscarRepuesto extends React.Component {
     }
     console.log(payload);
     const config = {
-      headers: { Authorization: `Bearer ${this.state.token['token']}` }
+        headers: { 
+            Authorization: `Bearer ${this.state.token['token']}`
+        }
     };
-    axios.post(API_GUARDAR_SOLICITUD_REPUESTO,config,payload)
+    axios.post(API_GUARDAR_SOLICITUD_REPUESTO,payload,config)
         .then(response => {
             let code = response.data.code;
             if(code == 200){
@@ -298,11 +300,6 @@ class BuscarRepuesto extends React.Component {
       </div>
     );
   }
-
-  keydown = (e) => {
-    console.log(e);
-  }
-
 
   renderObservaciones = () => {
     return(
