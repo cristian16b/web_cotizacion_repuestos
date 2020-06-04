@@ -34,6 +34,7 @@ class BuscarRepuesto extends React.Component {
     this.loadMarcas = this.loadMarcas.bind(this);
     this.loadModelos = this.loadModelos.bind(this);
     this.handleSubmit   = this.handleSubmit.bind(this); 
+    this.handleChange = this.handleChange.bind(this);
   }
 
   isHabilitado = () => { return this.state.botonesHabilitados}
@@ -235,9 +236,9 @@ class BuscarRepuesto extends React.Component {
     // console.log(`Option selected:`, e);
   }
 
-  handleChangeObservaciones = (e) => {
-    this.setState({ observaciones: e });
-    // console.log(`Option selected:`, e);
+  handleChange(event) { 
+    this.setState({[event.target.name]: event.target.value}); 
+    // console.log([event.target.name])  
   }
 
   renderSelectPrimerFila = () => {
@@ -306,7 +307,7 @@ class BuscarRepuesto extends React.Component {
                     <div className="row">
                       <div className="col-lg-12">
                         <label forhtml="message">Observaciones</label>
-                        <textarea onChange={this.handleChangeObservaciones} type="text" id="message" name="message" rows="2" className="form-control md-textarea">
+                        <textarea onChange={this.handleChange} type="text" id="observaciones" name="observaciones" rows="2" className="form-control md-textarea">
                         </textarea>
                         <span className="text-danger error_negrita">
                           {this.state.errors["observaciones"]}
