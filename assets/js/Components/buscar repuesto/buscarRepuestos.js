@@ -1,12 +1,10 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import './estilos.js';
 import MultipleImageUploadComponent from './subcomponentes/MultipleImageUploadComponent';
-import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER,API_GUARDAR_SOLICITUD_REPUESTO} from '../../Constantes/constantes';
 import axios from 'axios';
-import ImageUploading from 'react-images-uploading';
+import Loading from '../loading/loading.js';
 
 class BuscarRepuesto extends React.Component {
 
@@ -28,6 +26,7 @@ class BuscarRepuesto extends React.Component {
       errorApi: '',
       isSignedUp: false, 
       observaciones: '',
+      isLoading: false,
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
@@ -134,16 +133,19 @@ class BuscarRepuesto extends React.Component {
             Authorization: `Bearer ${this.state.token['token']}`
         }
     };
+    this.setState({isLoading: true});
     axios.post(API_GUARDAR_SOLICITUD_REPUESTO,payload,config)
         .then(response => {
+            this.setState({isLoading: false});
             let code = response.data.code;
             if(code == 200){
-              this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+              // this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
             }
             this.mostrarErroresApi(response);
         })
         .catch(e => {
-            alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+          this.setState({isLoading: false});
+          alert('Ocurrio un error al consultar al servidor, intente nuevamente');
     });
     event.preventDefault();
   }
@@ -363,6 +365,9 @@ class BuscarRepuesto extends React.Component {
 
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
     render() {
+    if(this.state.isLoading == true)
+      return  <Loading></Loading>
+    else
       return (
         <div className="row justify-content-center">
           <div className="col-lg-10">
@@ -379,7 +384,7 @@ class BuscarRepuesto extends React.Component {
                         con esta modificacion funciona correctamente
                     */}
                     <form onSubmit={this.handleSubmit}>
-                      {this.renderBotones()}
+                      <>{this.renderBotones()}</>
                     </form>
                 {/* FIN CARDBODY */}
               </div>
