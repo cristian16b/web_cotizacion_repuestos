@@ -5,7 +5,8 @@ import {API_LOGIN,API_LOGIN_SOCIAL} from '../../Constantes/constantes';
 import axios from 'axios';
 // import SocialButton from '../social button/SocialButton';
 import { FacebookLoginButton } from "react-social-login-buttons";
-import { OldSocialLogin as SocialLogin } from 'react-social-login'
+import { OldSocialLogin as SocialLogin } from 'react-social-login';
+import Loading from '../loading/loading.js';
  
 class Login extends React.Component {
 
@@ -16,7 +17,8 @@ class Login extends React.Component {
             username:'',
             password:'',
             errors: {},
-            errorApi: ''
+            errorApi: '',
+            isLoading: false,
         })
 
         this.cambioUsername = this.cambioUsername.bind(this);
@@ -94,16 +96,19 @@ class Login extends React.Component {
 
     //adaptador para hacer petición http
     consumirAxios = (url,payload) => {
+        this.setState({isLoading: true});
         axios.post(url,payload)
         .then(response => {
             let rol = response.data.rol;
             let token = response.data.token;
             let code = response.data.code;
+            this.setState({isLoading: false});
             // console.log(rol + ' ' + code );
             // Llamo al componente app para que muestre habilite rutas segun corresponda por el rol
             this.props.obtenerTokenPadre(true,rol,token,code);
         })
         .catch(e => {
+            this.setState({isLoading: false});
             if(e.response)
             {
                 let error = '';
@@ -114,6 +119,9 @@ class Login extends React.Component {
     }
 
     render() {
+    if(this.state.isLoading == true)
+        return  <Loading></Loading>
+    else
         return (
             <div className="row justify-content-center">
                 <div className="col-lg-5 col-md-6">

@@ -2,7 +2,8 @@ import React , { Component } from 'react';
 import {API_REGISTER,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import Loading from '../loading/loading.js';
 
 class Registrarme extends React.Component {
 
@@ -30,6 +31,7 @@ class Registrarme extends React.Component {
         botonesHabilitados: false,
         // <-- initialize the signup state as false
         isSignedUp: false, 
+        isLoading: false
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -118,6 +120,7 @@ consumirApiRegister(){
     "password2":this.state.password2,
     "email":this.state.email
   }
+  this.setState({isLoading: true});
   axios.post(API_REGISTER,payload)
       .then(response => {
           let code = response.data.code;
@@ -125,8 +128,10 @@ consumirApiRegister(){
             this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
           }
           this.mostrarErroresApi(response);
+          this.setState({isLoading: false});
       })
       .catch(e => {
+          this.setState({isLoading: false});
           alert('Ocurrio un error al consultar al servidor, intente nuevamente');
   });
   event.preventDefault();
@@ -216,6 +221,9 @@ redirectToLogin = () => {
 
 render() {
 
+if(this.state.isLoading == true)
+  return  <Loading></Loading>
+else
   return (        
       <div className="row justify-content-center">
         {
