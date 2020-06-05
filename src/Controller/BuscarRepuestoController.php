@@ -199,7 +199,7 @@ class BuscarRepuestoController extends AbstractController
 
     // ejemplo userId_1200_bateria_12/10/20 12:20.png
     private function obtenerNombreLogico($imgExtension,$idUser,$nombreRepuesto) {
-        return 'userId_' . $idUser . '_' . $nombreRepuesto . '_' . date('d/m/Y') . '_' . date('h:i:sa') . '.' . $imgExtension;
+        return 'userId_' . $idUser . '_' . $nombreRepuesto . '_' . date('d/m/Y')  . '.' . $imgExtension;
     }
 
     private function obtenerNombreFisico($imgExtension) {
