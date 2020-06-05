@@ -123,9 +123,23 @@ class BuscarRepuestoController extends AbstractController
                 throw new \Exception('Something went wrong!');
             }
 
-            dump($repuesto);
-            dump($modelo);
-            dump($marca);
+            $solicitud = new Solicitud();
+            $solicitud->setSolicitante($user);
+            $solicitud->setRepuesto($repuesto);
+            // no necesito setear la marca por la relacion con 
+            $solicitud->setModeloAuto($modelo);
+            $solicitud->setObservacion($observaciones);
+        
+            $recurso = new RecursoSolicitud();
+            // $recurso->set
+            foreach($imagenes as $imagen) {
+                // dump($imagen['dataURL']);
+                $imagenBase64 = $imagen['dataURL'];
+                $extension = $this->obtenerExtensionImagen($imagenBase64);
+                $tamanioBytes = $this->obtenerTamanioImagen($imagenBase64);
+                dump($this->obtenerNombreFisico($extension));
+                dump($this->obtenerNombreLogico($extension,$user->getId(),$repuesto->getName()));
+            }
             die;
             // $formErrors = $this->obtenerErrores();
 
@@ -168,6 +182,29 @@ class BuscarRepuestoController extends AbstractController
         return $this->getDoctrine()->getRepository(ModeloAuto::class)->find($id);
     }
 
+    private function obtenerTamanioImagen($img) {
+        // https://stackoverflow.com/questions/53228948/how-to-get-image-file-size-from-base-64-string-in-javascript
+        // x = (n * (3/4)) - y
+        // no se substrae el elemento y porque solo varia en uno o dos bits y obtenerlo es un costo innecesario
+        // formulada aplicada x = (n * (3/4)) bytes
+        return strlen($img) * (3/4);
+    }
+
+    private function obtenerExtensionImagen($img) {
+        // https://stackoverflow.com/questions/18658437/get-image-type-from-base64-encoded-src-string
+        $match = '';
+        preg_match("/^data:image\/(.*);base64/i",$img, $match);
+        return $match[1];
+    }
+
+    // ejemplo userId_1200_bateria_12/10/20 12:20.png
+    private function obtenerNombreLogico($imgExtension,$idUser,$nombreRepuesto) {
+        return 'userId_' . $idUser . '_' . $nombreRepuesto . '_' . date('d/m/Y') . '_' . date('h:i:sa') . '.' . $imgExtension;
+    }
+
+    private function obtenerNombreFisico($imgExtension) {
+        return md5(uniqid()).'.'. $imgExtension;
+    }
     // private function obtenerErrores() {
 
     //     $nombreError = $validator->validateProperty($user, 'nombre');
