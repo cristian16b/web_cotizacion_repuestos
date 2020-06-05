@@ -2,6 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\MarcaAuto;
+use App\Entity\ModeloAuto;
+use App\Entity\Repuesto;
+use App\Entity\RecursoSolicitud;
+use App\Entity\Solicitud;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -96,6 +101,11 @@ class BuscarRepuestoController extends AbstractController
  
         try {
             $user = $this->getUser();
+            // si no se obtiene correctamente el usuario falla
+            if(is_null($user)) {
+                throw new \Exception('Something went wrong!');
+            }
+
             $code = 200;
             $error = false;
 
@@ -105,8 +115,18 @@ class BuscarRepuestoController extends AbstractController
             $imagenes = $request->request->get('imagenes');
             $observaciones = $request->request->get('observaciones');
  
-            dump($user);
-            dump($request->request);die;
+            $repuesto = $this->obtenerRepuesto($idRepuesto);
+            $modelo = $this->obtenerModeloAuto($idModelo);
+            $marca = $this->obtenerMarcaAuto($idMarca);
+
+            if(is_null($repuesto) || is_null($marca) || is_null($modelo)) {
+                throw new \Exception('Something went wrong!');
+            }
+
+            dump($repuesto);
+            dump($modelo);
+            dump($marca);
+            die;
             // $formErrors = $this->obtenerErrores();
 
 
@@ -134,6 +154,18 @@ class BuscarRepuestoController extends AbstractController
         ];
  
         return new Response($serializer->serialize($response, "json"));
+    }
+
+    private function obtenerRepuesto($id){
+        return $this->getDoctrine()->getRepository(Repuesto::class)->find($id);
+    }
+
+    private function obtenerMarcaAuto($id){
+        return $this->getDoctrine()->getRepository(MarcaAuto::class)->find($id);
+    }
+
+    private function obtenerModeloAuto($id) {
+        return $this->getDoctrine()->getRepository(ModeloAuto::class)->find($id);
     }
 
     // private function obtenerErrores() {
