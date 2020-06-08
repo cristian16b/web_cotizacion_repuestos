@@ -350,7 +350,7 @@ class BuscarRepuesto extends React.Component {
   renderSubidaPrevisualizacionFotos = () => {
     return (
             <div className="row justify-content-center">
-              <div className="col-lg-12">
+              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                   <div className="form-group">
                     <p>Debe adjuntar al menos una foto del repuesto solicitado. Como máximo se aceptarán cuatro.</p>
                       <MultipleImageUploadComponent onChangeI={this.getImagen}></MultipleImageUploadComponent>

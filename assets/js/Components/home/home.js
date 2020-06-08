@@ -9,7 +9,7 @@ class Home extends React.Component {
   render() {
     return (        
       <div className="row justify-content-center">
-        <div className="col-lg-9">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
           <h1 className="my-4">Eisen Part</h1>
             <img  className="card-img-top img-fluid"
                   src="https://i.ibb.co/pzH2yTP/Eisen-Aplicativo03.jpg" 

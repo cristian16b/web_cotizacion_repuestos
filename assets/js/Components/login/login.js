@@ -124,7 +124,7 @@ class Login extends React.Component {
     else
         return (
             <div className="row justify-content-center">
-                <div className="col-lg-5 col-md-6">
+                <div className="col-12 col-sm-12 col-lg-5 col-md-6">
                     <div className="card">
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>

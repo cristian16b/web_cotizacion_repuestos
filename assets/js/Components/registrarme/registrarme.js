@@ -230,7 +230,7 @@ else
           // si se logueo correctamente se redirige al login
           this.redirectToLogin()
         }
-        <div className="col-lg-9">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
           <div className="card">
             <div className="card-body">
               <h2 className="my-4">Registrarme</h2>

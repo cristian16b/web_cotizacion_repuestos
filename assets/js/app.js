@@ -95,19 +95,19 @@ class App extends React.Component {
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
     render() {
       return (
-        <>
-          <BrowserRouter>
-            <>
-                {
-                  this.state.isUserLogin 
-                  ?
-                    <>{ this.returnTemplateLogueado() }</>   
-                  :
-                    <>{ this.returnTemplateNoLogueado() }</>         
-                }
-            </>
-          </BrowserRouter>
-        </>
+        <div className="row">
+          <div className="col-12 col-sm-12 col-md-12">
+            <BrowserRouter>
+                  {
+                    this.state.isUserLogin 
+                    ?
+                      <>{ this.returnTemplateLogueado() }</>   
+                    :
+                      <>{ this.returnTemplateNoLogueado() }</>         
+                  }
+            </BrowserRouter>
+          </div>
+        </div>
       );
     }
 }
