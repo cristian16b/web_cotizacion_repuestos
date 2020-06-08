@@ -434,7 +434,7 @@ renderBotonesUsuarioComercio () {
                 <div className="row justify-content-center">
                   <a  onClick={this.cambioComerciante} className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
                     <i className="fa fa-user fa-5x"></i><br/>
-                    <h4>Soy un comercio y quiero vender autopartes</h4>
+                    <h4>Soy un comercio y quiero registrarme<br/> para vender autopartes</h4>
                     <br/>Registrate!
                   </a>
                 </div>
