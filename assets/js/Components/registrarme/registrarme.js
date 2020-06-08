@@ -219,28 +219,10 @@ redirectToLogin = () => {
   }
 }
 
-render() {
-
-if(this.state.isLoading == true)
-  return  <Loading></Loading>
-else
-  return (        
-      <div className="row justify-content-center">
-        {
-          // si se logueo correctamente se redirige al login
-          this.redirectToLogin()
-        }
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-          <div className="card">
-            <div className="card-body">
-              <h2 className="my-4">Registrarme</h2>
-              <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <span className="text-danger error_negrita">
-                  {this.state.errorApi}
-                </span>
-              </div>
-              <div className="row">
+renderCamposComunes() {
+  return(
+    <>
+          <div className="row">
                 <div className="col-lg-6">
                   <div className="form-group">
                   <label htmlFor="apellido">Apellido</label>
@@ -355,31 +337,14 @@ else
                       </span> 
                   </div>
                 </div>
-              </div>
-{/* 
-              <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    
-                  </div>
-                </div> 
-              </div>
-               */}
-             <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <ReCAPTCHA
-                      sitekey={API_CAPTCHA_PUBLIC}
-                      onChange={this.handleChange}
-                    />
-                    <span id="passwordHelp" className="text-danger error_negrita">
-                      {this.state.errors["captcha"]}
-                    </span> 
-                  </div>
-                </div> 
-              </div> 
-          
-              <div className="row">
+              </div>    
+    </>
+  );
+}
+
+renderBotones() {
+  return(
+<div className="row">
                 <div className="col-lg-6">
                   <div className="form-group">
                     <button type="submit" 
@@ -396,7 +361,61 @@ else
                             className="btn btn-light btn-block">Cancelar</button>
                   </div>
                 </div>  
-              </div> 
+              </div>
+  );
+}
+
+renderCaptcha() {
+  return(
+    <div className="row">
+      <div className="col-lg-6">
+        <div className="form-group">
+          <ReCAPTCHA
+            sitekey={API_CAPTCHA_PUBLIC}
+            onChange={this.handleChange}
+          />
+          <span id="passwordHelp" className="text-danger error_negrita">
+            {this.state.errors["captcha"]}
+          </span> 
+        </div>
+      </div> 
+    </div> 
+  );
+}
+
+render() {
+
+if(this.state.isLoading == true)
+  return  <Loading></Loading>
+else
+  return (        
+      <div className="row justify-content-center">
+        {
+          // si se logueo correctamente se redirige al login
+          this.redirectToLogin()
+        }
+        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="my-4">Registrarme</h2>
+              <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <span className="text-danger error_negrita">
+                  {this.state.errorApi}
+                </span>
+              </div>
+              { this.renderCamposComunes() }
+    {/* 
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="form-group">
+                    
+                  </div>
+                </div> 
+              </div>
+               */}
+              { this.renderCaptcha() }
+              { this.renderBotones() }
               </form>
             </div>
           </div>
