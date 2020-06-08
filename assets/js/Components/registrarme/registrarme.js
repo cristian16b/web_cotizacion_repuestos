@@ -122,7 +122,8 @@ consumirApiRegister(){
     "telefono":this.state.telefono,
     "password":this.state.password,
     "password2":this.state.password2,
-    "email":this.state.email
+    "email":this.state.email,
+    "esComerciante":this.state.esComerciante,
   }
   this.setState({isLoading: true});
   axios.post(API_REGISTER,payload)
