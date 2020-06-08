@@ -26,6 +26,12 @@ h1,h2,h3 {
     color: rgb(21, 61, 87);
 }
 
+h4 {
+    text-transform: capitalize;
+    font-weight: bold;
+    color: rgb(21, 61, 87);
+}
+
 /* .btn-primary, .login-btn, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-block {
     background-color: #53595F 
 }  */
@@ -58,3 +64,10 @@ h1,h2,h3 {
 .nav-link-blanco {
     color: black; 
 }
+
+
+.btn-sq-lg {
+    width: 150px !important;
+    height: 150px !important;
+}
+  

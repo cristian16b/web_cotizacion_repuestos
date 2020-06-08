@@ -17,7 +17,7 @@ class Registrarme extends React.Component {
         telefono: '',
         email: '',
         //solo para vendedores
-        esComerciante: '',
+        esComerciante: false,
         cuitCuit: '',
         domicilio: '',
         //
@@ -31,7 +31,10 @@ class Registrarme extends React.Component {
         botonesHabilitados: false,
         // <-- initialize the signup state as false
         isSignedUp: false, 
-        isLoading: false
+        // para mostrar el loop de cargando
+        isLoading: false,
+        // para mostrar los botones de seleccion
+        botonesSeleccionUsuario: false
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -212,6 +215,12 @@ cambioHabilitado = () => {
   // console.log(this.state.botonesHabilitados);
 }
 
+cambioComerciante = () => {
+  this.setState({
+    esComerciante: true
+  });
+}
+
 redirectToLogin = () => {
   if (this.state.isSignedUp) {
     // redirect to home if signed up
@@ -383,11 +392,31 @@ renderCaptcha() {
   );
 }
 
+renderBotonesUsuarioComercio () {
+  return (
+          <>
+            <div className="row justify-content-center">
+                <a className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
+                  <i className="fa fa-user fa-5x"></i><br/>
+                  <h4>Necesito buscar repuestos</h4>
+                  <br/>Registrate!
+                </a>
+              </div>
+              <div className="row justify-content-center">
+                <a  className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
+                  <i className="fa fa-user fa-5x"></i><br/>
+                  <h4>Soy un comercio y quiero vender autopartes</h4>
+                  <br/>Registrate!
+                </a>
+              </div>
+          </>
+  );
+}
+
 render() {
 
 if(this.state.isLoading == true)
   return  <Loading></Loading>
-else
   return (        
       <div className="row justify-content-center">
         {
@@ -404,7 +433,26 @@ else
                   {this.state.errorApi}
                 </span>
               </div>
-              { this.renderCamposComunes() }
+              {
+                this.state.botonesSeleccionUsuario == false  && this.state.esComerciante == false
+                  ?
+                  <>{this.renderBotonesUsuarioComercio()}</>
+                  :
+                  <></>
+              }
+              {/* {
+                this.state.esComerciante == false
+                ?
+                <>{this.renderCamposComunes()}</>
+                :
+                <>
+                  {this.renderCamposComunes()}
+                  HOLAAAA
+                </>
+
+              } */}
+              
+              {/* { this.renderCamposComunes() } */}
     {/* 
               <div className="row">
                 <div className="col-lg-6">
@@ -414,8 +462,8 @@ else
                 </div> 
               </div>
                */}
-              { this.renderCaptcha() }
-              { this.renderBotones() }
+              {/* { this.renderCaptcha() }
+              { this.renderBotones() } */}
               </form>
             </div>
           </div>
