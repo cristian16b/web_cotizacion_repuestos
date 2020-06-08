@@ -51,6 +51,7 @@ class Registrarme extends React.Component {
     this.isHabilitado = this.isHabilitado.bind(this);
     this.cambioHabilitado = this.cambioHabilitado.bind(this);
     this.cambioComerciante = this.cambioComerciante.bind(this);
+    this.cancelar = this.cancelar.bind(this);
 }
 
 validarFormulario () {
@@ -216,25 +217,25 @@ cambioHabilitado = () => {
 }
 
 cambioComerciante = () => {
-  console.log('click sobre boton de comerciante');
+  // console.log('click sobre boton de comerciante');
   this.setState({
     esComerciante: true
   });
   this.setState({
     botonesSeleccionUsuario: false
   });
-  console.log('es comerciante = ' + this.state.esComerciante);
+  // console.log('es comerciante = ' + this.state.esComerciante);
 }
 
 cambioUsuario = () => {
-  console.log('click sobre boton de usuari');
+  // console.log('click sobre boton de usuari');
   this.setState({
     esComerciante: false
   });
   this.setState({
     botonesSeleccionUsuario: false
   });
-  console.log('es comerciante = ' + this.state.esComerciante);
+  // console.log('es comerciante = ' + this.state.esComerciante);
 }
 
 redirectToLogin = () => {
@@ -242,6 +243,16 @@ redirectToLogin = () => {
     // redirect to home if signed up
     return <Redirect to = {{ pathname: "/login" }} />;
   }
+}
+
+cancelar() {
+  this.setState({
+    esComerciante: false
+  });
+  this.setState({
+    botonesSeleccionUsuario: true
+  });
+  // console.log('click cancelar');
 }
 
 renderCamposComunes() {
@@ -381,7 +392,8 @@ renderBotones() {
                 </div>
                 <div className="col-lg-6">
                   <div className="form-group">
-                    <button type="reset" 
+                    <button 
+                            onClick={this.cancelar}
                             // disabled={this.state.botonesHabilitados}
                             className="btn btn-light btn-block">Cancelar</button>
                   </div>
@@ -413,14 +425,14 @@ renderBotonesUsuarioComercio () {
     <div className="row justify-content-center">
       <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                 <div className="row justify-content-center">
-                  <a onClick={this.cambioComerciante} className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
+                  <a onClick={this.cambioUsuario} className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
                     <i className="fa fa-user fa-5x"></i><br/>
-                    <h4>Necesito buscar repuestos</h4>
+                    <h4>Necesito buscar repuestos<br/> para mi auto/camioneta</h4>
                     <br/>Registrate!
                   </a>
                 </div>
                 <div className="row justify-content-center">
-                  <a onClick={this.cambioUsuario} className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
+                  <a  onClick={this.cambioComerciante} className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
                     <i className="fa fa-user fa-5x"></i><br/>
                     <h4>Soy un comercio y quiero vender autopartes</h4>
                     <br/>Registrate!
