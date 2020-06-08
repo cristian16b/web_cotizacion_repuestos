@@ -118,62 +118,9 @@ class Login extends React.Component {
         });
     }
 
-    render() {
-    if(this.state.isLoading == true)
-        return  <Loading></Loading>
-    else
-        return (
-            <div className="row justify-content-center">
-                <div className="col-12 col-sm-12 col-lg-5 col-md-6">
-                    <div className="card">
-                        <div className="card-body">
-                            <form onSubmit={this.handleSubmit}>
-                                <h2 className="text-center">Iniciar sesión</h2>
-                                <div className="form-group">
-                                    <span className="text-danger error_negrita">
-                                        {this.state.errorApi}
-                                    </span>
-                                </div>   
-                                <div className="form-group">
-                                    <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-user"></i></span>
-                                        {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-                                        <input type="text" className="form-control" name="username" 
-                                                defaultValue={this.state.username} onChange={this.cambioUsername}
-                                                placeholder="Ingrese su correo"/>
-                                    </div>
-                                    <span id="passwordHelp" className="text-danger error_negrita">
-                                        {this.state.errors["username"]}
-                                    </span> 
-                                </div>
-                                <div className="form-group">
-                                    <div className="input-group">
-                                        <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                                        <input type="password" className="form-control" name="password" 
-                                                defaultValue = {this.state.password} onChange={this.cambioPassword}
-                                                placeholder="Ingrese su contraseña" />	
-                                    </div>
-                                    <span id="passwordHelp" className="text-danger error_negrita">
-                                        {this.state.errors["password"]}
-                                    </span> 
-                                </div>        
-                                <div className="form-group">
-                                    <button type="submit" className="btn btn-primary login-btn btn-block">Ingresar</button>
-                                </div>
-                            </form>
-                            <div className="clearfix">
-                                    {/* <label className="pull-left checkbox-inline"><input type="checkbox" /> Remember me</label> */}
-                                    <Link to="/recuperarContrasenia" className="navbar-brand">
-                                        <span className="small"> 
-                                            ¿Olvidaste tu contraseña?
-                                        </span>
-                                    </Link>
-                            </div>
-                            <div className="clearfix">
-                                <hr />
-                            </div>
-                            <p className="text-center">O ingresar con tu red social</p>
-                            <div className="text-center social-btn">
+    renderLoginSocial () {
+        return(
+<div className="text-center social-btn">
                                             <div className="row justify-content-center">
                                                 <div className="col-lg-7 col-md-7 col-xs-8">
                                                     {/* <SocialButton
@@ -198,6 +145,11 @@ class Login extends React.Component {
                                                 </div>
                                             </div>          
                                 </div>
+        );
+    }
+
+    renderRegistrarse () {
+        return(
                             <p className="text-center">¿No tienes una cuenta?&nbsp;  
                                 <Link to="/registrarme">
                                     <span> 
@@ -205,6 +157,84 @@ class Login extends React.Component {
                                     </span>
                                 </Link>
                             </p>
+        );
+    }
+
+    renderInputCorreo() {
+        return(
+            <div className="form-group">
+                <div className="input-group">
+                    <span className="input-group-addon"><i className="fa fa-user"></i></span>
+                    {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
+                    <input type="text" className="form-control" name="username" 
+                            defaultValue={this.state.username} onChange={this.cambioUsername}
+                            placeholder="Ingrese su correo"/>
+                </div>
+                <span id="passwordHelp" className="text-danger error_negrita">
+                    {this.state.errors["username"]}
+                </span> 
+            </div>
+        );
+    }
+
+    renderInputPass() {
+        return(
+            <div className="form-group">
+                <div className="input-group">
+                    <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                        <input type="password" className="form-control" name="password" 
+                        defaultValue = {this.state.password} onChange={this.cambioPassword}
+                        placeholder="Ingrese su contraseña" />	
+                </div>
+                <span id="passwordHelp" className="text-danger error_negrita">
+                        {this.state.errors["password"]}
+                </span> 
+            </div>        
+        );
+    }
+
+    renderOlvidePass() {
+        return(
+            <div className="clearfix">
+                {/* <label className="pull-left checkbox-inline"><input type="checkbox" /> Remember me</label> */}
+                <Link to="/recuperarContrasenia" className="navbar-brand">
+                    <span className="small"> 
+                        ¿Olvidaste tu contraseña?
+                    </span>
+                </Link>
+            </div>
+        );
+    }
+
+    render() {
+    if(this.state.isLoading == true)
+        return  <Loading></Loading>
+    else
+        return (
+            <div className="row justify-content-center">
+                <div className="col-12 col-sm-12 col-lg-5 col-md-6">
+                    <div className="card">
+                        <div className="card-body">
+                            <form onSubmit={this.handleSubmit}>
+                                <h2 className="text-center">Iniciar sesión</h2>
+                                <div className="form-group">
+                                    <span className="text-danger error_negrita">
+                                        {this.state.errorApi}
+                                    </span>
+                                </div>   
+                                { this.renderInputCorreo() }
+                                { this.renderInputPass() }
+                                <div className="form-group">
+                                    <button type="submit" className="btn btn-primary login-btn btn-block">Ingresar</button>
+                                </div>
+                            </form>
+                                { this.renderOlvidePass() }
+                            <div className="clearfix">
+                                <hr />
+                            </div>
+                            <p className="text-center">O ingresar con tu red social</p>
+                                { this.renderLoginSocial() }
+                                { this.renderRegistrarse() }
                         </div>
                     </div>
                 </div>
