@@ -213,7 +213,7 @@ class Login extends React.Component {
         return (
             <div className="row justify-content-center">
                 <div className="col-12 col-sm-12 col-lg-5 col-md-6">
-                    <div className="card">
+                    <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
                                 <h2 className="text-center">Iniciar sesión</h2>

@@ -16,7 +16,7 @@ class Home extends React.Component {
                   alt="Cargando..." 
                   border="0">
             </img> 
-          <div className="card">
+          <div className="card shadow-sm p-3 mb-5 bg-white rounded">
             <div className="card-body">
               <p className="card-text">Descripción</p>
             </div>

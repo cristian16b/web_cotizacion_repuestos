@@ -459,7 +459,7 @@ else
           this.redirectToLogin()
         }
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-          <div className="card">
+          <div className="card shadow-sm p-3 mb-5 bg-white rounded">
             <div className="card-body">
               <h2 className="my-4">Registrarme</h2>
               <form onSubmit={this.handleSubmit}>

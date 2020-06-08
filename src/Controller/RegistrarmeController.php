@@ -108,6 +108,8 @@ class RegistrarmeController extends AbstractController
             $password = $request->request->get('password');
             $codArea = $request->request->get('codArea');
             $telefono = $request->request->get('telefono');
+            $esComerciante = $request->request->get('esComerciante');
+            dump($request->request);die;
  
             $user = new Usuario();
             $user->setNombre($name);
