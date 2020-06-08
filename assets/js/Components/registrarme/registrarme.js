@@ -34,7 +34,7 @@ class Registrarme extends React.Component {
         // para mostrar el loop de cargando
         isLoading: false,
         // para mostrar los botones de seleccion
-        botonesSeleccionUsuario: false
+        botonesSeleccionUsuario: true
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -50,7 +50,7 @@ class Registrarme extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.isHabilitado = this.isHabilitado.bind(this);
     this.cambioHabilitado = this.cambioHabilitado.bind(this);
-
+    this.cambioComerciante = this.cambioComerciante.bind(this);
 }
 
 validarFormulario () {
@@ -216,9 +216,25 @@ cambioHabilitado = () => {
 }
 
 cambioComerciante = () => {
+  console.log('click sobre boton de comerciante');
   this.setState({
     esComerciante: true
   });
+  this.setState({
+    botonesSeleccionUsuario: false
+  });
+  console.log('es comerciante = ' + this.state.esComerciante);
+}
+
+cambioUsuario = () => {
+  console.log('click sobre boton de usuari');
+  this.setState({
+    esComerciante: false
+  });
+  this.setState({
+    botonesSeleccionUsuario: false
+  });
+  console.log('es comerciante = ' + this.state.esComerciante);
 }
 
 redirectToLogin = () => {
@@ -394,36 +410,42 @@ renderCaptcha() {
 
 renderBotonesUsuarioComercio () {
   return (
-          <>
-            <div className="row justify-content-center">
-                <a className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
-                  <i className="fa fa-user fa-5x"></i><br/>
-                  <h4>Necesito buscar repuestos</h4>
-                  <br/>Registrate!
-                </a>
-              </div>
-              <div className="row justify-content-center">
-                <a  className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
-                  <i className="fa fa-user fa-5x"></i><br/>
-                  <h4>Soy un comercio y quiero vender autopartes</h4>
-                  <br/>Registrate!
-                </a>
-              </div>
-          </>
+    <div className="row justify-content-center">
+      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div className="row justify-content-center">
+                  <a onClick={this.cambioComerciante} className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
+                    <i className="fa fa-user fa-5x"></i><br/>
+                    <h4>Necesito buscar repuestos</h4>
+                    <br/>Registrate!
+                  </a>
+                </div>
+                <div className="row justify-content-center">
+                  <a onClick={this.cambioUsuario} className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
+                    <i className="fa fa-user fa-5x"></i><br/>
+                    <h4>Soy un comercio y quiero vender autopartes</h4>
+                    <br/>Registrate!
+                  </a>
+                </div>
+        </div>
+      </div>
   );
 }
 
-render() {
-
+render() { 
 if(this.state.isLoading == true)
   return  <Loading></Loading>
+else if(this.state.botonesSeleccionUsuario == true)
+  return(
+    <>{this.renderBotonesUsuarioComercio()}</>
+  )
+else 
   return (        
       <div className="row justify-content-center">
         {
-          // si se logueo correctamente se redirige al login
+          // si no se logueo correctamente se redirige al login
           this.redirectToLogin()
         }
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
           <div className="card">
             <div className="card-body">
               <h2 className="my-4">Registrarme</h2>
@@ -434,36 +456,21 @@ if(this.state.isLoading == true)
                 </span>
               </div>
               {
-                this.state.botonesSeleccionUsuario == false  && this.state.esComerciante == false
-                  ?
-                  <>{this.renderBotonesUsuarioComercio()}</>
-                  :
-                  <></>
-              }
-              {/* {
-                this.state.esComerciante == false
+                this.state.esComerciante == true
                 ?
-                <>{this.renderCamposComunes()}</>
+                  <>
+                    { this.renderCamposComunes() }
+                    <p>faltan los campos de comercio</p>
+                    { this.renderCaptcha() }
+                    { this.renderBotones() }
+                  </>
                 :
-                <>
-                  {this.renderCamposComunes()}
-                  HOLAAAA
-                </>
-
-              } */}
-              
-              {/* { this.renderCamposComunes() } */}
-    {/* 
-              <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    
-                  </div>
-                </div> 
-              </div>
-               */}
-              {/* { this.renderCaptcha() }
-              { this.renderBotones() } */}
+                  <>
+                    {this.renderCamposComunes()}
+                    { this.renderCaptcha() }
+                    { this.renderBotones() }
+                  </>
+              }
               </form>
             </div>
           </div>
