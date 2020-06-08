@@ -24,6 +24,11 @@ use Doctrine\ORM\EntityManagerInterface;
 */
 class RegistrarmeController extends AbstractController
 {
+    private $userAdminDefultd = "USER_ADMIN";
+    private $userRolUsuario = "ROLE_USER";
+    private $userRolComerciante = "ROLE_COMERCIANTE";
+    private $userRolAdmin = "ROLE_ADMIN";
+
     // /**
     //  * @Route("/", name="registrarme")
     //  */
@@ -109,7 +114,6 @@ class RegistrarmeController extends AbstractController
             $codArea = $request->request->get('codArea');
             $telefono = $request->request->get('telefono');
             $esComerciante = $request->request->get('esComerciante');
-            dump($request->request);die;
  
             $user = new Usuario();
             $user->setNombre($name);
@@ -117,11 +121,18 @@ class RegistrarmeController extends AbstractController
             $user->setUsername($email);
             $user->setPlainPassword($password);
             $user->setPassword($encoder->encodePassword($user, $password));
-            $user->setRoles($this->userRolUsuario);
             $user->setUsuarioUltimaModificacion($email);
             $user->setApellido($apellido);
             $user->setCodArea($codArea);
             $user->setTelefono($telefono);
+            if($esComerciante) 
+            {
+                $user->setRoles($this->userRolComerciante);
+            }
+            else 
+            {
+                $user->setRoles($this->userRolUsuario);
+            }
 
 
             $nombreError = $validator->validateProperty($user, 'nombre');
