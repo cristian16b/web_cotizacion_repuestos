@@ -16,7 +16,7 @@ class MisCotizaciones extends React.Component {
 
   renderTabla() {
     return (
-        // <div class="table-responsive-md table-responsive-sm">
+        <div className="table-responsive-md table-responsive-sm">
           <table className="table table-striped">
           <thead>
             <tr>
@@ -43,11 +43,6 @@ class MisCotizaciones extends React.Component {
                       Ver cotizaciones
                     </button>
                 </div>
-                <div className="collapse" id="collapseExample">
-                  <div className="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                  </div>
-                </div>
               </td>
             </tr>
             <tr>
@@ -63,7 +58,12 @@ class MisCotizaciones extends React.Component {
             </tr>
           </tbody>
         </table>
-      // </div>
+        <div className="collapse" id="collapseExample">
+          <div className="card card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          </div>
+        </div>
+      </div>
     );
   }
 
