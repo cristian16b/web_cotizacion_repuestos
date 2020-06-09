@@ -197,7 +197,7 @@ class Login extends React.Component {
         return(
             <div className="clearfix">
                 {/* <label className="pull-left checkbox-inline"><input type="checkbox" /> Remember me</label> */}
-                <Link to="/recuperarContrasenia" className="navbar-brand">
+                <Link to="/recuperarContrasenia" className="navbar-brand .nav-link-blanco">
                     <span className="small"> 
                         ¿Olvidaste tu contraseña?
                     </span>
