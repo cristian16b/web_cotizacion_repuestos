@@ -5,6 +5,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SolicitudRepository")
@@ -20,7 +21,14 @@ class Solicitud
     private $id;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 255,
+     *      minMessage = "Debes ingresar una observación de al menos 10 carácteres",
+     *      maxMessage = "La observación es muy larga",
+     *      allowEmptyString = false
+     * )
      */
     private $observacion;
 
@@ -36,6 +44,7 @@ class Solicitud
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\ModeloAuto", cascade={"persist", "remove"})
+     * @Assert\NotBlank(message="Debe seleccionar la marca y modelo de su auto")
      */
     private $modeloAuto;
 
@@ -46,6 +55,13 @@ class Solicitud
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\RecursoSolicitud", mappedBy="solicitud", orphanRemoval=true)
+     * @Assert\NotBlank(message="Debe cargar al menos una imagen y a lo sumo 4")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 4,
+     *      minMessage = "Debe cargar al menos una imagen",
+     *      maxMessage = "No puede subir archivos de más de 4 imagenes"
+     * )
      */
     private $recursos;
 
@@ -63,6 +79,7 @@ class Solicitud
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Repuesto", inversedBy="solicitudes")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Debe seleccionar su repuesto")
      */
     private $repuesto;
 

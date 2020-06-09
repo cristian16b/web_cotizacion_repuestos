@@ -91,7 +91,7 @@ class BuscarRepuestoController extends AbstractController
      *
      * @SWG\Tag(name="Registrar ")
      */
-    public function registerAction(Request $request) {
+    public function registerAction(Request $request,ValidatorInterface $validator) {
         // die;
         $serializer = $this->container->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
@@ -119,7 +119,7 @@ class BuscarRepuestoController extends AbstractController
             $modelo = $this->obtenerModeloAuto($idModelo);
             $marca = $this->obtenerMarcaAuto($idMarca);
 
-            if(is_null($repuesto) || is_null($marca) || is_null($modelo)) {
+            if(is_null($repuesto) || is_null($marca) || is_null($modelo) || is_null($imagenes)) {
                 throw new \Exception('Something went wrong!');
             }
 
@@ -129,30 +129,28 @@ class BuscarRepuestoController extends AbstractController
             // no necesito setear la marca por la relacion con 
             $solicitud->setModeloAuto($modelo);
             $solicitud->setObservacion($observaciones);
-        
-            $recurso = new RecursoSolicitud();
+
             // $recurso->set
-            foreach($imagenes as $imagen) {
-                // dump($imagen['dataURL']);
+            $errorFiles = '';
+            foreach($imagenes as $index => $imagen) {
+                $recurso = new RecursoSolicitud();
                 $imagenBase64 = $imagen['dataURL'];
-                $extension = $this->obtenerExtensionImagen($imagenBase64);
-                $tamanioBytes = $this->obtenerTamanioImagen($imagenBase64);
-                dump($this->obtenerNombreFisico($extension));
-                dump($this->obtenerNombreLogico($extension,$user->getId(),$repuesto->getName()));
+                $recurso->setBase64($imagenBase64);
+                $recurso->obtenerNombreLogico($index,$repuesto->getName());
+                $solicitud->addRecurso($recurso);
             }
-            die;
-            // $formErrors = $this->obtenerErrores();
 
+            $formErrors = $this->obtenerErrores($solicitud,$validator);
 
-            // if($formErrors) {
-            //     $response = [
-            //         'code' => 0,
-            //         'error' => $error,
-            //     ];
-            //     return new JsonResponse($response);
-            // }
+            if($formErrors) {
+                $response = [
+                    'code' => 0,
+                    'error' => $error,
+                ];
+                return new JsonResponse($response);
+            }
 
-            // $em->persist($user);
+            // $em->persist($solicitud);
             // $em->flush();
  
         } catch (Exception $ex) {
@@ -182,55 +180,37 @@ class BuscarRepuestoController extends AbstractController
         return $this->getDoctrine()->getRepository(ModeloAuto::class)->find($id);
     }
 
-    private function obtenerTamanioImagen($img) {
-        // https://stackoverflow.com/questions/53228948/how-to-get-image-file-size-from-base-64-string-in-javascript
-        // x = (n * (3/4)) - y
-        // no se substrae el elemento y porque solo varia en uno o dos bits y obtenerlo es un costo innecesario
-        // formulada aplicada x = (n * (3/4)) bytes
-        return strlen($img) * (3/4);
+    private function obtenerErrores($solicitud,$validator) {
+        $formErrors = [];
+
+        $observaciones = $validator->validateProperty($solicitud, 'observaciones');
+        $recursos = $validator->validateProperty($solicitud, 'recursos');
+        $repuesto = $validator->validateProperty($solicitud, 'repuesto');
+        $modelo = $validator->validateProperty($solicitud, 'modelo');
+
+        if(count($observaciones)>0){
+            $formErrors['observaciones'] =  $observaciones[0]->getMessage();
+        }
+        if(count($recursos)>0){
+            $formErrors['recursos'] =  $recursos[0]->getMessage();
+        }
+        if(count($repuesto)>0){
+            $formErrors['modelo'] =  $modelo[0]->getMessage();
+        }
+
+        $recursos = $solicitud->getRecursos();
+        $recursoError = [];
+        foreach($recursos as $index => $recurso) {
+            $recursoError = $validator->validateProperty($recurso, 'pesoMega');
+            if(count($recursoError)>0) {
+                $recursoError[$index] =  $recursoError[0]->getMessage();
+            }
+        }
+
+        if(!empty($recursoError)) {
+            $formErrors['recursos'] = $recursoError;
+        }
+
+        return $formErrors;
     }
-
-    private function obtenerExtensionImagen($img) {
-        // https://stackoverflow.com/questions/18658437/get-image-type-from-base64-encoded-src-string
-        $match = '';
-        preg_match("/^data:image\/(.*);base64/i",$img, $match);
-        return $match[1];
-    }
-
-    // ejemplo userId_1200_bateria_12/10/20 12:20.png
-    private function obtenerNombreLogico($imgExtension,$idUser,$nombreRepuesto) {
-        return 'userId_' . $idUser . '_' . $nombreRepuesto . '_' . date('d/m/Y')  . '.' . $imgExtension;
-    }
-
-    private function obtenerNombreFisico($imgExtension) {
-        return md5(uniqid()).'.'. $imgExtension;
-    }
-    // private function obtenerErrores() {
-
-    //     $nombreError = $validator->validateProperty($user, 'nombre');
-    //     $apellidoError = $validator->validateProperty($user, 'apellido');
-    //     $emailError = $validator->validateProperty($user, 'email');
-    //     $passwordError = $validator->validateProperty($user, 'password');
-    //     $codtelError = $validator->validateProperty($user, 'codArea');
-    //     $telefonoError = $validator->validateProperty($user, 'telefono');
-
-    //     if(count($nombreError)>0){
-    //         $formErrors['nombre'] =  $nombreError[0]->getMessage();
-    //     }
-    //     if(count($apellidoError)>0){
-    //         $formErrors['apellido'] =  $apellidoError[0]->getMessage();
-    //     }
-    //     if(count($emailError)>0){
-    //         $formErrors['email'] =  $emailError[0]->getMessage();
-    //     }
-    //     if(count($passwordError)>0){
-    //         $formErrors['password'] =  $passwordError[0]->getMessage();
-    //     }
-    //     if(count($codtelError)>0){
-    //         $formErrors['codArea'] =  $codtelError[0]->getMessage();
-    //     }
-    //     if(count($telefonoError)>0){
-    //         $formErrors['telefono'] =  $telefonoError[0]->getMessage();
-    //     }
-    // }
 }

@@ -144,8 +144,11 @@ class BuscarRepuesto extends React.Component {
             this.mostrarErroresApi(response);
         })
         .catch(e => {
-          this.setState({isLoading: false});
-          alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+          // si retorna que el jwt expiro por el tiempo que vuelva al login
+          if(e.code == 401) {
+            this.redirectToLogin();
+          }
+          //alert('Ocurrio un error al consultar al servidor, intente nuevamente');
     });
     event.preventDefault();
   }
