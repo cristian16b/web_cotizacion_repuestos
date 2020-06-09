@@ -199,16 +199,17 @@ class BuscarRepuestoController extends AbstractController
         }
 
         $recursos = $solicitud->getRecursos();
-        $recursoError = [];
+        $recursoErrors = [];
         foreach($recursos as $index => $recurso) {
             $recursoError = $validator->validateProperty($recurso, 'pesoMega');
+            dump($recursoError);
             if(count($recursoError)>0) {
                 $recursoError[$index] =  $recursoError[0]->getMessage();
             }
         }
 
-        if(!empty($recursoError)) {
-            $formErrors['fotos'] = $recursoError;
+        if(!empty($recursoErrors)) {
+            $formErrors['fotos'] = $recursoErrors;
         }
 
         return $formErrors;

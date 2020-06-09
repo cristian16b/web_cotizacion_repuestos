@@ -54,7 +54,7 @@ class Solicitud
     private $compra;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RecursoSolicitud", mappedBy="solicitud", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\RecursoSolicitud", mappedBy="solicitud", orphanRemoval=true, cascade={"persist", "remove"})
      * @Assert\NotBlank(message="Debe cargar al menos una imagen y a lo sumo 4")
      */
     private $recursos;
