@@ -191,4 +191,12 @@ class RecursoSolicitud
     public function obtenerNombreFisico() {
         $this->nombreFisico =  md5(uniqid()).'.'. $this->extensionArchivo;
     }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function guardarArchivo() {
+        file_put_contents('../fotosSolicitudes/'.$this->nombreFisico, file_get_contents($this->base64));
+    }
 }

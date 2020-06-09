@@ -56,12 +56,6 @@ class Solicitud
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\RecursoSolicitud", mappedBy="solicitud", orphanRemoval=true)
      * @Assert\NotBlank(message="Debe cargar al menos una imagen y a lo sumo 4")
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 4,
-     *      minMessage = "Debe cargar al menos una imagen",
-     *      maxMessage = "No puede subir archivos de más de 4 imagenes"
-     * )
      */
     private $recursos;
 

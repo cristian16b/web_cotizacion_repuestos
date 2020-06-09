@@ -145,13 +145,13 @@ class BuscarRepuestoController extends AbstractController
             if($formErrors) {
                 $response = [
                     'code' => 0,
-                    'error' => $error,
+                    'error' => $formErrors,
                 ];
                 return new JsonResponse($response);
             }
 
-            // $em->persist($solicitud);
-            // $em->flush();
+            $em->persist($solicitud);
+            $em->flush();
  
         } catch (Exception $ex) {
             $code = 500;
@@ -208,7 +208,7 @@ class BuscarRepuestoController extends AbstractController
         }
 
         if(!empty($recursoError)) {
-            $formErrors['recursos'] = $recursoError;
+            $formErrors['fotos'] = $recursoError;
         }
 
         return $formErrors;
