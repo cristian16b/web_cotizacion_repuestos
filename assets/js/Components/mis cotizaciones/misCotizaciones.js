@@ -17,7 +17,7 @@ class MisCotizaciones extends React.Component {
   renderTabla() {
     return (
         // <div class="table-responsive-md table-responsive-sm">
-          <table class="table table-striped">
+          <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Fecha</th>
@@ -33,18 +33,18 @@ class MisCotizaciones extends React.Component {
               <td>Optica para Citroen V3</td>
               <td>Modelo 2020 lo necesito con urgencia</td>
               <td>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-info" 
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-info" 
                             data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                       Ver fotos
                     </button>
-                    <button type="button" class="btn btn-dark"
+                    <button type="button" className="btn btn-dark"
                             data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                       Ver cotizaciones
                     </button>
                 </div>
-                <div class="collapse" id="collapseExample">
-                  <div class="card card-body">
+                <div className="collapse" id="collapseExample">
+                  <div className="card card-body">
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                   </div>
                 </div>
@@ -55,9 +55,9 @@ class MisCotizaciones extends React.Component {
               <td>Jacob</td>
               <td>Thornton</td>
               <td>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-info">Ver fotos</button>
-                    <button type="button" class="btn btn-dark">Ver cotizaciones</button>
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-info">Ver fotos</button>
+                    <button type="button" className="btn btn-dark">Ver cotizaciones</button>
                 </div>
               </td>
             </tr>
