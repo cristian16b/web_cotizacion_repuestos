@@ -43,7 +43,7 @@ class Solicitud
     private $fechaBaja;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ModeloAuto", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\ModeloAuto", cascade={"persist", "remove"})
      * @Assert\NotBlank(message="Debe seleccionar la marca y modelo de su auto")
      */
     private $modeloAuto;
