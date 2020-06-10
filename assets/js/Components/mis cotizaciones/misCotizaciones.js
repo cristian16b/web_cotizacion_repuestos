@@ -4,6 +4,15 @@ class MisCotizaciones extends React.Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      menu: false
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu(){
+    this.setState({ menu: !this.state.menu });
+    console.log(this.state.menu);
   }
 
   renderFiltrosBusqueda() {
@@ -15,6 +24,7 @@ class MisCotizaciones extends React.Component {
   }
 
   renderTabla() {
+    const show = (this.state.menu) ? "show" : "" ;
     return (
         <div className="table-responsive-md table-responsive-sm">
           <table className="table table-striped">
@@ -34,22 +44,23 @@ class MisCotizaciones extends React.Component {
               <td>Modelo 2020 lo necesito con urgencia</td>
               <td>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-info" 
+                    <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
                             data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
                       Ver fotos
                     </button>
-                    <button type="button" className="btn btn-dark"
+                    <button type="button" className="btn btn-dark"  onClick={ this.toggleMenu }
                             data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
                       Ver cotizaciones
                     </button>
                 </div>
-                <tr>
-                  <td colspan="3">
-                      <div id="accordion" class="collapse">Hidden by default</div>
-                  </td>
-                </tr>
+                <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
               </td>
             </tr>
+            {/* <tr>
+                  <td>
+                      <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
+                  </td>
+            </tr> */}
             <tr>
               <th scope="row">2</th>
               <td>Jacob</td>

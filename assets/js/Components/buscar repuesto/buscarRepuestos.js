@@ -78,6 +78,10 @@ class BuscarRepuesto extends React.Component {
       return <Redirect to = {{ pathname: "/login" }} />;
     }
   }
+
+  redirectToCotizaciones = () => {
+    return <Redirect to = {{ pathname: "/cotizacion" }} />;
+  }
   
   validarFormulario = () => {
     let formularioValido = true;
@@ -139,6 +143,7 @@ class BuscarRepuesto extends React.Component {
             this.setState({isLoading: false});
             let code = response.data.code;
             if(code == 200){
+              this.redirectToCotizaciones();
               // this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
             }
             this.mostrarErroresApi(response);
