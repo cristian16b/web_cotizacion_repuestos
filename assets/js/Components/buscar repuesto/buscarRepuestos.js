@@ -67,7 +67,7 @@ class BuscarRepuesto extends React.Component {
     event.preventDefault();
     // this.habilitarBotones();
     // console.log('entra');
-    if(this.validarFormulario() == true) {
+    if(this.validarFormulario() == true && this.isGuardado == false) {
       this.consumirApiGuardarSolicitud();
     } 
     // console.log('entra y falla');
@@ -81,10 +81,6 @@ class BuscarRepuesto extends React.Component {
     }
   }
 
-  redirectToCotizaciones = () => {
-    return <Redirect to = {{ pathname: "/cotizacion" }} />;
-  }
-  
   validarFormulario = () => {
     let formularioValido = true;
     let errors = {};
@@ -373,15 +369,14 @@ class BuscarRepuesto extends React.Component {
   }
 
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
-    render() {
+  render() {
     if(this.state.isLoading == true)
       return  <Loading></Loading>
+    if(this.state.isGuardado == true)
+      return  <Redirect to = {{ pathname: "/cotizaciones" }} />
     else
       return (
         <div className="row justify-content-center">
-          {
-            this.state.isGuardado == true? <>{this.redirectToCotizaciones()}</> : <></>
-          }
           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
             <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
