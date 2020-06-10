@@ -5,6 +5,7 @@ import AsyncSelect from 'react-select/async';
 import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER,API_GUARDAR_SOLICITUD_REPUESTO} from '../../Constantes/constantes';
 import axios from 'axios';
 import Loading from '../loading/loading.js';
+import { Redirect } from 'react-router';
 
 class BuscarRepuesto extends React.Component {
 
@@ -27,6 +28,7 @@ class BuscarRepuesto extends React.Component {
       isSignedUp: false, 
       observaciones: '',
       isLoading: false,
+      isGuardado: false
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
@@ -143,8 +145,7 @@ class BuscarRepuesto extends React.Component {
             this.setState({isLoading: false});
             let code = response.data.code;
             if(code == 200){
-              this.redirectToCotizaciones();
-              // this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+              this.setState({ isGuardado: true }); // after signing up, set the state to true. This will trigger a re-render
             }
             this.mostrarErroresApi(response);
         })
@@ -378,6 +379,9 @@ class BuscarRepuesto extends React.Component {
     else
       return (
         <div className="row justify-content-center">
+          {
+            this.state.isGuardado == true? <>{this.redirectToCotizaciones()}</> : <></>
+          }
           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
             <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">

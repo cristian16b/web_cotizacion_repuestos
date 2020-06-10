@@ -48,7 +48,7 @@ class MisCotizaciones extends React.Component {
                             data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
                       Ver fotos
                     </button>
-                    <button type="button" className="btn btn-dark"  onClick={ this.toggleMenu }
+                    <button type="button" className="btn btn-dark"
                             data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
                       Ver cotizaciones
                     </button>
