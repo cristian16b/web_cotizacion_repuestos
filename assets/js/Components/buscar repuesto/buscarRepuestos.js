@@ -67,7 +67,7 @@ class BuscarRepuesto extends React.Component {
     event.preventDefault();
     // this.habilitarBotones();
     // console.log('entra');
-    if(this.validarFormulario() == true && this.isGuardado == false) {
+    if(this.validarFormulario() == true) {
       this.consumirApiGuardarSolicitud();
     } 
     // console.log('entra y falla');
@@ -129,7 +129,7 @@ class BuscarRepuesto extends React.Component {
       "imagenes":this.state.listadoImagenes,
       "observaciones":this.state.observaciones,
     }
-    console.log(payload);
+    // console.log(payload);
     const config = {
         headers: { 
             Authorization: `Bearer ${this.state.token['token']}`
@@ -140,10 +140,12 @@ class BuscarRepuesto extends React.Component {
         .then(response => {
             this.setState({isLoading: false});
             let code = response.data.code;
-            if(code == 200){
+            if(code == 200 && this.state.isMount == true){
               this.setState({ isGuardado: true }); // after signing up, set the state to true. This will trigger a re-render
             }
-            this.mostrarErroresApi(response);
+            else {
+              this.mostrarErroresApi(response);
+            }
         })
         .catch(e => {
           // si retorna que el jwt expiro por el tiempo que vuelva al login
@@ -177,6 +179,11 @@ class BuscarRepuesto extends React.Component {
   componentDidMount() {
     // console.log('didmount');
     // this.mostrarToken();
+    this.state.isMount = true;
+  }
+
+  componentWillUnmount() {
+    this.state.isMount = false;
   }
 
   consumirApi = (name,url,minimaCantLetras) => {
