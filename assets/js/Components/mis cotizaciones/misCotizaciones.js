@@ -35,14 +35,19 @@ class MisCotizaciones extends React.Component {
               <td>
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" className="btn btn-info" 
-                            data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
                       Ver fotos
                     </button>
                     <button type="button" className="btn btn-dark"
-                            data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
                       Ver cotizaciones
                     </button>
                 </div>
+                <tr>
+                  <td colspan="3">
+                      <div id="accordion" class="collapse">Hidden by default</div>
+                  </td>
+                </tr>
               </td>
             </tr>
             <tr>
@@ -58,11 +63,6 @@ class MisCotizaciones extends React.Component {
             </tr>
           </tbody>
         </table>
-        <div className="collapse" id="collapseExample">
-          <div className="card card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </div>
       </div>
     );
   }
