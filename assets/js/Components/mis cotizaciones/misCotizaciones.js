@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table'
+import 'react-super-responsive-Table/dist/SuperResponsiveTableStyle.css'
 
 class MisCotizaciones extends React.Component {
 
@@ -17,7 +17,7 @@ class MisCotizaciones extends React.Component {
     console.log(this.state.menu);
   }
 
-  renderFiltrosBusqueda() {
+  renderFilTrosBusqueda() {
     return(
       <div className="row">
 
@@ -28,55 +28,99 @@ class MisCotizaciones extends React.Component {
   renderTabla() {
     const show = (this.state.menu) ? "show" : "" ;
     return (
-        <div className="table-responsive-md table-responsive-sm">
-          <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Fecha</th>
-              <th scope="col">Repuesto</th>
-              <th scope="col">Observaciones</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">01/09/2020</th>
-              <td>Optica para Citroen V3</td>
-              <td>Modelo 2020 lo necesito con urgencia</td>
-              <td>
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
-                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                      Ver fotos
-                    </button>
-                    <button type="button" className="btn btn-dark"
-                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                      Ver cotizaciones
-                    </button>
-                </div>
-                <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-              </td>
-            </tr>
-            {/* <tr>
-                  <td>
-                      <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-                  </td>
-            </tr> */}
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-info">Ver fotos</button>
-                    <button type="button" className="btn btn-dark">Ver cotizaciones</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <Table className="table table-sTriped">
+          <Thead>
+            <Tr>
+              <th scope="col">Solicitud</th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>
+                  <div className="row">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                    Optica para Citroen V3
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver fotos
+                      </button>
+                      <button type="button" className="btn btn-dark"
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver cotizaciones
+                      </button>
+                    </div>
+                    <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
+                  </div>
+                  </div>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                  <div className="row">
+                    Optica para Citroen V3
+                  </div>
+                  <div className="row">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver fotos
+                      </button>
+                      <button type="button" className="btn btn-dark"
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver cotizaciones
+                      </button>
+                  </div>
+                  <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
+                  </div>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                  <div className="row">
+                    Optica para Citroen V3
+                  </div>
+                  <div className="row">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver fotos
+                      </button>
+                      <button type="button" className="btn btn-dark"
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver cotizaciones
+                      </button>
+                  </div>
+                  <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
+                  </div>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                  <div className="row">
+                    Optica para Citroen V3
+                  </div>
+                  <div className="row">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver fotos
+                      </button>
+                      <button type="button" className="btn btn-dark"
+                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                        Ver cotizaciones
+                      </button>
+                  </div>
+                  <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
+                  </div>
+              </Td>
+            </Tr>
+          </Tbody>
+        </Table>
     );
   }
 
@@ -88,7 +132,7 @@ class MisCotizaciones extends React.Component {
               <div className="card-body">
                 <h1 className="my-4">Mis Cotizaciones</h1>
                 <h5>Listado de las últimas solicitudes generadas</h5>
-                <>{ this.renderFiltrosBusqueda() }</>
+                <>{ this.renderFilTrosBusqueda() }</>
                 <>{ this.renderTabla() }</>
               </div>
             </div>
