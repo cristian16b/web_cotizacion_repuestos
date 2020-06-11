@@ -19,7 +19,6 @@ class MisCotizaciones extends React.Component {
   }
 
   renderTabla() {
-    const show = (this.state.menu) ? "show" : "" ;
     return (
       <Row>
         <Col sm={{ size: 10, offset: 1 }}>
