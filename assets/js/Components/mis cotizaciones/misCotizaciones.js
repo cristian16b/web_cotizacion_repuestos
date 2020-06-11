@@ -1,35 +1,21 @@
 import React , { Component } from 'react';
-import ReactCollapsingTable from 'react-collapsing-table';
-import PopUpAlert from './PopUpAlert';
-import ImageModal from './ImageModal';
-import { Row, Col } from 'reactstrap';
-
-const TablePhoto = ({ row, accessor }) => {
-  return <span style={{height: 200, width: 200, backgroundColor: 'grey'}}>
-          <img src={ row[accessor] } className="img-fluid" width="200" height="200" alt=''/>
-        </span>
-};
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 class MisCotizaciones extends React.Component {
 
-clickedImage = ({ imageURL }) => {
-    this.props.actions.clickedImage({ imageURL });
-}
-
   constructor(props){
     super(props);
-
-    this.state = ({
-      rows : [
-        { id: 1, firstName: 'Paul', lastName: 'Darragh', photoUrl: 'https://s3.amazonaws.com/react-collapsing-table-photos/5.jpeg' }
-      ],columns : [
-        { accessor: 'firstName', label: 'First Name', priorityLevel: 1, position: 1, minWidth: 150, },
-        { accessor: 'lastName', label: 'Last Name', priorityLevel: 2, position: 2, minWidth: 150, },
-        { accessor: 'photoUrl', label: 'Photo', priorityLevel: 3, position: 3, minWidth: 200, CustomComponent: TablePhoto },
-      ]
-    });
+    this.state = {
+      menu: false
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
+  toggleMenu(){
+    this.setState({ menu: !this.state.menu });
+    console.log(this.state.menu);
+  }
 
   renderFiltrosBusqueda() {
     return(
@@ -39,23 +25,62 @@ clickedImage = ({ imageURL }) => {
     );
   }
 
-  // renderTabla() {
-  //   return (
-  //     const { receipts, columns, imageModal } = this.props;
-  //     const tableCallbacks = { photo: this.clickedImage, email: this.getEmailLogo }
-  //         <App receipts={ receipts }
-  //              columns={ columns }
-  //              imageModal={ imageModal }
-  //              toggleModal={ this.clickedImage }
-  //              tableCallbacks={ tableCallbacks }
-  //              fetchAllReceipts={ this.fetchAllReceipts }
-  //              fetchLastMonthsReceipts={ this.fetchLastMonthsReceipts }/>
-  //   );
-  // }
+  renderTabla() {
+    const show = (this.state.menu) ? "show" : "" ;
+    return (
+        <div className="table-responsive-md table-responsive-sm">
+          <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Repuesto</th>
+              <th scope="col">Observaciones</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">01/09/2020</th>
+              <td>Optica para Citroen V3</td>
+              <td>Modelo 2020 lo necesito con urgencia</td>
+              <td>
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
+                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                      Ver fotos
+                    </button>
+                    <button type="button" className="btn btn-dark"
+                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                      Ver cotizaciones
+                    </button>
+                </div>
+                <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
+              </td>
+            </tr>
+            {/* <tr>
+                  <td>
+                      <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
+                  </td>
+            </tr> */}
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-info">Ver fotos</button>
+                    <button type="button" className="btn btn-dark">Ver cotizaciones</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 
   render() {
-    // const { rows, columns, } = this.props;
-    const callbacks = { photoUrl: this.clickedImage }
     return (        
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -64,11 +89,7 @@ clickedImage = ({ imageURL }) => {
                 <h1 className="my-4">Mis Cotizaciones</h1>
                 <h5>Listado de las últimas solicitudes generadas</h5>
                 <>{ this.renderFiltrosBusqueda() }</>
-                <ReactCollapsingTable 
-                 rows={ this.state.rows }
-                 columns={ this.state.columns }
-                 callbacks={ callbacks } 
-                 />
+                <>{ this.renderTabla() }</>
               </div>
             </div>
           </div>
