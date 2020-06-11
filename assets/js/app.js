@@ -61,7 +61,7 @@ class App extends React.Component {
                 {/* <Route exact path="/repuesto" component={BuscarRepuesto} /> */}
                 <Route exact path="/repuesto" render={() => <BuscarRepuesto getTokenPadre={this.getToken}/>} />
                 <Route exact path="/perfil" component={MiPerfil} />
-                <Route exact path="/cotizaciones" component={MisCotizaciones} />
+                <Route exact path="/cotizaciones" render={() => <MisCotizaciones getTokenPadre={this.getToken}/>} />
                 <Route exact path="/contacto" component={Contacto} />
                 <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
                 <Route component={NotFound}/>

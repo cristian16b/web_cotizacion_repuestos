@@ -1,15 +1,55 @@
 import React , { Component } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table'
-import 'react-super-responsive-Table/dist/SuperResponsiveTableStyle.css'
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
+import 'react-super-responsive-Table/dist/SuperResponsiveTableStyle.css';
+import Loading from '../loading/loading.js';
 
 class MisCotizaciones extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-      menu: false
+      menu: false,
+      token: this.props.getTokenPadre(),
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentDidMount() {
+    
+    // this.state.isMount = true;
+  }
+
+  componentWillUnmount() {
+    // this.state.isMount = false;
+    this.consumirApiMisCotizaciones();
+  }
+
+  consumirApiMisCotizaciones() {
+    const config = {
+      headers: { Authorization: `Bearer ${this.state.token['token']}` }
+    };
+    // console.log(this.state.token['token']);
+    this.setState({peticionActiva: true});
+    //seteo peticionActiva true para evitar que se desaten continuas peticiones
+    axios.get(url,config)
+          .then(response => {
+              this.setState({peticionActiva: false});
+              // let lista = response.data.data;
+              // let options = lista.map(elemento => {    
+              //   return { value:  `${elemento.id}`, label: `${elemento.name}` };
+              // });
+              // return options;
+          })
+          .catch(e => {
+            this.setState({peticionActiva: false});
+            if(e.response)
+            {
+                let error = '';
+                error = e.response.data.message;
+                console.log(error);
+                // this.setState({errorApi: error});
+            }
+          });
   }
 
   toggleMenu(){
@@ -125,6 +165,8 @@ class MisCotizaciones extends React.Component {
   }
 
   render() {
+    if(this.state.isLoading == true)
+      return  <Loading></Loading>
     return (        
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
