@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import 'react-super-responsive-Table/dist/SuperResponsiveTableStyle.css';
 import Loading from '../loading/loading.js';
 import {API_MIS_SOLICITUDES} from '../../Constantes/constantes';
+import axios from 'axios';
 
 class MisCotizaciones extends React.Component {
 
@@ -17,7 +18,7 @@ class MisCotizaciones extends React.Component {
   }
 
   componentDidMount() {
-    // this.consumirApiMisCotizaciones();
+    this.consumirApiMisCotizaciones();
     this.state.isMount = true;
   }
 
@@ -34,10 +35,10 @@ class MisCotizaciones extends React.Component {
     //seteo peticionActiva true para evitar que se desaten continuas peticiones
     axios.get(API_MIS_SOLICITUDES,config)
           .then(response => {
-              this.setState({peticionActiva: false});
-
               if(this.state.isMount) {
-                
+                // oculto el bucle de cargando
+                this.setState({peticionActiva: false});
+
               }
               // let lista = response.data.data;
               // let options = lista.map(elemento => {    
