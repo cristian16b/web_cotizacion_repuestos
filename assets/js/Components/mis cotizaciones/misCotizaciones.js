@@ -8,21 +8,21 @@ class MisCotizaciones extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {
+    this.state = ({
       menu: false,
       token: this.props.getTokenPadre(),
-    };
+      isMount: false,
+    });
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
-    
-    // this.state.isMount = true;
+    // this.consumirApiMisCotizaciones();
+    this.state.isMount = true;
   }
 
   componentWillUnmount() {
-    // this.state.isMount = false;
-    this.consumirApiMisCotizaciones();
+    this.state.isMount = false;
   }
 
   consumirApiMisCotizaciones() {
@@ -35,6 +35,10 @@ class MisCotizaciones extends React.Component {
     axios.get(API_MIS_SOLICITUDES,config)
           .then(response => {
               this.setState({peticionActiva: false});
+
+              if(this.state.isMount) {
+                
+              }
               // let lista = response.data.data;
               // let options = lista.map(elemento => {    
               //   return { value:  `${elemento.id}`, label: `${elemento.name}` };
