@@ -21,11 +21,11 @@ class SolicitudRepository extends ServiceEntityRepository
 
     public function buscarUltimasPorId($usuario) {
         return $this->createQueryBuilder('s')
-            ->innerJoin('s.usuario','u','WITH','u.fechaBaja IS null')
+            ->innerJoin('s.solicitante','u','WITH','u.fechaBaja IS null')
             ->where('s.fechaBaja is null')
-            ->andWhere('s.usuario = :usuario')
+            ->andWhere('s.solicitante = :usuario')
             ->setParameter('usuario', $usuario)
-            ->orderBy('s.fechaAlta', 'DSC')
+            ->orderBy('s.fechaAlta', 'DESC')
             ->setMaxResults(20)
             ->getQuery()
             ->getResult()

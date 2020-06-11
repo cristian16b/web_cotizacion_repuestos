@@ -170,6 +170,11 @@ class Usuario implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Cotizacion", mappedBy="oferente")
      */
     private $cotizacionesRealizadas;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fechaBaja;
     
     public function __construct()
     {
@@ -506,6 +511,18 @@ class Usuario implements UserInterface
                 $cotizacionesRealizada->setOferente(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFechaBaja(): ?\DateTimeInterface
+    {
+        return $this->fechaBaja;
+    }
+
+    public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
+    {
+        $this->fechaBaja = $fechaBaja;
 
         return $this;
     }
