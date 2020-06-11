@@ -1,18 +1,13 @@
 import React , { Component } from 'react';
+import ReactCollapsingTable from 'react-collapsing-table';
+import PopUpAlert from './PopUpAlert';
+import ImageModal from './ImageModal';
+import { Row, Col } from 'reactstrap';
 
 class MisCotizaciones extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      menu: false
-    };
-    this.toggleMenu = this.toggleMenu.bind(this);
-  }
-
-  toggleMenu(){
-    this.setState({ menu: !this.state.menu });
-    console.log(this.state.menu);
   }
 
   renderFiltrosBusqueda() {
@@ -26,55 +21,24 @@ class MisCotizaciones extends React.Component {
   renderTabla() {
     const show = (this.state.menu) ? "show" : "" ;
     return (
-        <div className="table-responsive-md table-responsive-sm">
-          <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Fecha</th>
-              <th scope="col">Repuesto</th>
-              <th scope="col">Observaciones</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">01/09/2020</th>
-              <td>Optica para Citroen V3</td>
-              <td>Modelo 2020 lo necesito con urgencia</td>
-              <td>
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
-                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                      Ver fotos
-                    </button>
-                    <button type="button" className="btn btn-dark"
-                            data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                      Ver cotizaciones
-                    </button>
-                </div>
-                <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-              </td>
-            </tr>
-            {/* <tr>
-                  <td>
-                      <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-                  </td>
-            </tr> */}
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-info">Ver fotos</button>
-                    <button type="button" className="btn btn-dark">Ver cotizaciones</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <Row>
+        <Col sm={{ size: 10, offset: 1 }}>
+          { receipts.length > 0 && <PopUpAlert totalResults={ receipts.length } />}
+          <h1>Table of Receipts</h1>
+          <button onClick={ fetchAllReceipts }>All Receipts</button>
+          <button onClick={ fetchLastMonthsReceipts }>Last Months Receipts</button>
+          <ReactCollapsingTable columns={ columns }
+                                rows={ receipts }
+                                rowSize={ 5 }
+                                column='email'
+                                callbacks={ tableCallbacks }
+                                showSearch={ true }
+                                showPagination={ true } />
+          <ImageModal isOpen={ imageModal.isOpen }
+                      toggle={ toggleModal }
+                      imageURL={ imageModal.imageURL } />
+        </Col>
+      </Row>
     );
   }
 
