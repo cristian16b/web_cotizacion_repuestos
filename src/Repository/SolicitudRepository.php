@@ -19,6 +19,19 @@ class SolicitudRepository extends ServiceEntityRepository
         parent::__construct($registry, Solicitud::class);
     }
 
+    public function buscarUltimasPorId($usuario) {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.usuario','u','WITH','u.fechaBaja IS null')
+            ->where('s.fechaBaja is null')
+            ->andWhere('s.usuario = :usuario')
+            ->setParameter('usuario', $usuario)
+            ->orderBy('s.fechaAlta', 'DSC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+ 
     // /**
     //  * @return Solicitud[] Returns an array of Solicitud objects
     //  */

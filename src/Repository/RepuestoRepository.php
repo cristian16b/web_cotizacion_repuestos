@@ -23,6 +23,7 @@ class RepuestoRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.name LIKE :val')
+            ->andWhere('r.fechaBaja IS null')
             ->setParameter('val','%'. $value . '%')
             ->orderBy('r.name', 'ASC')
             ->getQuery()

@@ -25,6 +25,7 @@ class ModeloAutoRepository extends ServiceEntityRepository
             ->innerJoin('r.marcaAuto','m')
             ->andWhere('r.name LIKE :val')
             ->andWhere('m.id = :id')
+            ->andWhere('r.fechaBaja IS null')
             ->setParameter('val','%'. $value . '%')
             ->setParameter('id',$id)
             ->orderBy('r.name', 'ASC')

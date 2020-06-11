@@ -25,6 +25,7 @@ class TipoRepuestoRepository extends ServiceEntityRepository
         return 
              $this->createQueryBuilder('t')
                 ->andWhere('t.mlaId LIKE :val')
+                ->andWhere('t.fechaBaja IS null')
                 ->setParameter('val', '%'. $value . '%')
                 ->getQuery()
                 ->getOneOrNullResult()
