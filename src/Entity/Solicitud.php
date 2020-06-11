@@ -6,10 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SolicitudRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class Solicitud
 {
@@ -29,6 +32,7 @@ class Solicitud
      *      maxMessage = "La observación es muy larga",
      *      allowEmptyString = false
      * )
+     * @Expose
      */
     private $observacion;
 
@@ -45,6 +49,7 @@ class Solicitud
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ModeloAuto", cascade={"persist", "remove"})
      * @Assert\NotBlank(message="Debe seleccionar la marca y modelo de su auto")
+     * @Expose
      */
     private $modeloAuto;
 
@@ -74,6 +79,7 @@ class Solicitud
      * @ORM\ManyToOne(targetEntity="App\Entity\Repuesto", inversedBy="solicitudes")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Debe seleccionar su repuesto")
+     * @Expose
      */
     private $repuesto;
 

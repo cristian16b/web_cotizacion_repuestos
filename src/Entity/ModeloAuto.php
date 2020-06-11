@@ -48,6 +48,7 @@ class ModeloAuto
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\MarcaAuto", inversedBy="modelos")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose
      */
     private $marcaAuto;
 
