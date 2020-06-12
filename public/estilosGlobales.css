@@ -72,3 +72,7 @@ h4 {
 }
   
 /* color amarillo hexa #f4b31b color gris #53595f */
+
+.tdBefore {
+    display: none;
+}

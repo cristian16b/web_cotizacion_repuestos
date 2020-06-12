@@ -107,23 +107,23 @@ class MisCotizaciones extends React.Component {
   renderTabla() {
     const show = (this.state.menu) ? "show" : "" ;
     return (
-          <Table className="table table-sTriped">
-          <Thead>
-            <Tr>
-              <Th>Solicitudes realizadas</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {
-              this.state.misSolicitudes.map(elemento => {
-                  return (
-                    this.armarFilaTabla(elemento)
-                  )              
-                }
-              )
-            }
+          <Table className="table table-striped">
+            <Thead>
+              <Tr>
+                <Th>Solicitudes realizadas</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {
+                this.state.misSolicitudes.map(elemento => {
+                    return (
+                      this.armarFilaTabla(elemento)
+                    )              
+                  }
+                )
+              }
            </Tbody>
-        </Table>
+          </Table>
     );
   }
 
