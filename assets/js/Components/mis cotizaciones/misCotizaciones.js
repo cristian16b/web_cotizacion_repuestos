@@ -30,8 +30,8 @@ class MisCotizaciones extends React.Component {
       this.setState({isLoading: false});
       if(response.data.code == 200) {
         // console.log('code 200')
-        let data = response.data.data;
-        console.log(data);
+        this.setState({misSolicitudes: response.data.data});
+        // console.log(this.state.misSolicitudes);
       }
     } 
     catch (e) {
