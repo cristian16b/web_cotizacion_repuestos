@@ -20,6 +20,7 @@ class Solicitud
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
@@ -38,6 +39,7 @@ class Solicitud
 
     /**
      * @ORM\Column(type="date")
+     * @Expose
      */
     private $fechaAlta;
 
