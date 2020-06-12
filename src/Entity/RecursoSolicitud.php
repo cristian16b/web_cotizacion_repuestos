@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecursoSolicitudRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class RecursoSolicitud
 {
@@ -28,6 +29,7 @@ class RecursoSolicitud
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $nombreFisico;
 

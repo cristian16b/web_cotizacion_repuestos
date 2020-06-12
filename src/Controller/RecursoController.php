@@ -27,13 +27,24 @@ class RecursoController extends AbstractController
     */
     public function getRecurso(Request $request) {
 
-        $filepath = '../fotosSolicitudes/3fb8d945d977334e8a60250958956852.jpg';
+        $nombreArchivo = $request->query->get('fileName');
+
+        if(is_null($nombreArchivo)) {
+            throw new \Exception('Something went wrong!');
+        }
+
+        $extension = substr($nombreArchivo,strripos($nombreArchivo, '.'));
+
+        $filepath = '../fotosSolicitudes/' . $nombreArchivo;
         $response = new Response();
         
         if(file_exists($filepath)){
-            $response->headers->set('Content-Type', 'image/png');
+            $response->headers->set('Content-Type', 'image/' . $extension);
             $response->setContent(file_get_contents($filepath));
         }
-        return $response;
+        else {
+            throw new \Exception('Something went wrong!');
         }
+        return $response;
     }
+}

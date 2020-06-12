@@ -63,6 +63,7 @@ class Solicitud
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\RecursoSolicitud", mappedBy="solicitud", orphanRemoval=true, cascade={"persist", "remove"})
      * @Assert\NotBlank(message="Debe cargar al menos una imagen y a lo sumo 4")
+     * @Expose
      */
     private $recursos;
 
