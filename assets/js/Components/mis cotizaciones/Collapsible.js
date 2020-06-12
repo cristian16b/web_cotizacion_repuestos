@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 
-class Collapsible extends React.Component {
+export class Collapsible extends React.Component {
     constructor(props){
         super(props);
         this.state = {
