@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@symfony/webpack-encore": "^0.30.2",
@@ -12,6 +13,7 @@
     "webpack-notifier": "^1.8.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.10.2",
     "axios": "^0.19.2",
     "node-sass": "^4.14.0",
     "react": "^16.13.1",

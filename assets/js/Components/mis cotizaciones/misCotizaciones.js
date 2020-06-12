@@ -14,45 +14,36 @@ class MisCotizaciones extends React.Component {
       token: this.props.getTokenPadre(),
       isMount: false,
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
+      misSolicitudes: [],
     });
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  componentDidMount() {
-    this.consumirApiMisCotizaciones();
+  async componentDidMount() {
+    const config = {
+      headers: { Authorization: `Bearer ${this.state.token['token']}` }
+    };
+    try 
+    {
+      // Load async data from an inexistent endpoint.
+      let response = await axios.get(API_MIS_SOLICITUDES,config);
+      this.setState({isLoading: false});
+      if(response.data.code == 200) {
+        // console.log('code 200')
+        let data = response.data.data;
+        console.log(data);
+      }
+    } 
+    catch (e) {
+      console.log(`😱 Axios request failed: ${e}`);
+      alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+    }
+    
     this.state.isMount = true;
   }
 
   componentWillUnmount() {
     this.state.isMount = false;
-  }
-
-  consumirApiMisCotizaciones() {
-    const config = {
-      headers: { Authorization: `Bearer ${this.state.token['token']}` }
-    };
-    // console.log(this.state.token['token']);
-    this.setState({peticionActiva: true});
-    //seteo peticionActiva true para evitar que se desaten continuas peticiones
-    axios.get(API_MIS_SOLICITUDES,config)
-          .then(response => {
-              if(this.state.isMount) {
-                // oculto el bucle de cargando
-                this.setState({isLoading: false});
-                console.log(response.data);
-
-              }
-          })
-          .catch(e => {
-            this.setState({isLoading: false});
-            if(e.response)
-            {
-                let error = '';
-                error = e.response.data.message;
-                console.log(error);
-                // this.setState({errorApi: error});
-            }
-          });
   }
 
   toggleMenu(){
@@ -74,7 +65,7 @@ class MisCotizaciones extends React.Component {
           <Table className="table table-sTriped">
           <Thead>
             <Tr>
-              <th scope="col">Solicitud</th>
+              <th scope="col">Solicitudes realizadas</th>
             </Tr>
           </Thead>
           <Tbody>
@@ -102,67 +93,7 @@ class MisCotizaciones extends React.Component {
                   </div>
               </Td>
             </Tr>
-            <Tr>
-              <Td>
-                  <div className="row">
-                    Optica para Citroen V3
-                  </div>
-                  <div className="row">
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver fotos
-                      </button>
-                      <button type="button" className="btn btn-dark"
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver cotizaciones
-                      </button>
-                  </div>
-                  <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-                  </div>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>
-                  <div className="row">
-                    Optica para Citroen V3
-                  </div>
-                  <div className="row">
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver fotos
-                      </button>
-                      <button type="button" className="btn btn-dark"
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver cotizaciones
-                      </button>
-                  </div>
-                  <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-                  </div>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>
-                  <div className="row">
-                    Optica para Citroen V3
-                  </div>
-                  <div className="row">
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver fotos
-                      </button>
-                      <button type="button" className="btn btn-dark"
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver cotizaciones
-                      </button>
-                  </div>
-                  <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-                  </div>
-              </Td>
-            </Tr>
-          </Tbody>
+           </Tbody>
         </Table>
     );
   }
