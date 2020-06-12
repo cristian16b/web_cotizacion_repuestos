@@ -54,7 +54,7 @@ class MisCotizaciones extends React.Component {
   renderFilTrosBusqueda() {
     return(
       <div className="row">
-
+        <p>Aca va a estar el filtro de busqueda por nombre del respuesto</p>
       </div>
     );
   }
@@ -110,7 +110,7 @@ class MisCotizaciones extends React.Component {
           <Table className="table table-sTriped">
           <Thead>
             <Tr>
-              <th scope="col">Solicitudes realizadas</th>
+              <Th>Solicitudes realizadas</Th>
             </Tr>
           </Thead>
           <Tbody>
