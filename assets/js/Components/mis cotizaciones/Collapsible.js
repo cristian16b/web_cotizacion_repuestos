@@ -10,7 +10,9 @@ export class Collapsible extends React.Component {
     }
 
     togglePanel(e){
-        this.setState({open: !this.state.open})
+        this.setState({open: !this.state.open});
+        if(!this.state.open)
+            console.log('click se abre');
     }
 
     componentDidUpdate(){
@@ -18,14 +20,22 @@ export class Collapsible extends React.Component {
     }
 
     render() {
-      return (<div>
-        <div onClick={(e)=>this.togglePanel(e)} className='header'>
-            {this.props.title}</div>
-        {this.state.open ? (
-            <div className='content'>
-                {this.props.children}
-            </div>
-            ) : null}
-      </div>);
+      return (
+                <div>
+                    <div onClick={(e)=>this.togglePanel(e)} className={`header ${this.props.className}`} >
+                        {this.props.title}
+                    </div>
+                    {
+                        this.state.open ? 
+                        (
+                            <div className='content'>
+                                {this.props.children}
+                            </div>
+                        )              
+                        :
+                        null
+                    }
+                </div>
+            );
     }
 }

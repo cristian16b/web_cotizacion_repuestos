@@ -60,6 +60,10 @@ class MisCotizaciones extends React.Component {
     return fecha.substr(0,10).split('-').reverse().join('/');
   }
 
+  obtenerFotos() {
+    console.log('click');
+  }
+
   armarFilaTabla(elemento){
     return (
             <Tr key={elemento.id}>
@@ -81,28 +85,21 @@ class MisCotizaciones extends React.Component {
                       </div>
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                          <div className="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" className="btn btn-info"
-                                    data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                              Ver fotos
-                            </button>
-                            <button type="button" className="btn btn-dark"
-                                    data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                              Ver cotizaciones
-                            </button>
-                          </div>
-                          <Collapsible title="Header">
-                                <div> <p>Content of Collapsible</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</p>
-                                
-                                </div>
+                            <Collapsible title="Ver fotos" className="btn btn-info btn-lg btn-block">
+                                    <div> 
+                                      <p>Imagenes cargadas</p>
+                                    </div>
                               </Collapsible>
-
+                        </div>
                       </div>
-                </div>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                              <Collapsible title="Ver cotizaciones"  className="btn btn-dark btn-lg btn-block">
+                                    <div> <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
+                                    </div>
+                              </Collapsible>
+                        </div>
+                      </div>
             </Td>
           </Tr>
     )
