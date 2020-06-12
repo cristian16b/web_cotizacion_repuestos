@@ -19,6 +19,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-recaptcha": "^2.0.1",
+    "react-image-gallery": "^1.0.7",
     "react-images-uploading": "^2.2.0",
     "react-loading": "^2.0.3",
     "react-router-dom": "^5.1.2",
