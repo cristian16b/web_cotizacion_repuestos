@@ -61,7 +61,9 @@ class MisCotizaciones extends React.Component {
 
   // la fecha viene con el formato aaaa/mm/dd t00:00
   // se va a mostrar lo siguiente: dd/mm/aaaa 
-  formatearFecha
+  formatearFecha(fecha) {
+    return fecha.substr(0,10).split('-').reverse().join('/');
+  }
 
   armarFilaTabla(elemento){
     return (
@@ -69,7 +71,7 @@ class MisCotizaciones extends React.Component {
               <Td>
                 <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                          <b>Fecha: </b> {elemento.fecha_alta} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}
+                          <b>Fecha: </b> {this.formatearFecha(elemento.fecha_alta)} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}
                         </div>
                       </div>
                       <div className="row">
