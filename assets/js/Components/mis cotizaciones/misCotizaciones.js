@@ -59,6 +59,49 @@ class MisCotizaciones extends React.Component {
     );
   }
 
+  // la fecha viene con el formato aaaa/mm/dd t00:00
+  // se va a mostrar lo siguiente: dd/mm/aaaa 
+  formatearFecha
+
+  armarFilaTabla(elemento){
+    return (
+            <Tr key={elemento.id}>
+              <Td>
+                <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                          <b>Fecha: </b> {elemento.fecha_alta} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                          <b>Repuesto solicitado:</b> {elemento.repuesto.name}
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                          <b>Observación:</b> {elemento.observacion}
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div className="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
+                                  data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                            Ver fotos
+                          </button>
+                          <button type="button" className="btn btn-dark"
+                                  data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
+                            Ver cotizaciones
+                          </button>
+                        </div>
+                          {/* <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div> */}
+                        </div>
+                </div>
+            </Td>
+          </Tr>
+    )
+  }
+
   renderTabla() {
     const show = (this.state.menu) ? "show" : "" ;
     return (
@@ -69,30 +112,14 @@ class MisCotizaciones extends React.Component {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>
-                  <div className="row">
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                    Optica para Citroen V3
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver fotos
-                      </button>
-                      <button type="button" className="btn btn-dark"
-                              data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
-                        Ver cotizaciones
-                      </button>
-                    </div>
-                    <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div>
-                  </div>
-                  </div>
-              </Td>
-            </Tr>
+            {
+              this.state.misSolicitudes.map(elemento => {
+                  return (
+                    this.armarFilaTabla(elemento)
+                  )              
+                }
+              )
+            }
            </Tbody>
         </Table>
     );
