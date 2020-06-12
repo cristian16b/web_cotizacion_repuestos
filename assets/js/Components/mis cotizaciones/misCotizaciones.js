@@ -13,6 +13,7 @@ class MisCotizaciones extends React.Component {
       menu: false,
       token: this.props.getTokenPadre(),
       isMount: false,
+      isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
     });
     this.toggleMenu = this.toggleMenu.bind(this);
   }
@@ -37,17 +38,13 @@ class MisCotizaciones extends React.Component {
           .then(response => {
               if(this.state.isMount) {
                 // oculto el bucle de cargando
-                this.setState({peticionActiva: false});
+                this.setState({isLoading: false});
+                console.log(response.data);
 
               }
-              // let lista = response.data.data;
-              // let options = lista.map(elemento => {    
-              //   return { value:  `${elemento.id}`, label: `${elemento.name}` };
-              // });
-              // return options;
           })
           .catch(e => {
-            this.setState({peticionActiva: false});
+            this.setState({isLoading: false});
             if(e.response)
             {
                 let error = '';
