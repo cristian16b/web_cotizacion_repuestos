@@ -16,7 +16,6 @@ class MisCotizaciones extends React.Component {
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
       misSolicitudes: [],
     });
-    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   async componentDidMount() {
@@ -44,11 +43,6 @@ class MisCotizaciones extends React.Component {
 
   componentWillUnmount() {
     this.state.isMount = false;
-  }
-
-  toggleMenu(){
-    this.setState({ menu: !this.state.menu });
-    console.log(this.state.menu);
   }
 
   renderFilTrosBusqueda() {
@@ -87,7 +81,7 @@ class MisCotizaciones extends React.Component {
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                         <div className="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" className="btn btn-info"  onClick={ this.toggleMenu } 
+                          <button type="button" className="btn btn-info"
                                   data-target="#accordion" aria-expanded="false" aria-controls="collapseExample">
                             Ver fotos
                           </button>
@@ -96,7 +90,7 @@ class MisCotizaciones extends React.Component {
                             Ver cotizaciones
                           </button>
                         </div>
-                          {/* <div id="accordion" className={"collapse navbar-collapse " + show}>Hidden by default</div> */}
+                        
                         </div>
                 </div>
             </Td>
