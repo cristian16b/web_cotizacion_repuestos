@@ -101,8 +101,12 @@ class MisCotizaciones extends React.Component {
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                             <Collapsible title="Ver fotos" className="btn btn-info btn-lg btn-block">
+                              <div className="row">
+                                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                                  <p>Imagenes adjuntadas en la solicitud.Haga click para previsualizar las imagenes</p>
+                                </div>
+                              </div>
                               <div className="row justify-content-center"> 
-                              <p>Haga click para previsualizar las imagenes</p>
                               {
                                 recursos.map(e=>{
                                   return this.armarPrevisualizacionImagen(e)
