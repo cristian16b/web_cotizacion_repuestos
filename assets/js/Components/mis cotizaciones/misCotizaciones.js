@@ -102,12 +102,33 @@ class MisCotizaciones extends React.Component {
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                             <Collapsible title="Ver fotos" className="btn btn-info btn-lg btn-block">
                               <div className="row"> 
-                                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div className="col-12 col-sm-12 col-md-3 col-lg-3">
                                   <ModalImage
                                     small={'https://picsum.photos/id/1018/1000/600/'}
                                     large={'https://picsum.photos/id/1018/1000/600/'}
-                                    alt=""
-                                  />;
+                                    alt=" "
+                                  />
+                                </div>
+                                <div className="col-12 col-sm-12 col-md-3 col-lg-3">
+                                  <ModalImage
+                                    small={'https://picsum.photos/id/1018/1000/600/'}
+                                    large={'https://picsum.photos/id/1018/1000/600/'}
+                                    alt=" "
+                                  />
+                                </div>
+                                <div className="col-12 col-sm-12 col-md-3 col-lg-3">
+                                  <ModalImage
+                                    small={'https://picsum.photos/id/1018/1000/600/'}
+                                    large={'https://picsum.photos/id/1018/1000/600/'}
+                                    alt=" "
+                                  />
+                                </div>
+                                <div className="col-12 col-sm-12 col-md-12 col-lg-3">
+                                  <ModalImage
+                                    small={'https://picsum.photos/id/1018/1000/600/'}
+                                    large={'https://picsum.photos/id/1018/1000/600/'}
+                                    alt=" "
+                                  />
                                 </div>
                               </div>
                               </Collapsible>
