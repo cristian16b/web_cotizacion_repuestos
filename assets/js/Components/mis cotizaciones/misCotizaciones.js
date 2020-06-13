@@ -5,6 +5,7 @@ import Loading from '../loading/loading.js';
 import {API_MIS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
 import {Collapsible} from './Collapsible';
+import ModalImage from "react-modal-image";
 
 class MisCotizaciones extends React.Component {
 
@@ -16,6 +17,20 @@ class MisCotizaciones extends React.Component {
       isMount: false,
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
       misSolicitudes: [],
+      images : [
+        {
+          original: 'https://picsum.photos/id/1018/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1018/250/150/',
+        },
+        {
+          original: 'https://picsum.photos/id/1015/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1015/250/150/',
+        },
+        {
+          original: 'https://picsum.photos/id/1019/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1019/250/150/',
+        },
+      ]
     });
   }
 
@@ -86,9 +101,15 @@ class MisCotizaciones extends React.Component {
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                             <Collapsible title="Ver fotos" className="btn btn-info btn-lg btn-block">
-                                    <div> 
-                                      <p>Imagenes cargadas</p>
-                                    </div>
+                              <div className="row"> 
+                                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                                  <ModalImage
+                                    small={'https://picsum.photos/id/1018/1000/600/'}
+                                    large={'https://picsum.photos/id/1018/1000/600/'}
+                                    alt=""
+                                  />;
+                                </div>
+                              </div>
                               </Collapsible>
                         </div>
                       </div>
@@ -106,7 +127,6 @@ class MisCotizaciones extends React.Component {
   }
 
   renderTabla() {
-    const show = (this.state.menu) ? "show" : "" ;
     return (
           <Table className="table table-striped">
             <Thead>
