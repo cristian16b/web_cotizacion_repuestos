@@ -79,7 +79,21 @@ class MisCotizaciones extends React.Component {
     console.log('click');
   }
 
+  armarPrevisualizacionImagen = (recursos) => {
+  
+    return (
+            <div className="col-12 col-sm-12 col-md-3 col-lg-3">
+                    <ModalImage
+                            small={'https://picsum.photos/id/1018/1000/600/'}
+                            large={'https://picsum.photos/id/1018/1000/600/'}
+                            alt=" "
+                        />
+            </div>
+    );
+  }
+
   armarFilaTabla(elemento){
+    const recursos = elemento.recursos;
     return (
             <Tr key={elemento.id}>
               <Td>
@@ -102,36 +116,13 @@ class MisCotizaciones extends React.Component {
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                             <Collapsible title="Ver fotos" className="btn btn-info btn-lg btn-block">
                               <div className="row"> 
-                                <div className="col-12 col-sm-12 col-md-3 col-lg-3">
-                                  <ModalImage
-                                    small={'https://picsum.photos/id/1018/1000/600/'}
-                                    large={'https://picsum.photos/id/1018/1000/600/'}
-                                    alt=" "
-                                  />
-                                </div>
-                                <div className="col-12 col-sm-12 col-md-3 col-lg-3">
-                                  <ModalImage
-                                    small={'https://picsum.photos/id/1018/1000/600/'}
-                                    large={'https://picsum.photos/id/1018/1000/600/'}
-                                    alt=" "
-                                  />
-                                </div>
-                                <div className="col-12 col-sm-12 col-md-3 col-lg-3">
-                                  <ModalImage
-                                    small={'https://picsum.photos/id/1018/1000/600/'}
-                                    large={'https://picsum.photos/id/1018/1000/600/'}
-                                    alt=" "
-                                  />
-                                </div>
-                                <div className="col-12 col-sm-12 col-md-12 col-lg-3">
-                                  <ModalImage
-                                    small={'https://picsum.photos/id/1018/1000/600/'}
-                                    large={'https://picsum.photos/id/1018/1000/600/'}
-                                    alt=" "
-                                  />
-                                </div>
+                              {
+                                recursos.map(e=>{
+                                  return this.armarPrevisualizacionImagen(e)
+                                })
+                              }
                               </div>
-                              </Collapsible>
+                            </Collapsible>
                         </div>
                       </div>
                       <div className="row">
