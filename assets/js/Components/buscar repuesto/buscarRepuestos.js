@@ -320,7 +320,7 @@ class BuscarRepuesto extends React.Component {
     return(
                     <div className="row">
                       <div className="col-lg-12">
-                        <label forhtml="message">Observaciones</label>
+                        <label forhtml="message">Observaciones (año de su vehiculo u otros detalles que considere importantes)</label>
                         <textarea onChange={this.handleChange} type="text" id="observaciones" name="observaciones" rows="2" className="form-control md-textarea">
                         </textarea>
                         <span className="text-danger error_negrita">
