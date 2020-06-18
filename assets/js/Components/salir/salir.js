@@ -10,7 +10,7 @@ class Salir extends React.Component {
   }
 
   render() {
-    return null;
+    return <Redirect to = {{ pathname: "/login" }} />;
   }
 }
 

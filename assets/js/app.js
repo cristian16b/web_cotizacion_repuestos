@@ -84,7 +84,7 @@ class App extends React.Component {
                     <Route exact path="/contacto" component={Contacto} />
                     <Route exact path="/recuperarContrasenia" component={RecuperarContrasenia} />
                     <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
-                    <Route component={NotFound}/>
+                    {/* <Route component={NotFound}/> */}
                   </Switch>
                 </div>
                 <PiePagina />   

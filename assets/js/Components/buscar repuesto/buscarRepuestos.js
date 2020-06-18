@@ -129,12 +129,12 @@ class BuscarRepuesto extends React.Component {
       "imagenes":this.state.listadoImagenes,
       "observaciones":this.state.observaciones,
     }
-    // console.log(payload);
     const config = {
         headers: { 
             Authorization: `Bearer ${this.state.token['token']}`
         }
     };
+    console.log(config);
     this.setState({isLoading: true});
     axios.post(API_GUARDAR_SOLICITUD_REPUESTO,payload,config)
         .then(response => {
@@ -180,6 +180,7 @@ class BuscarRepuesto extends React.Component {
     // console.log('didmount');
     // this.mostrarToken();
     this.state.isMount = true;
+    // console.log('token recibidos');console.log(this.state.token);
   }
 
   componentWillUnmount() {
@@ -191,8 +192,11 @@ class BuscarRepuesto extends React.Component {
       // if(name.length > minimaCantLetras && this.state.peticionActiva == true)
       if(name.length > minimaCantLetras) {
         const config = {
-          headers: { Authorization: `Bearer ${this.state.token['token']}` }
+          headers: { 
+            Authorization: 'Bearer ' + this.state.token['token']
+          }
         };
+        console.log(config);
         // console.log(this.state.token['token']);
         this.setState({peticionActiva: true});
         //seteo peticionActiva true para evitar que se desaten continuas peticiones
@@ -388,7 +392,7 @@ class BuscarRepuesto extends React.Component {
             <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
                 <h1 className="my-4">Buscar un repuesto</h1>
-                <h6>Para solicitar cotizaziones sobre un repuesto debe cargar los siguientes datos</h6>
+                <h6>Para solicitar cotizaciones sobre un repuesto debe cargar los siguientes datos</h6>
                   {this.renderSelectPrimerFila()}
                   {this.renderSelectSegundaFila()}
                   {this.renderObservaciones()}
