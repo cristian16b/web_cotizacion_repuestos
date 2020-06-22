@@ -34,9 +34,9 @@ class Domicilio
     private $personas;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\localidad", inversedBy="domicilios")
      */
-    private $codigoPostal;
+    private $localidad;
 
     public function __construct()
     {
@@ -111,18 +111,6 @@ class Domicilio
                 $persona->setDomicilio(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCodigoPostal(): ?string
-    {
-        return $this->codigoPostal;
-    }
-
-    public function setCodigoPostal(string $codigoPostal): self
-    {
-        $this->codigoPostal = $codigoPostal;
 
         return $this;
     }

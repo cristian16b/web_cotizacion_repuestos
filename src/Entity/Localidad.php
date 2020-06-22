@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Localidad
      * @ORM\JoinColumn(nullable=false)
      */
     private $provincia;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Domicilio", mappedBy="localidad")
+     */
+    private $domicilios;
+
+    public function __construct()
+    {
+        $this->domicilios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,37 @@ class Localidad
     public function setProvincia(?provincia $provincia): self
     {
         $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Domicilio[]
+     */
+    public function getDomicilios(): Collection
+    {
+        return $this->domicilios;
+    }
+
+    public function addDomicilio(Domicilio $domicilio): self
+    {
+        if (!$this->domicilios->contains($domicilio)) {
+            $this->domicilios[] = $domicilio;
+            $domicilio->setLocalidad($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDomicilio(Domicilio $domicilio): self
+    {
+        if ($this->domicilios->contains($domicilio)) {
+            $this->domicilios->removeElement($domicilio);
+            // set the owning side to null (unless already changed)
+            if ($domicilio->getLocalidad() === $this) {
+                $domicilio->setLocalidad(null);
+            }
+        }
 
         return $this;
     }
