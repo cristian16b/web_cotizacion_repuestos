@@ -29,31 +29,6 @@ class Usuario implements UserInterface
     protected $id;
  
     /**
-     * @ORM\Column(name="nombre", type="string", length=150)
-     * @Assert\NotBlank(message="Debes completar tu nombre")
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage="El nombre debe tener al menos dos letras",
-     *     max = 100,
-     *     maxMessage="El nombre no puede tener una longitud mayor a 100 letras"
-     * )
-     * @Assert\Regex(
-     *     pattern="/^[a-zA-Z ]*$/",
-     *     message="El nombre solo debe tener letras"
-     * )
-     */
-    protected $nombre;
- 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank(message="Debes completar tu e-mail")
-     * @Assert\Email(
-     *     message="El formato del e-mail no es valido"
-     * )
-     */
-    protected $email;
- 
-    /**
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     protected $username;
@@ -101,54 +76,6 @@ class Usuario implements UserInterface
     private $usuarioUltimaModificacion;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Debes completar tu apellido")
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage="El apellido debe tener al menos dos letras",
-     *     max = 100,
-     *     maxMessage="El apellido no puede tener una longitud mayor a 100 letras"
-     * )
-     * @Assert\Regex(
-     *     pattern="/^[a-zA-Z ]*$/",
-     *     message="El apellido solo debe tener letras"
-     * )
-     */
-    private $apellido;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Debes completar el código de área")
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage="El código de área debe tener al menos dos números",
-     *     max = 10,
-     *     maxMessage="El código de área no puede tener una longitud mayor a 10 números"
-     * )
-     * @Assert\Regex(
-     *     pattern="/^[^A-Za-z]*$/",
-     *     message="El código de área no puede contener tener letras"
-     * ) 
-     */
-    private $codArea;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Debes completar tu teléfono")
-     * @Assert\Length(
-     *     min = 6,
-     *     minMessage="El teléfono debe tener al menos seis números",
-     *     max = 15,
-     *     maxMessage="El teléfono no puede tener una longitud mayor a 15 números"
-     * )
-     * @Assert\Regex(
-     *     pattern="/^[^A-Za-z]*$/",
-     *     message="El teléfono no puede contener tener letras"
-     * ) 
-     */
-    private $telefono;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $socialProvider;
@@ -192,50 +119,7 @@ class Usuario implements UserInterface
     {
         return $this->id;
     }
- 
-    /**
-     * @return mixed
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
- 
-    /**
-     * @param mixed $nombre
-     * @return self
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
- 
-        return $this;
-    }
- 
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
- 
-        return $this;
-    }
- 
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
- 
+
     /**
      * @return mixed
      */
