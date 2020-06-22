@@ -256,59 +256,61 @@ cancelar() {
   // console.log('click cancelar');
 }
 
-renderCamposComunes() {
+renderApellido() {
   return(
-    <>
-          <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
-                  <label htmlFor="apellido">Apellido</label>
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-user"></i></span>
-                        {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-                        <input type="text" className="form-control" name="apellido" 
-                                                    defaultValue={this.state.apellido} onChange={this.cambioApellido}
-                                                    placeholder="Ingrese su apellido"/>
-                    </div>
-                    <span id="passwordHelp" className="text-danger error_negrita">
-                      {this.state.errors["apellido"]}
-                    </span> 
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                  <label htmlFor="apellido">Nombre</label>
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-user"></i></span>
-                        {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-                        <input type="text" className="form-control" name="nombre" 
-                                                    defaultValue={this.state.nombre} onChange={this.cambioNombre}
-                                                    placeholder="Ingrese su nombre"/>
-                    </div>
-                    <span id="passwordHelp" className="text-danger error_negrita">
-                      {this.state.errors["nombre"]}
-                    </span> 
-                  </div>
-                </div>
-              </div>
+    <div className="form-group">
+    <label htmlFor="apellido">Apellido</label>
+      <div className="input-group">
+        <span className="input-group-addon"><i className="fa fa-user"></i></span>
+          {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
+          <input type="text" className="form-control" name="apellido" 
+                                      defaultValue={this.state.apellido} onChange={this.cambioApellido}
+                                      placeholder="Ingrese su apellido"/>
+      </div>
+      <span id="passwordHelp" className="text-danger error_negrita">
+        {this.state.errors["apellido"]}
+      </span> 
+    </div>
+  )
+}
 
-              <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
+renderNombre(){
+  return(
+    <div className="form-group">
+    <label htmlFor="apellido">Nombre</label>
+      <div className="input-group">
+        <span className="input-group-addon"><i className="fa fa-user"></i></span>
+          {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
+          <input type="text" className="form-control" name="nombre" 
+                                      defaultValue={this.state.nombre} onChange={this.cambioNombre}
+                                      placeholder="Ingrese su nombre"/>
+      </div>
+      <span id="passwordHelp" className="text-danger error_negrita">
+        {this.state.errors["nombre"]}
+      </span> 
+    </div>
+  );
+}
+
+renderTelefono() {
+  return(
+      <div className="row">
+          <div className="col-lg-6 col-12 col-md-12">                
+                <div className="form-group">
                   <label htmlFor="codArea">Código de área</label>
                   <div className="input-group">
                     <span className="input-group-addon"><i className="fa fa-user"></i></span>
                         <input type="text" className="form-control" name="codArea" 
                                                     defaultValue={this.state.codArea} onChange={this.cambioCodArea}
-                                                    placeholder="Ingrese su Código de área"/>
+                                                    placeholder="Ej: 0342"/>
                     </div>
                     <span id="passwordHelp" className="text-danger error_negrita">
                       {this.state.errors["codArea"]}
                     </span> 
+                  </div>
                 </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
+          <div className="col-lg-6 col-12 col-md-12"> 
+                <div className="form-group">
                   <label htmlFor="telefono">Telefóno</label>
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-lock"></i></span>
@@ -319,65 +321,84 @@ renderCamposComunes() {
                       <span id="passwordHelp" className="text-danger error_negrita">
                         {this.state.errors["telefono"]}
                       </span> 
-                  </div>
                 </div>
-              </div>
-
-              <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                        <input type="text" className="form-control" name="email" 
-                                                    defaultValue = {this.state.email} onChange={this.cambioEmail}
-                                                    placeholder="Ingrese su email" />	
-                      </div>
-                      <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["email"]}
-                      </span> 
-                  </div>
-                </div>
-              </div>
-
-          <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label htmlFor="password">Contraseña</label>
-                    <div className="input-group">
-                      <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["passdistintas"]}
-                      </span> 
-                    </div>
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                        <input type="password" className="form-control" name="password" 
-                                                    defaultValue = {this.state.password} onChange={this.cambioContraseña}
-                                                    placeholder="Ingrese su contraseña" />	
-                      </div>
-                      <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["password"]}
-                      </span> 
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                  <label htmlFor="password2">Ingrese nuevamente su contraseña</label>
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                        <input type="password" className="form-control" name="password2" 
-                                                    defaultValue = {this.state.password2} onChange={this.cambioContraseña2}
-                                                    placeholder="Ingrese nuevamente su contraseña" />	
-                      </div>
-                      <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["password2"]}
-                      </span> 
-                  </div>
-                </div>
-              </div>    
-    </>
+          </div>
+      </div>
   );
 }
+
+renderEmail() {
+  return (
+    <div className="form-group">
+    <label htmlFor="email">Email</label>
+    <div className="input-group">
+      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+        <input type="text" className="form-control" name="email" 
+                                    defaultValue = {this.state.email} onChange={this.cambioEmail}
+                                    placeholder="Ingrese su email" />	
+      </div>
+      <span id="passwordHelp" className="text-danger error_negrita">
+        {this.state.errors["email"]}
+      </span> 
+  </div>
+  );
+}
+
+renderContrasenia() {
+  return(
+    <div className="row">
+    <div className="col-lg-6">
+      <div className="form-group">
+        <label htmlFor="password">Contraseña</label>
+        <div className="input-group">
+          <span id="passwordHelp" className="text-danger error_negrita">
+            {this.state.errors["passdistintas"]}
+          </span> 
+        </div>
+        <div className="input-group">
+          <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+            <input type="password" className="form-control" name="password" 
+                                        defaultValue = {this.state.password} onChange={this.cambioContraseña}
+                                        placeholder="Ingrese su contraseña" />	
+          </div>
+          <span id="passwordHelp" className="text-danger error_negrita">
+            {this.state.errors["password"]}
+          </span> 
+      </div>
+    </div>
+    <div className="col-lg-6">
+      <div className="form-group">
+      <label htmlFor="password2">Ingrese nuevamente su contraseña</label>
+        <div className="input-group">
+          <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+            <input type="password" className="form-control" name="password2" 
+                                        defaultValue = {this.state.password2} onChange={this.cambioContraseña2}
+                                        placeholder="Ingrese nuevamente su contraseña" />	
+          </div>
+          <span id="passwordHelp" className="text-danger error_negrita">
+            {this.state.errors["password2"]}
+          </span> 
+      </div>
+    </div>
+  </div>
+  );
+}
+
+renderCamposComunes() {
+  return(
+          <div className="row">
+            <div className="col-lg-10 col-12 col-md-12">
+              <>{this.renderApellido()}</>
+              <>{this.renderNombre()}</>
+              <>{this.renderEmail()}</>
+              <>{this.renderTelefono()}</>
+              <>{this.renderContrasenia()}</>
+            </div>
+          </div>
+  );
+}
+
+
 
 renderBotones() {
   return(
@@ -406,7 +427,7 @@ renderBotones() {
 renderCaptcha() {
   return(
     <div className="row">
-      <div className="col-lg-6">
+      <div className="col-lg-6 col-12">
         <div className="form-group">
           <ReCAPTCHA
             sitekey={API_CAPTCHA_PUBLIC}
@@ -424,7 +445,7 @@ renderCaptcha() {
 renderBotonesUsuarioComercio () {
   return (
     <div className="row justify-content-center">
-      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+      <div className="col-12 col-sm-12 col-md-12 col-lg-8">
                 <div className="row justify-content-center">
                   <a onClick={this.cambioUsuario} className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
                     <i className="fa fa-user fa-5x"></i><br/>
@@ -458,7 +479,7 @@ else
           // si no se logueo correctamente se redirige al login
           this.redirectToLogin()
         }
-        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-6">
           <div className="card shadow-sm p-3 mb-5 bg-white rounded">
             <div className="card-body">
               <h2 className="my-4">Registrarme</h2>
