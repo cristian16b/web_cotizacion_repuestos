@@ -74,9 +74,10 @@ class App extends React.Component {
 
   returnTemplateNoLogueado = () => {
     return (
-            <>
-              <NavbarNoLogueado></NavbarNoLogueado>
-                <div className="container containerCentral">
+      <div className="row">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          <NavbarNoLogueado></NavbarNoLogueado>
+            {/* <div className="container containerCentral">
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/repuesto" component={BuscarRepuesto} />
@@ -84,11 +85,11 @@ class App extends React.Component {
                     <Route exact path="/contacto" component={Contacto} />
                     <Route exact path="/recuperarContrasenia" component={RecuperarContrasenia} />
                     <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
-                    {/* <Route component={NotFound}/> */}
                   </Switch>
-                </div>
-                <PiePagina />   
-            </>
+            </div> */}
+          <PiePagina />   
+        </div>
+      </div>
     );
   }
 
@@ -96,7 +97,7 @@ class App extends React.Component {
     render() {
       return (
         <div className="row">
-          <div className="col-12 col-sm-12 col-md-12">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12">
             <BrowserRouter>
                   {
                     this.state.isUserLogin 
