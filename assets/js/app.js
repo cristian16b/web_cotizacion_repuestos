@@ -53,8 +53,8 @@ class App extends React.Component {
   returnTemplateLogueado = () => {
     return (
         <>
-          <NavbarLogueado></NavbarLogueado>
-          <div className="container containerCentral">
+          <NavbarLogueado />
+          <div className="containerCentral">
               <Switch>
                 <Redirect exact from='/login' to='/repuesto'/>
                 <Route exact path="/" component={Home} />
@@ -76,8 +76,8 @@ class App extends React.Component {
     return (
       <div className="row">
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-          <NavbarNoLogueado></NavbarNoLogueado>
-            {/* <div className="container containerCentral">
+          <NavbarNoLogueado />    
+              <div className="containerCentral">
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/repuesto" component={BuscarRepuesto} />
@@ -86,8 +86,8 @@ class App extends React.Component {
                     <Route exact path="/recuperarContrasenia" component={RecuperarContrasenia} />
                     <Route exact path="/login" render={() => <Login obtenerTokenPadre={this.obtenerToken}/>} />
                   </Switch>
-            </div> */}
-          <PiePagina />   
+              </div>
+          <PiePagina />
         </div>
       </div>
     );
