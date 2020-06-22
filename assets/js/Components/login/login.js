@@ -216,7 +216,7 @@ class Login extends React.Component {
                     <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
-                                <h2 className="text-center">Iniciar sesión</h2>
+                                <h3 className="text-center">Iniciar sesión</h3>
                                 <div className="form-group">
                                     <span className="text-danger error_negrita">
                                         {this.state.errorApi}
