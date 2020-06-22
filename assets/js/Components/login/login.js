@@ -120,32 +120,22 @@ class Login extends React.Component {
 
     renderLoginSocial () {
         return(
-<div className="text-center social-btn">
-                                            <div className="row justify-content-center">
-                                                <div className="col-lg-7 col-md-7 col-xs-8">
-                                                    {/* <SocialButton
-                                                        provider='facebook'
-                                                        appId='245924643289636'
-                                                        onLoginSuccess={this.handleSocialLogin}
-                                                        // onLoginFailure={handleSocialLoginFailure}
-                                                        >
-                                                        <FacebookLoginButton>
-                                                            Facebook
-                                                        </FacebookLoginButton>
-                                                    </SocialButton> */}
-                                                    <SocialLogin
-                                                        provider='facebook'
-                                                        appId='245924643289636'
-                                                        callback={this.handleSocialLogin}
-                                                        >
-                                                        <FacebookLoginButton>
-                                                            Facebook
-                                                        </FacebookLoginButton>
-                                                    </SocialLogin>
-                                                </div>
-                                            </div>          
-                                </div>
-        );
+                <div className="text-center social-btn">
+                    <div className="row justify-content-center">
+                        <div className="col-5 col-lg-5 col-md-5 col-sm-5">
+                            <SocialLogin
+                                provider='facebook'
+                                appId='245924643289636'
+                                callback={this.handleSocialLogin}
+                            >
+                                <FacebookLoginButton>
+                                    Facebook
+                                </FacebookLoginButton>
+                            </SocialLogin>
+                        </div>
+                    </div>          
+                </div>
+            );
     }
 
     renderRegistrarse () {
