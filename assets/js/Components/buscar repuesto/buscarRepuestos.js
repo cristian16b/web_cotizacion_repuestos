@@ -391,7 +391,7 @@ class BuscarRepuesto extends React.Component {
           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
             <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
-                <h1 className="my-4">Buscar un repuesto</h1>
+                <h3 className="my-4">Buscar un repuesto</h3>
                 <h6>Para solicitar cotizaciones sobre un repuesto debe cargar los siguientes datos</h6>
                   {this.renderSelectPrimerFila()}
                   {this.renderSelectSegundaFila()}
