@@ -368,12 +368,12 @@ renderContrasenia() {
     </div>
     <div className="col-lg-6">
       <div className="form-group">
-      <label htmlFor="password2">Ingrese nuevamente su contraseña</label>
+      <label htmlFor="password2">Ingresela de nuevo</label>
         <div className="input-group">
           <span className="input-group-addon"><i className="fa fa-lock"></i></span>
             <input type="password" className="form-control" name="password2" 
                                         defaultValue = {this.state.password2} onChange={this.cambioContraseña2}
-                                        placeholder="Ingrese nuevamente su contraseña" />	
+                                        placeholder="Escribala de nuevo" />	
           </div>
           <span id="passwordHelp" className="text-danger error_negrita">
             {this.state.errors["password2"]}
@@ -465,53 +465,59 @@ renderBotonesUsuarioComercio () {
   );
 }
 
-render() { 
-if(this.state.isLoading == true)
-  return  <Loading></Loading>
-else if(this.state.botonesSeleccionUsuario == true)
+renderFormulario() {
   return(
-    <>{this.renderBotonesUsuarioComercio()}</>
-  )
-else 
-  return (        
-      <div className="row justify-content-center">
-        {
-          // si no se logueo correctamente se redirige al login
-          this.redirectToLogin()
-        }
-        <div className="col-12 col-sm-12 col-md-12 col-lg-6">
-          <div className="card shadow-sm p-3 mb-5 bg-white rounded">
-            <div className="card-body">
-              <h2 className="my-4">Registrarme</h2>
-              <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <span className="text-danger error_negrita">
-                  {this.state.errorApi}
-                </span>
-              </div>
-              {
-                this.state.esComerciante == true
-                ?
-                  <>
-                    { this.renderCamposComunes() }
-                    <p>faltan los campos de comercio</p>
-                    { this.renderCaptcha() }
-                    { this.renderBotones() }
-                  </>
-                :
-                  <>
-                    {this.renderCamposComunes()}
-                    { this.renderCaptcha() }
-                    { this.renderBotones() }
-                  </>
-              }
-              </form>
-            </div>
+    <div className="row justify-content-center">
+    {
+      // si no se logueo correctamente se redirige al login
+      this.redirectToLogin()
+    }
+    <div className="col-12 col-sm-12 col-md-12 col-lg-6">
+      <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+        <div className="card-body">
+          <h2 className="my-4">Registrarme</h2>
+          <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <span className="text-danger error_negrita">
+              {this.state.errorApi}
+            </span>
           </div>
+          {
+            this.state.esComerciante == true
+            ?
+              <>
+                { this.renderCamposComunes() }
+                <hr></hr>
+                { this.renderCaptcha() }
+                { this.renderBotones() }
+              </>
+            :
+              <>
+                {this.renderCamposComunes()}
+                { this.renderCaptcha() }
+                { this.renderBotones() }
+              </>
+          }
+          </form>
         </div>
       </div>
-    );
-  }
+    </div>
+  </div>
+  );
+}
+
+render() { 
+    if(this.state.isLoading == true)
+      return  <Loading></Loading>
+    else if(this.state.botonesSeleccionUsuario == true)
+      return(
+        <>{this.renderBotonesUsuarioComercio()}</>
+      )
+    else 
+      return (        
+          <>{this.renderFormulario()}</>
+        );
+      }
 }
 
 export default Registrarme;
