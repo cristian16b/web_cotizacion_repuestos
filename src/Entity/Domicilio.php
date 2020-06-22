@@ -29,11 +29,6 @@ class Domicilio
     private $numero;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $localidad;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Persona", mappedBy="domicilio")
      */
     private $personas;
