@@ -90,3 +90,24 @@ h4 {
 .tdBefore {
     display: none;
 }
+
+.btn {
+    border-radius: 25px;   
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    background: none;
+    border: 2px solid rgb(21, 61, 87);
+	color: rgb(21, 61, 87);
+}
+
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+	color: rgb(21, 61, 87);
+	border-color: rgb(21, 61, 87);
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+	border-color: rgb(21, 61, 87);
+	color: rgb(21, 61, 87);
+	box-shadow: none;
+}
