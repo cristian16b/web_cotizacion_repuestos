@@ -52,13 +52,13 @@ class App extends React.Component {
 
   returnTemplateLogueado = () => {
     return (
-        <>
-          <NavbarLogueado />
+      <div className="row">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          <NavbarLogueado/>
           <div className="containerCentral">
               <Switch>
                 <Redirect exact from='/login' to='/repuesto'/>
                 <Route exact path="/" component={Home} />
-                {/* <Route exact path="/repuesto" component={BuscarRepuesto} /> */}
                 <Route exact path="/repuesto" render={() => <BuscarRepuesto getTokenPadre={this.getToken}/>} />
                 <Route exact path="/perfil" component={MiPerfil} />
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones getTokenPadre={this.getToken}/>} />
@@ -68,7 +68,8 @@ class App extends React.Component {
               </Switch>
             </div>
           <PiePagina />
-        </>
+        </div>
+      </div>
     );
   }
 
