@@ -9,7 +9,7 @@ body {
 
 .containerColorFondo {
     background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 40%, rgba(83,89,95,1) 80%); 
+    background: linear-gradient(180deg, rgba(255,255,255,1) 60%, rgba(83,89,95,1) 100%); 
 }
 
 footer {
@@ -30,7 +30,11 @@ footer {
 h1,h2,h3 {
     text-transform: uppercase;
     font-weight: bold;
-    color: rgb(21, 61, 87);
+    /* color: rgb(21, 61, 87); */
+    color: rgba(244,179,27);
+    background-color: rgb(21, 61, 87);
+    opacity:0.99;
+    padding-left: 10%;
 }
 
 h4 {
@@ -63,9 +67,12 @@ h4 {
 .navbar-custom .navbar-brand,
 .navbar-brand,.navbar-nav li a, 
 .navbar-custom .navbar-text { 
-    color: white; 
+    /* color: white;  */
+    color: rgba(244,179,27);
     height: 0%;
     line-height: 95%;
+    font-weight: 900;
+    font-size: large;
 } 
 
 .nav-link-blanco {
