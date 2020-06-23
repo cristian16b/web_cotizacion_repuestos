@@ -15,7 +15,6 @@ class FormularioDatosComunes extends React.Component {
         password:'',
         password2: '',
         errors: {},
-        errorApi: '',
     })
   }
 
@@ -32,7 +31,7 @@ class FormularioDatosComunes extends React.Component {
                                         placeholder="Ingrese su apellido"/>
         </div>
         <span id="passwordHelp" className="text-danger error_negrita">
-          {this.state.errors["apellido"]}
+          {this.props.errors["apellido"]}
         </span> 
       </div>
     )
@@ -51,7 +50,7 @@ class FormularioDatosComunes extends React.Component {
                                         placeholder="Ingrese su nombre"/>
         </div>
         <span id="passwordHelp" className="text-danger error_negrita">
-          {this.state.errors["nombre"]}
+          {this.props.errors["nombre"]}
         </span> 
       </div>
     );
@@ -71,7 +70,7 @@ class FormularioDatosComunes extends React.Component {
                                                       placeholder="Ej: 0342"/>
                       </div>
                       <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["codArea"]}
+                        {this.props.errors["codArea"]}
                       </span> 
                     </div>
                   </div>
@@ -85,7 +84,7 @@ class FormularioDatosComunes extends React.Component {
                                                       placeholder="Ingrese su Telefóno" />	
                         </div>
                         <span id="passwordHelp" className="text-danger error_negrita">
-                          {this.state.errors["telefono"]}
+                          {this.props.errors["telefono"]}
                         </span> 
                   </div>
             </div>
@@ -105,7 +104,7 @@ class FormularioDatosComunes extends React.Component {
                                       placeholder="Ingrese su email" />	
         </div>
         <span id="passwordHelp" className="text-danger error_negrita">
-          {this.state.errors["email"]}
+          {this.props.errors["email"]}
         </span> 
     </div>
     );
@@ -120,7 +119,7 @@ class FormularioDatosComunes extends React.Component {
           <label htmlFor="password">Contraseña</label>
           <div className="input-group">
             <span id="passwordHelp" className="text-danger error_negrita">
-              {this.state.errors["passdistintas"]}
+              {this.props.errors["passdistintas"]}
             </span> 
           </div>
           <div className="input-group">
@@ -130,7 +129,7 @@ class FormularioDatosComunes extends React.Component {
                                           placeholder="Ingrese su contraseña" />	
             </div>
             <span id="passwordHelp" className="text-danger error_negrita">
-              {this.state.errors["password"]}
+              {this.props.errors["password"]}
             </span> 
         </div>
       </div>
@@ -144,7 +143,7 @@ class FormularioDatosComunes extends React.Component {
                                           placeholder="Escribala de nuevo" />	
             </div>
             <span id="passwordHelp" className="text-danger error_negrita">
-              {this.state.errors["password2"]}
+              {this.props.errors["password2"]}
             </span> 
         </div>
       </div>

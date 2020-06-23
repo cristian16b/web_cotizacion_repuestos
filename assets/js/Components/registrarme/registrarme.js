@@ -40,7 +40,6 @@ class Registrarme extends React.Component {
     this.validarFormulario = this.validarFormulario.bind(this);
     this.consumirApiRegister = this.consumirApiRegister.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.isHabilitado = this.isHabilitado.bind(this);
     this.cambioComerciante = this.cambioComerciante.bind(this);
     this.cancelar = this.cancelar.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -50,6 +49,7 @@ validarFormulario () {
   let formularioValido = true;
   let errors = {};
   //alert('A name was submitted: ' + this.state.username + ' ' + this.state.password);
+  console.log(this.state);
   if(this.state.password2.length == 0) {
     errors["password2"] = "Debe ingresar nuevamente la contraseña";
     formularioValido = false;
@@ -91,10 +91,10 @@ validarFormulario () {
     errors: errors
   });
 
+  console.log(errors);
+
   return formularioValido;
 }
-
-isHabilitado = () => { return this.state.botonesHabilitados}
 
 handleSubmit(event) {
   // this.habilitarBotones();
@@ -148,8 +148,7 @@ mostrarErroresApi = (response) => {
 handleChangeInput = e => {
   this.setState({
     [e.target.name] : e.target.value
-  })
-  console.log(this.state);
+  });
 }
 
 handleChange = value => {
@@ -204,17 +203,13 @@ renderBotones() {
                 <div className="col-lg-6">
                   <div className="form-group">
                     <button type="submit" 
-                            className="btn btn-primary btn-block"
-                            disabled={this.isHabilitado()}
-                            onClick={this.cambioHabilitado}
-                            >Registrarme</button>
+                            className="btn btn-primary btn-block">Registrarme</button>
                   </div>
                 </div>
                 <div className="col-lg-6">
                   <div className="form-group">
                     <button 
                             onClick={this.cancelar}
-                            // disabled={this.state.botonesHabilitados}
                             className="btn btn-light btn-block">Cancelar</button>
                   </div>
                 </div>  
@@ -285,7 +280,12 @@ renderFormulario() {
             ?
               <>
                 {/* { this.renderCamposComunes() } */}
-                <FormularioDatosComunes handleChangeInput={this.handleChangeInput} ></FormularioDatosComunes>
+                <FormularioDatosComunes 
+                  handleChangeInput={this.handleChangeInput} 
+                  errors={this.state.errors}
+                  errorsApi={this.state.errorApi}
+                >
+                </FormularioDatosComunes>
                 <hr></hr>
                 { this.renderCaptcha() }
                 { this.renderBotones() }
@@ -293,7 +293,12 @@ renderFormulario() {
             :
               <>
                 {/* {this.renderCamposComunes()} */}
-                <FormularioDatosComunes handleChangeInput={this.handleChangeInput}></FormularioDatosComunes>
+                <FormularioDatosComunes 
+                  handleChangeInput={this.handleChangeInput}
+                  errors={this.state.errors}
+                  errorsApi={this.state.errorApi}
+                >
+                </FormularioDatosComunes>
                 { this.renderCaptcha() }
                 { this.renderBotones() }
               </>
