@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Redirect } from 'react-router-dom';
 import Loading from '../loading/loading.js';
+import FormularioDatosComunes from './FormularioDatosComunes.js';
 
 class Registrarme extends React.Component {
 
@@ -27,8 +28,6 @@ class Registrarme extends React.Component {
         errorApi: '',
         // 
         catchaValido: false,
-        //
-        botonesHabilitados: false,
         // <-- initialize the signup state as false
         isSignedUp: false, 
         // para mostrar el loop de cargando
@@ -40,18 +39,11 @@ class Registrarme extends React.Component {
     this.handleSubmit   = this.handleSubmit.bind(this); 
     this.validarFormulario = this.validarFormulario.bind(this);
     this.consumirApiRegister = this.consumirApiRegister.bind(this);
-    this.cambioApellido = this.cambioApellido.bind(this);
-    this.cambioCodArea = this.cambioCodArea.bind(this);
-    this.cambioContraseña = this.cambioContraseña.bind(this);
-    this.cambioContraseña2 = this.cambioContraseña2.bind(this);
-    this.cambioEmail = this.cambioEmail.bind(this);
-    this.cambioNombre = this.cambioNombre.bind(this);
-    this.cambioTelefono = this.cambioTelefono.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.isHabilitado = this.isHabilitado.bind(this);
-    this.cambioHabilitado = this.cambioHabilitado.bind(this);
     this.cambioComerciante = this.cambioComerciante.bind(this);
     this.cancelar = this.cancelar.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
 }
 
 validarFormulario () {
@@ -109,7 +101,6 @@ handleSubmit(event) {
   if(this.validarFormulario() == true) {
     this.consumirApiRegister();
   } 
-  this.cambioHabilitado();
   event.preventDefault();
 }
 
@@ -154,46 +145,11 @@ mostrarErroresApi = (response) => {
   });
 }
 
-cambioApellido(e) {
+handleChangeInput = e => {
   this.setState({
-      apellido: e.target.value
+    [e.target.name] : e.target.value
   })
-}
-
-cambioNombre(e) {
-  this.setState({
-      nombre: e.target.value
-  })
-}
-
-cambioCodArea(e) {
-  this.setState({
-      codArea: e.target.value
-  })
-}
-
-cambioTelefono(e) {
-  this.setState({
-      telefono: e.target.value
-  })
-}
-
-cambioEmail(e) {
-  this.setState({
-      email: e.target.value
-  })
-}
-
-cambioContraseña(e) {
-  this.setState({
-      password: e.target.value
-  })
-}
-
-cambioContraseña2(e) {
-  this.setState({
-      password2: e.target.value
-  })
+  console.log(this.state);
 }
 
 handleChange = value => {
@@ -202,20 +158,6 @@ handleChange = value => {
   })
   //alert(this.state.catchaValido);
 };
-
-cambioHabilitado = () => { 
-  if(this.state.botonesHabilitados == true) {
-    this.setState({
-      botonesHabilitados: false
-    });
-  }
-  else {
-    this.setState({
-      botonesHabilitados: true
-    });
-  }
-  // console.log(this.state.botonesHabilitados);
-}
 
 cambioComerciante = () => {
   // console.log('click sobre boton de comerciante');
@@ -255,150 +197,6 @@ cancelar() {
   });
   // console.log('click cancelar');
 }
-
-renderApellido() {
-  return(
-    <div className="form-group">
-    <label htmlFor="apellido">Apellido</label>
-      <div className="input-group">
-        <span className="input-group-addon"><i className="fa fa-user"></i></span>
-          {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-          <input type="text" className="form-control" name="apellido" 
-                                      defaultValue={this.state.apellido} onChange={this.cambioApellido}
-                                      placeholder="Ingrese su apellido"/>
-      </div>
-      <span id="passwordHelp" className="text-danger error_negrita">
-        {this.state.errors["apellido"]}
-      </span> 
-    </div>
-  )
-}
-
-renderNombre(){
-  return(
-    <div className="form-group">
-    <label htmlFor="apellido">Nombre</label>
-      <div className="input-group">
-        <span className="input-group-addon"><i className="fa fa-user"></i></span>
-          {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-          <input type="text" className="form-control" name="nombre" 
-                                      defaultValue={this.state.nombre} onChange={this.cambioNombre}
-                                      placeholder="Ingrese su nombre"/>
-      </div>
-      <span id="passwordHelp" className="text-danger error_negrita">
-        {this.state.errors["nombre"]}
-      </span> 
-    </div>
-  );
-}
-
-renderTelefono() {
-  return(
-      <div className="row">
-          <div className="col-lg-6 col-12 col-md-12">                
-                <div className="form-group">
-                  <label htmlFor="codArea">Código de área</label>
-                  <div className="input-group">
-                    <span className="input-group-addon"><i className="fa fa-user"></i></span>
-                        <input type="text" className="form-control" name="codArea" 
-                                                    defaultValue={this.state.codArea} onChange={this.cambioCodArea}
-                                                    placeholder="Ej: 0342"/>
-                    </div>
-                    <span id="passwordHelp" className="text-danger error_negrita">
-                      {this.state.errors["codArea"]}
-                    </span> 
-                  </div>
-                </div>
-          <div className="col-lg-6 col-12 col-md-12"> 
-                <div className="form-group">
-                  <label htmlFor="telefono">Telefóno</label>
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                        <input type="text" className="form-control" name="telefono" 
-                                                    defaultValue = {this.state.telefono} onChange={this.cambioTelefono}
-                                                    placeholder="Ingrese su Telefóno" />	
-                      </div>
-                      <span id="passwordHelp" className="text-danger error_negrita">
-                        {this.state.errors["telefono"]}
-                      </span> 
-                </div>
-          </div>
-      </div>
-  );
-}
-
-renderEmail() {
-  return (
-    <div className="form-group">
-    <label htmlFor="email">Email</label>
-    <div className="input-group">
-      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-        <input type="text" className="form-control" name="email" 
-                                    defaultValue = {this.state.email} onChange={this.cambioEmail}
-                                    placeholder="Ingrese su email" />	
-      </div>
-      <span id="passwordHelp" className="text-danger error_negrita">
-        {this.state.errors["email"]}
-      </span> 
-  </div>
-  );
-}
-
-renderContrasenia() {
-  return(
-    <div className="row">
-    <div className="col-lg-6">
-      <div className="form-group">
-        <label htmlFor="password">Contraseña</label>
-        <div className="input-group">
-          <span id="passwordHelp" className="text-danger error_negrita">
-            {this.state.errors["passdistintas"]}
-          </span> 
-        </div>
-        <div className="input-group">
-          <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-            <input type="password" className="form-control" name="password" 
-                                        defaultValue = {this.state.password} onChange={this.cambioContraseña}
-                                        placeholder="Ingrese su contraseña" />	
-          </div>
-          <span id="passwordHelp" className="text-danger error_negrita">
-            {this.state.errors["password"]}
-          </span> 
-      </div>
-    </div>
-    <div className="col-lg-6">
-      <div className="form-group">
-      <label htmlFor="password2">Ingresela de nuevo</label>
-        <div className="input-group">
-          <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-            <input type="password" className="form-control" name="password2" 
-                                        defaultValue = {this.state.password2} onChange={this.cambioContraseña2}
-                                        placeholder="Escribala de nuevo" />	
-          </div>
-          <span id="passwordHelp" className="text-danger error_negrita">
-            {this.state.errors["password2"]}
-          </span> 
-      </div>
-    </div>
-  </div>
-  );
-}
-
-renderCamposComunes() {
-  return(
-          <div className="row">
-            <div className="col-lg-10 col-12 col-md-12">
-              <>{this.renderApellido()}</>
-              <>{this.renderNombre()}</>
-              <>{this.renderEmail()}</>
-              <>{this.renderTelefono()}</>
-              <>{this.renderContrasenia()}</>
-            </div>
-          </div>
-  );
-}
-
-
 
 renderBotones() {
   return(
@@ -486,14 +284,16 @@ renderFormulario() {
             this.state.esComerciante == true
             ?
               <>
-                { this.renderCamposComunes() }
+                {/* { this.renderCamposComunes() } */}
+                <FormularioDatosComunes handleChangeInput={this.handleChangeInput} ></FormularioDatosComunes>
                 <hr></hr>
                 { this.renderCaptcha() }
                 { this.renderBotones() }
               </>
             :
               <>
-                {this.renderCamposComunes()}
+                {/* {this.renderCamposComunes()} */}
+                <FormularioDatosComunes handleChangeInput={this.handleChangeInput}></FormularioDatosComunes>
                 { this.renderCaptcha() }
                 { this.renderBotones() }
               </>
