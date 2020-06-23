@@ -275,34 +275,22 @@ renderFormulario() {
               {this.state.errorApi}
             </span>
           </div>
-          {
-            this.state.esComerciante == true
-            ?
-              <>
-                {/* { this.renderCamposComunes() } */}
-                <FormularioDatosComunes 
+          <FormularioDatosComunes 
                   handleChangeInput={this.handleChangeInput} 
                   errors={this.state.errors}
                   errorsApi={this.state.errorApi}
                 >
-                </FormularioDatosComunes>
-                <hr></hr>
-                { this.renderCaptcha() }
-                { this.renderBotones() }
-              </>
-            :
-              <>
-                {/* {this.renderCamposComunes()} */}
-                <FormularioDatosComunes 
-                  handleChangeInput={this.handleChangeInput}
-                  errors={this.state.errors}
-                  errorsApi={this.state.errorApi}
-                >
-                </FormularioDatosComunes>
-                { this.renderCaptcha() }
-                { this.renderBotones() }
-              </>
-          }
+          </FormularioDatosComunes>
+            <>
+              {
+                this.state.esComerciante == true &&
+                <>
+                  <hr></hr>
+                </>
+              }
+            </>
+          { this.renderCaptcha() }
+          { this.renderBotones() }
           </form>
         </div>
       </div>
