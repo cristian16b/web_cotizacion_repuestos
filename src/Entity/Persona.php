@@ -129,6 +129,11 @@ class Persona
      */
     private $usuario;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fechaBaja;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -283,6 +288,18 @@ class Persona
     public function setUsuario(usuario $usuario): self
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getFechaBaja(): ?\DateTimeInterface
+    {
+        return $this->fechaBaja;
+    }
+
+    public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
+    {
+        $this->fechaBaja = $fechaBaja;
 
         return $this;
     }
