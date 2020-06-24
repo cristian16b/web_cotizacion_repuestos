@@ -5,6 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Redirect } from 'react-router-dom';
 import Loading from '../loading/loading.js';
 import FormularioDatosComunes from './FormularioDatosComunes.js';
+import FormularioDatosComerciante from './FormularioDatosComerciante.js';
 
 class Registrarme extends React.Component {
 
@@ -283,6 +284,9 @@ renderFormulario() {
                 this.state.esComerciante == true &&
                 <>
                   <hr></hr>
+                  <FormularioDatosComerciante>
+                    
+                  </FormularioDatosComerciante>
                 </>
               }
             </>
