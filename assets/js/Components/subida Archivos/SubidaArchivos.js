@@ -1,27 +1,42 @@
-import React from 'react';
-import {useDropzone} from 'react-dropzone';
+import React, { Component } from 'react';
 
-function SubidaArchivos(props) {
-  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+class SubidaArchivos extends React.Component {
+  constructor() {
+    super();
+    this.onChange = this.onChange.bind(this);
+    this.state = {
+      files: [],
+    };
+  }
+
+  onChange(e) {
+    var files = e.target.files;
+    console.log(files);
+    var filesArr = Array.prototype.slice.call(files);
+    console.log(filesArr);
+    this.setState({ files: [...this.state.files, ...filesArr] });
+  }
   
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+  removeFile(f) {
+       this.setState({ files: this.state.files.filter(x => x !== f) }); 
+  }
 
-  return (
-    <section className="container">
-      <div {...getRootProps({className: 'dropzone'})}>
-        <input {...getInputProps()} />
-        <p>{props.descripcion}</p>
+  render() {
+    return (
+      <div>
+        <label className="custom-file-upload">
+          <input type="file" multiple onChange={this.onChange} />
+          <i className="glyphicon glyphicon-upload" /> Agregar
+          <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-upload"></span>
+        </button>
+        </label>
+        {this.state.files.map(x => 
+           <div className="file-preview" onClick={this.removeFile.bind(this, x)}>{x.name}</div>
+         )}
       </div>
-      <aside>
-        <h5>Archivo</h5>
-        <ul>{files}</ul>
-      </aside>
-    </section>
-  );
+    );
+  }
 }
 
 export default SubidaArchivos;
