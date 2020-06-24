@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import {useDropzone} from 'react-dropzone';
 
 class FormularioDatosComerciante extends React.Component {
 
@@ -6,34 +7,37 @@ class FormularioDatosComerciante extends React.Component {
     super(props);
 
     this.state = ({
-        nombre:'',
-        apellido: '',
-        codArea: '',
-        telefono: '',
-        email: '',
-        //
-        password:'',
-        password2: '',
+        constanciaDni: '',
+        constanciaAfip: '',
+        domicilio: '',
+        nro: '',
+        localidad: '',
+        provincia: '',
         errors: {},
     })
   }
 
-  renderApellido() {
-    const {handleChangeInput} = this.props;
+  renderConstanciaDni() {
+    // const {handleChangeInput} = this.props;
+    const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+  
+    const files = acceptedFiles.map(file => (
+      <li key={file.path}>
+        {file.path} - {file.size} bytes
+      </li>
+    ));
+  
     return(
-      <div className="form-group">
-      <label htmlFor="apellido">Apellido</label>
-        <div className="input-group">
-          <span className="input-group-addon"><i className="fa fa-user"></i></span>
-            {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-            <input type="text" className="form-control" name="apellido" 
-                                        defaultValue={this.state.apellido} onChange={handleChangeInput}
-                                        placeholder="Ingrese su apellido"/>
-        </div>
-        <span id="passwordHelp" className="text-danger error_negrita">
-          {this.props.errors["apellido"]}
-        </span> 
-      </div>
+        <section className="container">
+            <div {...getRootProps({className: 'dropzone'})}>
+                <input {...getInputProps()} />
+                <p>Drag 'n' drop some files here, or click to select files</p>
+            </div>
+            <aside>
+                <h4>Files</h4>
+                <ul>{files}</ul>
+            </aside>
+        </section>
     )
   }
   
@@ -156,11 +160,11 @@ class FormularioDatosComerciante extends React.Component {
     return (
       <div className="row">
         <div className="col-lg-10 col-12 col-md-12">
-          <>{this.renderApellido()}</>
-          <>{this.renderNombre()}</>
+          <>{this.renderConstanciaDni()}</>
+          {/* <>{this.renderNombre()}</>
           <>{this.renderEmail()}</>
           <>{this.renderTelefono()}</>
-          <>{this.renderContrasenia()}</>
+          <>{this.renderContrasenia()}</> */}
         </div>
       </div>
     );
