@@ -134,16 +134,14 @@ class FormularioDatosComerciante extends React.Component {
   render() {
     const {handleChangeInput} = this.props;
     return (
-      <div className="row">
-        <div className="col-lg-10 col-12 col-md-12">
-          <SubidaArchivos nombreBoton="Adjuntar una copia de su DNI"></SubidaArchivos>
-          {/* <SubidaArchivos descripcion="Subir una copia de su inscripción en AFIP"></SubidaArchivos> */}
-          {/* <>{this.renderNombre()}</>
-          <>{this.renderEmail()}</>
-          <>{this.renderTelefono()}</>
-          <>{this.renderContrasenia()}</> */}
+        <div className="row">
+          <div className="col-lg-5 col-12 col-md-12">
+            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
+          </div>
+          <div className="col-lg-5 col-12 col-md-12">
+            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
+          </div>
         </div>
-      </div>
     );
   }
 }
