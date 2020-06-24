@@ -48,8 +48,7 @@ class Registrarme extends React.Component {
 validarFormulario () {
   let formularioValido = true;
   let errors = {};
-  //alert('A name was submitted: ' + this.state.username + ' ' + this.state.password);
-  console.log(this.state);
+
   if(this.state.password2.length == 0) {
     errors["password2"] = "Debe ingresar nuevamente la contraseña";
     formularioValido = false;
@@ -90,8 +89,6 @@ validarFormulario () {
   this.setState({
     errors: errors
   });
-
-  console.log(errors);
 
   return formularioValido;
 }
