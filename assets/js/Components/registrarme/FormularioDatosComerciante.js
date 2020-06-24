@@ -16,14 +16,6 @@ class FormularioDatosComerciante extends React.Component {
         errors: {},
     })
   }
-
-  renderConstanciaDni() {
-    // const {handleChangeInput} = this.props;
-
-    return(
-        <SubidaArchivos></SubidaArchivos>
-    )
-  }
   
   renderNombre(){
     const {handleChangeInput} = this.props;
@@ -144,7 +136,8 @@ class FormularioDatosComerciante extends React.Component {
     return (
       <div className="row">
         <div className="col-lg-10 col-12 col-md-12">
-          <>{this.renderConstanciaDni()}</>
+          <SubidaArchivos descripcion="Subir una copia de su DNI"></SubidaArchivos>
+          <SubidaArchivos descripcion="Subir una copia de su inscripción en AFIP"></SubidaArchivos>
           {/* <>{this.renderNombre()}</>
           <>{this.renderEmail()}</>
           <>{this.renderTelefono()}</>
