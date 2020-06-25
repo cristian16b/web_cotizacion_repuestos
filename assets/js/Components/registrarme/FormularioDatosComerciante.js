@@ -9,7 +9,7 @@ class FormularioDatosComerciante extends React.Component {
     this.state = ({
         constanciaDni: '',
         constanciaAfip: '',
-        domicilio: '',
+        calle: '',
         nro: '',
         localidad: '',
         provincia: '',
@@ -17,22 +17,44 @@ class FormularioDatosComerciante extends React.Component {
     })
   }
   
-  renderNombre(){
+  renderCalleNro(){
     const {handleChangeInput} = this.props;
     return(
-      <div className="form-group">
-      <label htmlFor="apellido">Nombre</label>
-        <div className="input-group">
-          <span className="input-group-addon"><i className="fa fa-user"></i></span>
-            {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-            <input type="text" className="form-control" name="nombre" 
-                                        defaultValue={this.state.nombre} onChange={handleChangeInput}
-                                        placeholder="Ingrese su nombre"/>
-        </div>
-        <span id="passwordHelp" className="text-danger error_negrita">
-          {this.props.errors["nombre"]}
-        </span> 
+      <div className="row">
+        <div className="col-lg-9 col-12 col-md-12">
+          <div className="form-group">
+            <label htmlFor="calle">Calle</label>
+              <div className="input-group">
+                <span className="input-group-addon"><i className="fa fa-user"></i></span>
+                  {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
+                  <input type="text" className="form-control" name="nombre" 
+                                              defaultValue={this.state.calle} onChange={handleChangeInput}
+                                              placeholder="Ingrese su calle"/>
+              </div>
+              <span id="calledHelp" className="text-danger error_negrita">
+                {/* {this.props.errors["calle"]} */}
+              </span> 
+            </div>
+          </div>
+          {/* fin primer columna */}
+          <div className="col-lg-3 col-12 col-md-12">
+            <div className="form-group">
+            <label htmlFor="nro">Nro.</label>
+              <div className="input-group">
+                <span className="input-group-addon"><i className="fa fa-user"></i></span>
+                  {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
+                  <input type="text" className="form-control" name="nro" 
+                                              defaultValue={this.state.nro} onChange={handleChangeInput}
+                                              placeholder="Ej: 5746"/>
+              </div>
+              <span id="calledHelp" className="text-danger error_negrita">
+                {/* {this.props.errors["calle"]} */}
+              </span> 
+            </div>
+          </div>
+          {/* fin segunda columna */}
       </div>
+      // fin de la fila
     );
   }
   
@@ -130,10 +152,9 @@ class FormularioDatosComerciante extends React.Component {
     </div>
     );
   }
-  
-  render() {
-    const {handleChangeInput} = this.props;
-    return (
+
+  renderArchivos = () => {
+    return(
         <div className="row">
           <div className="col-lg-5 col-12 col-md-12">
             <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
@@ -143,6 +164,18 @@ class FormularioDatosComerciante extends React.Component {
             <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
           </div>
         </div>
+    );
+  }
+  
+  render() {
+    const {handleChangeInput} = this.props;
+    return (
+      <div className="row">
+        <div className="col-lg-10 col-12 col-md-12">
+          <>{this.renderCalleNro()}</>
+          <>{this.renderArchivos()}</>
+        </div>
+      </div>
     );
   }
 }
