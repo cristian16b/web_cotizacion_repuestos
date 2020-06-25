@@ -1,6 +1,8 @@
 import React , { Component } from 'react';
 import SubidaArchivos from '../subida Archivos/SubidaArchivos.js';
 import AsyncSelect from 'react-select/async';
+import axios from 'axios';
+import {API_PROVINCIA,API_LOCALIDAD} from '../../Constantes/constantes';
 
 class FormularioDatosComerciante extends React.Component {
 
