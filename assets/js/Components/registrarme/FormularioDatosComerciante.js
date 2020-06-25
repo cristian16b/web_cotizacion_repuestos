@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import SubidaArchivos from '../subida Archivos/SubidaArchivos.js';
+import AsyncSelect from 'react-select/async';
 
 class FormularioDatosComerciante extends React.Component {
 
@@ -55,6 +56,55 @@ class FormularioDatosComerciante extends React.Component {
           {/* fin segunda columna */}
       </div>
       // fin de la fila
+    );
+  }
+
+  handleChangeSelectProvincia = (e) => {
+    this.setState({ provincia: e });
+    // console.log(`Option selected:`, e);
+  }
+
+  handleChangeSelectLocalidad = (e) => {
+    this.setState({ localidad: e });
+    // console.log(`Option selected:`, e);
+  }
+
+  renderProvinciaLocalidad = () => {
+    return (
+              <div className="row">
+                <div className="col-lg-6">
+                  <label forhtml="provincia">Provincia</label>
+                  <AsyncSelect 
+                    id="provincia"
+                    cacheOptions 
+                    value = { this.state.provincia }
+                    // loadOptions = {this.loadMarcas}
+                    onChange={this.handleChangeSelectProvincia}
+                    placeholder={<div>Escriba la provincia donde vive</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                  <span className="text-danger error_negrita">
+                    {/* {this.state.errors["marcaSeleccionado"]} */}
+                  </span>
+                  {/* fin 1era columna */}
+                </div>
+                <div className="col-lg-6">
+                  <label forhtml="localidad">Localidad</label>
+                  <AsyncSelect 
+                    id="localidad"
+                    cacheOptions 
+                    value = { this.state.localidad }
+                    // loadOptions = {this.loadModelos}
+                    onChange={this.handleChangeSelectLocalidad}
+                    placeholder={<div>Escriba la localidad donde vive</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                  <span className="text-danger error_negrita">
+                    {/* {this.state.errors["modeloSeleccionado"]} */}
+                  </span>
+                  {/* fin 2da columna */}
+                </div>
+              </div>
     );
   }
   
@@ -174,6 +224,7 @@ class FormularioDatosComerciante extends React.Component {
         <div className="col-lg-10 col-12 col-md-12">
           <>{this.renderCalleNro()}</>
           <>{this.renderArchivos()}</>
+          <>{this.renderProvinciaLocalidad()}</>
         </div>
       </div>
     );
