@@ -73,7 +73,6 @@ class SubidaArchivos extends React.Component {
       { 
         return ( 
           <div> 
-            <br /> 
             <b>No se han adjuntado ningun archivo</b> 
           </div> 
         ); 
