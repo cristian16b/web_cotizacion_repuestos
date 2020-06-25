@@ -138,6 +138,7 @@ class FormularioDatosComerciante extends React.Component {
           <div className="col-lg-5 col-12 col-md-12">
             <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
           </div>
+          <hr/>
           <div className="col-lg-5 col-12 col-md-12">
             <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
           </div>
