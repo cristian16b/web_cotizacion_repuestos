@@ -124,7 +124,7 @@ class Persona
     private $domicilio;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\usuario", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Usuario", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $usuario;
