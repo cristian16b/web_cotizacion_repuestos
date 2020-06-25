@@ -117,7 +117,7 @@ class FormularioDatosComerciante extends React.Component {
               </div>
     );
   }
-  
+
   renderArchivos = () => {
     return(
         <div className="row">
@@ -136,7 +136,7 @@ class FormularioDatosComerciante extends React.Component {
     const {handleChangeInput} = this.props;
     return (
       <div className="row">
-        <div className="col-lg-10 col-12 col-md-12">
+        <div className="col-lg-11 col-12 col-md-12">
           <>{this.renderCalleNro()}</>
           <>{this.renderProvinciaLocalidad()}</>
           <>{this.renderArchivos()}</>

@@ -155,7 +155,7 @@ class FormularioDatosComunes extends React.Component {
     const {handleChangeInput} = this.props;
     return (
       <div className="row">
-        <div className="col-lg-10 col-12 col-md-12">
+        <div className="col-lg-11 col-12 col-md-12">
           <>{this.renderApellido()}</>
           <>{this.renderNombre()}</>
           <>{this.renderEmail()}</>

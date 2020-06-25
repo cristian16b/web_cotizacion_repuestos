@@ -292,6 +292,7 @@ renderFormulario() {
             </>
             <hr></hr>
           { this.renderCaptcha() }
+            <hr></hr>
           { this.renderBotones() }
           </form>
         </div>
