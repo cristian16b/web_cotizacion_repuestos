@@ -290,6 +290,7 @@ renderFormulario() {
                 </>
               }
             </>
+            <hr></hr>
           { this.renderCaptcha() }
           { this.renderBotones() }
           </form>
