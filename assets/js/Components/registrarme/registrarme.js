@@ -21,10 +21,17 @@ class Registrarme extends React.Component {
         //solo para vendedores
         esComerciante: false,
         cuitCuit: '',
-        domicilio: '',
+        // datos del comerciante
+        constanciaDni: '',
+        constanciaAfip: '',
+        calle: '',
+        nro: '',
+        localidad: '',
+        provincia: '',
         //
         password:'',
         password2: '',
+        // errores locales o retornados por la api
         errors: {},
         errorApi: '',
         // 
