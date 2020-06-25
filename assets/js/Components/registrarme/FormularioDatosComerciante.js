@@ -69,6 +69,14 @@ class FormularioDatosComerciante extends React.Component {
     // console.log(`Option selected:`, e);
   }
 
+  loadProvincia = (name) => {
+
+  }
+
+  loadLocalidad = (name) => {
+
+  }
+
   renderProvinciaLocalidad = () => {
     return (
               <div className="row">
@@ -78,7 +86,7 @@ class FormularioDatosComerciante extends React.Component {
                     id="provincia"
                     cacheOptions 
                     value = { this.state.provincia }
-                    // loadOptions = {this.loadMarcas}
+                    loadOptions = {this.loadProvincia}
                     onChange={this.handleChangeSelectProvincia}
                     placeholder={<div>Escriba la provincia donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
@@ -94,7 +102,7 @@ class FormularioDatosComerciante extends React.Component {
                     id="localidad"
                     cacheOptions 
                     value = { this.state.localidad }
-                    // loadOptions = {this.loadModelos}
+                    loadOptions = {this.loadLocalidad}
                     onChange={this.handleChangeSelectLocalidad}
                     placeholder={<div>Escriba la localidad donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
