@@ -72,7 +72,41 @@ class FormularioDatosComerciante extends React.Component {
   }
 
   loadProvincia = (name) => {
+    let url = API_PROVINCIA + `?name=${name}`; 
+    console.log(name);
+    console.log(url);
+    console.log()
+    if(name.length > 4) {
+      return this.getData(url)
+    }
+  }
 
+  async getData(url){
+    try 
+    {
+      // Load async data from an inexistent endpoint.
+      const response = await axios.get(url);
+      const { data } = await response;
+      console.log(data);
+      this.setState({peticionActiva: false});
+      let lista = data.data.data;
+      let options = lista.map(elemento => {    
+        return { value:  `${elemento.id}`, label: `${elemento.name}` };
+      });
+      return options;
+    } 
+    catch (e) 
+    {
+      console.log(`😱 Axios request failed: ${e}`);
+      this.setState({peticionActiva: false});
+      if(e.response)
+      {
+          let error = '';
+          error = e.response.data.message;
+          console.log(error);
+          // this.setState({errorApi: error});
+      }
+    }
   }
 
   loadLocalidad = (name) => {
