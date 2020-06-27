@@ -64,28 +64,3 @@ INSERT INTO `marca_auto` (`id`, `name`, `mla_id`, `fecha_alta`, `fecha_baja`) VA
 (63, 'Volvo', 'MLA7080', '2020-05-21', NULL),
 (64, 'Zanella', 'MLA417354', '2020-05-21', NULL),
 (65, 'Otras Marcas', 'MLA1939', '2020-05-21', NULL);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `marca_auto`
---
-ALTER TABLE `marca_auto`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `marca_auto`
---
-ALTER TABLE `marca_auto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

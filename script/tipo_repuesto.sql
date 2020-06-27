@@ -20,28 +20,3 @@ INSERT INTO `tipo_repuesto` (`id`, `name`, `fecha_alta`, `fecha_baja`, `mla_id`)
 (19, 'Suspensión y Dirección', '2020-05-22', NULL, 'MLA22222'),
 (20, 'Transmisión', '2020-05-22', NULL, 'MLA373442'),
 (21, 'Otros', '2020-05-22', NULL, 'MLA85960');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `tipo_repuesto`
---
-ALTER TABLE `tipo_repuesto`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `tipo_repuesto`
---
-ALTER TABLE `tipo_repuesto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

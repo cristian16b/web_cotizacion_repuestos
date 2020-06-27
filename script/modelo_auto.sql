@@ -915,39 +915,3 @@ INSERT INTO `modelo_auto` (`id`, `name`, `mla_id`, `fecha_alta`, `fecha_baja`, `
 (914, 'Otros Modelos', 'MLA52748', '2020-05-26', NULL, 63),
 (915, 'Force', 'MLA420714', '2020-05-26', NULL, 64),
 (916, 'Otros Modelos', 'MLA27301', '2020-05-26', NULL, 65);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `modelo_auto`
---
-ALTER TABLE `modelo_auto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_marca_auto` (`marca_auto_id`) USING BTREE;
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `modelo_auto`
---
-ALTER TABLE `modelo_auto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=917;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `modelo_auto`
---
-ALTER TABLE `modelo_auto`
-  ADD CONSTRAINT `FK_1A672BB2EE59A52` FOREIGN KEY (`marca_auto_id`) REFERENCES `marca_auto` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -230,39 +230,3 @@ INSERT INTO `repuesto` (`id`, `name`, `fecha_alta`, `fecha_baja`, `mla_id`, `tip
 (229, 'Tapas de Diferenciales', '2020-05-23', NULL, 'MLA413343', 20),
 (230, 'Transmisión - Otros', '2020-05-23', NULL, 'MLA377331', 20),
 (231, 'Otros', '2020-05-23', NULL, 'MLA85960', 21);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `repuesto`
---
-ALTER TABLE `repuesto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_repuesto_id` (`tipo_repuesto_id`) USING BTREE;
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `repuesto`
---
-ALTER TABLE `repuesto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `repuesto`
---
-ALTER TABLE `repuesto`
-  ADD CONSTRAINT `FK_A4D859BB791F4666` FOREIGN KEY (`tipo_repuesto_id`) REFERENCES `tipo_repuesto` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
