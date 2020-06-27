@@ -6,10 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonaRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"email"},message="El e-mail ingresado ya se encuentra registrado")
+ * @ORM\Table(indexes={
+ *   @ORM\Index(name="domicilio_id", columns={"domicilio_id"})
+ * })
  */
 class Persona
 {

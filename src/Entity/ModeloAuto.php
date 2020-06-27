@@ -13,6 +13,9 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Entity(repositoryClass="App\Repository\ModeloAutoRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
+  * @ORM\Table(indexes={
+ *   @ORM\Index(name="marca_auto_id", columns={"marca_auto_id"}),
+ * })
  */
 class ModeloAuto
 {

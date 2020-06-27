@@ -13,6 +13,9 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Entity(repositoryClass="App\Repository\RepuestoRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
+ * @ORM\Table(indexes={
+ *   @ORM\Index(name="tipo_repuesto_id", columns={"tipo_repuesto_id"})
+ * })
  */
 class Repuesto
 {

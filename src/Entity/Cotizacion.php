@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CotizacionRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(indexes={
+ *   @ORM\Index(name="estado_id", columns={"estado_id"}),
+ *   @ORM\Index(name="oferente_id", columns={"oferente_id"}),
+ *   @ORM\Index(name="solicitud_id", columns={"solicitud_id"})
+ * })
  */
 class Cotizacion
 {

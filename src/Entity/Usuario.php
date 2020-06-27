@@ -17,7 +17,6 @@ use JMS\Serializer\Annotation\Expose;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"email"},message="El e-mail ingresado ya se encuentra registrado")
  */
 class Usuario implements UserInterface
 {

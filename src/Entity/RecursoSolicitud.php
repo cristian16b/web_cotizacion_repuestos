@@ -14,6 +14,9 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Entity(repositoryClass="App\Repository\RecursoSolicitudRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
+ * @ORM\Table(indexes={
+ *   @ORM\Index(name="solicitud_id", columns={"solicitud_id"})
+ * })
  */
 class RecursoSolicitud
 {

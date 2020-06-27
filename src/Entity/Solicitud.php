@@ -13,6 +13,11 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Entity(repositoryClass="App\Repository\SolicitudRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
+ * @ORM\Table(indexes={
+ *   @ORM\Index(name="modelo_auto_id", columns={"modelo_auto_id"}),
+ *   @ORM\Index(name="solicitante_id", columns={"solicitante_id"}),
+ *   @ORM\Index(name="solicitante_id", columns={"repuesto_id"})
+ * })
  */
 class Solicitud
 {
