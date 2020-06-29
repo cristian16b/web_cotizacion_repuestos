@@ -18,6 +18,11 @@ class FormularioDatosComerciante extends React.Component {
         provincia: '',
         errors: {},
     })
+
+    this.handleChangeSelectLocalidad = this.handleChangeSelectLocalidad.bind(this);
+    this.handleChangeSelectProvincia = this.handleChangeSelectProvincia.bind(this);
+    this.loadLocalidad = this.loadLocalidad.bind(this);
+    this.loadProvincia = this.loadProvincia.bind(this);  
   }
   
   renderCalleNro(){
@@ -62,18 +67,16 @@ class FormularioDatosComerciante extends React.Component {
   }
 
   handleChangeSelectProvincia = (e) => {
-    this.setState({ provincia: e });
-    // console.log(`Option selected:`, e);
+    this.setState({provincia: e}); 
   }
 
   handleChangeSelectLocalidad = (e) => {
     this.setState({ localidad: e });
-    // console.log(`Option selected:`, e);
   }
 
   loadProvincia = (name) => {
-    let url = API_PROVINCIA + `?name=${name}`; 
     if(name.length > 4) {
+      let url = API_PROVINCIA + `?name=${name}`; 
       return this.getData(url)
     }
   }
@@ -86,7 +89,7 @@ class FormularioDatosComerciante extends React.Component {
       const { data } = await response;
       this.setState({peticionActiva: false});
       let lista = data.data;
-      console.log(lista);
+      // console.log(lista);
       let options = lista.map(elemento => {    
         return { value:  `${elemento.id}`, label: `${elemento.name}` };
       });
@@ -108,7 +111,11 @@ class FormularioDatosComerciante extends React.Component {
   }
 
   loadLocalidad = (name) => {
-
+    if(name.length > 4) {
+      let id = this.state.provincia.value;
+      let url = API_LOCALIDAD + `?name=${name}&idProvincia=${id}`; 
+      return this.getData(url)
+    }
   }
 
   renderProvinciaLocalidad = () => {
