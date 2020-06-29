@@ -51,6 +51,8 @@ class Registrarme extends React.Component {
     this.cambioComerciante = this.cambioComerciante.bind(this);
     this.cancelar = this.cancelar.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.handleChangeSelectLocalidad = this.handleChangeSelectLocalidad.bind(this);
+    this.handleChangeSelectProvincia = this.handleChangeSelectProvincia.bind(this);
 }
 
 validarFormulario () {
@@ -134,8 +136,9 @@ validarFormulario () {
 }
 
 handleSubmit(event) {
+  console.log(this.state);
   if(this.validarFormulario() == true) {
-    this.consumirApiRegister();
+    // this.consumirApiRegister();
   } 
   event.preventDefault();
 }
@@ -233,6 +236,14 @@ cancelar() {
   // console.log('click cancelar');
 }
 
+handleChangeSelectProvincia = (e) => {
+  this.setState({provincia: e}); 
+}
+
+handleChangeSelectLocalidad = (e) => {
+  this.setState({ localidad: e });
+}
+
 renderBotones() {
   return(
 <div className="row">
@@ -301,7 +312,7 @@ renderFormulario() {
       // si no se logueo correctamente se redirige al login
       this.redirectToLogin()
     }
-    <div className="col-12 col-sm-12 col-md-12 col-lg-6">
+    <div className="col-12 col-sm-12 col-md-12 col-lg-9">
       <div className="card shadow-sm p-3 mb-5 bg-white rounded">
         <div className="card-body">
           <h2 className="my-4">Registrarme</h2>
@@ -323,6 +334,11 @@ renderFormulario() {
                 <>
                   <hr></hr>
                   <FormularioDatosComerciante
+                    handleChangeInput={this.handleChangeInput} 
+                    handleChangeSelectLocalidad={this.handleChangeSelectLocalidad}
+                    handleChangeSelectProvincia={this.handleChangeSelectProvincia}
+                    provincia={this.state.provincia}
+                    localidad={this.state.localidad}
                     errors={this.state.errors}
                     errorsApi={this.state.errorApi}
                   >

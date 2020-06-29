@@ -83,7 +83,7 @@ class FormularioDatosComunes extends React.Component {
                                                       defaultValue = {this.state.telefono} onChange={handleChangeInput}
                                                       placeholder="Ingrese su Telefóno" />	
                         </div>
-                        <span id="passwordHelp" className="text-danger error_negrita">
+                        <span id="telefonodHelp" className="text-danger error_negrita">
                           {this.props.errors["telefono"]}
                         </span> 
                   </div>

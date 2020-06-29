@@ -19,8 +19,6 @@ class FormularioDatosComerciante extends React.Component {
         errors: {},
     })
 
-    this.handleChangeSelectLocalidad = this.handleChangeSelectLocalidad.bind(this);
-    this.handleChangeSelectProvincia = this.handleChangeSelectProvincia.bind(this);
     this.loadLocalidad = this.loadLocalidad.bind(this);
     this.loadProvincia = this.loadProvincia.bind(this);  
   }
@@ -35,7 +33,7 @@ class FormularioDatosComerciante extends React.Component {
               <div className="input-group">
                 <span className="input-group-addon"><i className="fa fa-user"></i></span>
                   {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
-                  <input type="text" className="form-control" name="nombre" 
+                  <input type="text" className="form-control" name="calle" 
                                               defaultValue={this.state.calle} onChange={handleChangeInput}
                                               placeholder="Ingrese su calle"/>
               </div>
@@ -64,14 +62,6 @@ class FormularioDatosComerciante extends React.Component {
       </div>
       // fin de la fila
     );
-  }
-
-  handleChangeSelectProvincia = (e) => {
-    this.setState({provincia: e}); 
-  }
-
-  handleChangeSelectLocalidad = (e) => {
-    this.setState({ localidad: e });
   }
 
   loadProvincia = (name) => {
@@ -112,13 +102,14 @@ class FormularioDatosComerciante extends React.Component {
 
   loadLocalidad = (name) => {
     if(name.length > 4) {
-      let id = this.state.provincia.value;
+      let id = this.props.provincia.value;
       let url = API_LOCALIDAD + `?name=${name}&idProvincia=${id}`; 
       return this.getData(url)
     }
   }
 
   renderProvinciaLocalidad = () => {
+    const {handleChangeSelectProvincia,handleChangeSelectLocalidad} = this.props;
     return (
               <div className="row">
                 <div className="col-lg-6">
@@ -126,9 +117,9 @@ class FormularioDatosComerciante extends React.Component {
                   <AsyncSelect 
                     id="provincia"
                     cacheOptions 
-                    value = { this.state.provincia }
+                    value = { this.props.provincia }
                     loadOptions = {this.loadProvincia}
-                    onChange={this.handleChangeSelectProvincia}
+                    onChange={handleChangeSelectProvincia}
                     placeholder={<div>Escriba la provincia donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
@@ -142,9 +133,9 @@ class FormularioDatosComerciante extends React.Component {
                   <AsyncSelect 
                     id="localidad"
                     cacheOptions 
-                    value = { this.state.localidad }
+                    value = { this.props.localidad }
                     loadOptions = {this.loadLocalidad}
-                    onChange={this.handleChangeSelectLocalidad}
+                    onChange={handleChangeSelectLocalidad}
                     placeholder={<div>Escriba la localidad donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
@@ -158,17 +149,20 @@ class FormularioDatosComerciante extends React.Component {
   }
 
   renderArchivos = () => {
+    const {handleChangeInput} = this.props;
     return(
         <div className="row">
           <div className="col-lg-5 col-12 col-md-12">
-            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
+            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"
+            ></SubidaArchivos>
             <span className="text-danger error_negrita">
               {this.props.errors["constanciaDni"]}
             </span>
           </div>
           <hr/>
           <div className="col-lg-5 col-12 col-md-12">
-            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
+            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"
+            ></SubidaArchivos>
             <span className="text-danger error_negrita">
               {this.props.errors["constanciaAfip"]}
             </span>

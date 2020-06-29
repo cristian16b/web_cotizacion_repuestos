@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2020 a las 21:09:19
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.3
+-- Tiempo de generación: 29-06-2020 a las 17:56:01
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -87,14 +86,14 @@ CREATE TABLE `estado_cotizacion` (
 CREATE TABLE `localidad` (
   `id` int(11) NOT NULL,
   `provincia_id` int(11) NOT NULL,
-  `localidad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `localidad`
 --
 
-INSERT INTO `localidad` (`id`, `provincia_id`, `localidad`) VALUES
+INSERT INTO `localidad` (`id`, `provincia_id`, `name`) VALUES
 (1, 1, '25 de Mayo'),
 (2, 1, '3 de febrero'),
 (3, 1, 'A. Alsina'),
@@ -2188,7 +2187,7 @@ INSERT INTO `localidad` (`id`, `provincia_id`, `localidad`) VALUES
 (2091, 22, 'Pueblo Muñoz'),
 (2092, 22, 'Pueblo Uranga'),
 (2093, 22, 'Pujato');
-INSERT INTO `localidad` (`id`, `provincia_id`, `localidad`) VALUES
+INSERT INTO `localidad` (`id`, `provincia_id`, `name`) VALUES
 (2094, 22, 'Pujato N.'),
 (2095, 22, 'Rafaela'),
 (2096, 22, 'Ramayón'),
@@ -2477,7 +2476,8 @@ INSERT INTO `localidad` (`id`, `provincia_id`, `localidad`) VALUES
 (2379, 25, 'Villa Quinteros'),
 (2380, 25, 'Yánima'),
 (2381, 25, 'Yerba Buena'),
-(2382, 25, 'Yerba Buena (S)');
+(2382, 25, 'Yerba Buena (S)'),
+(2383, 22, 'Santa Fe');
 
 -- --------------------------------------------------------
 
@@ -3532,14 +3532,14 @@ CREATE TABLE `persona` (
 
 CREATE TABLE `provincia` (
   `id` int(11) NOT NULL,
-  `provincia` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `provincia`
 --
 
-INSERT INTO `provincia` (`id`, `provincia`) VALUES
+INSERT INTO `provincia` (`id`, `name`) VALUES
 (1, 'Buenos Aires'),
 (2, 'Buenos Aires-GBA'),
 (3, 'Capital Federal'),
@@ -3969,8 +3969,8 @@ ALTER TABLE `modelo_auto`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_email` (`email`),
-  ADD UNIQUE KEY `UNIQ_usuario_id` (`usuario_id`),
+  ADD UNIQUE KEY `UNIQ_51E5B69BE7927C74` (`email`),
+  ADD UNIQUE KEY `UNIQ_51E5B69BDB38439E` (`usuario_id`),
   ADD KEY `domicilio_id` (`domicilio_id`);
 
 --
@@ -3998,10 +3998,10 @@ ALTER TABLE `repuesto`
 --
 ALTER TABLE `solicitud`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_compra_id` (`compra_id`),
-  ADD KEY `IDX_solicitante_id` (`solicitante_id`),
+  ADD UNIQUE KEY `UNIQ_96D27CC0F2E704D7` (`compra_id`),
   ADD KEY `modelo_auto_id` (`modelo_auto_id`),
-  ADD KEY `solicitante_id` (`repuesto_id`);
+  ADD KEY `solicitante_id` (`repuesto_id`),
+  ADD KEY `IDX_96D27CC0C680A87` (`solicitante_id`);
 
 --
 -- Indices de la tabla `tipo_repuesto`
@@ -4014,7 +4014,7 @@ ALTER TABLE `tipo_repuesto`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_username` (`username`) USING BTREE;
+  ADD UNIQUE KEY `UNIQ_2265B05DF85E0677` (`username`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -4048,7 +4048,7 @@ ALTER TABLE `estado_cotizacion`
 -- AUTO_INCREMENT de la tabla `localidad`
 --
 ALTER TABLE `localidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2383;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2384;
 
 --
 -- AUTO_INCREMENT de la tabla `marca_auto`
