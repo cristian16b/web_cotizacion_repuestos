@@ -322,8 +322,10 @@ renderFormulario() {
                 this.state.esComerciante == true &&
                 <>
                   <hr></hr>
-                  <FormularioDatosComerciante>
-                    
+                  <FormularioDatosComerciante
+                    errors={this.state.errors}
+                    errorsApi={this.state.errorApi}
+                  >
                   </FormularioDatosComerciante>
                 </>
               }

@@ -40,7 +40,7 @@ class FormularioDatosComerciante extends React.Component {
                                               placeholder="Ingrese su calle"/>
               </div>
               <span id="calledHelp" className="text-danger error_negrita">
-                {/* {this.props.errors["calle"]} */}
+                {this.props.errors["calle"]}
               </span> 
             </div>
           </div>
@@ -56,7 +56,7 @@ class FormularioDatosComerciante extends React.Component {
                                               placeholder="Ej: 5746"/>
               </div>
               <span id="calledHelp" className="text-danger error_negrita">
-                {/* {this.props.errors["calle"]} */}
+                {this.props.errors["nro"]}
               </span> 
             </div>
           </div>
@@ -133,7 +133,7 @@ class FormularioDatosComerciante extends React.Component {
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
-                    {/* {this.state.errors["marcaSeleccionado"]} */}
+                    {this.props.errors["provincia"]}
                   </span>
                   {/* fin 1era columna */}
                 </div>
@@ -149,7 +149,7 @@ class FormularioDatosComerciante extends React.Component {
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
-                    {/* {this.state.errors["modeloSeleccionado"]} */}
+                    {this.props.errors["localidad"]}
                   </span>
                   {/* fin 2da columna */}
                 </div>
@@ -162,10 +162,16 @@ class FormularioDatosComerciante extends React.Component {
         <div className="row">
           <div className="col-lg-5 col-12 col-md-12">
             <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
+            <span className="text-danger error_negrita">
+              {this.props.errors["constanciaDni"]}
+            </span>
           </div>
           <hr/>
           <div className="col-lg-5 col-12 col-md-12">
             <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"></SubidaArchivos>
+            <span className="text-danger error_negrita">
+              {this.props.errors["constanciaAfip"]}
+            </span>
           </div>
         </div>
     );
