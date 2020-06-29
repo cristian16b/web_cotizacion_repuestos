@@ -22,7 +22,7 @@ class ProvinciaRepository extends ServiceEntityRepository
     public function buscarPorNombre($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.provincia LIKE :val')
+            ->andWhere('p.name LIKE :val')
             ->setParameter('val', '%'. $value . '%')
             ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)

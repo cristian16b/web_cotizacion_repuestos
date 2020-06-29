@@ -26,7 +26,7 @@ class Provincia
      * @ORM\Column(type="string", length=255)
      * @Expose
      */
-    private $provincia;
+    private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Localidad", mappedBy="provincia")
@@ -43,14 +43,14 @@ class Provincia
         return $this->id;
     }
 
-    public function getProvincia(): ?string
+    public function getName(): ?string
     {
-        return $this->provincia;
+        return $this->name;
     }
 
-    public function setProvincia(string $provincia): self
+    public function setName(string $Name): self
     {
-        $this->provincia = $provincia;
+        $this->name = $Name;
 
         return $this;
     }
@@ -67,7 +67,7 @@ class Provincia
     {
         if (!$this->localidads->contains($localidad)) {
             $this->localidads[] = $localidad;
-            $localidad->setProvincia($this);
+            $localidad->setName($this);
         }
 
         return $this;
@@ -78,8 +78,8 @@ class Provincia
         if ($this->localidads->contains($localidad)) {
             $this->localidads->removeElement($localidad);
             // set the owning side to null (unless already changed)
-            if ($localidad->getProvincia() === $this) {
-                $localidad->setProvincia(null);
+            if ($localidad->getName() === $this) {
+                $localidad->setName(null);
             }
         }
 

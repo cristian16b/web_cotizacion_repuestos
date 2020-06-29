@@ -73,9 +73,6 @@ class FormularioDatosComerciante extends React.Component {
 
   loadProvincia = (name) => {
     let url = API_PROVINCIA + `?name=${name}`; 
-    console.log(name);
-    console.log(url);
-    console.log()
     if(name.length > 4) {
       return this.getData(url)
     }
@@ -87,12 +84,13 @@ class FormularioDatosComerciante extends React.Component {
       // Load async data from an inexistent endpoint.
       const response = await axios.get(url);
       const { data } = await response;
-      console.log(data);
       this.setState({peticionActiva: false});
-      let lista = data.data.data;
+      let lista = data.data;
+      console.log(lista);
       let options = lista.map(elemento => {    
         return { value:  `${elemento.id}`, label: `${elemento.name}` };
       });
+      // console.log(options);
       return options;
     } 
     catch (e) 

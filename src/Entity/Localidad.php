@@ -24,7 +24,7 @@ class Localidad
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $localidad;
+    private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\provincia", inversedBy="localidads")
@@ -47,14 +47,14 @@ class Localidad
         return $this->id;
     }
 
-    public function getLocalidad(): ?string
+    public function getName(): ?string
     {
-        return $this->localidad;
+        return $this->name;
     }
 
-    public function setLocalidad(string $localidad): self
+    public function setName(string $name): self
     {
-        $this->localidad = $localidad;
+        $this->name = $name;
 
         return $this;
     }
@@ -83,7 +83,7 @@ class Localidad
     {
         if (!$this->domicilios->contains($domicilio)) {
             $this->domicilios[] = $domicilio;
-            $domicilio->setLocalidad($this);
+            $domicilio->setName($this);
         }
 
         return $this;
@@ -94,8 +94,8 @@ class Localidad
         if ($this->domicilios->contains($domicilio)) {
             $this->domicilios->removeElement($domicilio);
             // set the owning side to null (unless already changed)
-            if ($domicilio->getLocalidad() === $this) {
-                $domicilio->setLocalidad(null);
+            if ($domicilio->getName() === $this) {
+                $domicilio->setName(null);
             }
         }
 
