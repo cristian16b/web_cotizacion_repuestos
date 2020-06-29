@@ -153,7 +153,9 @@ class FormularioDatosComerciante extends React.Component {
     return(
         <div className="row">
           <div className="col-lg-5 col-12 col-md-12">
-            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"
+            <SubidaArchivos 
+              nombreBoton="Adjuntar una copia de su inscripción AFIP"
+              onChangeValue={this.handleChangeValue}
             ></SubidaArchivos>
             <span className="text-danger error_negrita">
               {this.props.errors["constanciaDni"]}
@@ -161,7 +163,9 @@ class FormularioDatosComerciante extends React.Component {
           </div>
           <hr/>
           <div className="col-lg-5 col-12 col-md-12">
-            <SubidaArchivos nombreBoton="Adjuntar una copia de su inscripción AFIP"
+            <SubidaArchivos 
+              nombreBoton="Adjuntar una copia de su inscripción AFIP"
+              onChangeValue={this.handleChangeValue}
             ></SubidaArchivos>
             <span className="text-danger error_negrita">
               {this.props.errors["constanciaAfip"]}
@@ -170,7 +174,12 @@ class FormularioDatosComerciante extends React.Component {
         </div>
     );
   }
-  
+
+  handleChangeValue = e => {
+    console.log('in father');
+    console.log(e);
+  }
+
   render() {
     const {handleChangeInput} = this.props;
     return (

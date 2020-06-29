@@ -30,13 +30,14 @@ class SubidaArchivos extends React.Component {
 
   // On file select (from the pop up) 
   onFileChange = event => { 
-    
+
     let tipoArchivoSubido = event.target.files[0].type;
 
     if(formatosAceptados.includes(tipoArchivoSubido)) {
       // Update the state 
       this.setState({ selectedFile: event.target.files[0] }); 
       this.setState({errorFormato: false});
+      this.props.onChangeValue(event.target.files[0] );
     }
     else 
     {
@@ -87,7 +88,7 @@ class SubidaArchivos extends React.Component {
               <input 
                   style={hide} 
                   type="file" 
-                  onChange={this.onFileChange} 
+                  onChange={this.onFileChange}
                   accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
               />
             <span className="glyphicon glyphicon-upload"> Subir</span>
