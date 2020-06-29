@@ -94,6 +94,38 @@ validarFormulario () {
     formularioValido = false;
   }
 
+  if(this.state.esComerciante) {
+    if(this.state.calle == ''){
+      errors["calle"] = "Debe completar la calle";
+      formularioValido = false;    
+    }
+  
+    if(this.state.nro == ''){
+      errors["nro"] = "Debe completar el nro";
+      formularioValido = false;    
+    }
+  
+    if(this.state.provincia == ''){
+      errors["provincia"] = "Debe seleccionar su provincia";
+      formularioValido = false;    
+    }
+  
+    if(this.state.localidad == ''){
+      errors["localidad"] = "Debe completar la calle";
+      formularioValido = false;    
+    }
+  
+    if(this.state.calle == ''){
+      errors["constanciaDni"] = "Debe subir una constancia del Dni";
+      formularioValido = false;    
+    }
+  
+    if(this.state.calle == ''){
+      errors["constanciaAfip"] = "Debe subir una constancia de Afip";
+      formularioValido = false;    
+    }  
+  }
+
   this.setState({
     errors: errors
   });
@@ -102,7 +134,6 @@ validarFormulario () {
 }
 
 handleSubmit(event) {
-  // this.habilitarBotones();
   if(this.validarFormulario() == true) {
     this.consumirApiRegister();
   } 
