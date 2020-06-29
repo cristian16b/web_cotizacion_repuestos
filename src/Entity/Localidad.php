@@ -27,7 +27,7 @@ class Localidad
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\provincia", inversedBy="localidads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Provincia", inversedBy="localidads")
      * @ORM\JoinColumn(nullable=false)
      */
     private $provincia;

@@ -19,6 +19,21 @@ class LocalidadRepository extends ServiceEntityRepository
         parent::__construct($registry, Localidad::class);
     }
 
+    public function buscarPorNombre($name,$idProvincia)
+    {
+        return $this->createQueryBuilder('l')
+            ->innerJoin('l.provincia','p')
+            ->andWhere('l.name LIKE :name')
+            ->andWhere('p.id = :idProvincia')
+            ->setParameter('name', '%'. $name . '%')
+            ->setParameter('idProvincia',$idProvincia)
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Localidad[] Returns an array of Localidad objects
     //  */
