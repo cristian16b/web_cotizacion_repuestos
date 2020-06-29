@@ -138,7 +138,7 @@ validarFormulario () {
 handleSubmit(event) {
   console.log(this.state);
   if(this.validarFormulario() == true) {
-    // this.consumirApiRegister();
+    this.consumirApiRegister();
   } 
   event.preventDefault();
 }
@@ -154,22 +154,44 @@ consumirApiRegister(){
     "password2":this.state.password2,
     "email":this.state.email,
     "esComerciante":this.state.esComerciante,
+    "calle":this.state.calle,
+    "nro":this.state.nro,
+    "provincia":this.state.provincia,
+    "localidad":this.state.localidad,
+    "constanciaDni":this.state.constanciaDni,
+    "constanciaAfip":this.state.constanciaAfip
   }
-  this.setState({isLoading: true});
-  axios.post(API_REGISTER,payload)
-      .then(response => {
-          let code = response.data.code;
-          if(code == 200){
-            this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
-          }
-          this.mostrarErroresApi(response);
-          this.setState({isLoading: false});
-      })
-      .catch(e => {
-          this.setState({isLoading: false});
-          alert('Ocurrio un error al consultar al servidor, intente nuevamente');
-  });
+  this.getData(API_REGISTER,payload);
   event.preventDefault();
+}
+
+async getData(url,payload){
+  try 
+  {
+    // Load async data from an inexistent endpoint.
+    const response = await axios.post(API_REGISTER,payload);
+    const { data } = await response;
+    this.setState({peticionActiva: false});
+
+    let code = response.data.code;
+    if(code == 200){
+      this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+    }
+    this.mostrarErroresApi(response);
+    this.setState({isLoading: false});
+  } 
+  catch (e) 
+  {
+    console.log(`😱 Axios request failed: ${e}`);
+    this.setState({isLoading: false});
+    if(e.response)
+    {
+        let error = '';
+        error = e.response.data.message;
+        console.log(error);
+        // this.setState({errorApi: error});
+    }
+  }
 }
 
 mostrarErroresApi = (response) => {

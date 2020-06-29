@@ -69,7 +69,7 @@ class FormularioDatosComunes extends React.Component {
                                                       defaultValue={this.state.codArea} onChange={handleChangeInput}
                                                       placeholder="Ej: 0342"/>
                       </div>
-                      <span id="passwordHelp" className="text-danger error_negrita">
+                      <span id="codAreaHelp" className="text-danger error_negrita">
                         {this.props.errors["codArea"]}
                       </span> 
                     </div>
