@@ -30,7 +30,6 @@ class SubidaArchivos extends React.Component {
 
   // On file select (from the pop up) 
   onFileChange = event => { 
-
     let tipoArchivoSubido = event.target.files[0].type;
 
     if(formatosAceptados.includes(tipoArchivoSubido)) {

@@ -155,7 +155,7 @@ class FormularioDatosComerciante extends React.Component {
           <div className="col-lg-5 col-12 col-md-12">
             <SubidaArchivos 
               nombreBoton="Adjuntar una copia de su inscripción AFIP"
-              onChangeValue={this.handleChangeValue}
+              onChangeValue={this.handleChangeValueDni}
             ></SubidaArchivos>
             <span className="text-danger error_negrita">
               {this.props.errors["constanciaDni"]}
@@ -165,7 +165,7 @@ class FormularioDatosComerciante extends React.Component {
           <div className="col-lg-5 col-12 col-md-12">
             <SubidaArchivos 
               nombreBoton="Adjuntar una copia de su inscripción AFIP"
-              onChangeValue={this.handleChangeValue}
+              onChangeValue={this.handleChangeValueAfip}
             ></SubidaArchivos>
             <span className="text-danger error_negrita">
               {this.props.errors["constanciaAfip"]}
@@ -175,9 +175,13 @@ class FormularioDatosComerciante extends React.Component {
     );
   }
 
-  handleChangeValue = e => {
-    console.log('in father');
-    console.log(e);
+  // linkeo con el componente nieto (subidaarchivo) con el (registrarme)
+  handleChangeValueDni = e => {
+    this.props.onChangeValueDni(e);
+  }
+
+  handleChangeValueAfip = e => {
+    this.props.onChangeValueAfip(e);
   }
 
   render() {

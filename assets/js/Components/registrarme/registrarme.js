@@ -117,12 +117,12 @@ validarFormulario () {
       formularioValido = false;    
     }
   
-    if(this.state.calle == ''){
+    if(this.state.constanciaDni == ''){
       errors["constanciaDni"] = "Debe subir una constancia del Dni";
       formularioValido = false;    
     }
   
-    if(this.state.calle == ''){
+    if(this.state.constanciaAfip == ''){
       errors["constanciaAfip"] = "Debe subir una constancia de Afip";
       formularioValido = false;    
     }  
@@ -266,6 +266,14 @@ handleChangeSelectLocalidad = (e) => {
   this.setState({ localidad: e });
 }
 
+handleChangeValueArchivoDni = e => {
+  this.setState({ constanciaDni: e });
+}
+
+handleChangeValueArchivoAfip = e => {
+  this.setState({ constanciaAfip: e });
+}
+
 renderBotones() {
   return(
 <div className="row">
@@ -363,6 +371,8 @@ renderFormulario() {
                     localidad={this.state.localidad}
                     errors={this.state.errors}
                     errorsApi={this.state.errorApi}
+                    onChangeValueDni={this.handleChangeValueArchivoDni}
+                    onChangeValueAfip={this.handleChangeValueArchivoAfip}
                   >
                   </FormularioDatosComerciante>
                 </>
