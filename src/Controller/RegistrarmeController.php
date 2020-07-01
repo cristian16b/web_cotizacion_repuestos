@@ -16,6 +16,7 @@ use Swagger\Annotations as SWG;
 use App\Entity\Usuario;
 use App\Entity\Persona;
 use App\Entity\Domicilio;
+use App\Entity\Localidad;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
@@ -113,13 +114,12 @@ class RegistrarmeController extends AbstractController
             $esComerciante = $request->request->get('esComerciante');
             $calle = $request->request->get('calle');
             $nro = $request->request->get('nro');
-            $localidad = $request->request->get('localidad');
-            dump($localidad);die;
+            $localidadId = $request->request->get('localidad');
 
-            
             $archivos = $request->files;
             $constanciaDni = $archivos->get("constanciaDni");
             $constanciaAfip = $archivos->get("constanciaAfip");
+            dump($constanciaAfip);die;
 
             $user = new Usuario();
             $persona = new Persona();
@@ -141,6 +141,7 @@ class RegistrarmeController extends AbstractController
 
             $domicilio->setCalle($calle);
             $domicilio->setNumero($nro);
+            $localidad = $this->obtenerLocalidad($localidadId);
             $domicilio->setLocalidad($localidad);
 
             $persona->setUsuario($user);
@@ -150,12 +151,6 @@ class RegistrarmeController extends AbstractController
             $persona->setCodArea($codArea);
             $persona->setTelefono($telefono);
             $persona->setDomicilio($domicilio);
-
-            dump($domicilio);
-            dump($user);
-            dump($persona);
-            die;
-
 
             $nombreError = $validator->validateProperty($user, 'nombre');
             $apellidoError = $validator->validateProperty($user, 'apellido');
@@ -211,6 +206,6 @@ class RegistrarmeController extends AbstractController
     }
 
     private function obtenerLocalidad($id) {
-
+        return $this->getDoctrine()->getRepository(Localidad::class)->find($id);
     }
 }

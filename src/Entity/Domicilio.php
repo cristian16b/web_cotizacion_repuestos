@@ -80,7 +80,7 @@ class Domicilio
         return $this->localidad;
     }
 
-    public function setLocalidad(string $localidad): self
+    public function setLocalidad($localidad): self
     {
         $this->localidad = $localidad;
 
