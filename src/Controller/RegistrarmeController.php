@@ -17,6 +17,8 @@ use App\Entity\Usuario;
 use App\Entity\Persona;
 use App\Entity\Domicilio;
 use App\Entity\Localidad;
+use App\Entity\ConstanciaPersona;
+use App\Entity\TipoConstancia;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
@@ -33,6 +35,9 @@ class RegistrarmeController extends AbstractController
     private $userRolUsuario = "ROLE_USER";
     private $userRolComerciante = "ROLE_COMERCIANTE";
     private $userRolAdmin = "ROLE_ADMIN";
+
+    private $tipoDNI = "DNI";
+    private $tipoAfip = "INSCRIPCIÒN AFIP";
 
     public static function getSubscribedServices() 
     {
@@ -117,13 +122,20 @@ class RegistrarmeController extends AbstractController
             $localidadId = $request->request->get('localidad');
 
             $archivos = $request->files;
-            $constanciaDni = $archivos->get("constanciaDni");
-            $constanciaAfip = $archivos->get("constanciaAfip");
-            dump($constanciaAfip);die;
+            $fileDni = $archivos->get("constanciaDni");
+            $fileAfip = $archivos->get("constanciaAfip");
 
             $user = new Usuario();
             $persona = new Persona();
             $domicilio = new Domicilio();
+            $constanciaDni = new ConstanciaPersona();
+            $constanciaAfip = new ConstanciaPersona();
+            $tipoConstanciaDni = $this->obtenerTipoConstancia($this->$tipoConstanciaDni);
+            $tipoConstanciaAfip = $this->obtenerTipoConstancia($this->$tipoAfip);
+            $constanciaDni->setTipo($tipoConstanciaDni);
+            $constanciaDni->setFile($fileDni);
+            $constanciaAfip->setFile($fileAfip);
+            $constanciaAfip->setFILE($fileDni);
 
             $user->setPlainPassword($password);
             $user->setPassword($encoder->encodePassword($user, $password));
@@ -152,12 +164,12 @@ class RegistrarmeController extends AbstractController
             $persona->setTelefono($telefono);
             $persona->setDomicilio($domicilio);
 
-            $nombreError = $validator->validateProperty($user, 'nombre');
-            $apellidoError = $validator->validateProperty($user, 'apellido');
-            $emailError = $validator->validateProperty($user, 'email');
+            $nombreError = $validator->validateProperty($persona, 'nombre');
+            $apellidoError = $validator->validateProperty($persona, 'apellido');
+            $emailError = $validator->validateProperty($persona, 'email');
             $passwordError = $validator->validateProperty($user, 'password');
-            $codtelError = $validator->validateProperty($user, 'codArea');
-            $telefonoError = $validator->validateProperty($user, 'telefono');
+            $codtelError = $validator->validateProperty($persona, 'codArea');
+            $telefonoError = $validator->validateProperty($persona, 'telefono');
        
             $formErrors = [];
             if(count($nombreError)>0){
@@ -207,5 +219,9 @@ class RegistrarmeController extends AbstractController
 
     private function obtenerLocalidad($id) {
         return $this->getDoctrine()->getRepository(Localidad::class)->find($id);
+    }
+
+    private function obtenerTipoConstancia($name) {
+        return $this->getDoctrine()->getRepository(TipoConstancia::class)->find(array('name',$name));
     }
 }

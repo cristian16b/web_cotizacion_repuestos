@@ -23,11 +23,19 @@ class Domicilio
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Debes completar el nombre de tu calle")
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="El nombre de la calle debe tener al menos dos letras",
+     *     max = 100,
+     *     maxMessage="El nombre de la calle no puede tener una longitud mayor a 100 letras"
+     * )
      */
     private $calle;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Debes completar el nro de tu domicilio")
      */
     private $numero;
 
