@@ -114,6 +114,9 @@ class RegistrarmeController extends AbstractController
             $calle = $request->request->get('calle');
             $nro = $request->request->get('nro');
             $localidad = $request->request->get('localidad');
+            dump($localidad);die;
+
+            
             $archivos = $request->files;
             $constanciaDni = $archivos->get("constanciaDni");
             $constanciaAfip = $archivos->get("constanciaAfip");
@@ -205,5 +208,9 @@ class RegistrarmeController extends AbstractController
         ];
  
         return new Response($serializer->serialize($response, "json"));
+    }
+
+    private function obtenerLocalidad($id) {
+
     }
 }

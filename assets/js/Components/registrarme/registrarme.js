@@ -155,8 +155,8 @@ consumirApiRegister(){
     "esComerciante":this.state.esComerciante,
     "calle":this.state.calle,
     "nro":this.state.nro,
-    "provincia":this.state.provincia,
-    "localidad":this.state.localidad,
+    "provincia":this.state.provincia['value'],
+    "localidad":this.state.localidad['value'],
     "constanciaDni":this.state.constanciaDni,
     "constanciaAfip":this.state.constanciaAfip
   };
@@ -168,7 +168,7 @@ consumirApiRegister(){
     // console.log(x + '-' + payload[x]);
     formData.append(indice,payload[indice]);
   } 
-
+  // llamamos a la api
   this.getData(API_REGISTER,formData,headers);
   event.preventDefault();
 }
