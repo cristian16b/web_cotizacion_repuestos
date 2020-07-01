@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use DateTime;
@@ -138,6 +139,16 @@ class Persona
      * @ORM\Column(type="date", nullable=true)
      */
     private $fechaBaja;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ConstanciaPersona", mappedBy="persona")
+     */
+    private $constanciaPersonas;
+
+    public function __construct()
+    {
+        $this->constanciaPersonas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -341,6 +352,37 @@ class Persona
     public function setTelefono(string $telefono): self
     {
         $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConstanciaPersona[]
+     */
+    public function getConstanciaPersonas(): Collection
+    {
+        return $this->constanciaPersonas;
+    }
+
+    public function addConstanciaPersona(ConstanciaPersona $constanciaPersona): self
+    {
+        if (!$this->constanciaPersonas->contains($constanciaPersona)) {
+            $this->constanciaPersonas[] = $constanciaPersona;
+            $constanciaPersona->setPersona($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConstanciaPersona(ConstanciaPersona $constanciaPersona): self
+    {
+        if ($this->constanciaPersonas->contains($constanciaPersona)) {
+            $this->constanciaPersonas->removeElement($constanciaPersona);
+            // set the owning side to null (unless already changed)
+            if ($constanciaPersona->getPersona() === $this) {
+                $constanciaPersona->setPersona(null);
+            }
+        }
 
         return $this;
     }
