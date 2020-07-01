@@ -88,6 +88,9 @@ class RegistrarmeController extends AbstractController
         // die;
         $serializer = $this->get('serializer');
         $em = $this->getDoctrine()->getManager();
+
+        dump($request);
+        die;
  
         $user = [];
         $message = "";

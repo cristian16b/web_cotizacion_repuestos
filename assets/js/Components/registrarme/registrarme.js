@@ -136,10 +136,9 @@ validarFormulario () {
 }
 
 handleSubmit(event) {
-  console.log(this.state);
-  if(this.validarFormulario() == true) {
+  // if(this.validarFormulario() == true) {
     this.consumirApiRegister();
-  } 
+  // } 
   event.preventDefault();
 }
 
@@ -160,16 +159,25 @@ consumirApiRegister(){
     "localidad":this.state.localidad,
     "constanciaDni":this.state.constanciaDni,
     "constanciaAfip":this.state.constanciaAfip
-  }
-  this.getData(API_REGISTER,payload);
+  };
+  const headers = {
+    'Content-Type': 'multipart/form-data',
+  };
+  const formData = new FormData();
+  for (let indice in payload) {
+    // console.log(x + '-' + payload[x]);
+    formData.append(indice,payload[indice]);
+  } 
+
+  this.getData(API_REGISTER,formData,headers);
   event.preventDefault();
 }
 
-async getData(url,payload){
+async getData(url,payload,headers){
   try 
   {
     // Load async data from an inexistent endpoint.
-    const response = await axios.post(API_REGISTER,payload);
+    const response = await axios.post(url,payload,headers);
     const { data } = await response;
     this.setState({peticionActiva: false});
 
@@ -346,7 +354,7 @@ renderFormulario() {
       <div className="card shadow-sm p-3 mb-5 bg-white rounded">
         <div className="card-body">
           <h2 className="my-4">Registrarme</h2>
-          <form onSubmit={this.handleSubmit}>
+          <form  method="post" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <span className="text-danger error_negrita">
               {this.state.errorApi}
