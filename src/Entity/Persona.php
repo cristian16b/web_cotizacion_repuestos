@@ -186,6 +186,18 @@ class Persona
  
         return $this;
     }
+
+    public function getApellido(): ?string
+    {
+        return $this->apellido;
+    }
+
+    public function setApellido(string $apellido): self
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
  
     /**
      * Set email
@@ -305,6 +317,30 @@ class Persona
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
+
+        return $this;
+    }
+
+    public function getCodArea(): ?string
+    {
+        return $this->codArea;
+    }
+
+    public function setCodArea(string $codArea): self
+    {
+        $this->codArea = $codArea;
+
+        return $this;
+    }
+
+    public function getTelefono(): ?string
+    {
+        return $this->telefono;
+    }
+
+    public function setTelefono(string $telefono): self
+    {
+        $this->telefono = $telefono;
 
         return $this;
     }

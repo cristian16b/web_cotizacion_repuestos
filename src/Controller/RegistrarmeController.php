@@ -14,10 +14,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Entity\Usuario;
+use App\Entity\Persona;
+use App\Entity\Domicilio;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
+use JMS\Serializer\SerializerInterface;
+
 
 /**
 * @Route("/api")
@@ -28,6 +32,11 @@ class RegistrarmeController extends AbstractController
     private $userRolUsuario = "ROLE_USER";
     private $userRolComerciante = "ROLE_COMERCIANTE";
     private $userRolAdmin = "ROLE_ADMIN";
+
+    public static function getSubscribedServices() 
+    {
+        return array_merge(parent::getSubscribedServices(), [ 'jms_serializer' => '?'.SerializerInterface::class, ]); 
+    }
 
     // /**
     //  * @Route("/", name="registrarme")
@@ -85,13 +94,8 @@ class RegistrarmeController extends AbstractController
      * @SWG\Tag(name="User")
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $encoder,ValidatorInterface $validator) {
-        // die;
-        $serializer = $this->get('serializer');
+        $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
-
-        dump($request);
-        die;
- 
         $user = [];
         $message = "";
  
@@ -100,16 +104,6 @@ class RegistrarmeController extends AbstractController
             $code = 200;
             $error = false;
 
-            // ejemplo de como vienen los datos desde el front-end
-            //   [         
-            //     "apellido" => "ooso"
-            //     "nombre" => "oso"
-            //     "codArea" => "oso"
-            //     "telefono" => "ososo"
-            //     "password" => "sooso"
-            //     "email" => "sooso"
-            //   ]
-
             $apellido = $request->request->get('apellido');
             $name = $request->request->get('nombre');
             $email = $request->request->get('email');
@@ -117,17 +111,22 @@ class RegistrarmeController extends AbstractController
             $codArea = $request->request->get('codArea');
             $telefono = $request->request->get('telefono');
             $esComerciante = $request->request->get('esComerciante');
- 
+            $calle = $request->request->get('calle');
+            $nro = $request->request->get('nro');
+            $localidad = $request->request->get('localidad');
+            $archivos = $request->files;
+            $constanciaDni = $archivos->get("constanciaDni");
+            $constanciaAfip = $archivos->get("constanciaAfip");
+
             $user = new Usuario();
-            $user->setNombre($name);
-            $user->setEmail($email);
-            $user->setUsername($email);
+            $persona = new Persona();
+            $domicilio = new Domicilio();
+
             $user->setPlainPassword($password);
             $user->setPassword($encoder->encodePassword($user, $password));
             $user->setUsuarioUltimaModificacion($email);
-            $user->setApellido($apellido);
-            $user->setCodArea($codArea);
-            $user->setTelefono($telefono);
+            $user->setUsername($email);
+
             if($esComerciante) 
             {
                 $user->setRoles($this->userRolComerciante);
@@ -136,6 +135,23 @@ class RegistrarmeController extends AbstractController
             {
                 $user->setRoles($this->userRolUsuario);
             }
+
+            $domicilio->setCalle($calle);
+            $domicilio->setNumero($nro);
+            $domicilio->setLocalidad($localidad);
+
+            $persona->setUsuario($user);
+            $persona->setNombre($name);
+            $persona->setEmail($email);
+            $persona->setApellido($apellido);
+            $persona->setCodArea($codArea);
+            $persona->setTelefono($telefono);
+            $persona->setDomicilio($domicilio);
+
+            dump($domicilio);
+            dump($user);
+            dump($persona);
+            die;
 
 
             $nombreError = $validator->validateProperty($user, 'nombre');
