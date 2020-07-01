@@ -100,16 +100,6 @@ class Persona
     private $telefono;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $constanciaInscripcionAfip;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $constanciaDni;
-
-    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $fechaAlta;
@@ -155,31 +145,7 @@ class Persona
         return $this->id;
     }
 
-    public function getConstanciaInscripcionAfip(): ?string
-    {
-        return $this->constanciaInscripcionAfip;
-    }
-
-    public function setConstanciaInscripcionAfip(?string $constanciaInscripcionAfip): self
-    {
-        $this->constanciaInscripcionAfip = $constanciaInscripcionAfip;
-
-        return $this;
-    }
-
-    public function getConstanciaDni(): ?string
-    {
-        return $this->constanciaDni;
-    }
-
-    public function setConstanciaDni(?string $constanciaDni): self
-    {
-        $this->constanciaDni = $constanciaDni;
-
-        return $this;
-    }
-
-        /**
+    /**
      * @return mixed
      */
     public function getNombre()
