@@ -3,6 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConstanciaPersonaRepository")
@@ -160,6 +164,8 @@ class ConstanciaPersona
     {
         $this->file = $file;
 
+        dump($file);die;
+
         return $this;
     }
 
@@ -197,5 +203,18 @@ class ConstanciaPersona
         $this->persona = $persona;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setFechaAlta($dateTimeNow);
+        if ($this->getFechaAlta() === null) {
+            $this->setFechaAlta($dateTimeNow);
+        }
     }
 }

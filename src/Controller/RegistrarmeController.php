@@ -130,8 +130,8 @@ class RegistrarmeController extends AbstractController
             $domicilio = new Domicilio();
             $constanciaDni = new ConstanciaPersona();
             $constanciaAfip = new ConstanciaPersona();
-            $tipoConstanciaDni = $this->obtenerTipoConstancia($this->$tipoConstanciaDni);
-            $tipoConstanciaAfip = $this->obtenerTipoConstancia($this->$tipoAfip);
+            $tipoConstanciaDni = $this->obtenerTipoConstancia($this->tipoDNI);
+            $tipoConstanciaAfip = $this->obtenerTipoConstancia($this->tipoAfip);
             $constanciaDni->setTipo($tipoConstanciaDni);
             $constanciaDni->setFile($fileDni);
             $constanciaAfip->setFile($fileAfip);
