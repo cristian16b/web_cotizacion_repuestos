@@ -37,6 +37,12 @@ class ConstanciaPersona
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 2,
+     *      minMessage = "Debe cargar un archivo",
+     *      maxMessage = "No puede subir archivos de más de 2 MegaBytes"
+     * ) 
      */
     private $pesgoMega;
 
