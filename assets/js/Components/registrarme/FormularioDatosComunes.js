@@ -4,17 +4,6 @@ class FormularioDatosComunes extends React.Component {
 
   constructor(props){
     super(props);
-
-    this.state = ({
-        nombre:'',
-        apellido: '',
-        codArea: '',
-        telefono: '',
-        email: '',
-        //
-        password:'',
-        password2: ''
-    })
   }
 
   renderApellido() {
@@ -26,7 +15,7 @@ class FormularioDatosComunes extends React.Component {
           <span className="input-group-addon"><i className="fa fa-user"></i></span>
             {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
             <input type="text" className="form-control" name="apellido" 
-                                        defaultValue={this.state.apellido} onChange={handleChangeInput}
+                                        defaultValue={this.props.apellido} onChange={handleChangeInput}
                                         placeholder="Ingrese su apellido"/>
         </div>
         <span id="passwordHelp" className="text-danger error_negrita">
@@ -45,7 +34,7 @@ class FormularioDatosComunes extends React.Component {
           <span className="input-group-addon"><i className="fa fa-user"></i></span>
             {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
             <input type="text" className="form-control" name="nombre" 
-                                        defaultValue={this.state.nombre} onChange={handleChangeInput}
+                                        defaultValue={this.props.nombre} onChange={handleChangeInput}
                                         placeholder="Ingrese su nombre"/>
         </div>
         <span id="passwordHelp" className="text-danger error_negrita">
@@ -65,7 +54,7 @@ class FormularioDatosComunes extends React.Component {
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-user"></i></span>
                           <input type="text" className="form-control" name="codArea" 
-                                                      defaultValue={this.state.codArea} onChange={handleChangeInput}
+                                                      defaultValue={this.props.codArea} onChange={handleChangeInput}
                                                       placeholder="Ej: 0342"/>
                       </div>
                       <span id="codAreaHelp" className="text-danger error_negrita">
@@ -79,7 +68,7 @@ class FormularioDatosComunes extends React.Component {
                       <div className="input-group">
                         <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                           <input type="text" className="form-control" name="telefono" 
-                                                      defaultValue = {this.state.telefono} onChange={handleChangeInput}
+                                                      defaultValue = {this.props.telefono} onChange={handleChangeInput}
                                                       placeholder="Ingrese su Telefóno" />	
                         </div>
                         <span id="telefonodHelp" className="text-danger error_negrita">
@@ -99,7 +88,7 @@ class FormularioDatosComunes extends React.Component {
       <div className="input-group">
         <span className="input-group-addon"><i className="fa fa-lock"></i></span>
           <input type="text" className="form-control" name="email" 
-                                      defaultValue = {this.state.email} onChange={handleChangeInput}
+                                      defaultValue = {this.props.email} onChange={handleChangeInput}
                                       placeholder="Ingrese su email" />	
         </div>
         <span id="passwordHelp" className="text-danger error_negrita">
@@ -124,7 +113,7 @@ class FormularioDatosComunes extends React.Component {
           <div className="input-group">
             <span className="input-group-addon"><i className="fa fa-lock"></i></span>
               <input type="password" className="form-control" name="password" 
-                                          defaultValue = {this.state.password} onChange={handleChangeInput}
+                                          defaultValue = {this.props.password} onChange={handleChangeInput}
                                           placeholder="Ingrese su contraseña" />	
             </div>
             <span id="passwordHelp" className="text-danger error_negrita">
@@ -138,7 +127,7 @@ class FormularioDatosComunes extends React.Component {
           <div className="input-group">
             <span className="input-group-addon"><i className="fa fa-lock"></i></span>
               <input type="password" className="form-control" name="password2" 
-                                          defaultValue = {this.state.password2} onChange={handleChangeInput}
+                                          defaultValue = {this.props.password2} onChange={handleChangeInput}
                                           placeholder="Escribala de nuevo" />	
             </div>
             <span id="passwordHelp" className="text-danger error_negrita">

@@ -9,16 +9,6 @@ class FormularioDatosComerciante extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = ({
-        constanciaDni: '',
-        constanciaAfip: '',
-        calle: '',
-        nro: '',
-        localidad: '',
-        provincia: '',
-        errors: {},
-    })
-
     this.loadLocalidad = this.loadLocalidad.bind(this);
     this.loadProvincia = this.loadProvincia.bind(this);  
   }
@@ -34,7 +24,7 @@ class FormularioDatosComerciante extends React.Component {
                 <span className="input-group-addon"><i className="fa fa-user"></i></span>
                   {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                   <input type="text" className="form-control" name="calle" 
-                                              defaultValue={this.state.calle} onChange={handleChangeInput}
+                                              defaultValue={this.props.calle} onChange={handleChangeInput}
                                               placeholder="Ingrese su calle"/>
               </div>
               <span id="calledHelp" className="text-danger error_negrita">
@@ -50,7 +40,7 @@ class FormularioDatosComerciante extends React.Component {
                 <span className="input-group-addon"><i className="fa fa-user"></i></span>
                   {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                   <input type="text" className="form-control" name="nro" 
-                                              defaultValue={this.state.nro} onChange={handleChangeInput}
+                                              defaultValue={this.props.nro} onChange={handleChangeInput}
                                               placeholder="Ej: 5746"/>
               </div>
               <span id="calledHelp" className="text-danger error_negrita">

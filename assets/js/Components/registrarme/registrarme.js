@@ -201,7 +201,6 @@ async getData(url,payload,headers){
 }
 
 mostrarErroresApi = (response) => {
-  console.log(response);
   let errors = {};
   for (const prop in response) {
     // console.log(`obj.${prop} = ${mensajes[prop]}`);
@@ -255,12 +254,36 @@ redirectToLogin = () => {
 
 cancelar() {
   this.setState({
-    esComerciante: false
-  });
-  this.setState({
+    nombre:'',
+    apellido: '',
+    codArea: '',
+    telefono: '',
+    email: '',
+    //solo para vendedores
+    esComerciante: false,
+    cuitCuit: '',
+    // datos del comerciante
+    constanciaDni: '',
+    constanciaAfip: '',
+    calle: '',
+    nro: '',
+    localidad: '',
+    provincia: '',
+    //
+    password:'',
+    password2: '',
+    // errores locales o retornados por la api
+    errors: {},
+    errorApi: '',
+    // 
+    catchaValido: false,
+    // <-- initialize the signup state as false
+    isSignedUp: false, 
+    // para mostrar el loop de cargando
+    isLoading: false,
+    // para mostrar los botones de seleccion
     botonesSeleccionUsuario: true
   });
-  // console.log('click cancelar');
 }
 
 handleChangeSelectProvincia = (e) => {
@@ -361,6 +384,13 @@ renderFormulario() {
                   handleChangeInput={this.handleChangeInput} 
                   errors={this.state.errors}
                   errorsApi={this.state.errorApi}
+                  nombre={this.state.nombre}
+                  apellido={this.state.apellido}
+                  codArea={this.state.codArea}
+                  telefono={this.state.telefono}
+                  email={this.state.email}
+                  password={this.state.password}
+                  password2={this.state.password2}
                 >
           </FormularioDatosComunes>
             <>
@@ -372,6 +402,8 @@ renderFormulario() {
                     handleChangeInput={this.handleChangeInput} 
                     handleChangeSelectLocalidad={this.handleChangeSelectLocalidad}
                     handleChangeSelectProvincia={this.handleChangeSelectProvincia}
+                    constanciaDni={this.state.constanciaDni}
+                    constanciaAfip={this.state.constanciaAfip}
                     provincia={this.state.provincia}
                     localidad={this.state.localidad}
                     errors={this.state.errors}
