@@ -136,14 +136,16 @@ validarFormulario () {
 }
 
 handleSubmit(event) {
-  // if(this.validarFormulario() == true) {
+  if(this.validarFormulario() == true) {
     this.consumirApiRegister();
-  // } 
+  } 
   event.preventDefault();
 }
 
 
 consumirApiRegister(){
+  this.setState({isLoading:true});
+
   const payload={
     "apellido":this.state.apellido,
     "nombre":this.state.nombre,
@@ -185,20 +187,16 @@ async getData(url,payload,headers){
     if(code == 200){
       this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
     }
-    this.mostrarErroresApi(response);
+    else if(code == 400) {
+      this.mostrarErroresApi(response.data.error);
+    }
     this.setState({isLoading: false});
   } 
   catch (e) 
   {
     console.log(`😱 Axios request failed: ${e}`);
     this.setState({isLoading: false});
-    if(e.response)
-    {
-        let error = '';
-        error = e.response.data.message;
-        console.log(error);
-        // this.setState({errorApi: error});
-    }
+    alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
   }
 }
 
@@ -223,8 +221,7 @@ handleChangeInput = e => {
 handleChange = value => {
   this.setState({
     catchaValido: true
-  })
-  //alert(this.state.catchaValido);
+  });
 };
 
 cambioComerciante = () => {

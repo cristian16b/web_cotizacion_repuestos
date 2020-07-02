@@ -46,7 +46,7 @@ class Domicilio
     private $personas;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\localidad", inversedBy="domicilios")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Localidad", inversedBy="domicilios")
      */
     private $localidad;
 

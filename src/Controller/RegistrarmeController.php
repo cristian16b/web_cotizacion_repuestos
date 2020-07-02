@@ -143,7 +143,7 @@ class RegistrarmeController extends AbstractController
             $codtelError = $validator->validateProperty($persona, 'codArea');
             $telefonoError = $validator->validateProperty($persona, 'telefono');
             
-            if($esComerciante) 
+            if($esComerciante == "true") 
             {
 
                 $localidad = $this->obtenerLocalidad($localidadId);     
@@ -178,6 +178,13 @@ class RegistrarmeController extends AbstractController
                 $nroError = $validator->validateProperty($domicilio, 'numero');
 
                 $user->setRoles($this->userRolComerciante);
+
+                if(count($calleError)>0){
+                    $formErrors['calle'] =  $telefonoError[0]->getMessage();
+                }
+                if(count($nroError)>0){
+                    $formErrors['nro'] =  $telefonoError[0]->getMessage();
+                }
             }
             else 
             {
@@ -203,17 +210,12 @@ class RegistrarmeController extends AbstractController
             if(count($telefonoError)>0){
                 $formErrors['telefono'] =  $telefonoError[0]->getMessage();
             }
-            if(count($calleError)>0){
-                $formErrors['calle'] =  $telefonoError[0]->getMessage();
-            }
-            if(count($nroError)>0){
-                $formErrors['nro'] =  $telefonoError[0]->getMessage();
-            }
+
 
             if($formErrors) {
                 $response = [
-                    'code' => 0,
-                    'error' => $error,
+                    'code' => 400,
+                    'error' => $formErrors,
                 ];
                 return new JsonResponse($response);
             }
