@@ -218,9 +218,16 @@ handleChangeInput = e => {
 }
 
 handleChange = value => {
-  this.setState({
-    catchaValido: true
-  });
+  if(this.state.catchaValido == false) {
+    this.setState({
+      catchaValido: true
+    });
+  }
+  else {
+    this.setState({
+      catchaValido: false
+    });
+  }
 };
 
 cambioComerciante = () => {
@@ -330,6 +337,7 @@ renderCaptcha() {
           <ReCAPTCHA
             sitekey={API_CAPTCHA_PUBLIC}
             onChange={this.handleChange}
+            onExpired={this.handleChange}
           />
           <span id="passwordHelp" className="text-danger error_negrita">
             {this.state.errors["captcha"]}
