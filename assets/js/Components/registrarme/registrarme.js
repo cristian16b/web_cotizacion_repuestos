@@ -201,11 +201,11 @@ async getData(url,payload,headers){
 }
 
 mostrarErroresApi = (response) => {
-  let mensajes = response.data;
+  console.log(response);
   let errors = {};
-  for (const prop in mensajes) {
+  for (const prop in response) {
     // console.log(`obj.${prop} = ${mensajes[prop]}`);
-    errors[prop] = mensajes[prop];
+    errors[prop] = response[prop];
   }
   this.setState({
     errors: errors

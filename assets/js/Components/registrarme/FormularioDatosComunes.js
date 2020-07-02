@@ -13,8 +13,7 @@ class FormularioDatosComunes extends React.Component {
         email: '',
         //
         password:'',
-        password2: '',
-        errors: {},
+        password2: ''
     })
   }
 
