@@ -43,9 +43,15 @@ class Usuario implements UserInterface
      *     max = 100,
      *     maxMessage="La contraseña no puede tener una longitud mayor a 100 letras"
      * )
+     * @Assert\Regex(
+     *     pattern="/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/",
+     *     message="La contraseña debe tener al entre 6 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.NO puede tener otros símbolos."
+     * )
      * @Serializer\Exclude()
      */
     protected $password;
+
+    
  
     /**
      * @var string

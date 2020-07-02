@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConstanciaPersonaRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(indexes={
  *   @ORM\Index(name="tipo_id", columns={"tipo_id"}),
  *   @ORM\Index(name="persona_id", columns={"persona_id"})
@@ -163,8 +164,13 @@ class ConstanciaPersona
     public function setFile($file): self
     {
         $this->file = $file;
-
-        dump($file);die;
+        $this->setNombreLogico($file->getClientOriginalName());
+        $pesoMega = (($file->getSize())/1024)/1024;
+        $this->setPesgoMega($pesoMega);
+        $mimetype = $file->getClientMimeType();
+        $pos = strpos($mimetype,'/');
+        $tipo = substr($mimetype,  $pos + 1);
+        $this->setExtensionArchivo($tipo);
 
         return $this;
     }

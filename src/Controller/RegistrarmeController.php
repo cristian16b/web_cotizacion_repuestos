@@ -117,44 +117,16 @@ class RegistrarmeController extends AbstractController
             $codArea = $request->request->get('codArea');
             $telefono = $request->request->get('telefono');
             $esComerciante = $request->request->get('esComerciante');
-            $calle = $request->request->get('calle');
-            $nro = $request->request->get('nro');
             $localidadId = $request->request->get('localidad');
-
-            $archivos = $request->files;
-            $fileDni = $archivos->get("constanciaDni");
-            $fileAfip = $archivos->get("constanciaAfip");
 
             $user = new Usuario();
             $persona = new Persona();
             $domicilio = new Domicilio();
-            $constanciaDni = new ConstanciaPersona();
-            $constanciaAfip = new ConstanciaPersona();
-            $tipoConstanciaDni = $this->obtenerTipoConstancia($this->tipoDNI);
-            $tipoConstanciaAfip = $this->obtenerTipoConstancia($this->tipoAfip);
-            $constanciaDni->setTipo($tipoConstanciaDni);
-            $constanciaDni->setFile($fileDni);
-            $constanciaAfip->setFile($fileAfip);
-            $constanciaAfip->setFILE($fileDni);
 
             $user->setPlainPassword($password);
             $user->setPassword($encoder->encodePassword($user, $password));
             $user->setUsuarioUltimaModificacion($email);
             $user->setUsername($email);
-
-            if($esComerciante) 
-            {
-                $user->setRoles($this->userRolComerciante);
-            }
-            else 
-            {
-                $user->setRoles($this->userRolUsuario);
-            }
-
-            $domicilio->setCalle($calle);
-            $domicilio->setNumero($nro);
-            $localidad = $this->obtenerLocalidad($localidadId);
-            $domicilio->setLocalidad($localidad);
 
             $persona->setUsuario($user);
             $persona->setNombre($name);
@@ -170,6 +142,47 @@ class RegistrarmeController extends AbstractController
             $passwordError = $validator->validateProperty($user, 'password');
             $codtelError = $validator->validateProperty($persona, 'codArea');
             $telefonoError = $validator->validateProperty($persona, 'telefono');
+            
+            if($esComerciante) 
+            {
+
+                $localidad = $this->obtenerLocalidad($localidadId);     
+                $archivos = $request->files;
+
+                $fileDni = $archivos->get("constanciaDni");
+                $fileAfip = $archivos->get("constanciaAfip");
+                
+                if(is_null($fileAfip) || is_null($fileDni) || is_null($localidad)) {
+                    throw new \Exception('Something went wrong!');
+                }
+
+                $calle = $request->request->get('calle');
+                $nro = $request->request->get('nro');
+
+                $domicilio->setCalle($calle);
+                $domicilio->setNumero($nro);
+                $domicilio->setLocalidad($localidad);
+                $persona->setDomicilio($domicilio);
+
+
+                $constanciaDni = new ConstanciaPersona();
+                $constanciaAfip = new ConstanciaPersona();
+                $tipoConstanciaDni = $this->obtenerTipoConstancia($this->tipoDNI);
+                $tipoConstanciaAfip = $this->obtenerTipoConstancia($this->tipoAfip);
+                $constanciaDni->setTipo($tipoConstanciaDni);
+                $constanciaDni->setFile($fileDni);
+                $constanciaAfip->setFile($fileAfip);
+                $constanciaAfip->setTipo($tipoConstanciaAfip);
+
+                $calleError = $validator->validateProperty($domicilio, 'calle');
+                $nroError = $validator->validateProperty($domicilio, 'numero');
+
+                $user->setRoles($this->userRolComerciante);
+            }
+            else 
+            {
+                $user->setRoles($this->userRolUsuario);
+            }
        
             $formErrors = [];
             if(count($nombreError)>0){
@@ -190,6 +203,12 @@ class RegistrarmeController extends AbstractController
             if(count($telefonoError)>0){
                 $formErrors['telefono'] =  $telefonoError[0]->getMessage();
             }
+            if(count($calleError)>0){
+                $formErrors['calle'] =  $telefonoError[0]->getMessage();
+            }
+            if(count($nroError)>0){
+                $formErrors['nro'] =  $telefonoError[0]->getMessage();
+            }
 
             if($formErrors) {
                 $response = [
@@ -199,7 +218,7 @@ class RegistrarmeController extends AbstractController
                 return new JsonResponse($response);
             }
 
-            $em->persist($user);
+            $em->persist($persona);
             $em->flush();
  
         } catch (Exception $ex) {
@@ -222,6 +241,6 @@ class RegistrarmeController extends AbstractController
     }
 
     private function obtenerTipoConstancia($name) {
-        return $this->getDoctrine()->getRepository(TipoConstancia::class)->find(array('name',$name));
+        return $this->getDoctrine()->getRepository(TipoConstancia::class)->findOneBy(array('nombre'=>$name));
     }
 }
