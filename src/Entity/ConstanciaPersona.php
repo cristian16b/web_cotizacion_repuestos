@@ -211,4 +211,14 @@ class ConstanciaPersona
     public function obtenerNombreFisico() {
         $this->nombreFisico =  md5(uniqid()).'.'. $this->extensionArchivo;
     }
+
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function guardarArchivo() {
+        $baseDir = './constancia ' . $this->getTipo()->getNombre();
+        file_put_contents($baseDir . $this->nombreFisico, $this->file);
+    }
 }

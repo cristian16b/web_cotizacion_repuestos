@@ -18,7 +18,7 @@ class FormularioDatosComunes extends React.Component {
                                         defaultValue={this.props.apellido} onChange={handleChangeInput}
                                         placeholder="Ingrese su apellido"/>
         </div>
-        <span id="passwordHelp" className="text-danger error_negrita">
+        <span id="apellidoHelp" className="text-danger error_negrita">
           {this.props.errors["apellido"]}
         </span> 
       </div>
@@ -37,7 +37,7 @@ class FormularioDatosComunes extends React.Component {
                                         defaultValue={this.props.nombre} onChange={handleChangeInput}
                                         placeholder="Ingrese su nombre"/>
         </div>
-        <span id="passwordHelp" className="text-danger error_negrita">
+        <span id="nombreHelp" className="text-danger error_negrita">
           {this.props.errors["nombre"]}
         </span> 
       </div>
@@ -91,7 +91,7 @@ class FormularioDatosComunes extends React.Component {
                                       defaultValue = {this.props.email} onChange={handleChangeInput}
                                       placeholder="Ingrese su email" />	
         </div>
-        <span id="passwordHelp" className="text-danger error_negrita">
+        <span id="emailHelp" className="text-danger error_negrita">
           {this.props.errors["email"]}
         </span> 
     </div>
@@ -130,7 +130,7 @@ class FormularioDatosComunes extends React.Component {
                                           defaultValue = {this.props.password2} onChange={handleChangeInput}
                                           placeholder="Escribala de nuevo" />	
             </div>
-            <span id="passwordHelp" className="text-danger error_negrita">
+            <span id="password2Help" className="text-danger error_negrita">
               {this.props.errors["password2"]}
             </span> 
         </div>

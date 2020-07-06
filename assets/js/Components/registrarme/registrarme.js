@@ -183,7 +183,7 @@ async getData(url,payload,headers){
     // Load async data from an inexistent endpoint.
     const response = await axios.post(url,payload,headers);
     const { data } = await response;
-    this.setState({peticionActiva: false});
+    this.setState({ catchaValido: false });
 
     let code = response.data.code;
     if(code == 200){
@@ -198,6 +198,7 @@ async getData(url,payload,headers){
   {
     console.log(`😱 Axios request failed: ${e}`);
     this.setState({isLoading: false});
+    this.setState({ catchaValido: false });
     alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
   }
 }
@@ -413,6 +414,8 @@ renderFormulario() {
                     handleChangeSelectProvincia={this.handleChangeSelectProvincia}
                     constanciaDni={this.state.constanciaDni}
                     constanciaAfip={this.state.constanciaAfip}
+                    calle={this.props.calle}
+                    nro={this.props.nro}
                     provincia={this.state.provincia}
                     localidad={this.state.localidad}
                     errors={this.state.errors}

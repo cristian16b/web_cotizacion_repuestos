@@ -9,7 +9,9 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-/fotosSolicitudes/
+/fotosSolicitudes/*
+/constancia DNI/*
+/constancia INSCRIPCIÒN AFIP/*
 
 ###> symfony/phpunit-bridge ###
 .phpunit
