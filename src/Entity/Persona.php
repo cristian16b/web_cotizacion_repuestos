@@ -115,7 +115,7 @@ class Persona
     private $usuarioUltimaModificacion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Domicilio", inversedBy="personas")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Domicilio",  inversedBy="personas" , cascade={"persist", "remove"})
      */
     private $domicilio;
 
@@ -131,7 +131,7 @@ class Persona
     private $fechaBaja;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ConstanciaPersona", mappedBy="persona")
+     * @ORM\OneToMany(targetEntity="App\Entity\ConstanciaPersona", mappedBy="persona",cascade={"persist", "remove"})
      */
     private $constanciaPersonas;
 

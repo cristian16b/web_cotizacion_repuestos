@@ -134,12 +134,12 @@ class RegistrarmeController extends AbstractController
             $persona->setApellido($apellido);
             $persona->setCodArea($codArea);
             $persona->setTelefono($telefono);
-            $persona->setDomicilio($domicilio);
+            $persona->setUsuarioUltimaModificacion($email);
 
             $nombreError = $validator->validateProperty($persona, 'nombre');
             $apellidoError = $validator->validateProperty($persona, 'apellido');
             $emailError = $validator->validateProperty($persona, 'email');
-            $passwordError = $validator->validateProperty($user, 'password');
+            $passwordError = $validator->validateProperty($user, 'plainPassword');
             $codtelError = $validator->validateProperty($persona, 'codArea');
             $telefonoError = $validator->validateProperty($persona, 'telefono');
             
@@ -173,6 +173,10 @@ class RegistrarmeController extends AbstractController
                 $constanciaDni->setFile($fileDni);
                 $constanciaAfip->setFile($fileAfip);
                 $constanciaAfip->setTipo($tipoConstanciaAfip);
+                $persona->addConstanciaPersona($constanciaAfip);
+                $persona->addConstanciaPersona($constanciaDni);
+                $constanciaDni->setPersona($persona);
+                $constanciaAfip->setPersona($persona);
 
                 $calleError = $validator->validateProperty($domicilio, 'calle');
                 $nroError = $validator->validateProperty($domicilio, 'numero');

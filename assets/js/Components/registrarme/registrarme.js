@@ -47,7 +47,8 @@ class Registrarme extends React.Component {
     this.handleSubmit   = this.handleSubmit.bind(this); 
     this.validarFormulario = this.validarFormulario.bind(this);
     this.consumirApiRegister = this.consumirApiRegister.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeCaptcha = this.handleChangeCaptcha.bind(this);
+    this.handleChangeCaptchaExpirado = this.handleChangeCaptchaExpirado.bind(this);
     this.cambioComerciante = this.cambioComerciante.bind(this);
     this.cancelar = this.cancelar.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -145,6 +146,7 @@ handleSubmit(event) {
 
 consumirApiRegister(){
   this.setState({isLoading:true});
+  this.setState({captcha: false });
 
   const payload={
     "apellido":this.state.apellido,
@@ -217,18 +219,17 @@ handleChangeInput = e => {
   });
 }
 
-handleChange = value => {
-  if(this.state.catchaValido == false) {
+handleChangeCaptcha = value => {
     this.setState({
       catchaValido: true
     });
-  }
-  else {
-    this.setState({
-      catchaValido: false
-    });
-  }
 };
+
+handleChangeCaptchaExpirado = value => {
+  this.setState({
+    catchaValido: false
+  });
+}
 
 cambioComerciante = () => {
   // console.log('click sobre boton de comerciante');
@@ -336,8 +337,8 @@ renderCaptcha() {
         <div className="form-group">
           <ReCAPTCHA
             sitekey={API_CAPTCHA_PUBLIC}
-            onChange={this.handleChange}
-            onExpired={this.handleChange}
+            onChange={this.handleChangeCaptcha}
+            onExpired={this.handleChangeCaptchaExpirado}
           />
           <span id="passwordHelp" className="text-danger error_negrita">
             {this.state.errors["captcha"]}

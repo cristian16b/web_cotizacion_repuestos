@@ -28,11 +28,6 @@ class ConstanciaPersona
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nombre;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $nombreLogico;
 
     /**
@@ -72,7 +67,7 @@ class ConstanciaPersona
     private $tipo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Persona", inversedBy="constanciaPersonas")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Persona", inversedBy="constanciaPersonas",cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $persona;
@@ -82,18 +77,6 @@ class ConstanciaPersona
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNombre(): ?string
-    {
-        return $this->nombre;
-    }
-
-    public function setNombre(string $nombre): self
-    {
-        $this->nombre = $nombre;
-
-        return $this;
     }
 
     public function getNombreLogico(): ?string
@@ -171,6 +154,7 @@ class ConstanciaPersona
         $pos = strpos($mimetype,'/');
         $tipo = substr($mimetype,  $pos + 1);
         $this->setExtensionArchivo($tipo);
+        $this->obtenerNombreFisico();
 
         return $this;
     }
@@ -222,5 +206,9 @@ class ConstanciaPersona
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    public function obtenerNombreFisico() {
+        $this->nombreFisico =  md5(uniqid()).'.'. $this->extensionArchivo;
     }
 }

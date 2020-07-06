@@ -37,16 +37,6 @@ class Usuario implements UserInterface
     /**
      * @ORM\Column(name="password", type="string", length=255)
      * @Assert\NotBlank(message="Debes completar tu contraseña")
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage="La contraseña debe tener al menos dos letras",
-     *     max = 100,
-     *     maxMessage="La contraseña no puede tener una longitud mayor a 100 letras"
-     * )
-     * @Assert\Regex(
-     *     pattern="/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/",
-     *     message="La contraseña debe tener al entre 6 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.NO puede tener otros símbolos."
-     * )
      * @Serializer\Exclude()
      */
     protected $password;
@@ -55,6 +45,16 @@ class Usuario implements UserInterface
  
     /**
      * @var string
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="La contraseña debe tener al menos dos letras",
+     *     max = 100,
+     *     maxMessage="La contraseña no puede tener una longitud mayor a 100 letras"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/",
+     *     message="La contraseña debe tener al entre 6 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. NO puede tener otros símbolos."
+     * )
      */
     protected $plainPassword;
  
