@@ -1,10 +1,10 @@
 import React , { Component  } from 'react';
 require("../login/login.css");
 import {Link}  from 'react-router-dom';
-import {API_LOGIN,API_LOGIN_SOCIAL} from '../../Constantes/constantes';
+import {API_LOGIN,API_LOGIN_SOCIAL,API_FACEBOOK} from '../../Constantes/constantes';
 import axios from 'axios';
 // import SocialButton from '../social button/SocialButton';
-import { FacebookLoginButton } from "react-social-login-buttons";
+import { FacebookLoginButton,GoogleLoginButton } from "react-social-login-buttons";
 import { OldSocialLogin as SocialLogin } from 'react-social-login';
 import Loading from '../loading/loading.js';
  
@@ -77,7 +77,7 @@ class Login extends React.Component {
     }
 
     // login con facebook
-    handleSocialLogin = (user) => {
+    handleSocialLoginFacebook = (user) => {
         let email = user.profile.email;
         let nombre = user.profile.name;
         let apellido = user.profile.lastName;
@@ -92,6 +92,25 @@ class Login extends React.Component {
             token
         };
         this.consumirAxios(API_LOGIN_SOCIAL,payload);
+    }
+
+    // login con gmail
+    handleSocialLoginGmail = (user) => {
+        console.log(user);
+        // let email = user.profile.email;
+        // let nombre = user.profile.name;
+        // let apellido = user.profile.lastName;
+        // let id = user.profile.id;
+        // let token = user.token.accessToken;
+
+        // const payload = {
+        //     email,
+        //     nombre,
+        //     apellido,
+        //     id,
+        //     token
+        // };
+        // this.consumirAxios(API_LOGIN_SOCIAL,payload);
     }
 
     //adaptador para hacer petición http
@@ -122,15 +141,24 @@ class Login extends React.Component {
         return(
                 <div className="text-center social-btn">
                     <div className="row justify-content-center">
-                        <div className="col-5 col-lg-5 col-md-5 col-sm-5">
+                        <div className="col-12 col-lg-6 col-md-6 col-sm-8">
                             <SocialLogin
                                 provider='facebook'
-                                appId='245924643289636'
-                                callback={this.handleSocialLogin}
+                                appId={API_FACEBOOK}
+                                callback={this.handleSocialLoginFacebook}
                             >
                                 <FacebookLoginButton>
                                     Facebook
                                 </FacebookLoginButton>
+                            </SocialLogin>
+                            <SocialLogin
+                                provider='google'
+                                appId={API_FACEBOOK}
+                                callback={this.handleSocialLoginGmail}
+                            >
+                                <GoogleLoginButton>
+                                    Gmail
+                                </GoogleLoginButton>
                             </SocialLogin>
                         </div>
                     </div>          

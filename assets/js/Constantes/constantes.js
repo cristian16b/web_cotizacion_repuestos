@@ -16,3 +16,4 @@ export const API_LOCALIDAD = API_BASE_URL + '/localidad/getByName';
 // lo siguiente son las key del captcha de verificacion de persona
 export const API_CAPTCHA_PUBLIC = '6Ld2A_0UAAAAADDGvROkBFyPOPDkZWqoLLkbaWym';
 export const API_CAPTCHA_PRIVATE = '6Ld2A_0UAAAAALQJE4OHpHCktkGQRsIwbuzZKDZ4';
+export const API_FACEBOOK = '245924643289636';
