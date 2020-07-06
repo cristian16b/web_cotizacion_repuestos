@@ -96,21 +96,19 @@ class Login extends React.Component {
 
     // login con gmail
     handleSocialLoginGmail = (user) => {
-        console.log(user);
-        // let email = user.profile.email;
-        // let nombre = user.profile.name;
-        // let apellido = user.profile.lastName;
-        // let id = user.profile.id;
-        // let token = user.token.accessToken;
-
-        // const payload = {
-        //     email,
-        //     nombre,
-        //     apellido,
-        //     id,
-        //     token
-        // };
-        // this.consumirAxios(API_LOGIN_SOCIAL,payload);
+        let email = user.profile.email;
+        let nombre = user.profile.firstName;
+        let apellido = user.profile.lastName;
+        let id = user.profile.id;
+        let token = user.token.accessToken;
+        const payload = {
+            email,
+            nombre,
+            apellido,
+            id,
+            token
+        };
+        this.consumirAxios(API_LOGIN_SOCIAL,payload);
     }
 
     //adaptador para hacer petición http
