@@ -7,6 +7,7 @@ use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConstanciaPersonaRepository")
@@ -218,7 +219,7 @@ class ConstanciaPersona
      * @ORM\PreUpdate
      */
     public function guardarArchivo() {
-        $baseDir = './constancia ' . $this->getTipo()->getNombre();
-        file_put_contents($baseDir . $this->nombreFisico, $this->file);
+        $baseDir = '../constancia ' . $this->getTipo()->getNombre();
+        file_put_contents($baseDir . '/'. $this->nombreFisico, $this->file);
     }
 }
