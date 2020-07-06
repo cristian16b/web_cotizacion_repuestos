@@ -203,6 +203,7 @@ class RegistrarmeController extends AbstractController
                 $formErrors['apellido'] =  $apellidoError[0]->getMessage();
             }
             if(count($emailError)>0){
+                dump($emailError[0]->getMessage());
                 $formErrors['email'] =  $emailError[0]->getMessage();
             }
             if(count($passwordError)>0){

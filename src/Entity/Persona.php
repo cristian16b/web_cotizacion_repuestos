@@ -48,6 +48,7 @@ class Persona
      * @Assert\Email(
      *     message="El formato del e-mail no es valido"
      * )
+     * @Assert\Unique(message="El e-mail ingresado ya se encuentra registrado")
      */
     protected $email;
 
