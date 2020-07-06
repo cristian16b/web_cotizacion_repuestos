@@ -17,3 +17,5 @@ export const API_LOCALIDAD = API_BASE_URL + '/localidad/getByName';
 export const API_CAPTCHA_PUBLIC = '6Ld2A_0UAAAAADDGvROkBFyPOPDkZWqoLLkbaWym';
 export const API_CAPTCHA_PRIVATE = '6Ld2A_0UAAAAALQJE4OHpHCktkGQRsIwbuzZKDZ4';
 export const API_FACEBOOK = '245924643289636';
+export const API_GMAIL_KEY = '775255573684-f20unn7pj53doijh2cofbj3g44c68up3.apps.googleusercontent.com';
+export const API_GMAIL_PRIVATE = 'SSNU0kKOvu3fLpnnaVbrfzYp';

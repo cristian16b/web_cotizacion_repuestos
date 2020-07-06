@@ -4,7 +4,7 @@ import {Link}  from 'react-router-dom';
 import {API_LOGIN,API_LOGIN_SOCIAL,API_FACEBOOK} from '../../Constantes/constantes';
 import axios from 'axios';
 // import SocialButton from '../social button/SocialButton';
-import { FacebookLoginButton,GoogleLoginButton } from "react-social-login-buttons";
+import { FacebookLoginButton,GoogleLoginButton,API_GMAIL_KEY,API_GMAIL_PRIVATE } from "react-social-login-buttons";
 import { OldSocialLogin as SocialLogin } from 'react-social-login';
 import Loading from '../loading/loading.js';
  
@@ -153,7 +153,7 @@ class Login extends React.Component {
                             </SocialLogin>
                             <SocialLogin
                                 provider='google'
-                                appId={API_FACEBOOK}
+                                appId={API_GMAIL_KEY}
                                 callback={this.handleSocialLoginGmail}
                             >
                                 <GoogleLoginButton>
