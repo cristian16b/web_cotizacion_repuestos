@@ -83,13 +83,15 @@ class Login extends React.Component {
         let apellido = user.profile.lastName;
         let id = user.profile.id;
         let token = user.token.accessToken;
+        let provider = 'FACEBOOK';
 
         const payload = {
             email,
             nombre,
             apellido,
             id,
-            token
+            token,
+            provider
         };
         this.consumirAxios(API_LOGIN_SOCIAL,payload);
     }
@@ -101,12 +103,15 @@ class Login extends React.Component {
         let apellido = user.profile.lastName;
         let id = user.profile.id;
         let token = user.token.accessToken;
+        let provider = 'GMAIL';
+
         const payload = {
             email,
             nombre,
             apellido,
             id,
-            token
+            token,
+            provider
         };
         this.consumirAxios(API_LOGIN_SOCIAL,payload);
     }
@@ -119,10 +124,13 @@ class Login extends React.Component {
             let rol = response.data.rol;
             let token = response.data.token;
             let code = response.data.code;
+            console.log(code == 401);
             this.setState({isLoading: false});
-            // console.log(rol + ' ' + code );
-            // Llamo al componente app para que muestre habilite rutas segun corresponda por el rol
-            this.props.obtenerTokenPadre(true,rol,token,code);
+            if(code == 200) {
+                // console.log(rol + ' ' + code );
+                // Llamo al componente app para que muestre habilite rutas segun corresponda por el rol
+                this.props.obtenerTokenPadre(true,rol,token,code);
+            }
         })
         .catch(e => {
             this.setState({isLoading: false});
@@ -130,7 +138,12 @@ class Login extends React.Component {
             {
                 let error = '';
                 error = e.response.data.message;
-                this.setState({errorApi: error});
+                if(e.response.data.code == 401) {
+                    this.setState({errorApi: 'Usuario y / o contraseña invalida'});
+                }
+                else {
+                    this.setState({errorApi: error});
+                }
             }
         });
     }

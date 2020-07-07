@@ -44,6 +44,7 @@ class LoginController extends AbstractController
 
     private $datoNoInformado = "NO INFORMADO";
     private $providerFacebook = "FACEBOOK";
+    private $providerGmail = "GMAIL";
 
     // /**
     //  * @Route("/login", name="login")
@@ -106,9 +107,10 @@ class LoginController extends AbstractController
             $idSocial = $request->request->get('id');
             $nombre = $request->request->get('nombre');
             $token = $request->request->get('token');
+            $provider = $request->request->get('provider');
 
             // si uno de los datos viene vacios 
-            if(!$token || !$apellido || !$email || !$idSocial || !$nombre) 
+            if(!$token || !$apellido || !$email || !$idSocial || !$nombre  || $provider) 
             {
                 throw new AccessDeniedException('Bad credentials.'); 
             }
@@ -133,7 +135,13 @@ class LoginController extends AbstractController
             }
 
             $user->setSocialToken($token);
-            $user->setSocialProvider($this->providerFacebook);
+            if($provider == $this->providerFacebook) {
+                $user->setSocialProvider($this->providerFacebook);
+            }
+            else if($provider == $this->providerGmail) {
+                $user->setSocialProvider($this->providerGmail);
+            }
+
             $user->setSocialId($idSocial);
 
             $entityManager->persist($user);
