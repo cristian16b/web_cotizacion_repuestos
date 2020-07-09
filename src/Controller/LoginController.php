@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Entity\Usuario;
+use App\Entity\Persona;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
@@ -86,7 +87,7 @@ class LoginController extends AbstractController
     public function getLogiSocialAction(Request $request, UserPasswordEncoderInterface $encoder, JWTTokenManagerInterface $JWTManager) {
 
         $serializer = $this->get('serializer');
-        $repository = $this->getDoctrine()->getRepository(Usuario::class);
+        $repository = $this->getDoctrine()->getRepository(Persona::class);
         $entityManager = $this->getDoctrine()->getManager();
 
         $code = 200;
@@ -110,39 +111,49 @@ class LoginController extends AbstractController
             $provider = $request->request->get('provider');
 
             // si uno de los datos viene vacios 
-            if(!$token || !$apellido || !$email || !$idSocial || !$nombre  || $provider) 
+            if(!$token || !$apellido || !$email || !$idSocial || !$nombre  || !$provider) 
             {
                 throw new AccessDeniedException('Bad credentials.'); 
             }
-
-            $user = $repository->findOneBy([
+            
+            $persona = $repository->findOneBy([
                 'email' => $email,
             ]);
             
-            
-            if(is_null($user)) {
+            if(is_null($persona)) {
+                $persona = new Persona();
                 $user = new Usuario();
-                $user->setNombre($nombre);
-                $user->setEmail($email);
+                $persona->setNombre($nombre);
+                $persona->setEmail($email);
                 $user->setUsername($email);
                 $user->setPlainPassword($idSocial);
                 $user->setPassword($encoder->encodePassword($user, $idSocial));
                 $user->setRoles($this->userRolUsuario);
                 $user->setUsuarioUltimaModificacion($email);
-                $user->setApellido($apellido);
-                $user->setCodArea($this->datoNoInformado);
-                $user->setTelefono($this->datoNoInformado);
+                $persona->setUsuarioUltimaModificacion($email);
+                $persona->setApellido($apellido);
+                $persona->setCodArea($this->datoNoInformado);
+                $persona->setTelefono($this->datoNoInformado);
+                $user->setSocialToken($token);
+                if($provider == $this->providerFacebook) {
+                    $user->setSocialProvider($this->providerFacebook);
+                }
+                else if($provider == $this->providerGmail) {
+                    $user->setSocialProvider($this->providerGmail);
+                }
+                $user->setSocialId($idSocial);
             }
-
-            $user->setSocialToken($token);
-            if($provider == $this->providerFacebook) {
-                $user->setSocialProvider($this->providerFacebook);
+            else {
+                $user = $persona->getUsuario();
+                $user->setSocialToken($token);
+                if($provider == $this->providerFacebook) {
+                    $user->setSocialProvider($this->providerFacebook);
+                }
+                else if($provider == $this->providerGmail) {
+                    $user->setSocialProvider($this->providerGmail);
+                }
+                $user->setSocialId($idSocial);
             }
-            else if($provider == $this->providerGmail) {
-                $user->setSocialProvider($this->providerGmail);
-            }
-
-            $user->setSocialId($idSocial);
 
             $entityManager->persist($user);
             $entityManager->flush();
