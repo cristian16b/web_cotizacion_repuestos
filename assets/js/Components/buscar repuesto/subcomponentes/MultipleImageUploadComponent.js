@@ -33,6 +33,10 @@ const imgAdd =
   fontSize:'15px'
 }
 
+const divPrevisualizacion = {
+    padding: '5%'
+}
+
 class MultipleImageUploadComponent extends React.Component {
 
   onChangeI = (imageList) => {
@@ -44,6 +48,8 @@ class MultipleImageUploadComponent extends React.Component {
     render() {
         return (
             <div className="row justify-content-center">
+                <br/>
+                <br/>
                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div className="form-group">
                         <ImageUploading

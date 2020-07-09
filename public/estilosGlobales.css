@@ -111,3 +111,21 @@ h4 {
 	color: rgb(21, 61, 87);
 	box-shadow: none;
 }
+
+.btn-danger {
+    background: none;
+    border: 2px solid red;
+	color: red;
+}
+
+.btn-secondary {
+    background: none;
+    border: 2px solid rgba(83,89,95,1);
+	color: rgba(83,89,95,1);
+}
+
+.btn-warning {
+    background: none;
+    border: 2px solid rgba(244,179,27);
+	color:rgba(244,179,27);
+}
