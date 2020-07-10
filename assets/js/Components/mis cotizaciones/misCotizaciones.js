@@ -99,7 +99,7 @@ class MisCotizaciones extends React.Component {
                       </div>
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                            <Collapsible title="Ver fotos" className="btn btn-info btn-lg btn-block">
+                            <Collapsible title="Ver fotos" className="btn btn-secondary">
                               <div className="row">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                                   <p>Imagenes adjuntadas en la solicitud.Haga click para previsualizar las imagenes</p>
@@ -117,7 +117,7 @@ class MisCotizaciones extends React.Component {
                       </div>
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                              <Collapsible title="Ver cotizaciones"  className="btn btn-dark btn-lg btn-block">
+                              <Collapsible title="Ver cotizaciones"  className="btn btn-warning">
                                     <div> <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
                                     </div>
                               </Collapsible>
