@@ -13,7 +13,6 @@ class MisCotizaciones extends React.Component {
     super(props);
     this.state = ({
       menu: false,
-      token: this.props.getTokenPadre(),
       isMount: false,
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
       misSolicitudes: [],
@@ -22,7 +21,7 @@ class MisCotizaciones extends React.Component {
 
   async componentDidMount() {
     const config = {
-      headers: { Authorization: `Bearer ${this.state.token['token']}` }
+      headers: { Authorization: `Bearer ${this.props.token}` }
     };
     try 
     {
