@@ -130,10 +130,9 @@ class BuscarRepuesto extends React.Component {
     }
     const config = {
         headers: { 
-            Authorization: `Bearer ${this.state.token}`
+            Authorization: `Bearer ${this.props.token}`
         }
     };
-    console.log(config);
     this.setState({isLoading: true});
     axios.post(API_GUARDAR_SOLICITUD_REPUESTO,payload,config)
         .then(response => {
@@ -192,10 +191,9 @@ class BuscarRepuesto extends React.Component {
       if(name.length > minimaCantLetras) {
         const config = {
           headers: { 
-            Authorization: 'Bearer ' + this.state.token
+            Authorization: `Bearer ${this.props.token}`
           }
         };
-        console.log(config);
         // console.log(this.state.token['token']);
         this.setState({peticionActiva: true});
         //seteo peticionActiva true para evitar que se desaten continuas peticiones
