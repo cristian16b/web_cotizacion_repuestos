@@ -142,6 +142,7 @@ class LoginController extends AbstractController
                     $user->setSocialProvider($this->providerGmail);
                 }
                 $user->setSocialId($idSocial);
+                $persona->setUsuario($user);
             }
             else {
                 $user = $persona->getUsuario();
@@ -153,9 +154,10 @@ class LoginController extends AbstractController
                     $user->setSocialProvider($this->providerGmail);
                 }
                 $user->setSocialId($idSocial);
+                $persona->setUsuario($user);
             }
 
-            $entityManager->persist($user);
+            $entityManager->persist($persona);
             $entityManager->flush();
 
             return new JsonResponse(
