@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import 'react-super-responsive-Table/dist/SuperResponsiveTableStyle.css';
 import Loading from '../loading/loading.js';
-import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO} from '../../Constantes/constantes';
+import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
 import {Collapsible} from './Collapsible';
 import ModalImage from "react-modal-image";
@@ -56,33 +56,68 @@ class MisCotizaciones extends React.Component {
     });
   }
 
+  buscarRepuestoSolicitado = e => {
+    const config = {
+      headers: { Authorization: `Bearer ${this.props.token}` }
+    };
+    let url = API_BUSCAR_MIS_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
+    this.getData(url,config);
+  }
+
+  async getData(url,headers){
+    try 
+    {
+      // Load async data from an inexistent endpoint.
+      const response = await axios.get(url,headers);
+      const { data } = await response;
+      this.setState({ catchaValido: false });
+  
+      let code = response.data.code;
+      if(code == 200){
+        this.setState({misSolicitudes: response.data.data});
+      }
+      this.setState({isLoading: false});
+    } 
+    catch (e) 
+    {
+      console.log(`😱 Axios request failed: ${e}`);
+      this.setState({isLoading: false});
+      this.setState({ catchaValido: false });
+      alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
+    }
+  }
+
   renderFilTrosBusqueda() {
     return(
-      <div className="row">
-        <div className="col-12 col-sm-12 col-md-3 col-lg-6">
-          <div className="form-group">
-            <label htmlFor="password">Buscar repuesto solicitado</label>
-            <div className="input-group">
-              <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                <input type="text" className="form-control" name="buscar" 
-                                            defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
-                                            placeholder="Escribala el repuesto que solicito" />	
-              </div>
-              <span id="buscar" className="text-danger error_negrita">
-                {this.state.errors["buscar"]}
-              </span> 
+      <>
+        <div className="row">
+          <div className="col-12 col-sm-12 col-md-3 col-lg-6">
+            <div className="form-group">
+              <label htmlFor="password">Buscar repuesto solicitado</label>
+              <div className="input-group">
+                <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                  <input type="text" className="form-control" name="repuestoBuscar" 
+                                              defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
+                                              placeholder="Escribala el repuesto que solicito" />	
+                </div>
+                <span id="buscar" className="text-danger error_negrita">
+                  {this.state.errors["buscar"]}
+                </span> 
+            </div>
           </div>
         </div>
-        <div className="col-12 col-sm-12 col-md-3 col-lg-2">
-            <button type="submit" 
-              className="btn btn-primary btn-block">Buscar</button>
+          <div className="row">
+                  <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+              <button type="submit" onClick={this.buscarRepuestoSolicitado}
+                className="btn btn-primary btn-block">Buscar</button>
+          </div>
+          <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+              <button 
+                onClick={this.cancelar}
+                className="btn btn-light btn-block">Reiniciar</button>
+          </div>
         </div>
-        <div className="col-12 col-sm-12 col-md-3 col-lg-2">
-            <button 
-              onClick={this.cancelar}
-              className="btn btn-light btn-block">Reiniciar</button>
-        </div>
-      </div>
+      </>
     );
   }
 

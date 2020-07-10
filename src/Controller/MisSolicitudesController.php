@@ -95,4 +95,64 @@ class MisSolicitudesController extends AbstractController
             )
         );
     }
+
+    /**
+     * @Rest\Get("/buscar", name="solicitudes_buscar", defaults={"_format":"json"})
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Retorna las ultimas 20 solicitudes realizadas."
+     * )
+     *
+     * @SWG\Response(
+     *     response=500,
+     *     description="Un error ocurrio en la busqueda de mis solicitudes."
+     * )
+     *
+     * @SWG\Tag(name="MisSolicitudes")
+     */
+    public function buscarSolicitudesRealizadasAction(Request $request)
+    {
+        $serializer = $this->container->get('jms_serializer');
+        $solicitudes = [];
+        $message = "";
+
+        try {
+            $user = $this->getUser();
+            $name = $request->query->get('name');
+            // si no se obtiene correctamente el usuario falla
+            if(is_null($user)) {
+                throw new \Exception('Something went wrong!');
+            }
+
+            $code = 200;
+            $error = false;
+
+            $em = $this->getDoctrine()->getManager();
+            $solicitudes= $em->getRepository(Solicitud::class)
+                    ->buscarUltimasPorNombreRepuesto($user,$name);
+
+            if (is_null($solicitudes)) {
+                $solicitudes = [];
+            }
+
+        } catch (Exception $ex) {
+            $code = 500;
+            $error = true;
+            $message = "Error: {$ex->getMessage()}";
+        }
+
+        $response = [
+            'code' => $code,
+            'error' => $error,
+            'data' => $code == 200 ? $solicitudes : $message,
+        ];
+        
+        return new Response(
+            $serializer->serialize(
+                $response,
+                "json"
+            )
+        );
+    }
 }

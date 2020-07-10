@@ -31,6 +31,22 @@ class SolicitudRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function buscarUltimasPorNombreRepuesto($user,$name) {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.solicitante','u','WITH','u.fechaBaja IS null')
+            ->innerJoin('s.repuesto','r','WITH','r.fechaBaja IS null')
+            ->where('s.fechaBaja is null')
+            ->andWhere('s.solicitante = :usuario')
+            ->andWhere('r.name LIKE :repuestoIngresado')
+            ->setParameter('usuario', $usuario)
+            ->setParameter('repuestoIngresado','%' . $name . '%')
+            ->orderBy('s.fechaAlta', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
  
     // /**
     //  * @return Solicitud[] Returns an array of Solicitud objects
