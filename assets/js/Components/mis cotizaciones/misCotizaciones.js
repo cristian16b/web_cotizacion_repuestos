@@ -16,7 +16,11 @@ class MisCotizaciones extends React.Component {
       isMount: false,
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
       misSolicitudes: [],
+      repuestoBuscar: '',
+      errors:{},
     });
+
+    this.handleChangeInput = this.handleChangeInput.bind(this);
   }
 
   async componentDidMount() {
@@ -46,10 +50,38 @@ class MisCotizaciones extends React.Component {
     this.state.isMount = false;
   }
 
+  handleChangeInput = e => {
+    this.setState({
+      [e.target.name] : e.target.value
+    });
+  }
+
   renderFilTrosBusqueda() {
     return(
       <div className="row">
-        <p>Aca va a estar el filtro de busqueda por nombre del respuesto</p>
+        <div className="col-12 col-sm-12 col-md-3 col-lg-6">
+          <div className="form-group">
+            <label htmlFor="password">Buscar repuesto solicitado</label>
+            <div className="input-group">
+              <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                <input type="text" className="form-control" name="buscar" 
+                                            defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
+                                            placeholder="Escribala el repuesto que solicito" />	
+              </div>
+              <span id="buscar" className="text-danger error_negrita">
+                {this.state.errors["buscar"]}
+              </span> 
+          </div>
+        </div>
+        <div className="col-12 col-sm-12 col-md-3 col-lg-2">
+            <button type="submit" 
+              className="btn btn-primary btn-block">Buscar</button>
+        </div>
+        <div className="col-12 col-sm-12 col-md-3 col-lg-2">
+            <button 
+              onClick={this.cancelar}
+              className="btn btn-light btn-block">Reiniciar</button>
+        </div>
       </div>
     );
   }
@@ -160,7 +192,9 @@ class MisCotizaciones extends React.Component {
               <div className="card-body">
                 <h3 className="my-4">Mis Cotizaciones</h3>
                 <h5>Listado de las últimas solicitudes generadas</h5>
+                <hr/>
                 <>{ this.renderFilTrosBusqueda() }</>
+                <hr/>
                 <>{ this.renderTabla() }</>
               </div>
             </div>
