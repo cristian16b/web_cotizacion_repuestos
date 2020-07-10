@@ -46,10 +46,6 @@ class App extends React.Component {
     // alert(this.state.isUserLogin);
   }
 
-  getToken = () => {
-    return this.state.token;
-  }
-
   returnTemplateLogueado = () => {
     return (
       <div className="row">
@@ -59,9 +55,9 @@ class App extends React.Component {
               <Switch>
                 <Redirect exact from='/login' to='/repuesto'/>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/repuesto" render={() => <BuscarRepuesto getTokenPadre={this.getToken}/>} />
+                <Route exact path="/repuesto" render={() => <BuscarRepuesto token={this.state.token} rol={this.state.rol}/>} />
                 <Route exact path="/perfil" component={MiPerfil} />
-                <Route exact path="/cotizaciones" render={() => <MisCotizaciones getTokenPadre={this.getToken}/>} />
+                <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token} rol={this.state.rol}/>} />
                 <Route exact path="/contacto" component={Contacto} />
                 <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
                 <Route component={NotFound}/>

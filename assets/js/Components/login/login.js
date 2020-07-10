@@ -124,7 +124,6 @@ class Login extends React.Component {
             let rol = response.data.rol;
             let token = response.data.token;
             let code = response.data.code;
-            console.log(code == 401);
             this.setState({isLoading: false});
             if(code == 200) {
                 // console.log(rol + ' ' + code );

@@ -16,7 +16,8 @@ class BuscarRepuesto extends React.Component {
     // que tiene el metodo getToke y esta asociado a gettokenpadre
     // es la forma mas facil que encontre para obtener los datos
     this.state = ({
-      token: this.props.getTokenPadre(),
+      token: this.props.token,
+      rol: this.props.rol,
       peticionActiva:false,
       repuestoSeleccionado: '',
       marcaSeleccionado: '',
@@ -30,6 +31,10 @@ class BuscarRepuesto extends React.Component {
       isLoading: false,
       isGuardado: false
     })
+
+    console.log('...es un token');
+    console.log(this.props.token);
+    console.log(this.props.rol);
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
     this.loadMarcas = this.loadMarcas.bind(this);
@@ -131,7 +136,7 @@ class BuscarRepuesto extends React.Component {
     }
     const config = {
         headers: { 
-            Authorization: `Bearer ${this.state.token['token']}`
+            Authorization: `Bearer ${this.state.token}`
         }
     };
     console.log(config);
@@ -193,7 +198,7 @@ class BuscarRepuesto extends React.Component {
       if(name.length > minimaCantLetras) {
         const config = {
           headers: { 
-            Authorization: 'Bearer ' + this.state.token['token']
+            Authorization: 'Bearer ' + this.state.token
           }
         };
         console.log(config);
