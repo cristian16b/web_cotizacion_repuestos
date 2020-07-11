@@ -32,7 +32,7 @@ class SolicitudRepository extends ServiceEntityRepository
         ;
     }
 
-    public function buscarUltimasPorNombreRepuesto($user,$name) {
+    public function buscarUltimasPorNombreRepuesto($usuario,$name) {
         return $this->createQueryBuilder('s')
             ->innerJoin('s.solicitante','u','WITH','u.fechaBaja IS null')
             ->innerJoin('s.repuesto','r','WITH','r.fechaBaja IS null')

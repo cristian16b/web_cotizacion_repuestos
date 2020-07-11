@@ -91,7 +91,7 @@ class MisCotizaciones extends React.Component {
     return(
       <>
         <div className="row">
-          <div className="col-12 col-sm-12 col-md-3 col-lg-6">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-6">
             <div className="form-group">
               <label htmlFor="password">Buscar repuesto solicitado</label>
               <div className="input-group">
