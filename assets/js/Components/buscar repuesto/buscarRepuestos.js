@@ -389,6 +389,7 @@ class BuscarRepuesto extends React.Component {
             <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
                 <h3 className="my-4">Buscar un repuesto</h3>
+                <hr/>
                 <h6>Para solicitar cotizaciones sobre un repuesto debe cargar los siguientes datos</h6>
                   {this.renderSelectPrimerFila()}
                   {this.renderSelectSegundaFila()}
@@ -400,6 +401,7 @@ class BuscarRepuesto extends React.Component {
                     */}
                     <form onSubmit={this.handleSubmit}>
                       <>{this.renderBotones()}</>
+                      <hr/>
                     </form>
                 {/* FIN CARDBODY */}
               </div>
