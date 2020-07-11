@@ -60,9 +60,19 @@ class MisCotizaciones extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
-    this.setState({isLoading: true});
-    let url = API_BUSCAR_MIS_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
-    this.getData(url,config);
+    let repuestoBuscar = this.state.repuestoBuscar;
+    if(repuestoBuscar.length >= 3) {
+      this.setState({errors: {}});
+      this.setState({isLoading: true});
+      let url = API_BUSCAR_MIS_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
+      this.getData(url,config);
+    }
+    else {
+      let error = {};
+      error["buscar"] = "Debes escribir al menos 3 caracteres";
+      this.setState({errors: error});
+    }
+
   }
 
   async getData(url,headers){
@@ -113,7 +123,7 @@ class MisCotizaciones extends React.Component {
           </div>
           <div className="col-6 col-sm-6 col-md-3 col-lg-2">
               <button 
-                onClick={this.cancelar}
+                onClick={this.componentDidMount}
                 className="btn btn-light btn-block">Reiniciar</button>
           </div>
         </div>
