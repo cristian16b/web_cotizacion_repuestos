@@ -21,6 +21,7 @@ class MisCotizaciones extends React.Component {
     });
 
     this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.reiniciar = this.reiniciar.bind(this);
   }
 
   async componentDidMount() {
@@ -72,7 +73,6 @@ class MisCotizaciones extends React.Component {
       error["buscar"] = "Debes escribir al menos 3 caracteres";
       this.setState({errors: error});
     }
-
   }
 
   async getData(url,headers){
@@ -95,6 +95,17 @@ class MisCotizaciones extends React.Component {
       this.setState({isLoading: false});
       alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
     }
+  }
+
+  reiniciar = (e) => {
+    const config = {
+      headers: { Authorization: `Bearer ${this.props.token}` }
+    };
+    this.setState({isLoading: true});
+    this.setState({repuestoBuscar: ''});
+    this.setState({errors: {}});
+    let url = API_MIS_SOLICITUDES;
+    this.getData(url,config);
   }
 
   renderFilTrosBusqueda() {
@@ -123,7 +134,7 @@ class MisCotizaciones extends React.Component {
           </div>
           <div className="col-6 col-sm-6 col-md-3 col-lg-2">
               <button 
-                onClick={this.componentDidMount}
+                onClick={this.reiniciar}
                 className="btn btn-light btn-block">Reiniciar</button>
           </div>
         </div>
