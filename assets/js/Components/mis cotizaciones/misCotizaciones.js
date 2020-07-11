@@ -60,6 +60,7 @@ class MisCotizaciones extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
+    this.setState({isLoading: true});
     let url = API_BUSCAR_MIS_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
     this.getData(url,config);
   }
@@ -82,7 +83,6 @@ class MisCotizaciones extends React.Component {
     {
       console.log(`😱 Axios request failed: ${e}`);
       this.setState({isLoading: false});
-      this.setState({ catchaValido: false });
       alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
     }
   }
