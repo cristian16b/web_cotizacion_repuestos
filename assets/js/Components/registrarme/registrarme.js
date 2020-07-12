@@ -44,6 +44,8 @@ class Registrarme extends React.Component {
         botonesSeleccionUsuario: true,
         // para ocultar/mostrar los campos de contrasenia/campos de archivos
         ocultarCampos: false,
+        // para habilitar modo lectura (true) o modo editar (false)
+        soloLectura: false
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -404,6 +406,7 @@ renderFormulario() {
                   password={this.state.password}
                   password2={this.state.password2}
                   ocultarCampos={this.state.ocultarCampos}
+                  soloLectura={this.state.soloLectura}
                 >
           </FormularioDatosComunes>
             <>

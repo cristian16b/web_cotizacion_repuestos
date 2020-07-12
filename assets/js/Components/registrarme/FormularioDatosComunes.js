@@ -15,6 +15,7 @@ class FormularioDatosComunes extends React.Component {
           <span className="input-group-addon"><i className="fa fa-user"></i></span>
             {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
             <input type="text" className="form-control" name="apellido" 
+                    readOnly={this.props.soloLectura}
                                         defaultValue={this.props.apellido} onChange={handleChangeInput}
                                         placeholder="Ingrese su apellido"/>
         </div>
@@ -34,6 +35,7 @@ class FormularioDatosComunes extends React.Component {
           <span className="input-group-addon"><i className="fa fa-user"></i></span>
             {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
             <input type="text" className="form-control" name="nombre" 
+                                readOnly={this.props.soloLectura}
                                         defaultValue={this.props.nombre} onChange={handleChangeInput}
                                         placeholder="Ingrese su nombre"/>
         </div>
@@ -54,6 +56,7 @@ class FormularioDatosComunes extends React.Component {
                     <div className="input-group">
                       <span className="input-group-addon"><i className="fa fa-user"></i></span>
                           <input type="text" className="form-control" name="codArea" 
+                                              readOnly={this.props.soloLectura}
                                                       defaultValue={this.props.codArea} onChange={handleChangeInput}
                                                       placeholder="Ej: 0342"/>
                       </div>
@@ -68,6 +71,7 @@ class FormularioDatosComunes extends React.Component {
                       <div className="input-group">
                         <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                           <input type="text" className="form-control" name="telefono" 
+                                              readOnly={this.props.soloLectura}
                                                       defaultValue = {this.props.telefono} onChange={handleChangeInput}
                                                       placeholder="Ingrese su Telefóno" />	
                         </div>
@@ -88,6 +92,7 @@ class FormularioDatosComunes extends React.Component {
       <div className="input-group">
         <span className="input-group-addon"><i className="fa fa-lock"></i></span>
           <input type="text" className="form-control" name="email" 
+                              readOnly={this.props.soloLectura}
                                       defaultValue = {this.props.email} onChange={handleChangeInput}
                                       placeholder="Ingrese su email" />	
         </div>

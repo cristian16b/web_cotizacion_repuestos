@@ -30,6 +30,7 @@ class MiPerfil extends React.Component {
       // errores locales o retornados por la api
       errors: {},
       errorApi: '',
+      soloLectura: true,
     });
   }
 
@@ -48,6 +49,7 @@ class MiPerfil extends React.Component {
               email={this.state.email}
               password={this.state.password}
               password2={this.state.password2}
+              soloLectura={this.state.soloLectura}
             >
           </FormularioDatosComunes>
           <hr></hr>
@@ -83,6 +85,7 @@ class MiPerfil extends React.Component {
             email={this.state.email}
             password={this.state.password}
             password2={this.state.password2}
+            soloLectura={this.state.soloLectura}
           >
         </FormularioDatosComunes>
       );
