@@ -31,7 +31,6 @@ class MiPerfil extends React.Component {
       errors: {},
       errorApi: '',
     });
-
   }
 
   renderDatosPerfil() {
@@ -90,7 +89,7 @@ class MiPerfil extends React.Component {
     }
     else {
       return(
-null
+          null
       );
     }
   }
