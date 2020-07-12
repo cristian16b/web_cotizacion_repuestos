@@ -201,7 +201,7 @@ class Usuario implements UserInterface
      */
     public function getRoles()
     {
-        return ["ROLE_USER"];
+        return array($this->roles);
     }
  
     public function getSalt() {}
