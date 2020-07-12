@@ -181,7 +181,12 @@ class FormularioDatosComerciante extends React.Component {
         <div className="col-lg-11 col-12 col-md-12">
           <>{this.renderCalleNro()}</>
           <>{this.renderProvinciaLocalidad()}</>
-          <>{this.renderArchivos()}</>
+          <>
+            {
+              this.props.ocultarCampos == false &&
+              <>{this.renderArchivos()}</>
+            }
+          </>
         </div>
       </div>
     );
