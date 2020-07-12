@@ -56,7 +56,7 @@ class App extends React.Component {
                 <Redirect exact from='/login' to='/repuesto'/>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/repuesto" render={() => <BuscarRepuesto token={this.state.token} rol={this.state.rol}/>} />
-                <Route exact path="/perfil" component={MiPerfil} />
+                <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token} rol={this.state.rol}/>} />
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token} rol={this.state.rol}/>} />
                 <Route exact path="/contacto" component={Contacto} />
                 <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />

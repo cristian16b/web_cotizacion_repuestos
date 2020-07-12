@@ -21,3 +21,6 @@ export const API_CAPTCHA_PRIVATE = '6Ld2A_0UAAAAALQJE4OHpHCktkGQRsIwbuzZKDZ4';
 export const API_FACEBOOK = '245924643289636';
 export const API_GMAIL_KEY = '775255573684-f20unn7pj53doijh2cofbj3g44c68up3.apps.googleusercontent.com';
 export const API_GMAIL_PRIVATE = 'SSNU0kKOvu3fLpnnaVbrfzYp';
+// roles de usuario
+export const ROL_COMERCIANTE = "ROLE_COMERCIANTE";
+export const ROL_USER = "ROLE_USER";

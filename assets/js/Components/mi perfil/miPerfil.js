@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import Loading from '../loading/loading.js';
+import {ROL_COMERCIANTE,ROL_USER} from '../../Constantes/constantes';
 
 class MiPerfil extends React.Component {
 
@@ -7,19 +7,24 @@ class MiPerfil extends React.Component {
     super(props);
 
     this.state = ({
-      menu: false,
-      isMount: false,
-      isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
-      misSolicitudes: [],
-      repuestoBuscar: '',
-      errors:{},
     });
 
   }
 
+  renderDatosPerfil() {
+    console.log(this.props.rol);
+    if(this.props.rol == ROL_COMERCIANTE) {
+
+    }
+    else if(this.props.rol == ROL_USER) {
+
+    }
+    else {
+
+    }
+  }
+
   render() {
-    // if(this.state.isLoading == true)
-    //   return  <Loading></Loading>
     return (        
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
@@ -27,7 +32,7 @@ class MiPerfil extends React.Component {
               <div className="card-body">
                 <h3 className="my-4">Mi perfil</h3>
                 <hr/>
-
+                <>{this.renderDatosPerfil()}</>
             </div>
           </div>
         </div>
