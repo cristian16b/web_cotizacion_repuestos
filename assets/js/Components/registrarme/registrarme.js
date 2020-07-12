@@ -41,7 +41,9 @@ class Registrarme extends React.Component {
         // para mostrar el loop de cargando
         isLoading: false,
         // para mostrar los botones de seleccion
-        botonesSeleccionUsuario: true
+        botonesSeleccionUsuario: true,
+        // para ocultar/mostrar los campos de contrasenia/campos de archivos
+        ocultarCampos: false,
     })
 
     this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -401,6 +403,7 @@ renderFormulario() {
                   email={this.state.email}
                   password={this.state.password}
                   password2={this.state.password2}
+                  ocultarCampos={this.state.ocultarCampos}
                 >
           </FormularioDatosComunes>
             <>
@@ -422,6 +425,7 @@ renderFormulario() {
                     errorsApi={this.state.errorApi}
                     onChangeValueDni={this.handleChangeValueArchivoDni}
                     onChangeValueAfip={this.handleChangeValueArchivoAfip}
+                    ocultarCampos={this.state.ocultarCampos}
                   >
                   </FormularioDatosComerciante>
                 </>

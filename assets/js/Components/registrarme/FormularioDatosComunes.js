@@ -148,7 +148,12 @@ class FormularioDatosComunes extends React.Component {
           <>{this.renderNombre()}</>
           <>{this.renderEmail()}</>
           <>{this.renderTelefono()}</>
-          <>{this.renderContrasenia()}</>
+          <>
+            {
+              this.props.ocultarCampos == false &&
+              <>{this.renderContrasenia()}</>
+            }
+          </>
         </div>
       </div>
     );
