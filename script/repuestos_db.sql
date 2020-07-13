@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2020 a las 17:56:01
+-- Tiempo de generación: 13-07-2020 a las 02:16:11
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -38,6 +38,33 @@ CREATE TABLE `compra` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `constancia_persona`
+--
+
+CREATE TABLE `constancia_persona` (
+  `id` int(11) NOT NULL,
+  `nombre_logico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_fisico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pesgo_mega` double NOT NULL,
+  `fecha_alta` date NOT NULL,
+  `fecha_baja` date DEFAULT NULL,
+  `tipo_id` int(11) NOT NULL,
+  `persona_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `constancia_persona`
+--
+
+INSERT INTO `constancia_persona` (`id`, `nombre_logico`, `nombre_fisico`, `pesgo_mega`, `fecha_alta`, `fecha_baja`, `tipo_id`, `persona_id`) VALUES
+(1, 'Solicitud protesis.png', 'ed3046d2090dbc564291aae502fb0d9f.png', 0.052115440368652, '2020-07-06', NULL, 2, 6),
+(2, 'CV-BUDZICZ.pdf', '04257ecadc6864d72a4a4821ab041ccd.pdf', 0.047978401184082, '2020-07-06', NULL, 1, 6),
+(3, 'CV-BUDZICZ.pdf', '9bf57e55e0f431b9e6a26d29e5c8448b.pdf', 0.047978401184082, '2020-07-06', NULL, 2, 7),
+(4, '106571278_1146413055722721_9051077943535246814_o.jpg', 'c556b70cbbbebd41e0650fc997fb0fa2.jpeg', 0.32494735717773, '2020-07-06', NULL, 1, 7);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cotizacion`
 --
 
@@ -63,6 +90,15 @@ CREATE TABLE `domicilio` (
   `calle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `numero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `domicilio`
+--
+
+INSERT INTO `domicilio` (`id`, `localidad_id`, `calle`, `numero`) VALUES
+(1, 2383, 'gral paz', '5746'),
+(4, 2383, 'gral paz', '5746'),
+(5, 2127, 'gral paz', '5746');
 
 -- --------------------------------------------------------
 
@@ -3516,13 +3552,23 @@ CREATE TABLE `persona` (
   `apellido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cod_area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `constancia_inscripcion_afip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `constancia_dni` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `usuario_ultima_modificacion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`id`, `domicilio_id`, `usuario_id`, `nombre`, `email`, `apellido`, `cod_area`, `telefono`, `created_at`, `updated_at`, `usuario_ultima_modificacion`, `fecha_baja`) VALUES
+(1, NULL, 4, 'prueba', 'prueba@usuario.com', 'user', '0342', '4694604', '2020-07-05 17:04:12', '2020-07-05 17:04:12', 'prueba@usuario.com', NULL),
+(2, 1, 5, 'prueba', 'comerciante@prueba.com', 'comerciante', '0342', '4600700', '2020-07-05 17:26:14', '2020-07-05 17:26:14', 'comerciante@prueba.com', NULL),
+(3, NULL, 6, 'CRISTIAN GONZALO', 'cristian.budzicz@gmail.com', 'budzicz', '0342', '4606060', '2020-07-05 17:31:38', '2020-07-05 17:31:38', 'cristian.budzicz@gmail.com', NULL),
+(6, 4, 9, 'rodrigo', 'repuestossantafe@correo.com', 'gonzalez', '0342', '4607668', '2020-07-06 13:52:47', '2020-07-06 13:52:47', 'repuestossantafe@correo.com', NULL),
+(7, 5, 11, 'prueba', 'repuestossantafe@prueba.com', 'comerciante', '343', '155316982', '2020-07-06 22:12:38', '2020-07-06 22:12:38', 'repuestossantafe@prueba.com', NULL),
+(8, NULL, 16, 'Cristian Budzicz', 'cristian16b@hotmail.com', 'Budzicz', 'NO INFORMADO', 'NO INFORMADO', '2020-07-10 03:39:15', '2020-07-10 03:39:15', 'cristian16b@hotmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -3581,6 +3627,15 @@ CREATE TABLE `recurso_solicitud` (
   `fecha_baja` date DEFAULT NULL,
   `peso_mega` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `recurso_solicitud`
+--
+
+INSERT INTO `recurso_solicitud` (`id`, `solicitud_id`, `nombre_logico`, `nombre_fisico`, `fecha_alta`, `fecha_baja`, `peso_mega`) VALUES
+(1, 1, 'Bujías_0_10/07/2020.jpeg', 'a20a87982d07c04c453bd2b5fc4aa410.jpeg', '2020-07-10', NULL, 0.007889986038208),
+(2, 2, 'Motores Completos_0_11/07/2020.jpeg', '8d8510c29528b2c116b2e437cb8fc350.jpeg', '2020-07-11', NULL, 0.15254044532776),
+(3, 3, 'Baterías_0_11/07/2020.jpeg', 'a3df9b5ee67f29ec7b73f6aeaa2b6782.jpeg', '2020-07-11', NULL, 0.0079529285430908);
 
 -- --------------------------------------------------------
 
@@ -3851,6 +3906,34 @@ CREATE TABLE `solicitud` (
   `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `solicitud`
+--
+
+INSERT INTO `solicitud` (`id`, `modelo_auto_id`, `compra_id`, `solicitante_id`, `repuesto_id`, `observacion`, `fecha_alta`, `fecha_baja`) VALUES
+(1, 309, NULL, 16, 60, 'modelo 2020 usadas o nuevas', '2020-07-10', NULL),
+(2, 114, NULL, 16, 121, 'con urgencia por necesitarlo, saludos', '2020-07-11', NULL),
+(3, 317, NULL, 16, 81, 'nueva o con poco uso para modelo 2020', '2020-07-11', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_constancia`
+--
+
+CREATE TABLE `tipo_constancia` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_constancia`
+--
+
+INSERT INTO `tipo_constancia` (`id`, `nombre`) VALUES
+(1, 'DNI'),
+(2, 'INSCRIPCIÒN AFIP');
+
 -- --------------------------------------------------------
 
 --
@@ -3913,6 +3996,18 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `username`, `password`, `roles`, `created_at`, `updated_at`, `usuario_ultima_modificacion`, `social_provider`, `social_id`, `social_token`, `fecha_baja`) VALUES
+(4, 'prueba@usuario.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_USER\"', '2020-07-05 17:04:12', '2020-07-05 17:04:12', 'prueba@usuario.com', NULL, NULL, NULL, NULL),
+(5, 'comerciante@prueba.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_COMERCIANTE\"', '2020-07-05 17:26:14', '2020-07-05 17:26:14', 'comerciante@prueba.com', NULL, NULL, NULL, NULL),
+(6, 'cristian.budzicz@gmail.com', 'Atw8HUEDLVdr3kw1Fzbf0XWPGlbpSG9R9qf4Ord4OmEQf3nqibpX4C3VVH2ZC5xXCflYRkR42G7u/i68Gg3OwQ==', '\"ROLE_USER\"', '2020-07-05 17:31:38', '2020-07-12 21:02:49', 'cristian.budzicz@gmail.com', 'GMAIL', '115032604460116739525', 'ya29.a0AfH6SMDsRp_guOrO-SNxe8ZOnU1FmOF6_fz1sA9551Tz6HNhc39J6GYrJ6ZHWyUq3qFwY8JsQXJu7NNfJBj-Aw-K_8T7LSlx0XLZUzyT26toOn2Uqy63GULVXUGv7e6xlBLTKLvQMC0W1Ef35yqe-myl7xxhmrxTI4h7', NULL),
+(9, 'repuestossantafe@correo.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_COMERCIANTE\"', '2020-07-06 13:52:47', '2020-07-06 13:52:47', 'repuestossantafe@correo.com', NULL, NULL, NULL, NULL),
+(11, 'repuestossantafe@prueba.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_COMERCIANTE\"', '2020-07-06 22:12:38', '2020-07-06 22:12:38', 'repuestossantafe@prueba.com', NULL, NULL, NULL, NULL),
+(16, 'cristian16b@hotmail.com', '42Xgm9Z5AE49KpQ69tevCOEdpPwK6nGs88y4KUs2WK3j7zdsFtfeKhmBpBhoGrXVjW++nrHHmDF9uv4gOamPXA==', '\"ROLE_USER\"', '2020-07-10 03:39:15', '2020-07-13 01:56:16', 'cristian16b@hotmail.com', 'FACEBOOK', '3282297848450174', 'EAADfqssBOiQBAOGZBfBwIlFCzZBRZCzvzoi4iZAIO7RpgZCZCK0moyHNES1kgjzZCCGUsDmP77C0KBC9B8ZCtkA0NIZB5giRSxxBkUJEjL6Cy53ZBdKNVpJ6hvzrxOBTjnZBsOgA9oOHpMZCAATIPLCKmVU0X0j0cV88nEupqbVSPcrLqEHg6gr8JfzrtOXRlta60Sp6n2YX0A1ZCZBAZDZD', NULL);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -3921,6 +4016,14 @@ CREATE TABLE `usuario` (
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `constancia_persona`
+--
+ALTER TABLE `constancia_persona`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tipo_id` (`tipo_id`),
+  ADD KEY `persona_id` (`persona_id`);
 
 --
 -- Indices de la tabla `cotizacion`
@@ -4004,6 +4107,12 @@ ALTER TABLE `solicitud`
   ADD KEY `IDX_96D27CC0C680A87` (`solicitante_id`);
 
 --
+-- Indices de la tabla `tipo_constancia`
+--
+ALTER TABLE `tipo_constancia`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tipo_repuesto`
 --
 ALTER TABLE `tipo_repuesto`
@@ -4027,6 +4136,12 @@ ALTER TABLE `compra`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `constancia_persona`
+--
+ALTER TABLE `constancia_persona`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `cotizacion`
 --
 ALTER TABLE `cotizacion`
@@ -4036,7 +4151,7 @@ ALTER TABLE `cotizacion`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_cotizacion`
@@ -4066,7 +4181,7 @@ ALTER TABLE `modelo_auto`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `provincia`
@@ -4078,7 +4193,7 @@ ALTER TABLE `provincia`
 -- AUTO_INCREMENT de la tabla `recurso_solicitud`
 --
 ALTER TABLE `recurso_solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `repuesto`
@@ -4090,7 +4205,13 @@ ALTER TABLE `repuesto`
 -- AUTO_INCREMENT de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_constancia`
+--
+ALTER TABLE `tipo_constancia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_repuesto`
@@ -4102,11 +4223,18 @@ ALTER TABLE `tipo_repuesto`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `constancia_persona`
+--
+ALTER TABLE `constancia_persona`
+  ADD CONSTRAINT `FK_DF453725A9276E6C` FOREIGN KEY (`tipo_id`) REFERENCES `tipo_constancia` (`id`),
+  ADD CONSTRAINT `FK_DF453725F5F88DB9` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`);
 
 --
 -- Filtros para la tabla `cotizacion`
