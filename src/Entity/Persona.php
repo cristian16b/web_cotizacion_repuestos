@@ -43,7 +43,7 @@ class Persona
     protected $nombre;
  
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank(message="Debes completar tu e-mail")
      * @Assert\Email(
      *     message="El formato del e-mail no es valido"

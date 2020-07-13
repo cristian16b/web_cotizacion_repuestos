@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2020 a las 02:16:11
+-- Tiempo de generación: 13-07-2020 a las 02:26:59
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -3548,7 +3548,7 @@ CREATE TABLE `persona` (
   `domicilio_id` int(11) DEFAULT NULL,
   `usuario_id` int(11) NOT NULL,
   `nombre` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apellido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cod_area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3983,7 +3983,7 @@ INSERT INTO `tipo_repuesto` (`id`, `name`, `fecha_alta`, `fecha_baja`, `mla_id`)
 
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json_array)',
   `created_at` datetime NOT NULL,

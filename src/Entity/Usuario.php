@@ -28,7 +28,7 @@ class Usuario implements UserInterface
     protected $id;
  
     /**
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * @ORM\Column(name="username", type="string", length=100, unique=true)
      */
     protected $username;
  
