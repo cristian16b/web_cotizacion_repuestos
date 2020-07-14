@@ -162,7 +162,7 @@ class LoginController extends AbstractController
 
             return new JsonResponse(
                 [
-                    'token' => $JWTManager->create($user),
+                    'token' => array("token" => $JWTManager->create($user)),
                     'code' => 200,
                     'rol' => $user->getRoles(),
                 ]);

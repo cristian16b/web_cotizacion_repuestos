@@ -202,7 +202,6 @@ class BuscarRepuestoController extends AbstractController
         $recursoErrors = [];
         foreach($recursos as $index => $recurso) {
             $recursoError = $validator->validateProperty($recurso, 'pesoMega');
-            dump($recursoError);
             if(count($recursoError)>0) {
                 $recursoError[$index] =  $recursoError[0]->getMessage();
             }
