@@ -89,12 +89,12 @@ class BuscarRepuesto extends React.Component {
     }
 
     if(this.state.modeloSeleccionado.length === 0) {
-      errors["modeloSeleccionado"] = "Debe seleccionar el modelo de su auto";
+      errors["modeloSeleccionado"] = "Debe seleccionar el modelo de su Vehículo";
       formularioValido = false;
     }
 
     if(this.state.marcaSeleccionado.length === 0) {
-      errors["marcaSeleccionado"] = "Debe seleccionar la marca de su auto";
+      errors["marcaSeleccionado"] = "Debe seleccionar la marca de su Vehículo";
       formularioValido = false;
     }
 
@@ -262,14 +262,14 @@ class BuscarRepuesto extends React.Component {
     return (
               <div className="row">
                 <div className="col-lg-6">
-                  <label forhtml="marca">Marca del auto</label>
+                  <label forhtml="marca">Marca del Vehículo</label>
                   <AsyncSelect 
                     id="marca"
                     cacheOptions 
                     value = { this.state.marcaSeleccionado }
                     loadOptions = {this.loadMarcas}
                     onChange={this.handleChangeSelectMarca}
-                    placeholder={<div>Escriba la marca de su auto</div>}
+                    placeholder={<div>Escriba la marca de su Vehículo</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
@@ -285,7 +285,7 @@ class BuscarRepuesto extends React.Component {
                     value = { this.state.modeloSeleccionado }
                     loadOptions = {this.loadModelos}
                     onChange={this.handleChangeSelectModelo}
-                    placeholder={<div>Escriba el modelo de su auto</div>}
+                    placeholder={<div>Escriba el modelo de su Vehículo</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
@@ -323,7 +323,7 @@ class BuscarRepuesto extends React.Component {
     return(
                     <div className="row">
                       <div className="col-lg-12">
-                        <label forhtml="message">Observaciones (año de su vehiculo u otros detalles que considere importantes)</label>
+                        <label forhtml="message">Observaciones (año de su vehículo u otros detalles que considere importantes)</label>
                         <textarea onChange={this.handleChange} type="text" id="observaciones" name="observaciones" rows="2" className="form-control md-textarea">
                         </textarea>
                         <span className="text-danger error_negrita">
