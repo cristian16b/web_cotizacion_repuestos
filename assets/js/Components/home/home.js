@@ -10,7 +10,7 @@ class Home extends React.Component {
     return (        
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-          <h1 className="my-4">Eisen Part</h1>
+          <h5>Eisen Part</h5>
             <img  className="card-img-top img-fluid"
                   src="https://i.ibb.co/pzH2yTP/Eisen-Aplicativo03.jpg" 
                   alt="Cargando..." 

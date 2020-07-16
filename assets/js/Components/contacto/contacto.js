@@ -14,7 +14,7 @@ class Contacto extends React.Component {
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
               <section className="mb-4">
-                <h3 className="my-4">Formulario de contacto</h3>
+                <h5>Formulario de contacto</h5>
                 <p className="text-center w-responsive mx-auto mb-5">¿Tenes alguna consulta?</p>
 
                 <div className="row">

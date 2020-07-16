@@ -27,7 +27,7 @@ footer {
     font-weight: bold;
 }
 
-h1,h2,h3,h4 {
+h1,h2,h3,h4,h5 {
     text-transform: uppercase;
     font-weight: bold;
     /* color: rgb(21, 61, 87); */
@@ -37,11 +37,11 @@ h1,h2,h3,h4 {
     border-radius: 25px;
 }
 
-h5 {
+/* h5 {
     text-transform: capitalize;
     font-weight: bold;
     color: rgb(21, 61, 87);
-}
+} */
 
 /* .btn-primary, .login-btn, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-block {
     background-color: #53595F 
@@ -93,7 +93,7 @@ h5 {
 
 .btn {
     border-radius: 25px;   
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .btn-primary {

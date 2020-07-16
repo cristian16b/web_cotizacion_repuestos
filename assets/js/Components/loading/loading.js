@@ -24,13 +24,13 @@ const Loading = () => (
             </div>
             <div className="row justify-content-center" align="center" style={divMensaje}>
                 <div className="col-12 col-md-8 col-lg-10">
-                    <h4>Cargando</h4>
+                    <h5>Cargando</h5>
                 </div>
                 <div className="col-12 col-md-8 col-lg-10">
-                    <h4>...</h4>
+                    <h5>...</h5>
                 </div>
                 <div className="col-12 col-md-8 col-lg-10">
-                    <h4>Espere un momento</h4>
+                    <h5>Espere un momento</h5>
                 </div>
             </div>
     </div>

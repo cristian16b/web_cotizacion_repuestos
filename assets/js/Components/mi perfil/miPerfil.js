@@ -132,7 +132,7 @@ class MiPerfil extends React.Component {
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
-                <h3 className="my-4">Mi perfil</h3>
+                <h5 className="my-4">Mi perfil</h5>
                 <h4>en construcciòn...</h4>
                 <hr/>
                 <>{this.renderDatosPerfil()}</>
