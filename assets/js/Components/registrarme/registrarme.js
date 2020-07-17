@@ -361,15 +361,21 @@ renderBotonesUsuarioComercio () {
                 <div className="row justify-content-center">
                   <a onClick={this.cambioUsuario} className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
                     <i className="fa fa-user fa-5x"></i><br/>
-                    <h4>Necesito buscar repuestos<br/> para mi auto/camioneta</h4>
-                    <br/>Registrate!
+                    <h5>
+                      Usuario
+                      <br/>
+                      Registrate!
+                    </h5>
                   </a>
                 </div>
                 <div className="row justify-content-center">
                   <a  onClick={this.cambioComerciante} className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
                     <i className="fa fa-user fa-5x"></i><br/>
-                    <h4>Soy un comercio y quiero registrarme<br/> para vender autopartes</h4>
-                    <br/>Registrate!
+                    <h5>
+                      Vendedor
+                      <br/>
+                      Registrate!
+                    </h5>
                   </a>
                 </div>
         </div>
@@ -387,7 +393,7 @@ renderFormulario() {
     <div className="col-12 col-sm-12 col-md-12 col-lg-9">
       <div className="card shadow-sm p-3 mb-5 bg-white rounded">
         <div className="card-body">
-          <h2 className="my-4">Registrarme</h2>
+          <h5>Registrarme</h5>
           <form  method="post" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <span className="text-danger error_negrita">
