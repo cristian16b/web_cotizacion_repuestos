@@ -119,6 +119,8 @@ class Login extends React.Component {
     //adaptador para hacer petición http
     consumirAxios = (url,payload) => {
         this.setState({isLoading: true});
+        this.setState({errors: {}});
+        this.setState({errorApi: ''});
         axios.post(url,payload)
         .then(response => {
             let rol = response.data.rol;
