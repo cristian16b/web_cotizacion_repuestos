@@ -109,6 +109,11 @@ class Usuario implements UserInterface
      * @ORM\Column(type="date", nullable=true)
      */
     private $fechaBaja;
+
+    /**
+     * @ORM\Column(type="boolean",options={"default":"0"})
+     */
+    private $confirmado;
     
     public function __construct()
     {
@@ -377,6 +382,18 @@ class Usuario implements UserInterface
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
+
+        return $this;
+    }
+
+    public function getConfirmado(): ?bool
+    {
+        return $this->confirmado;
+    }
+
+    public function setConfirmado(bool $confirmado): self
+    {
+        $this->confirmado = $confirmado;
 
         return $this;
     }
