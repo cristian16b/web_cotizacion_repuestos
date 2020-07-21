@@ -160,13 +160,25 @@ class LoginController extends AbstractController
             $entityManager->persist($persona);
             $entityManager->flush();
 
-            return new JsonResponse(
-                [
-                    'token' => array("token" => $JWTManager->create($user)),
-                    'code' => 200,
-                    'rol' => $user->getRoles(),
-                ]);
-
+            if($user->getConfirmado()) {
+                return new JsonResponse(
+                    [
+                        'token' => array("token" => $JWTManager->create($user)),
+                        'code' => 200,
+                        'rol' => $user->getRoles(),
+                    ]);
+            }
+            else {
+                $message = "Su perfil no ha sido verificado. "."Revise su correo " . $user->getUsername() . 
+                " donde fue enviado el correo de confirmación. ".
+                "De no encontrarlo como recibido, puede haber sido recibido como spam."
+                ;
+                return new JsonResponse(
+                    [
+                        'code' => 403,
+                        'message' => $message,
+                    ]);
+            }
         }
         catch (Exception $ex) {
             $code = 500;
