@@ -125,7 +125,12 @@ class Login extends React.Component {
             let token = response.data.token;
             let code = response.data.code;
             this.setState({isLoading: false});
-            if(code == 200) {
+            if(code != 200) 
+            {
+                let error = response.data.message;
+                this.setState({errorApi: error});
+            }
+            else {
                 // console.log(rol + ' ' + code );
                 // Llamo al componente app para que muestre habilite rutas segun corresponda por el rol
                 this.props.obtenerTokenPadre(true,rol,token,code);
