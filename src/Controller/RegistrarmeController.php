@@ -25,6 +25,7 @@ use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
 * @Route("/api")
@@ -258,8 +259,23 @@ class RegistrarmeController extends AbstractController
     */
     public function verificarCuenta(Request $request,$token) {
 
-        $url = $this->obtenerUrlConfirmacionCuenta();
-        dump($url);
+        if(is_null($token)) {
+            throw new \Exception('Something went wrong!');
+        }
+
+        $usuario = $this->obtenerUsuarioAsociadaToken($token);
+        // dump($usuario);
+
+        // dump($usuario->getCreatedAt());
+
+        $hoy = date('Y-m-d H:i:s');
+        // dump($hoy);
+
+        $to_time = strtotime($usuario->getCreatedAt()->format('Y-m-d H:i:s'));
+        $from_time = strtotime($hoy);
+        echo round(abs($to_time - $from_time) / 60,2). " minute";
+
+
         die;
     }
 
@@ -276,7 +292,7 @@ class RegistrarmeController extends AbstractController
     }
 
     private function obtenerUsuarioAsociadaToken($token) {
-        return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('email'=>$email));
+        return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('socialToken'=>$token));
     }
 
     private function obtenerUrlConfirmacionCuenta() {
