@@ -39,6 +39,8 @@ class RegistrarmeController extends AbstractController
     private $tipoDNI = "DNI";
     private $tipoAfip = "INSCRIPCIÒN AFIP";
 
+    private $errorEmail = "El e-mail ingresado ya se encuentra registrado";
+
     public static function getSubscribedServices() 
     {
         return array_merge(parent::getSubscribedServices(), [ 'jms_serializer' => '?'.SerializerInterface::class, ]); 
@@ -109,6 +111,7 @@ class RegistrarmeController extends AbstractController
     
             $code = 200;
             $error = false;
+            $formErrors = [];
 
             $apellido = $request->request->get('apellido');
             $name = $request->request->get('nombre');
@@ -138,7 +141,13 @@ class RegistrarmeController extends AbstractController
 
             $nombreError = $validator->validateProperty($persona, 'nombre');
             $apellidoError = $validator->validateProperty($persona, 'apellido');
-            $emailError = $validator->validateProperty($persona, 'email');
+            // por algun motivo no toma el assert unique entity se comenta esto:
+            // $emailError = $validator->validateProperty($persona, 'email');
+            // se cambia por un find 
+            if(!is_null($this->obtenerPersona($email))) {
+                $formErrors['email'] = $this->errorEmail;
+            }
+
             $passwordError = $validator->validateProperty($user, 'plainPassword');
             $codtelError = $validator->validateProperty($persona, 'codArea');
             $telefonoError = $validator->validateProperty($persona, 'telefono');
@@ -195,16 +204,11 @@ class RegistrarmeController extends AbstractController
                 $user->setRoles($this->userRolUsuario);
             }
        
-            $formErrors = [];
             if(count($nombreError)>0){
                 $formErrors['nombre'] =  $nombreError[0]->getMessage();
             }
             if(count($apellidoError)>0){
                 $formErrors['apellido'] =  $apellidoError[0]->getMessage();
-            }
-            if(count($emailError)>0){
-                $tmp = (array) $emailError[0]->getConstraint();
-                $formErrors['email'] =  $tmp['message'];
             }
             if(count($passwordError)>0){
                 $formErrors['password'] =  $passwordError[0]->getMessage();
@@ -215,7 +219,6 @@ class RegistrarmeController extends AbstractController
             if(count($telefonoError)>0){
                 $formErrors['telefono'] =  $telefonoError[0]->getMessage();
             }
-
 
             if($formErrors) {
                 $response = [
@@ -249,5 +252,9 @@ class RegistrarmeController extends AbstractController
 
     private function obtenerTipoConstancia($name) {
         return $this->getDoctrine()->getRepository(TipoConstancia::class)->findOneBy(array('nombre'=>$name));
+    }
+
+    private function obtenerPersona($email) {
+        return $this->getDoctrine()->getRepository(Persona::class)->findOneBy(array('email'=>$email));
     }
 }
