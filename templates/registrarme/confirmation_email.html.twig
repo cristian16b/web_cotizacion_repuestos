@@ -1,10 +1,11 @@
-{% extends 'base.html.twig' %}
+<h4>Welcome {{ email.toName }}!</h4>
 
-{% block title %}Hello RegistrarmeController!{% endblock %}
+<p>
+    You signed up as {{ username }} the following email:
+</p>
+<p><code>{{ email.to[0].address }}</code></p>
 
-{% block body %}
-<p>hola soy un correo</p>
-{% endblock %}
-{% block javascripts %}
-<script src="{{ asset('./build/app.js') }}"></script>
-{% endblock %}
+<p>
+    <a href="#">Click here to activate your account</a>
+    (this link is valid until {{ expiration_date|date('F jS') }})
+</p>

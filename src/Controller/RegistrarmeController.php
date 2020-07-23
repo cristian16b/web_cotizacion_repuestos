@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
-
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 /**
 * @Route("/api")
@@ -130,6 +130,11 @@ class RegistrarmeController extends AbstractController
             $user->setPassword($encoder->encodePassword($user, $password));
             $user->setUsuarioUltimaModificacion($email);
             $user->setUsername($email);
+            // en el registro se le asigna un token al usuario
+            $user->setSocialToken($this->obtenerTokenAutenticacion());
+            // inicialmente el usuario esta deshabilitado
+            $user->setConfirmado(false);
+            // se activara su cuenta cuando ingrese a su correo y click en el link
 
             $persona->setUsuario($user);
             $persona->setNombre($name);
@@ -246,6 +251,14 @@ class RegistrarmeController extends AbstractController
         return new Response($serializer->serialize($response, "json"));
     }
 
+    /**
+     * @Route("/verificar/{token}", name="registrarme" , methods={"GET"})
+    */
+    public function verificarCuenta(Request $request,$token) {
+
+        dump($token);die($this->obtenerTokenAutenticacion());
+    }
+
     private function obtenerLocalidad($id) {
         return $this->getDoctrine()->getRepository(Localidad::class)->find($id);
     }
@@ -256,5 +269,34 @@ class RegistrarmeController extends AbstractController
 
     private function obtenerPersona($email) {
         return $this->getDoctrine()->getRepository(Persona::class)->findOneBy(array('email'=>$email));
+    }
+
+    private function obtenerUsuarioAsociadaToken($token) {
+        return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('email'=>$email));
+    }
+
+    private function enviarCorreoNotificacion($persona,$usuario) {
+
+        $url = $this->generateUrl('user_profile', [
+            'username' => $user->getUsername(),
+        ]);
+
+        $email = (new TemplatedEmail())
+            ->from('info@eisenparts.com')
+            ->to(new Address($persona->getEmail()))
+            ->subject('EisenPart - Confirma tu perfil de usuario')
+        
+            // path of the Twig template to render
+            ->htmlTemplate('registrarme/confirmation_email.html.twig')
+        
+            // pass variables (name => value) to the template
+            ->context([
+                'url' => $url
+            ])
+        ;
+    }
+
+    private function obtenerTokenAutenticacion() {
+        return rtrim(strtr(base64_encode(random_bytes(20)), '+/', '-_'), '=');
     }
 }
