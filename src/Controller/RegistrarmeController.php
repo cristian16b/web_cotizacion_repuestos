@@ -41,6 +41,8 @@ class RegistrarmeController extends AbstractController
 
     private $errorEmail = "El e-mail ingresado ya se encuentra registrado";
 
+    private $baseUrlEisenPartProduccion = 'https://www.eisenparts.com';
+
     public static function getSubscribedServices() 
     {
         return array_merge(parent::getSubscribedServices(), [ 'jms_serializer' => '?'.SerializerInterface::class, ]); 
@@ -252,11 +254,13 @@ class RegistrarmeController extends AbstractController
     }
 
     /**
-     * @Route("/verificar/{token}", name="registrarme" , methods={"GET"})
+     * @Route("/verificar/{token}", name="verificar" , methods={"GET"})
     */
     public function verificarCuenta(Request $request,$token) {
 
-        dump($token);die($this->obtenerTokenAutenticacion());
+        $url = $this->obtenerUrlConfirmacionCuenta();
+        dump($url);
+        die;
     }
 
     private function obtenerLocalidad($id) {
@@ -275,11 +279,13 @@ class RegistrarmeController extends AbstractController
         return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('email'=>$email));
     }
 
+    private function obtenerUrlConfirmacionCuenta() {
+        return $this->baseUrlEisenPartProduccion . '/api/verificar/' . $this->obtenerTokenAutenticacion();
+    }
+
     private function enviarCorreoNotificacion($persona,$usuario) {
 
-        $url = $this->generateUrl('user_profile', [
-            'username' => $user->getUsername(),
-        ]);
+        $url = $this->obtenerUrlConfirmacionCuenta();
 
         $email = (new TemplatedEmail())
             ->from('info@eisenparts.com')
@@ -291,7 +297,8 @@ class RegistrarmeController extends AbstractController
         
             // pass variables (name => value) to the template
             ->context([
-                'url' => $url
+                'url' => $url,
+                'email' => $persona->getEmail(),
             ])
         ;
     }

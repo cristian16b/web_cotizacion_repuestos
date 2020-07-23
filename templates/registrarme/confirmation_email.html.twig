@@ -1,11 +1,9 @@
-<h4>Welcome {{ email.toName }}!</h4>
+<h4>EisenPart - Confirma tu correo para poder ingresar!</h4>
 
 <p>
-    You signed up as {{ username }} the following email:
+    Te has registrado con el siguiente correo <b> {{ email }} </b>
 </p>
-<p><code>{{ email.to[0].address }}</code></p>
 
 <p>
-    <a href="#">Click here to activate your account</a>
-    (this link is valid until {{ expiration_date|date('F jS') }})
+    <a href="{{ path('url') }}">Haz click aqui para confirmar tu cuenta</a>
 </p>
