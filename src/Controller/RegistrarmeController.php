@@ -264,18 +264,19 @@ class RegistrarmeController extends AbstractController
         }
 
         $usuario = $this->obtenerUsuarioAsociadaToken($token);
-        // dump($usuario);
 
-        // dump($usuario->getCreatedAt());
-
-        $hoy = date('Y-m-d H:i:s');
-        // dump($hoy);
-
-        $to_time = strtotime($usuario->getCreatedAt()->format('Y-m-d H:i:s'));
-        $from_time = strtotime($hoy);
-        echo round(abs($to_time - $from_time) / 60,2). " minute";
-
-
+        if(is_null($usuario)) {
+            throw new \Exception('Something went wrong!');
+        }
+        
+        if($this->esTokenExpirado($usuario->getCreatedAt()) != false) {
+            return $this->redirectToRoute('index');
+        }
+        else {
+    //     return $this->render('registrarme/index.html.twig', [
+    //         'controller_name' => 'RegistrarmeController',
+    //     ]);
+        }
         die;
     }
 
@@ -321,5 +322,15 @@ class RegistrarmeController extends AbstractController
 
     private function obtenerTokenAutenticacion() {
         return rtrim(strtr(base64_encode(random_bytes(20)), '+/', '-_'), '=');
+    }
+
+    private function esTokenExpirado($fechaCreacionUsuario) {
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $hoy = date('Y-m-d H:i:s');
+        $to_time = strtotime($fechaCreacionUsuario->format('Y-m-d H:i:s'));
+        $from_time = strtotime($hoy);
+
+        $diferenciaMinutos = round(abs($from_time - $to_time) / 60,2);
+        return $diferenciaMinutos <= 410;
     }
 }
