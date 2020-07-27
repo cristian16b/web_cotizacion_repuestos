@@ -188,6 +188,8 @@ class RegistrarmeController extends AbstractController
                 $tipoConstanciaAfip = $this->obtenerTipoConstancia($this->tipoAfip);
                 $constanciaDni->setTipo($tipoConstanciaDni);
                 $constanciaDni->setFile($fileDni);
+                $constanciaDni->setDirectorio($this->getParameter('kernel.project_dir'));
+                $constanciaAfip->setDirectorio($this->getParameter('kernel.project_dir'));
                 $constanciaAfip->setFile($fileAfip);
                 $constanciaAfip->setTipo($tipoConstanciaAfip);
                 $persona->addConstanciaPersona($constanciaAfip);

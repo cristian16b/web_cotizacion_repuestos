@@ -388,7 +388,7 @@ renderBotonesUsuarioComercio () {
                 <hr></hr>
                 <div className="row justify-content-center">
                     <i className="fa fa-user fa-5x"></i><br/>
-                    <button onClick={this.cambioUsuario} class="btn btn-secondary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
+                    <button onClick={this.cambioComerciante} class="btn btn-secondary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
                       <b>
                         Vendedor
                         <br/>

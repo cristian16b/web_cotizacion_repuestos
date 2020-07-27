@@ -72,6 +72,8 @@ class ConstanciaPersona
      * @ORM\JoinColumn(nullable=false)
      */
     private $persona;
+
+    private $directorio;
     
     public function getId(): ?int
     {
@@ -217,7 +219,14 @@ class ConstanciaPersona
      * @ORM\PreUpdate
      */
     public function guardarArchivo() {
-        $dir = $this->getParameter('kernel.project_dir') . '/constancia ' . $this->getTipo()->getNombre();
-        file_put_contents($dir . '/'. $this->nombreFisico, $this->file);
+        // $dir =  $this->directorio . '\constancia ' . $this->getTipo()->getNombre();
+        // $nombreFisico = $dir . '\' . $this->nombreFisico, $this->file;
+        // file_put_contents();
+        $baseDir = '../constancia ' . $this->getTipo()->getNombre();
+        file_put_contents($baseDir . '/'. $this->nombreFisico, $this->file);
+    }
+
+    public function setDirectorio($directorio) {
+        $this->directorio = $directorio;
     }
 }
