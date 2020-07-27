@@ -268,16 +268,12 @@ class RegistrarmeController extends AbstractController
         if(is_null($usuario)) {
             throw new \Exception('Something went wrong!');
         }
-        
-        if($this->esTokenExpirado($usuario->getCreatedAt()) != false) {
-            return $this->redirectToRoute('index');
-        }
-        else {
-    //     return $this->render('registrarme/index.html.twig', [
-    //         'controller_name' => 'RegistrarmeController',
-    //     ]);
-        }
-        die;
+
+        // en esta instancia, no se validara si el token expiro, 
+        // simplemente que es valido y esta asoc a un usuario
+        // prox. entrega retomar esto y agregar validacion
+        // sobre el tiempo de expiracion
+        return $this->redirectToRoute('index');
     }
 
     private function obtenerLocalidad($id) {
