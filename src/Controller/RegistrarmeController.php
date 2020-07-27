@@ -271,6 +271,11 @@ class RegistrarmeController extends AbstractController
             throw new \Exception('Something went wrong!');
         }
 
+        $usuario->setConfirmado(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($persona);
+        $entityManager->flush();
+
         // en esta instancia, no se validara si el token expiro, 
         // simplemente que es valido y esta asoc a un usuario
         // prox. entrega retomar esto y agregar validacion
