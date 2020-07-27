@@ -7,6 +7,20 @@ import Loading from '../loading/loading.js';
 import FormularioDatosComunes from './FormularioDatosComunes.js';
 import FormularioDatosComerciante from './FormularioDatosComerciante.js';
 
+const divLoading = {
+  'height': "100%",
+  'width': "100%",
+  '' : '',
+}
+
+const divBucle = {
+  'margin': '1% auto'
+}
+
+const divMensaje = {
+  'margin': '0% auto'
+}
+
 class Registrarme extends React.Component {
 
   constructor(props){
@@ -356,28 +370,35 @@ renderCaptcha() {
 
 renderBotonesUsuarioComercio () {
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center"  style={divLoading}>
       <div className="col-12 col-sm-12 col-md-12 col-lg-8">
+      <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+        <div className="card-body">
+        <h5>Registrarme</h5>
+            <hr></hr>
                 <div className="row justify-content-center">
-                  <a onClick={this.cambioUsuario} className="btn btn-sq-lg btn-default  shadow-lg p-3 mb-5 bg-white rounded">
-                    <i className="fa fa-user fa-5x"></i><br/>
-                    <h5>
-                      Usuario
-                      <br/>
-                      Registrate!
-                    </h5>
-                  </a>
+                    <button onClick={this.cambioUsuario} class="btn btn-primary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
+                      <b>
+                        Usuario
+                        <br/> 
+                        Registrate!
+                      </b>
+                    </button>
                 </div>
+                <hr></hr>
                 <div className="row justify-content-center">
-                  <a  onClick={this.cambioComerciante} className="btn btn-sq-lg btn-default shadow-lg p-3 mb-5 bg-white rounded">
                     <i className="fa fa-user fa-5x"></i><br/>
-                    <h5>
-                      Vendedor
-                      <br/>
-                      Registrate!
-                    </h5>
-                  </a>
+                    <button onClick={this.cambioUsuario} class="btn btn-secondary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
+                      <b>
+                        Vendedor
+                        <br/>
+                        Registrate!
+                      </b>
+                    </button>
                 </div>
+                <hr></hr>
+            </div>
+          </div>
         </div>
       </div>
   );
