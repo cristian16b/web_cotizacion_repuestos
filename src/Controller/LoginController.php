@@ -141,6 +141,7 @@ class LoginController extends AbstractController
                 else if($provider == $this->providerGmail) {
                     $user->setSocialProvider($this->providerGmail);
                 }
+                $user->setConfirmado(true);
                 $user->setSocialId($idSocial);
                 $persona->setUsuario($user);
             }
@@ -154,6 +155,7 @@ class LoginController extends AbstractController
                     $user->setSocialProvider($this->providerGmail);
                 }
                 $user->setSocialId($idSocial);
+                $user->setConfirmado(true);
                 $persona->setUsuario($user);
             }
 
