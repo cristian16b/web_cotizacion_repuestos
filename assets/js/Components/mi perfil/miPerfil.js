@@ -4,6 +4,7 @@ import FormularioDatosComunes from '../registrarme/FormularioDatosComunes.js';
 import FormularioDatosComerciante from '../registrarme/FormularioDatosComerciante.js';
 import {API_MI_PERFIL} from '../../Constantes/constantes';
 import Loading from '../loading/loading.js';
+import axios from 'axios';
 
 class MiPerfil extends React.Component {
 
