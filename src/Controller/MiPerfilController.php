@@ -62,7 +62,8 @@ class MiPerfilController extends AbstractController
         {
             $code = 200;
             $error = false;
-
+            $constancias = array();
+            $domicilio = array();
             $user = $this->getUser();
 
             // si no se obtiene correctamente el usuario falla
@@ -77,10 +78,16 @@ class MiPerfilController extends AbstractController
                 ]
             );
 
-            dump($perfil);die;
+            if($user->getRoles()[0] == "ROLE_COMERCIANTE") {
+                $constancias = $perfil->getConstanciaPersonas();
+                $domicilio = $perfil->getDomicilio();
+            }
 
             if (is_null($perfil)) {
-                $perfil = [];
+                $response = [];
+            }
+            else {
+                $response = array($perfil,$domicilio,$constancias);
             }
 
         } catch (Exception $ex) {
@@ -92,7 +99,7 @@ class MiPerfilController extends AbstractController
         $response = [
             'code' => $code,
             'error' => $error,
-            'data' => $code == 200 ? $perfil : $message,
+            'data' => $code == 200 ? $response : $message,
         ];
         
         return new Response(
