@@ -84,12 +84,8 @@ class MiPerfilController extends AbstractController
             }
 
             if (is_null($perfil)) {
-                $response = [];
+                $perfil = [];
             }
-            else {
-                $response = array($perfil,$domicilio,$constancias);
-            }
-
         } catch (Exception $ex) {
             $code = 500;
             $error = true;
@@ -99,7 +95,7 @@ class MiPerfilController extends AbstractController
         $response = [
             'code' => $code,
             'error' => $error,
-            'data' => $code == 200 ? $response : $message,
+            'data' => $code == 200 ? $perfil : $message,
         ];
         
         return new Response(
