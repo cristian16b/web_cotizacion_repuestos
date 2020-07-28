@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
+use App\Entity\Persona;
 
 /**
  * @Route("/api/v1/perfil")
@@ -57,22 +58,29 @@ class MiPerfilController extends AbstractController
         $solicitudes = [];
         $message = "";
 
-        try {
+        try 
+        {
+            $code = 200;
+            $error = false;
+
             $user = $this->getUser();
+
             // si no se obtiene correctamente el usuario falla
             if(is_null($user)) {
                 throw new \Exception('Something went wrong!');
             }
 
-            $code = 200;
-            $error = false;
+            // buscar la persona asociada 
+            $perfil = $this->getDoctrine()->getRepository(Persona::class)->findOneBy(
+                [
+                    'email' => $user->getUsername()
+                ]
+            );
 
-            $em = $this->getDoctrine()->getManager();
-            $solicitudes= $em->getRepository(Solicitud::class)
-                    ->buscarUltimasPorId($user);
+            dump($perfil);die;
 
-            if (is_null($solicitudes)) {
-                $solicitudes = [];
+            if (is_null($perfil)) {
+                $perfil = [];
             }
 
         } catch (Exception $ex) {
@@ -84,7 +92,7 @@ class MiPerfilController extends AbstractController
         $response = [
             'code' => $code,
             'error' => $error,
-            'data' => $code == 200 ? $solicitudes : $message,
+            'data' => $code == 200 ? $perfil : $message,
         ];
         
         return new Response(
