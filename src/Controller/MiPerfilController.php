@@ -26,21 +26,21 @@ class MiPerfilController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/getByName", name="marca_auto_getAll", defaults={"_format":"json"})
+     * @Rest\Get("/getPerfil", name="perfil_usuario", defaults={"_format":"json"})
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Retorna todos los repuestos."
+     *     description="Retorna el perfil."
      * )
      *
      * @SWG\Response(
      *     response=500,
-     *     description="Un error ocurrio en la busqueda de los repuestos."
+     *     description="Un error ocurrio en la busqueda del perfil."
      * )
      *
-     * @SWG\Tag(name="Repuesto")
+     * @SWG\Tag(name="Perfil")
      */
-    public function getByNameAction(Request $request)
+    public function getPerfilAction(Request $request)
     {
 
     }
