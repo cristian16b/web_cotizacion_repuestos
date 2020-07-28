@@ -6,9 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DomicilioRepository")
+ * @ExclusionPolicy("all")
  * @ORM\Table(indexes={
  *   @ORM\Index(name="localidad_id", columns={"localidad_id"}),
  * })
@@ -19,6 +22,7 @@ class Domicilio
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
@@ -31,12 +35,14 @@ class Domicilio
      *     max = 100,
      *     maxMessage="El nombre de la calle no puede tener una longitud mayor a 100 letras"
      * )
+     * @Expose
      */
     private $calle;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Debes completar el nro de tu domicilio")
+     * @Expose
      */
     private $numero;
 
@@ -47,6 +53,7 @@ class Domicilio
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Localidad", inversedBy="domicilios")
+     * @Expose
      */
     private $localidad;
 

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConstanciaPersonaRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  * @ORM\Table(indexes={
  *   @ORM\Index(name="tipo_id", columns={"tipo_id"}),
  *   @ORM\Index(name="persona_id", columns={"persona_id"})
@@ -33,6 +34,7 @@ class ConstanciaPersona
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $nombreFisico;
 

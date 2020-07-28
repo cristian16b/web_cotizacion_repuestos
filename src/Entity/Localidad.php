@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocalidadRepository")
+ * @ExclusionPolicy("all")
  * @ORM\Table(indexes={
  *   @ORM\Index(name="provincia_id", columns={"provincia_id"}),
  * })
@@ -18,17 +21,20 @@ class Localidad
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Provincia", inversedBy="localidads")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose
      */
     private $provincia;
 

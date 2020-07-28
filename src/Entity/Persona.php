@@ -8,10 +8,13 @@ use Doctrine\Common\Collections\Collection;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonaRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  * @UniqueEntity(fields={"email"},message="El e-mail ingresado ya se encuentra registrado")
  * @ORM\Table(indexes={
  *   @ORM\Index(name="domicilio_id", columns={"domicilio_id"})
@@ -23,6 +26,7 @@ class Persona
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
@@ -39,6 +43,7 @@ class Persona
      *     pattern="/^[a-zA-Z ]*$/",
      *     message="El nombre solo debe tener letras"
      * )
+     * @Expose
      */
     protected $nombre;
  
@@ -48,6 +53,7 @@ class Persona
      * @Assert\Email(
      *     message="El formato del e-mail no es valido"
      * )
+     * @Expose
      */
     protected $email;
 
@@ -64,6 +70,7 @@ class Persona
      *     pattern="/^[a-zA-Z ]*$/",
      *     message="El apellido solo debe tener letras"
      * )
+     * @Expose
      */
     private $apellido;
 
@@ -80,6 +87,7 @@ class Persona
      *     pattern="/^[^A-Za-z]*$/",
      *     message="El código de área no puede contener tener letras"
      * ) 
+     * @Expose
      */
     private $codArea;
 
@@ -96,6 +104,7 @@ class Persona
      *     pattern="/^[^A-Za-z]*$/",
      *     message="El teléfono no puede contener tener letras"
      * ) 
+     * @Expose
      */
     private $telefono;
 
@@ -116,6 +125,7 @@ class Persona
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Domicilio",  inversedBy="personas" , cascade={"persist", "remove"})
+     * @Expose
      */
     private $domicilio;
 
@@ -132,6 +142,7 @@ class Persona
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ConstanciaPersona", mappedBy="persona",cascade={"persist", "remove"})
+     * @Expose
      */
     private $constanciaPersonas;
 
