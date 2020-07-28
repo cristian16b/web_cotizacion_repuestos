@@ -3,6 +3,7 @@ import {ROL_COMERCIANTE,ROL_USER} from '../../Constantes/constantes';
 import FormularioDatosComunes from '../registrarme/FormularioDatosComunes.js';
 import FormularioDatosComerciante from '../registrarme/FormularioDatosComerciante.js';
 import {API_MI_PERFIL} from '../../Constantes/constantes';
+import Loading from '../loading/loading.js';
 
 class MiPerfil extends React.Component {
 
@@ -33,6 +34,7 @@ class MiPerfil extends React.Component {
       errorApi: '',
       soloLectura: true,
       isMount: false,
+      isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
     });
   }
 
@@ -40,21 +42,22 @@ class MiPerfil extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
-    // try 
-    // {
-    //   // Load async data from an inexistent endpoint.
-    //   let response = await axios.get(API_MI_PERFIL,config);
-    //   this.setState({isLoading: false});
-    //   if(response.data.code == 200) {
-    //     // console.log('code 200')
-    //     this.setState({misSolicitudes: response.data.data});
-    //     console.log(this.state.misSolicitudes);
-    //   }
-    // } 
-    // catch (e) {
-    //   console.log(`😱 Axios request failed: ${e}`);
-    //   alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
-    // }
+    try 
+    {
+      // Load async data from an inexistent endpoint.
+      let response = await axios.get(API_MI_PERFIL,config);
+      this.setState({isLoading: false});
+      if(response.data.code == 200) {
+        // console.log('code 200')
+        this.setState({misSolicitudes: response.data.data});
+        console.log(this.state.misSolicitudes);
+      }
+    } 
+    catch (e) {
+      this.setState({isLoading: false});
+      console.log(`😱 Axios request failed: ${e}`);
+      alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+    }
     
     this.state.isMount = true;
   }
@@ -127,13 +130,14 @@ class MiPerfil extends React.Component {
   }
 
   render() {
+    if(this.state.isLoading == true)
+      return  <Loading></Loading>
     return (        
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
                 <h5>Mi perfil</h5>
-                <h4>en construcciòn...</h4>
                 <hr/>
                 <>{this.renderDatosPerfil()}</>
             </div>
