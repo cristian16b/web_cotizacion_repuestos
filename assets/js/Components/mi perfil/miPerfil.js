@@ -59,11 +59,15 @@ class MiPerfil extends React.Component {
       alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
     }
     
-    this.state.isMount = true;
+    this.setState({
+      isMount : true
+    });
   }
 
   componentWillUnmount() {
-    this.state.isMount = false;
+    this.setState({
+      isMount : false
+    });
   }
 
   renderDatosPerfil() {
