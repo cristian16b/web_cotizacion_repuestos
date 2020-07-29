@@ -114,7 +114,7 @@ class FormularioDatosComerciante extends React.Component {
                     onChange={handleChangeSelectProvincia}
                     placeholder={<div>Escriba la provincia donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
-                    readOnly={this.props.soloLectura}
+                    isDisabled={this.props.soloLectura}
                   />
                   <span className="text-danger error_negrita">
                     {this.props.errors["provincia"]}
@@ -131,7 +131,7 @@ class FormularioDatosComerciante extends React.Component {
                     onChange={handleChangeSelectLocalidad}
                     placeholder={<div>Escriba la localidad donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
-                    readOnly={this.props.soloLectura}
+                    isDisabled={this.props.soloLectura}
                   />
                   <span className="text-danger error_negrita">
                     {this.props.errors["localidad"]}

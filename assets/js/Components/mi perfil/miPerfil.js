@@ -112,7 +112,7 @@ class MiPerfil extends React.Component {
               errorsApi={this.state.errorApi}
               nombre={this.state.nombre}
               apellido={this.state.apellido}
-              codArea={this.state.codArea}
+              codArea={this.state.cod_area}
               telefono={this.state.telefono}
               email={this.state.email}
               password={this.state.password}
