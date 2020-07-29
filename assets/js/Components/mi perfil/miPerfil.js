@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import {ROL_COMERCIANTE,ROL_USER} from '../../Constantes/constantes';
 import FormularioDatosComunes from '../registrarme/FormularioDatosComunes.js';
 import FormularioDatosComerciante from '../registrarme/FormularioDatosComerciante.js';
-import {API_MI_PERFIL} from '../../Constantes/constantes';
+import {API_MI_PERFIL,API_OBTENER_CONSTANCIA} from '../../Constantes/constantes';
 import Loading from '../loading/loading.js';
 import axios from 'axios';
 
@@ -21,8 +21,10 @@ class MiPerfil extends React.Component {
       esComerciante: false,
       cuitCuit: '',
       // datos del comerciante
+      // en los siguientes se van a guardar las url de las constancias
       constanciaDni: '',
       constanciaAfip: '',
+      // datos del domicilio
       calle: '',
       nro: '',
       localidad: '',
@@ -54,6 +56,7 @@ class MiPerfil extends React.Component {
         // console.log(this.state.misSolicitudes);
 
         let data = response.data.data;
+        console.log(data);
         this.setState({
           apellido : data.apellido
         });
@@ -141,10 +144,10 @@ class MiPerfil extends React.Component {
             <hr></hr>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href="#" class="badge badge-primary btn-primary">Ver Inscripción en AFIP</a>
+                <a href="#" className="badge badge-primary btn-primary">Ver Inscripción en AFIP</a>
               </div>
               <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href="#" class="badge badge-secondary btn-secondary">Ver D.N.I</a>
+                <a href="#" className="badge badge-secondary btn-secondary">Ver D.N.I</a>
               </div>
             </div>     
             <hr></hr>
