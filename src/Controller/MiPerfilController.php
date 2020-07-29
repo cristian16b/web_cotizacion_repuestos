@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use App\Entity\Persona;
+use App\Entity\ConstanciaPersona;
 
 /**
  * @Route("/api/v1/perfil")
@@ -77,11 +78,6 @@ class MiPerfilController extends AbstractController
                     'email' => $user->getUsername()
                 ]
             );
-
-            if($user->getRoles()[0] == "ROLE_COMERCIANTE") {
-                $constancias = $perfil->getConstanciaPersonas();
-                $domicilio = $perfil->getDomicilio();
-            }
 
             if (is_null($perfil)) {
                 $perfil = [];

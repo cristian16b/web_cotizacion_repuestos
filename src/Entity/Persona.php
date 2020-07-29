@@ -141,7 +141,7 @@ class Persona
     private $fechaBaja;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ConstanciaPersona", mappedBy="persona",cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\ConstanciaPersona", mappedBy="persona",orphanRemoval=true,cascade={"persist", "remove"})
      * @Expose
      */
     private $constanciaPersonas;
