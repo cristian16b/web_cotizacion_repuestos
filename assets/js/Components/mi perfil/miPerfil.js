@@ -137,7 +137,22 @@ class MiPerfil extends React.Component {
               onChangeValueAfip={this.handleChangeValueArchivoAfip}
               soloLectura={this.state.soloLectura}
             >
-            </FormularioDatosComerciante>        
+            </FormularioDatosComerciante>
+            <hr></hr>
+            <div className="row">
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                <a href="#" class="badge badge-primary btn-primary">Inscripción en AFIP</a>
+              </div>
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                <a href="#" class="badge badge-secondary btn-secondary">D.N.I</a>
+              </div>
+            </div>     
+            <hr></hr>
+            <div className="row">
+              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+
+              </div>
+            </div>        
         </>
       );
     }
