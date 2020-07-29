@@ -79,9 +79,11 @@ class MiPerfil extends React.Component {
           this.setState({
             localidad : data.domicilio.localidad.name
           });
+          alert(this.state.localidad);
           this.setState({
             provincia : data.domicilio.localidad.provincia.name
           });
+          alert(this.state.provincia);
         }
       }
     } 
