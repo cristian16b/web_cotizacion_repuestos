@@ -85,6 +85,12 @@ class MiPerfil extends React.Component {
           this.setState({
             provincia : data.domicilio.localidad.provincia.name
           });
+          this.setState({
+            constanciaAfip : API_OBTENER_CONSTANCIA + data.constancia_personas[0].nombre_fisico
+          });
+          this.setState({
+            constanciaDni : API_OBTENER_CONSTANCIA +  data.constancia_personas[1].nombre_fisico
+          });
         }
       }
     } 
@@ -144,10 +150,10 @@ class MiPerfil extends React.Component {
             <hr></hr>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href="#" className="badge badge-primary btn-primary">Ver Inscripción en AFIP</a>
+                <a href={this.state.constanciaAfip} target="_blank" className="badge badge-primary btn-primary">Ver Inscripción en AFIP</a>
               </div>
               <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href="#" className="badge badge-secondary btn-secondary">Ver D.N.I</a>
+                <a href={this.state.constanciaDni} target="_blank" className="badge badge-secondary btn-secondary">Ver D.N.I</a>
               </div>
             </div>     
             <hr></hr>

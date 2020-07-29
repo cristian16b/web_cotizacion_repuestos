@@ -15,7 +15,7 @@ export const API_MI_PERFIL = API_BASE_URL + '/api/v1/perfil/getPerfil';
 export const API_OBTENER_FOTO_REPUESTO = API_BASE_URL + '/recurso/get/foto';
 export const API_PROVINCIA = API_BASE_URL + '/provincia/getByName';
 export const API_LOCALIDAD = API_BASE_URL + '/localidad/getByName';
-export const API_OBTENER_CONSTANCIA = API_BASE_URL + '/recurso/get/archivo';
+export const API_OBTENER_CONSTANCIA = API_BASE_URL + '/recurso/get/archivo/';
 // lo siguiente son las key del captcha de verificacion de persona
 export const API_CAPTCHA_PUBLIC = '6Ld2A_0UAAAAADDGvROkBFyPOPDkZWqoLLkbaWym';
 export const API_CAPTCHA_PRIVATE = '6Ld2A_0UAAAAALQJE4OHpHCktkGQRsIwbuzZKDZ4';
