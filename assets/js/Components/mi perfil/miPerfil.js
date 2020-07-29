@@ -52,25 +52,37 @@ class MiPerfil extends React.Component {
         // console.log('code 200')
         // this.setState({misSolicitudes: response.data.data});
         // console.log(this.state.misSolicitudes);
-        // console.log(response.data.data);
+
+        let data = response.data.data;
         this.setState({
-          apellido : response.data.data.apellido
+          apellido : data.apellido
         });
         this.setState({
-          nombre : response.data.data.nombre
+          nombre : data.nombre
         });
         this.setState({
-          cod_area : response.data.data.cod_area
+          cod_area : data.cod_area
         });
         this.setState({
-          telefono : response.data.data.telefono
+          telefono : data.telefono
         });
         this.setState({
-          email : response.data.data.email
+          email : data.email
         });
-        // this.setState({
-        //   apellido : response.data.data.apellido
-        // });
+        if(this.props.rol[0] == ROL_COMERCIANTE) {
+          this.setState({
+            calle : data.domicilio.calle
+          });
+          this.setState({
+            nro : data.domicilio.numero
+          });
+          this.setState({
+            localidad : data.domicilio.localidad.name
+          });
+          this.setState({
+            provincia : data.domicilio.localidad.provincia.name
+          });
+        }
       }
     } 
     catch (e) {
@@ -115,8 +127,8 @@ class MiPerfil extends React.Component {
               handleChangeSelectProvincia={this.handleChangeSelectProvincia}
               constanciaDni={this.state.constanciaDni}
               constanciaAfip={this.state.constanciaAfip}
-              calle={this.props.calle}
-              nro={this.props.nro}
+              calle={this.state.calle}
+              nro={this.state.nro}
               provincia={this.state.provincia}
               localidad={this.state.localidad}
               errors={this.state.errors}
