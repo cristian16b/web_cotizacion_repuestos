@@ -141,18 +141,29 @@ class MiPerfil extends React.Component {
             <hr></hr>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href="#" class="badge badge-primary btn-primary">Inscripción en AFIP</a>
+                <a href="#" class="badge badge-primary btn-primary">Ver Inscripción en AFIP</a>
               </div>
               <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href="#" class="badge badge-secondary btn-secondary">D.N.I</a>
+                <a href="#" class="badge badge-secondary btn-secondary">Ver D.N.I</a>
               </div>
             </div>     
             <hr></hr>
             <div className="row">
-              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-
+              <div className="col-lg-6">
+                <div className="form-group">
+                  <button
+                          className="btn btn-primary btn-block"
+                          >Editar</button>
+                </div>
               </div>
-            </div>        
+              <div className="col-lg-6">
+                <div className="form-group">
+                  <button
+                          className="btn btn-warning btn-block">Dar de baja
+                  </button>
+                </div>
+              </div>  
+            </div>     
         </>
       );
     }
