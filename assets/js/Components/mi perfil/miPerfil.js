@@ -14,7 +14,7 @@ class MiPerfil extends React.Component {
     this.state = ({
       nombre:'',
       apellido: '',
-      codArea: '',
+      cod_area: '',
       telefono: '',
       email: '',
       //solo para vendedores
@@ -50,8 +50,27 @@ class MiPerfil extends React.Component {
       this.setState({isLoading: false});
       if(response.data.code == 200) {
         // console.log('code 200')
-        this.setState({misSolicitudes: response.data.data});
-        console.log(this.state.misSolicitudes);
+        // this.setState({misSolicitudes: response.data.data});
+        // console.log(this.state.misSolicitudes);
+        // console.log(response.data.data);
+        this.setState({
+          apellido : response.data.data.apellido
+        });
+        this.setState({
+          nombre : response.data.data.nombre
+        });
+        this.setState({
+          cod_area : response.data.data.cod_area
+        });
+        this.setState({
+          telefono : response.data.data.telefono
+        });
+        this.setState({
+          email : response.data.data.email
+        });
+        // this.setState({
+        //   apellido : response.data.data.apellido
+        // });
       }
     } 
     catch (e) {
@@ -104,6 +123,7 @@ class MiPerfil extends React.Component {
               errorsApi={this.state.errorApi}
               onChangeValueDni={this.handleChangeValueArchivoDni}
               onChangeValueAfip={this.handleChangeValueArchivoAfip}
+              soloLectura={this.state.soloLectura}
             >
             </FormularioDatosComerciante>        
         </>

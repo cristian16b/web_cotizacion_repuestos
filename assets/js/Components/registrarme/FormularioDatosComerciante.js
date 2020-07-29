@@ -24,6 +24,7 @@ class FormularioDatosComerciante extends React.Component {
                 <span className="input-group-addon"><i className="fa fa-user"></i></span>
                   {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                   <input type="text" className="form-control" name="calle" 
+                                      readOnly={this.props.soloLectura}
                                               defaultValue={this.props.calle} onChange={handleChangeInput}
                                               placeholder="Ingrese su calle"/>
               </div>
@@ -40,6 +41,7 @@ class FormularioDatosComerciante extends React.Component {
                 <span className="input-group-addon"><i className="fa fa-user"></i></span>
                   {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                   <input type="text" className="form-control" name="nro" 
+                                      readOnly={this.props.soloLectura}
                                               defaultValue={this.props.nro} onChange={handleChangeInput}
                                               placeholder="Ej: 5746"/>
               </div>
@@ -112,6 +114,7 @@ class FormularioDatosComerciante extends React.Component {
                     onChange={handleChangeSelectProvincia}
                     placeholder={<div>Escriba la provincia donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
+                    readOnly={this.props.soloLectura}
                   />
                   <span className="text-danger error_negrita">
                     {this.props.errors["provincia"]}
@@ -128,6 +131,7 @@ class FormularioDatosComerciante extends React.Component {
                     onChange={handleChangeSelectLocalidad}
                     placeholder={<div>Escriba la localidad donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
+                    readOnly={this.props.soloLectura}
                   />
                   <span className="text-danger error_negrita">
                     {this.props.errors["localidad"]}
