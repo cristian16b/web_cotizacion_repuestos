@@ -86,10 +86,10 @@ class MiPerfil extends React.Component {
         let data = response.data.data;
         // console.log(data);
         this.setState({
-          apellido : data.apellido
+          apellido : data.apellido.toUpperCase() 
         });
         this.setState({
-          nombre : data.nombre
+          nombre : data.nombre.toUpperCase()
         });
         this.setState({
           cod_area : data.cod_area
@@ -102,7 +102,7 @@ class MiPerfil extends React.Component {
         });
         if(this.props.rol[0] == ROL_COMERCIANTE) {
           this.setState({
-            calle : data.domicilio.calle
+            calle : data.domicilio.calle.toUpperCase() 
           });
           this.setState({
             nro : data.domicilio.numero
