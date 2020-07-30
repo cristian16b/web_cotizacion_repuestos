@@ -103,8 +103,6 @@ class FormularioAltaUsuario extends React.Component {
       codArea: '',
       telefono: '',
       email: '',
-      //solo para vendedores
-      esComerciante: false,
       cuitCuit: '',
       // datos del comerciante
       constanciaDni: '',
@@ -176,7 +174,7 @@ class FormularioAltaUsuario extends React.Component {
             </FormularioDatosComunes>
               <>
                 {
-                  this.state.esComerciante == true &&
+                  this.props.esComerciante == true &&
                   <>
                     <hr></hr>
                     <FormularioDatosComerciante
@@ -252,7 +250,7 @@ class FormularioAltaUsuario extends React.Component {
       formularioValido = false;
     }
   
-    if(this.state.esComerciante) {
+    if(this.props.esComerciante) {
       if(this.state.calle == ''){
         errors["calle"] = "Debe completar la calle";
         formularioValido = false;    

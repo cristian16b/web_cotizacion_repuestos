@@ -105,21 +105,19 @@ render() {
     if(this.state.botonesSeleccionUsuario == true)
       return(
         <>
-        es vendedor
-          {/* <FormularioAltaUsuario
-            ocultarCampos={this.state.esComerciante}
+          <FormularioAltaUsuario
+            esComerciante={this.state.esComerciante}
           >
-          </FormularioAltaUsuario> */}
+          </FormularioAltaUsuario>
         </>
       )
     if(this.state.botonesSeleccionUsuario == false)
       return (        
             <>
-            es usuario 
-              {/* <FormularioAltaUsuario
-                ocultarCampos={this.state.esComerciante}
+              <FormularioAltaUsuario
+                esComerciante={this.state.esComerciante}
               >
-              </FormularioAltaUsuario> */}
+              </FormularioAltaUsuario>
             </>
           );
     }
