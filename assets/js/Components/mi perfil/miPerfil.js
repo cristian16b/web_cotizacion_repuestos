@@ -6,6 +6,7 @@ import {API_MI_PERFIL,API_OBTENER_CONSTANCIA} from '../../Constantes/constantes'
 import Loading from '../loading/loading.js';
 import axios from 'axios';
 import Salir from '../salir/salir.js';
+import Registrarme from '../registrarme/registrarme.js';
 
 class MiPerfil extends React.Component {
 
@@ -41,6 +42,25 @@ class MiPerfil extends React.Component {
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
       isLogin: true
     });
+
+    this.editarUsuario = this.editarUsuario.bind(this);
+    this.darBajaUsuario = this.darBajaUsuario.bind(this);
+  }
+
+  editarUsuario = () => {
+    this.setState({
+      soloLectura : false
+    });
+  }
+  
+  cancelarEditarUsuario = () => {
+    this.setState({
+      soloLectura : true
+    });
+  }
+
+  darBajaUsuario = () => {
+
   }
 
   async componentDidMount() {
@@ -58,7 +78,7 @@ class MiPerfil extends React.Component {
         // console.log(this.state.misSolicitudes);
 
         let data = response.data.data;
-        console.log(data);
+        // console.log(data);
         this.setState({
           apellido : data.apellido
         });
@@ -162,20 +182,37 @@ class MiPerfil extends React.Component {
               </div>
             </div>     
             <hr></hr>
-            <div className="row">
-              <div className="col-lg-6">
+            {/* primer fila con los botones para editar / borrar */}
+            <div className="row" style={{ display: this.state.soloLectura ? "block" : "none" }}>
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                 <div className="form-group">
-                  <button
+                  <button onClick={this.editarUsuario}
                           className="btn btn-primary btn-block"
                           >Editar</button>
                 </div>
               </div>
-              <div className="col-lg-6">
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                 <div className="form-group">
-                  <button
+                  <button onClick={this.darBajaUsuario}
                           className="btn btn-warning btn-block">Dar de baja
                   </button>
                 </div>
+              </div>  
+            </div>
+            {/* segunda fila de botones */}
+            <div className="row" style={{ display: this.state.soloLectura ? "none" : "block"  }}>
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                  <div className="form-group">
+                    <button type="submit" 
+                            className="btn btn-primary btn-block">Registrarme</button>
+                  </div>
+              </div>
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                  <div className="form-group">
+                    <button 
+                            onClick={this.cancelarEditarUsuario}
+                            className="btn btn-light btn-block">Cancelar</button>
+                  </div>
               </div>  
             </div>     
         </>
