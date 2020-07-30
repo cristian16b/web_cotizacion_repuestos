@@ -40,7 +40,8 @@ class MiPerfil extends React.Component {
       soloLectura: true,
       isMount: false,
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
-      isLogin: true
+      isLogin: true,
+      ocultarPass: true,
     });
 
     this.editarUsuario = this.editarUsuario.bind(this);
@@ -51,11 +52,17 @@ class MiPerfil extends React.Component {
     this.setState({
       soloLectura : false
     });
+    this.setState({
+      ocultarPass : false
+    });
   }
   
   cancelarEditarUsuario = () => {
     this.setState({
       soloLectura : true
+    });
+    this.setState({
+      ocultarPass : true
     });
   }
 
@@ -136,6 +143,59 @@ class MiPerfil extends React.Component {
     });
   }
 
+  renderBotones = () => {
+    return(
+          <>
+            {/* primer fila con los botones para editar / borrar */}
+            <div className="row" style={{ display: this.state.soloLectura ? "block" : "none" }}>
+                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                   <div className="form-group">
+                     <button onClick={this.editarUsuario}
+                             className="btn btn-primary btn-block"
+                             >Editar</button>
+                   </div>
+                 </div>
+                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                   <div className="form-group">
+                     <button onClick={this.darBajaUsuario}
+                             className="btn btn-warning btn-block">Dar de baja
+                     </button>
+                   </div>
+                 </div>  
+               </div>
+               {/* segunda fila de botones */}
+               <div className="row" style={{ display: this.state.soloLectura ? "none" : "block"  }}>
+                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                     <div className="form-group">
+                       <button type="submit" 
+                               className="btn btn-primary btn-block">Guardar</button>
+                     </div>
+                 </div>
+                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                     <div className="form-group">
+                       <button 
+                               onClick={this.cancelarEditarUsuario}
+                               className="btn btn-light btn-block">Cancelar</button>
+                     </div>
+                 </div>  
+               </div>     
+          </>
+    );
+  }
+
+  renderConstanciasAsociadas = () => {
+    return (
+        <div className="row" style={{ display: this.state.soloLectura ? "block" : "none" }}>
+          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+            <a href={this.state.constanciaAfip} target="_blank" className="badge badge-primary btn-primary">Ver Inscripción en AFIP</a>
+          </div>
+          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+            <a href={this.state.constanciaDni} target="_blank" className="badge badge-secondary btn-secondary">Ver D.N.I</a>
+          </div>
+      </div>     
+    );
+  }
+
   renderDatosPerfil() {
     if(this.props.rol[0] == ROL_COMERCIANTE) {
       return(
@@ -152,6 +212,7 @@ class MiPerfil extends React.Component {
               password={this.state.password}
               password2={this.state.password2}
               soloLectura={this.state.soloLectura}
+              ocultarCampos={this.state.ocultarPass}
             >
           </FormularioDatosComunes>
           <hr></hr>
@@ -173,67 +234,32 @@ class MiPerfil extends React.Component {
             >
             </FormularioDatosComerciante>
             <hr></hr>
-            <div className="row">
-              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href={this.state.constanciaAfip} target="_blank" className="badge badge-primary btn-primary">Ver Inscripción en AFIP</a>
-              </div>
-              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <a href={this.state.constanciaDni} target="_blank" className="badge badge-secondary btn-secondary">Ver D.N.I</a>
-              </div>
-            </div>     
+            <>{this.renderConstanciasAsociadas()}</>
             <hr></hr>
-            {/* primer fila con los botones para editar / borrar */}
-            <div className="row" style={{ display: this.state.soloLectura ? "block" : "none" }}>
-              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <div className="form-group">
-                  <button onClick={this.editarUsuario}
-                          className="btn btn-primary btn-block"
-                          >Editar</button>
-                </div>
-              </div>
-              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <div className="form-group">
-                  <button onClick={this.darBajaUsuario}
-                          className="btn btn-warning btn-block">Dar de baja
-                  </button>
-                </div>
-              </div>  
-            </div>
-            {/* segunda fila de botones */}
-            <div className="row" style={{ display: this.state.soloLectura ? "none" : "block"  }}>
-              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                  <div className="form-group">
-                    <button type="submit" 
-                            className="btn btn-primary btn-block">Registrarme</button>
-                  </div>
-              </div>
-              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                  <div className="form-group">
-                    <button 
-                            onClick={this.cancelarEditarUsuario}
-                            className="btn btn-light btn-block">Cancelar</button>
-                  </div>
-              </div>  
-            </div>     
+            <>{this.renderBotones()}</>
         </>
       );
-    }
+    }   
     else if(this.props.rol[0] == ROL_USER) {
       return(
-        <FormularioDatosComunes 
-            handleChangeInput={this.handleChangeInput} 
-            errors={this.state.errors}
-            errorsApi={this.state.errorApi}
-            nombre={this.state.nombre}
-            apellido={this.state.apellido}
-            codArea={this.state.codArea}
-            telefono={this.state.telefono}
-            email={this.state.email}
-            password={this.state.password}
-            password2={this.state.password2}
-            soloLectura={this.state.soloLectura}
-          >
-        </FormularioDatosComunes>
+        <>
+          <FormularioDatosComunes 
+              handleChangeInput={this.handleChangeInput} 
+              errors={this.state.errors}
+              errorsApi={this.state.errorApi}
+              nombre={this.state.nombre}
+              apellido={this.state.apellido}
+              codArea={this.state.codArea}
+              telefono={this.state.telefono}
+              email={this.state.email}
+              password={this.state.password}
+              password2={this.state.password2}
+              soloLectura={this.state.soloLectura}
+              ocultarCampos={this.state.ocultarPass}
+            >
+          </FormularioDatosComunes>
+          <>{this.renderBotones()}</>
+        </>
       );
     }
     else {
