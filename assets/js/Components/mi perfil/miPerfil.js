@@ -6,7 +6,6 @@ import {API_MI_PERFIL,API_OBTENER_CONSTANCIA} from '../../Constantes/constantes'
 import Loading from '../loading/loading.js';
 import axios from 'axios';
 import Salir from '../salir/salir.js';
-import Registrarme from '../registrarme/registrarme.js';
 
 class MiPerfil extends React.Component {
 
