@@ -170,7 +170,7 @@ class FormularioAltaUsuario extends React.Component {
                     email={this.state.email}
                     password={this.state.password}
                     password2={this.state.password2}
-                    ocultarCampos={this.state.ocultarCampos}
+                    ocultarCampos={this.props.ocultarCampos}
                     soloLectura={this.state.soloLectura}
                   >
             </FormularioDatosComunes>
@@ -193,7 +193,7 @@ class FormularioAltaUsuario extends React.Component {
                       errorsApi={this.state.errorApi}
                       onChangeValueDni={this.handleChangeValueArchivoDni}
                       onChangeValueAfip={this.handleChangeValueArchivoAfip}
-                      ocultarCampos={this.state.ocultarCampos}
+                      ocultarCampos={this.props.ocultarCampos}
                     >
                     </FormularioDatosComerciante>
                   </>

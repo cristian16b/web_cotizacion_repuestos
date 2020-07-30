@@ -25,6 +25,7 @@ class Registrarme extends React.Component {
     this.state = ({
       //solo para vendedores
       esComerciante: false,
+      botonesSeleccionUsuario: null,
     });
 
     this.cambioComerciante = this.cambioComerciante.bind(this);
@@ -97,21 +98,28 @@ renderBotonesUsuarioComercio () {
 }
 
 render() { 
+    if(this.state.botonesSeleccionUsuario == null)
+      return <>{this.renderBotonesUsuarioComercio()}</>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     if(this.state.botonesSeleccionUsuario == true)
       return(
         <>
-          <FormularioAltaUsuario>
+          <FormularioAltaUsuario
+            ocultarCampos={true}
+          >
           </FormularioAltaUsuario>
         </>
       )
-    return (        
-          <>
-            <FormularioAltaUsuario>
-            </FormularioAltaUsuario>
-          </>
-        );
+    if(this.state.botonesSeleccionUsuario == false)
+      return (        
+            <>
+              <FormularioAltaUsuario
+                ocultarCampos={false}
+              >
+              </FormularioAltaUsuario>
+            </>
+          );
     }
 }
 
