@@ -107,6 +107,7 @@ render() {
         <>
           <FormularioAltaUsuario
             esComerciante={this.state.esComerciante}
+            ocultarCampos={false}
           >
           </FormularioAltaUsuario>
         </>
@@ -116,6 +117,7 @@ render() {
             <>
               <FormularioAltaUsuario
                 esComerciante={this.state.esComerciante}
+                ocultarCampos={false}
               >
               </FormularioAltaUsuario>
             </>
