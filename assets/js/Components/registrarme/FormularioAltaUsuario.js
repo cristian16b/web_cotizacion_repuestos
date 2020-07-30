@@ -97,35 +97,35 @@ class FormularioAltaUsuario extends React.Component {
   }
 
   cancelar() {
-    this.setState({
-      nombre:'',
-      apellido: '',
-      codArea: '',
-      telefono: '',
-      email: '',
-      cuitCuit: '',
-      // datos del comerciante
-      constanciaDni: '',
-      constanciaAfip: '',
-      calle: '',
-      nro: '',
-      localidad: '',
-      provincia: '',
-      //
-      password:'',
-      password2: '',
-      // errores locales o retornados por la api
-      errors: {},
-      errorApi: '',
-      // 
-      catchaValido: false,
-      // <-- initialize the signup state as false
-      isSignedUp: false, 
-      // para mostrar el loop de cargando
-      isLoading: false,
-      // para mostrar los botones de seleccion
-      botonesSeleccionUsuario: true
-    });
+    this.props.mostrarBotones();
+    // this.setState({
+    //   nombre:'',
+    //   apellido: '',
+    //   codArea: '',
+    //   telefono: '',
+    //   email: '',
+    //   cuitCuit: '',
+    //   // datos del comerciante
+    //   constanciaDni: '',
+    //   constanciaAfip: '',
+    //   calle: '',
+    //   nro: '',
+    //   localidad: '',
+    //   provincia: '',
+    //   //
+    //   password:'',
+    //   password2: '',
+    //   // errores locales o retornados por la api
+    //   errors: {},
+    //   errorApi: '',
+    //   // 
+    //   catchaValido: false,
+    //   // <-- initialize the signup state as false
+    //   isSignedUp: false, 
+    //   // para mostrar el loop de cargando
+    //   isLoading: false,
+    //   edit: true
+    // });
   }
   
   handleChangeSelectProvincia = (e) => {

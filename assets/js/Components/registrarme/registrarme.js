@@ -97,6 +97,12 @@ renderBotonesUsuarioComercio () {
   );
 }
 
+resetearMostrarBotones = () => {
+  this.setState({
+    botonesSeleccionUsuario: null
+  });
+}
+
 render() { 
     if(this.state.botonesSeleccionUsuario == null)
       return <>{this.renderBotonesUsuarioComercio()}</>
@@ -106,6 +112,7 @@ render() {
       return(
         <>
           <FormularioAltaUsuario
+            mostrarBotones={this.resetearMostrarBotones}
             esComerciante={this.state.esComerciante}
             ocultarCampos={false}
           >
@@ -116,6 +123,7 @@ render() {
       return (        
             <>
               <FormularioAltaUsuario
+                mostrarBotones={this.resetearMostrarBotones}
                 esComerciante={this.state.esComerciante}
                 ocultarCampos={false}
               >
