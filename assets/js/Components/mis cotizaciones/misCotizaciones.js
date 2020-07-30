@@ -6,6 +6,7 @@ import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES
 import axios from 'axios';
 import {Collapsible} from './Collapsible';
 import ModalImage from "react-modal-image";
+import Salir from '../salir/salir.js';
 
 class MisCotizaciones extends React.Component {
 
@@ -18,6 +19,7 @@ class MisCotizaciones extends React.Component {
       misSolicitudes: [],
       repuestoBuscar: '',
       errors:{},
+      isLogin: true
     });
 
     this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -41,7 +43,10 @@ class MisCotizaciones extends React.Component {
     } 
     catch (e) {
       console.log(`😱 Axios request failed: ${e}`);
-      alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+      // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+      this.setState({
+        isLogin : false
+      });
     }
     
     this.setState({
@@ -97,7 +102,10 @@ class MisCotizaciones extends React.Component {
     {
       console.log(`😱 Axios request failed: ${e}`);
       this.setState({isLoading: false});
-      alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
+      // alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
+      this.setState({
+        isLogin : false
+      });
     }
   }
 
@@ -243,6 +251,8 @@ class MisCotizaciones extends React.Component {
   }
 
   render() {
+    if(this.state.isLogin == false)
+      return <Salir/>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     return (        

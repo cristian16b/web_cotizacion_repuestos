@@ -5,6 +5,7 @@ import FormularioDatosComerciante from '../registrarme/FormularioDatosComerciant
 import {API_MI_PERFIL,API_OBTENER_CONSTANCIA} from '../../Constantes/constantes';
 import Loading from '../loading/loading.js';
 import axios from 'axios';
+import Salir from '../salir/salir.js';
 
 class MiPerfil extends React.Component {
 
@@ -38,6 +39,7 @@ class MiPerfil extends React.Component {
       soloLectura: true,
       isMount: false,
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
+      isLogin: true
     });
   }
 
@@ -97,7 +99,10 @@ class MiPerfil extends React.Component {
     catch (e) {
       this.setState({isLoading: false});
       console.log(`😱 Axios request failed: ${e}`);
-      alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+      // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+      this.setState({
+        isLogin : false
+      });
     }
     
     this.setState({
@@ -202,6 +207,8 @@ class MiPerfil extends React.Component {
   }
 
   render() {
+    if(this.state.isLogin == false)
+      return <Salir/>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     return (        

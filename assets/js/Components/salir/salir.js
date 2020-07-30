@@ -1,7 +1,5 @@
 import React , { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Link, useHistory } from "react-router-dom";
-
 
 class Salir extends React.Component {
   constructor(props){

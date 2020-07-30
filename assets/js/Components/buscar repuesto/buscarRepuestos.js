@@ -6,6 +6,7 @@ import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER,API_GU
 import axios from 'axios';
 import Loading from '../loading/loading.js';
 import { Redirect } from 'react-router';
+import Salir from '../salir/salir.js';
 
 class BuscarRepuesto extends React.Component {
 
@@ -27,7 +28,8 @@ class BuscarRepuesto extends React.Component {
       isSignedUp: false, 
       observaciones: '',
       isLoading: false,
-      isGuardado: false
+      isGuardado: false,
+      isLogin: true
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);
@@ -148,9 +150,12 @@ class BuscarRepuesto extends React.Component {
         })
         .catch(e => {
           // si retorna que el jwt expiro por el tiempo que vuelva al login
-          if(e.code == 401) {
-            this.redirectToLogin();
-          }
+          // if(e.code == 401) {
+          //   this.redirectToLogin();
+          // }
+          this.setState({
+            isLogin : false
+          });
           //alert('Ocurrio un error al consultar al servidor, intente nuevamente');
     });
     event.preventDefault();
@@ -216,6 +221,9 @@ class BuscarRepuesto extends React.Component {
                     error = e.response.data.message;
                     console.log(error);
                     // this.setState({errorApi: error});
+                    this.setState({
+                      isLogin : false
+                    });
                 }
               });
       }
@@ -380,6 +388,8 @@ class BuscarRepuesto extends React.Component {
 
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
   render() {
+    if(this.state.isLogin == false)
+      return <Salir/>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     if(this.state.isGuardado == true)
