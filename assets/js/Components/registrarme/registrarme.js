@@ -33,18 +33,18 @@ class Registrarme extends React.Component {
 
 
 cambioComerciante = () => {
-  // console.log('click sobre boton de comerciante');
+  console.log('click sobre boton de comerciante');
   this.setState({
     esComerciante: true
   });
   this.setState({
-    botonesSeleccionUsuario: false
+    botonesSeleccionUsuario: true
   });
   // console.log('es comerciante = ' + this.state.esComerciante);
 }
 
 cambioUsuario = () => {
-  // console.log('click sobre boton de usuari');
+  console.log('click sobre boton de usuari');
   this.setState({
     esComerciante: false
   });
@@ -105,19 +105,21 @@ render() {
     if(this.state.botonesSeleccionUsuario == true)
       return(
         <>
-          <FormularioAltaUsuario
-            ocultarCampos={true}
+        es vendedor
+          {/* <FormularioAltaUsuario
+            ocultarCampos={this.state.esComerciante}
           >
-          </FormularioAltaUsuario>
+          </FormularioAltaUsuario> */}
         </>
       )
     if(this.state.botonesSeleccionUsuario == false)
       return (        
             <>
-              <FormularioAltaUsuario
-                ocultarCampos={false}
+            es usuario 
+              {/* <FormularioAltaUsuario
+                ocultarCampos={this.state.esComerciante}
               >
-              </FormularioAltaUsuario>
+              </FormularioAltaUsuario> */}
             </>
           );
     }
