@@ -6,6 +6,7 @@ import {API_MI_PERFIL,API_OBTENER_CONSTANCIA} from '../../Constantes/constantes'
 import Loading from '../loading/loading.js';
 import axios from 'axios';
 import Salir from '../salir/salir.js';
+import DarBaja from '../mi perfil/DarBaja.js';
 
 class MiPerfil extends React.Component {
 
@@ -41,6 +42,7 @@ class MiPerfil extends React.Component {
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
       isLogin: true,
       ocultarPass: true,
+      solicitaBaja: false,
     });
 
     this.editarUsuario = this.editarUsuario.bind(this);
@@ -66,7 +68,9 @@ class MiPerfil extends React.Component {
   }
 
   darBajaUsuario = () => {
-
+    this.setState({
+      solicitaBaja : true
+    });
   }
 
   async componentDidMount() {
@@ -273,6 +277,8 @@ class MiPerfil extends React.Component {
       return <Salir/>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
+    if(this.state.solicitaBaja == true)
+      return  <DarBaja></DarBaja>
     return (        
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
