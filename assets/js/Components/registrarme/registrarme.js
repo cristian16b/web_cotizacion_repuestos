@@ -1,6 +1,5 @@
 import React , { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import Loading from '../loading/loading.js';
 import FormularioAltaUsuario from '../registrarme/FormularioAltaUsuario.js';
 
 const divLoading = {
@@ -106,8 +105,6 @@ resetearMostrarBotones = () => {
 render() { 
     if(this.state.botonesSeleccionUsuario == null)
       return <>{this.renderBotonesUsuarioComercio()}</>
-    if(this.state.isLoading == true)
-      return  <Loading></Loading>
     if(this.state.botonesSeleccionUsuario == true)
       return(
         <>

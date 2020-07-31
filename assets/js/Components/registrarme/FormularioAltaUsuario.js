@@ -4,6 +4,7 @@ import FormularioDatosComerciante from './FormularioDatosComerciante.js';
 import {API_REGISTER,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
+import Loading from '../loading/loading.js';
 
 class FormularioAltaUsuario extends React.Component {
 
@@ -388,6 +389,8 @@ class FormularioAltaUsuario extends React.Component {
   }
 
   render() {
+    if(this.state.isLoading == true)
+      return  <Loading></Loading>
     return (
       <>{this.renderFormulario()}</>
     );
