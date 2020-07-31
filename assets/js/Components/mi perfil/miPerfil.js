@@ -272,13 +272,19 @@ class MiPerfil extends React.Component {
     }
   }
 
+  cancelarBajaUsuario = () => {
+    this.setState({
+      solicitaBaja : false
+    });
+  }
+
   render() {
     if(this.state.isLogin == false)
       return <Salir/>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     if(this.state.solicitaBaja == true)
-      return  <DarBaja></DarBaja>
+      return  <DarBaja cancelarBajaUsuario={this.cancelarBajaUsuario}></DarBaja>
     return (        
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">

@@ -52,7 +52,7 @@ class DarBaja extends React.Component {
   }
 
   cancelarBajaUsuario = () => {
-
+    this.props.cancelarBajaUsuario();
   }
 }
 

@@ -81,7 +81,7 @@ class FormularioAltaUsuario extends React.Component {
   <div className="row">
                   <div className="col-lg-6">
                     <div className="form-group">
-                      <button type="submit" 
+                      <button type="submit" onClick={this.handleSubmit}
                               className="btn btn-primary btn-block">Registrarme</button>
                     </div>
                   </div>
@@ -317,6 +317,7 @@ class FormularioAltaUsuario extends React.Component {
       "constanciaDni":this.state.constanciaDni,
       "constanciaAfip":this.state.constanciaAfip
     };
+    console.log(payload);
     const headers = {
       'Content-Type': 'multipart/form-data',
     };
@@ -333,6 +334,7 @@ class FormularioAltaUsuario extends React.Component {
   async getData(url,payload,headers){
     try 
     {
+      console.log('entra');
       // Load async data from an inexistent endpoint.
       const response = await axios.post(url,payload,headers);
       const { data } = await response;
