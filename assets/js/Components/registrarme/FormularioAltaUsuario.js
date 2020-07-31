@@ -268,7 +268,7 @@ class FormularioAltaUsuario extends React.Component {
       }
     
       if(this.state.localidad == ''){
-        errors["localidad"] = "Debe completar la calle";
+        errors["localidad"] = "Debe completar la localidad";
         formularioValido = false;    
       }
     
