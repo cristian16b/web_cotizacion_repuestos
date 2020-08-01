@@ -52,7 +52,7 @@ class App extends React.Component {
       return (
         <div className="row">
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-          <NavbarLogueado/>
+          <NavbarLogueado rol={this.state.rol}/>
           <div className="containerCentral">
               <Switch>
                 <Redirect exact from='/login' to='/repuesto'/>
@@ -72,7 +72,7 @@ class App extends React.Component {
     return (
       <div className="row">
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-          <NavbarLogueado/>
+          <NavbarLogueado rol={this.state.rol}/>
           <div className="containerCentral">
               <Switch>
                 <Redirect exact from='/login' to='/repuesto'/>
