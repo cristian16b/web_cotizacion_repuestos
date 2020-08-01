@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   obtenerToken = (bandera,rolObtenido,tokenObtenido,code) => {
-    console.log(rolObtenido + ' ' + tokenObtenido + ' ' + code);
+    // console.log(rolObtenido + ' ' + tokenObtenido + ' ' + code);
     // 
     if(code == 200) {
 
@@ -58,7 +58,7 @@ class App extends React.Component {
                 <Route exact path="/repuesto" render={() => <BuscarRepuesto token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} />
-                <Route exact path="/contacto" component={Contacto} />
+                {/* <Route exact path="/contacto" component={Contacto} /> */}
                 <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
                 <Route component={NotFound}/>
               </Switch>
