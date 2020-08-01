@@ -16,6 +16,7 @@ import NavbarLogueado from './Components/barra superior/navBarLogueado';
 import Salir from './Components/salir/salir';
 import RecuperarContrasenia from './Components/recuperar/recuperarContrasenia';
 import NotFound from './Components/not found/notfound';
+import {ROL_COMERCIANTE} from './Constantes/constantes';
 
 class App extends React.Component {
 
@@ -47,6 +48,27 @@ class App extends React.Component {
   }
 
   returnTemplateLogueado = () => {
+    if(this.state.rol == ROL_COMERCIANTE)
+      return (
+        <div className="row">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          <NavbarLogueado/>
+          <div className="containerCentral">
+              <Switch>
+                <Redirect exact from='/login' to='/repuesto'/>
+                <Route exact path="/" component={Home} />
+                {/* <Route exact path="/repuesto" render={() => <BuscarRepuesto token={this.state.token['token']} rol={this.state.rol}/>} /> */}
+                <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token['token']} rol={this.state.rol}/>} />
+                {/* <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} /> */}
+                {/* <Route exact path="/contacto" component={Contacto} /> */}
+                <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
+                <Route component={NotFound}/>
+              </Switch>
+            </div>
+          <PiePagina />
+        </div>
+      </div>
+      )
     return (
       <div className="row">
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
