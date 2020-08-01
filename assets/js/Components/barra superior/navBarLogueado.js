@@ -27,12 +27,9 @@ class NavbarLogueado extends React.Component {
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
                             <Link to="/" className="navbar-brand"><span className="nav-link">¿Quienes somos?</span></Link>
                         </li>
-                        {/* <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
-                            <Link to="/repuesto" className="navbar-brand"><span className="nav-link">Buscar un repuesto</span></Link>
-                        </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
-                            <Link to="/cotizaciones" className="navbar-brand"><span className="nav-link">Mis cotizaciones</span></Link>
-                        </li> */}
+                            <Link to="/solicitudes" className="navbar-brand"><span className="nav-link">Mis solicitudes recibidas</span></Link>
+                        </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
                             <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mi perfil</span></Link>
                         </li>
