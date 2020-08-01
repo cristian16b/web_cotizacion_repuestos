@@ -110,7 +110,6 @@ class FormularioDatosComerciante extends React.Component {
                     id="provincia"
                     cacheOptions 
                     value = { this.props.provincia }
-                    inputValue = { this.props.provincia }
                     loadOptions = {this.loadProvincia}
                     onChange={handleChangeSelectProvincia}
                     placeholder={<div>Escriba la provincia donde vive</div>}
@@ -129,7 +128,6 @@ class FormularioDatosComerciante extends React.Component {
                     cacheOptions 
                     value = { this.props.localidad }
                     loadOptions = {this.loadLocalidad}
-                    inputValue = { this.props.localidad }
                     onChange={handleChangeSelectLocalidad}
                     placeholder={<div>Escriba la localidad donde vive</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}

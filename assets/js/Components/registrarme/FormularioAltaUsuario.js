@@ -130,6 +130,7 @@ class FormularioAltaUsuario extends React.Component {
   }
   
   handleChangeSelectProvincia = (e) => {
+    console.log(e);
     this.setState({provincia: e}); 
   }
   
@@ -193,6 +194,7 @@ class FormularioAltaUsuario extends React.Component {
                       onChangeValueDni={this.handleChangeValueArchivoDni}
                       onChangeValueAfip={this.handleChangeValueArchivoAfip}
                       ocultarCampos={this.props.ocultarCampos}
+                      soloLectura={this.state.soloLectura}
                     >
                     </FormularioDatosComerciante>
                   </>
