@@ -18,9 +18,9 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 
 /**
- * @Route("/api/v1/solicitudes/repuesto")
+ * @Route("/api/v1/solicitudes")
 */
-class MisSolicitudesController extends AbstractController
+class SolicitudesController extends AbstractController
 {
     // /**
     //  * @Route("/mis/solicitudes", name="mis_solicitudes")
@@ -38,7 +38,7 @@ class MisSolicitudesController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/listar", name="solicitudes_listar", defaults={"_format":"json"})
+     * @Rest\Get("/repuesto/listar", name="solicitudes_listar", defaults={"_format":"json"})
      *
      * @SWG\Response(
      *     response=200,
@@ -97,7 +97,7 @@ class MisSolicitudesController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/buscar", name="solicitudes_buscar", defaults={"_format":"json"})
+     * @Rest\Get("/repuesto/buscar", name="solicitudes_buscar", defaults={"_format":"json"})
      *
      * @SWG\Response(
      *     response=200,
@@ -131,6 +131,65 @@ class MisSolicitudesController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $solicitudes= $em->getRepository(Solicitud::class)
                     ->buscarUltimasPorNombreRepuesto($user,$name);
+
+            if (is_null($solicitudes)) {
+                $solicitudes = [];
+            }
+
+        } catch (Exception $ex) {
+            $code = 500;
+            $error = true;
+            $message = "Error: {$ex->getMessage()}";
+        }
+
+        $response = [
+            'code' => $code,
+            'error' => $error,
+            'data' => $code == 200 ? $solicitudes : $message,
+        ];
+        
+        return new Response(
+            $serializer->serialize(
+                $response,
+                "json"
+            )
+        );
+    }
+
+    /**
+     * @Rest\Get("/ultimas/listar", name="solicitudes_ultimas_listar", defaults={"_format":"json"})
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Retorna las ultimas 30 solicitudes realizadas."
+     * )
+     *
+     * @SWG\Response(
+     *     response=500,
+     *     description="Un error ocurrio en la busqueda de mis solicitudes."
+     * )
+     *
+     * @SWG\Tag(name="UltimasSolicitudes")
+     */
+    public function buscarUltimasSolicitudesRealizadasAction(Request $request)
+    {
+        $serializer = $this->container->get('jms_serializer');
+        $solicitudes = [];
+        $message = "";
+
+        try {
+            $user = $this->getUser();
+            // si no se obtiene correctamente el usuario falla
+            if(is_null($user)) {
+                throw new \Exception('Something went wrong!');
+            }
+
+            $code = 200;
+            $error = false;
+
+            $em = $this->getDoctrine()->getManager();
+            $solicitudes= $em->getRepository(Solicitud::class)
+                    ->buscarUltimas();
 
             if (is_null($solicitudes)) {
                 $solicitudes = [];
