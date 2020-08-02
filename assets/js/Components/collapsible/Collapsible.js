@@ -11,8 +11,8 @@ export class Collapsible extends React.Component {
 
     togglePanel(e){
         this.setState({open: !this.state.open});
-        if(!this.state.open)
-            console.log('click se abre');
+        // if(!this.state.open)
+        //     console.log('click se abre');
     }
 
     componentDidUpdate(){

@@ -214,14 +214,13 @@ class SolicitudesGeneradas extends React.Component {
                             </Collapsible>
                         </div>
                       </div>
-                      {/* <div className="row">
+                      <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                              <Collapsible title="Ver cotizaciones"  className="btn btn-warning">
-                                    <div> <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
-                                    </div>
+                              <Collapsible title="Enviar cotización"  className="btn btn-warning">
+                                <p>soy un previo de respuesta</p>
                               </Collapsible>
                         </div>
-                      </div> */}
+                      </div>
             </Td>
           </Tr>
     )
