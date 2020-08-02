@@ -1,13 +1,13 @@
 import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import Loading from '../loading/loading.js';
-import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES} from '../../Constantes/constantes';
+import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES,API_ULTIMAS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
 // import {Collapsible} from './Collapsible';
 import ModalImage from "react-modal-image";
 import Salir from '../salir/salir.js';
 
-class SolicituesGeneradas extends React.Component {
+class SolicitudesGeneradas extends React.Component {
 
   constructor(props){
     super(props);
@@ -32,7 +32,7 @@ class SolicituesGeneradas extends React.Component {
     try 
     {
       // Load async data from an inexistent endpoint.
-      let response = await axios.get(API_MIS_SOLICITUDES,config);
+      let response = await axios.get(API_ULTIMAS_SOLICITUDES,config);
       this.setState({isLoading: false});
       if(response.data.code == 200) {
         // console.log('code 200')
@@ -115,7 +115,7 @@ class SolicituesGeneradas extends React.Component {
     this.setState({isLoading: true});
     this.setState({repuestoBuscar: ''});
     this.setState({errors: {}});
-    let url = API_MIS_SOLICITUDES;
+    let url = API_ULTIMAS_SOLICITUDES;
     this.getData(url,config);
   }
 
@@ -124,8 +124,8 @@ class SolicituesGeneradas extends React.Component {
       <>
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-6">
-            <div className="form-group">
-              <label htmlFor="password">Buscar repuesto solicitado</label>
+            {/* <div className="form-group">
+              <label htmlFor="password">Filtros de búsqueda de solicitudes</label>
               <div className="input-group">
                 <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                   <input type="text" className="form-control" name="repuestoBuscar" 
@@ -135,7 +135,7 @@ class SolicituesGeneradas extends React.Component {
                 <span id="buscar" className="text-danger error_negrita">
                   {this.state.errors["buscar"]}
                 </span> 
-            </div>
+            </div> */}
           </div>
         </div>
           <div className="row">
@@ -214,14 +214,14 @@ class SolicituesGeneradas extends React.Component {
                             </Collapsible>
                         </div>
                       </div>
-                      <div className="row">
+                      {/* <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                               <Collapsible title="Ver cotizaciones"  className="btn btn-warning">
                                     <div> <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
                                     </div>
                               </Collapsible>
                         </div>
-                      </div>
+                      </div> */}
             </Td>
           </Tr>
     )
@@ -260,7 +260,7 @@ class SolicituesGeneradas extends React.Component {
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
                 <h5>Solicitudes generadas</h5>
-                <p>Listado solo de las últimas solicitudes que fueron generadas por los usuarios</p>
+                <p>Listado de las últimas solicitudes que fueron generadas por los usuarios</p>
                 <p>Para buscar solicitudes para un tipo de repuesto,marca o modelo debe seleccionar los filtros.</p>
                 <hr/>
                 <>{ this.renderFilTrosBusqueda() }</>
@@ -274,4 +274,4 @@ class SolicituesGeneradas extends React.Component {
   }
 }
 
-export default SolicituesGeneradas;
+export default SolicitudesGeneradas;

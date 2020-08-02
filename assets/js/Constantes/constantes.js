@@ -11,6 +11,7 @@ export const API_GUARDAR_SOLICITUD_REPUESTO = API_BASE_URL + '/api/v1/solicitud/
 export const API_MIS_SOLICITUDES = API_BASE_URL + '/api/v1/solicitudes/repuesto/listar';
 export const API_BUSCAR_MIS_SOLICITUDES = API_BASE_URL + '/api/v1/solicitudes/repuesto/buscar';
 export const API_MI_PERFIL = API_BASE_URL + '/api/v1/perfil/getPerfil'; 
+export const API_ULTIMAS_SOLICITUDES = API_BASE_URL + '/api/v1/solicitudes/ultimas/listar';
 // las siguientes son apis publiucas
 export const API_OBTENER_FOTO_REPUESTO = API_BASE_URL + '/recurso/get/foto';
 export const API_PROVINCIA = API_BASE_URL + '/provincia/getByName';
