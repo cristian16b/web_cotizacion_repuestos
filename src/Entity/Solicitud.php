@@ -16,7 +16,9 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Table(indexes={
  *   @ORM\Index(name="modelo_auto_id", columns={"modelo_auto_id"}),
  *   @ORM\Index(name="solicitante_id", columns={"solicitante_id"}),
- *   @ORM\Index(name="solicitante_id", columns={"repuesto_id"})
+ *   @ORM\Index(name="repuesto_id", columns={"repuesto_id"}),
+ *   @ORM\Index(name="estado_id", columns={"estado_id"}),
+ *   @ORM\Index(name="compra_id", columns={"compra_id"})
  * })
  */
 class Solicitud
@@ -90,6 +92,12 @@ class Solicitud
      * @Expose
      */
     private $repuesto;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\EstadoSolicitud", inversedBy="solicituds")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $estado;
 
     public function __construct()
     {
@@ -257,6 +265,18 @@ class Solicitud
     public function setRepuesto(?Repuesto $repuesto): self
     {
         $this->repuesto = $repuesto;
+
+        return $this;
+    }
+
+    public function getEstado(): ?EstadoSolicitud
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?EstadoSolicitud $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }

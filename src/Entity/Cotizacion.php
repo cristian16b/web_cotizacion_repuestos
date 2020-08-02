@@ -58,6 +58,11 @@ class Cotizacion
      */
     private $oferente;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $fechaLimiteValidez;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +149,18 @@ class Cotizacion
     public function setOferente(?Usuario $oferente): self
     {
         $this->oferente = $oferente;
+
+        return $this;
+    }
+
+    public function getFechaLimiteValidez(): ?\DateTimeInterface
+    {
+        return $this->fechaLimiteValidez;
+    }
+
+    public function setFechaLimiteValidez(\DateTimeInterface $fechaLimiteValidez): self
+    {
+        $this->fechaLimiteValidez = $fechaLimiteValidez;
 
         return $this;
     }
