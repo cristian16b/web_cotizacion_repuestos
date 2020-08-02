@@ -8,6 +8,7 @@ import BuscarRepuesto from './Components/buscar repuesto/buscarRepuestos';
 import Contacto from './Components/contacto/contacto';
 import MiPerfil from './Components/mi perfil/miPerfil';
 import MisCotizaciones from './Components/mis cotizaciones/misCotizaciones';
+import MisCotizaciones from './Components/solicitudes generadas/miss';
 import Registrarme from './Components/registrarme/registrarme';
 import Login from './Components/login/login';
 import { BrowserRouter, Route, Switch , Redirect } from 'react-router-dom';
