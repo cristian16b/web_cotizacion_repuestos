@@ -3,7 +3,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import Loading from '../loading/loading.js';
 import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES,API_ULTIMAS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
-// import {Collapsible} from './Collapsible';
+import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
 import Salir from '../salir/salir.js';
 
