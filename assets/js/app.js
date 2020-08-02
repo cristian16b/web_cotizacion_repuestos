@@ -8,7 +8,7 @@ import BuscarRepuesto from './Components/buscar repuesto/buscarRepuestos';
 import Contacto from './Components/contacto/contacto';
 import MiPerfil from './Components/mi perfil/miPerfil';
 import MisCotizaciones from './Components/mis cotizaciones/misCotizaciones';
-import MisCotizaciones from './Components/solicitudes generadas/miss';
+import SolicitudesGeneradas from './Components/solicitudes generadas/SolicitudesGeneradas';
 import Registrarme from './Components/registrarme/registrarme';
 import Login from './Components/login/login';
 import { BrowserRouter, Route, Switch , Redirect } from 'react-router-dom';
@@ -59,7 +59,7 @@ class App extends React.Component {
                 <Redirect exact from='/login' to='/solicitudes'/>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token['token']} rol={this.state.rol}/>} />
-                <Route exact path="/solicitudes" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} />
+                <Route exact path="/solicitudes" render={() => <SolicitudesGeneradas token={this.state.token['token']} rol={this.state.rol}/>} />
                 {/* <Route exact path="/contacto" component={Contacto} /> */}
                 <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
                 <Route component={NotFound}/>

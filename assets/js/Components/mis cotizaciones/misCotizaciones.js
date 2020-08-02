@@ -1,6 +1,5 @@
 import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
-import '../solicitudes generadas/node_modules/react-super-responsive-Table/dist/SuperResponsiveTableStyle.css';
 import Loading from '../loading/loading.js';
 import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';

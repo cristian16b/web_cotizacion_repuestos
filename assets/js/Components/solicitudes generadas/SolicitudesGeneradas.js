@@ -1,10 +1,9 @@
 import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
-import 'react-super-responsive-Table/dist/SuperResponsiveTableStyle.css';
 import Loading from '../loading/loading.js';
 import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
-import {Collapsible} from './Collapsible';
+// import {Collapsible} from './Collapsible';
 import ModalImage from "react-modal-image";
 import Salir from '../salir/salir.js';
 
@@ -261,7 +260,8 @@ class SolicituesGeneradas extends React.Component {
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
                 <h5>Solicitudes generadas</h5>
-                <p>Listado de las últimas solicitudes generadas</p>
+                <p>Listado solo de las últimas solicitudes que fueron generadas por los usuarios</p>
+                <p>Para buscar solicitudes para un tipo de repuesto,marca o modelo debe seleccionar los filtros.</p>
                 <hr/>
                 <>{ this.renderFilTrosBusqueda() }</>
                 <hr/>
