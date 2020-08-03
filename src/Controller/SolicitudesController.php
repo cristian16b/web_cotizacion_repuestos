@@ -214,4 +214,70 @@ class SolicitudesController extends AbstractController
             )
         );
     }
+
+    
+    /**
+     * @Rest\Get("/buscar", name="solicitudes_buscar", defaults={"_format":"json"})
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Retorna las ultimas 30 solicitudes realizadas."
+     * )
+     *
+     * @SWG\Response(
+     *     response=500,
+     *     description="Un error ocurrio en la busqueda de mis solicitudes."
+     * )
+     *
+     * @SWG\Tag(name="buscarSolicitudesRealizadas")
+     */
+    public function filtrarSolicitudesRealizadasAction(Request $request)
+    {
+        $serializer = $this->container->get('jms_serializer');
+        $solicitudes = [];
+        $message = "";
+
+        try {
+            $user = $this->getUser();
+
+            $repuesto = $request->query->get('repuesto');
+            $marca = $request->query->get('marca');
+            $modelo = $request->query->get('modelo');
+
+
+            // si no se obtiene correctamente el usuario falla
+            if(is_null($user) || ($repuesto == 'undefined' && $marca == 'undefined' && $modelo == 'undefined')) {
+                throw new \Exception('Something went wrong!');
+            }            
+
+            $code = 200;
+            $error = false;
+
+            $em = $this->getDoctrine()->getManager();
+            $solicitudes= $em->getRepository(Solicitud::class)
+                    ->filtrarSolicitudes($repuesto,$marca,$modelo);
+
+            if (is_null($solicitudes)) {
+                $solicitudes = [];
+            }
+
+        } catch (Exception $ex) {
+            $code = 500;
+            $error = true;
+            $message = "Error: {$ex->getMessage()}";
+        }
+
+        $response = [
+            'code' => $code,
+            'error' => $error,
+            'data' => $code == 200 ? $solicitudes : $message,
+        ];
+        
+        return new Response(
+            $serializer->serialize(
+                $response,
+                "json"
+            )
+        );
+    }
 }

@@ -92,17 +92,17 @@ class SolicitudesGeneradas extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
-    let repuestoBuscar = this.state.repuestoBuscar;
+    console.log(this.state);
     if(this.state.repuestoSeleccionado == '' && this.state.modeloSeleccionado == '' && this.state.marcaSeleccionado == '') {
-      this.setState({errors: {}});
-      this.setState({isLoading: true});
-      let url = API_BUSCAR_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
-      this.getData(url,config);
-    }
-    else {
       let error = {};
       error["buscar"] = "Debes seleccionar al menos uno de los filtros";
       this.setState({errors: error});
+    }
+    else {
+      this.setState({errors: {}});
+      this.setState({isLoading: true});
+      let url = API_BUSCAR_SOLICITUDES + `?repuesto=${this.state.repuestoSeleccionado.value}&marca=${this.state.marcaSeleccionado.value}&modelo=${this.state.modeloSeleccionado.value}`;
+      this.getData(url,config);
     }
   }
 
@@ -138,6 +138,9 @@ class SolicitudesGeneradas extends React.Component {
     this.setState({isLoading: true});
     this.setState({repuestoBuscar: ''});
     this.setState({errors: {}});
+    this.setState({repuestoSeleccionado: ''});
+    this.setState({modeloSeleccionado: ''});
+    this.setState({marcaSeleccionado: ''});
     let url = API_ULTIMAS_SOLICITUDES;
     this.getData(url,config);
   }
@@ -145,6 +148,13 @@ class SolicitudesGeneradas extends React.Component {
   renderFilTrosBusqueda() {
     return(
       <>
+        <div className="row">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-4">
+            <span id="buscar" className="text-danger error_negrita">
+                    {this.state.errors["buscar"]}
+                  </span> 
+          </div>
+        </div>
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-4">
                   <label forhtml="marca">Marca del Vehículo</label>
@@ -315,7 +325,6 @@ class SolicitudesGeneradas extends React.Component {
           Authorization: `Bearer ${this.props.token}`
         }
       };
-      console.log(config);
       // console.log(this.state.token['token']);
       this.setState({peticionActiva: true});
       //seteo peticionActiva true para evitar que se desaten continuas peticiones

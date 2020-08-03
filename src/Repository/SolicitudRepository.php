@@ -19,6 +19,31 @@ class SolicitudRepository extends ServiceEntityRepository
         parent::__construct($registry, Solicitud::class);
     }
 
+    public function filtrarSolicitudes($repuesto,$marca,$modelo) {
+        // dump($repuesto != 'undefined');dump($marca != 'undefined');dump($modelo != 'undefined');
+        $query = $this->createQueryBuilder('s')
+                        ->innerJoin('s.repuesto','r','WITH','r.fechaBaja IS null')
+                        ->innerJoin('s.modeloAuto','modelo','WITH','modelo.fechaBaja IS null')
+                        ->innerJoin('modelo.marcaAuto','marca','WITH','marca.fechaBaja IS null')
+                        ->where('s.fechaBaja is null')
+                        ->orderBy('s.fechaAlta', 'DESC')
+                        ->setMaxResults(100)
+                    ;
+        if($repuesto != 'undefined') {
+            $query->andWhere('r.id = :idRepuesto');
+            $query->setParameter('idRepuesto',$repuesto);
+        }
+        if($modelo != 'undefined') {
+            $query->andWhere('modelo.id = :idModeloAuto');
+            $query->setParameter('idModeloAuto',$modelo);
+        }
+        if($marca != 'undefined') {
+            $query->andWhere('marca.id = :idMarca');
+            $query->setParameter('idMarca',$marca);
+        }
+        return $query->getQuery()->getResult();
+    }
+
     public function buscarUltimas() {
         return $this->createQueryBuilder('s')
             ->where('s.fechaBaja is null')
