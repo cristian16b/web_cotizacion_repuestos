@@ -1,17 +1,22 @@
 import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import Loading from '../loading/loading.js';
-import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES,API_ULTIMAS_SOLICITUDES} from '../../Constantes/constantes';
+import {API_REPUESTOS_FILTER,API_AUTO_MODELO_FILTER,API_AUTO_MARCA_FILTER,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES,API_ULTIMAS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
 import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
 import Salir from '../salir/salir.js';
+import AsyncSelect from 'react-select/async';
 
 class SolicitudesGeneradas extends React.Component {
 
   constructor(props){
     super(props);
     this.state = ({
+      peticionActiva:false,
+      repuestoSeleccionado: '',
+      marcaSeleccionado: '',
+      modeloSeleccionado: '',
       menu: false,
       isMount: false,
       isLoading: true, // inicialmente esta cargando hasta que se monta el componente en componentdidmount()
@@ -23,6 +28,24 @@ class SolicitudesGeneradas extends React.Component {
 
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.reiniciar = this.reiniciar.bind(this);
+    this.loadRepuestos = this.loadRepuestos.bind(this);
+    this.loadMarcas = this.loadMarcas.bind(this);
+    this.loadModelos = this.loadModelos.bind(this);
+  }
+
+  handleChangeSelectRepuesto = (e) => {
+    this.setState({ repuestoSeleccionado: e });
+    // console.log(`Option selected:`, e);
+  }
+
+  handleChangeSelectMarca = (e) => {
+    this.setState({ marcaSeleccionado: e });
+    // console.log(`Option selected:`, e);
+  }
+
+  handleChangeSelectModelo = (e) => {
+    this.setState({ modeloSeleccionado: e });
+    // console.log(`Option selected:`, e);
   }
 
   async componentDidMount() {
@@ -123,25 +146,60 @@ class SolicitudesGeneradas extends React.Component {
     return(
       <>
         <div className="row">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-6">
-            {/* <div className="form-group">
-              <label htmlFor="password">Filtros de búsqueda de solicitudes</label>
-              <div className="input-group">
-                <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                  <input type="text" className="form-control" name="repuestoBuscar" 
-                                              defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
-                                              placeholder="Escribala el repuesto que solicito" />	
+          <div className="col-12 col-sm-12 col-md-12 col-lg-4">
+                  <label forhtml="marca">Marca del Vehículo</label>
+                  <AsyncSelect 
+                    id="marca"
+                    cacheOptions 
+                    value = { this.state.marcaSeleccionado }
+                    loadOptions = {this.loadMarcas}
+                    onChange={this.handleChangeSelectMarca}
+                    placeholder={<div>Escriba la marca de su Vehículo</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                  <span className="text-danger error_negrita">
+                    {this.state.errors["marcaSeleccionado"]}
+                  </span>
+                  {/* fin 1era columna */}
+            </div>
+                <div className="col-12 col-sm-12 col-md-12 col-lg-4">
+                  <label forhtml="modelo">Modelo</label>
+                  <AsyncSelect 
+                    id="modelo"
+                    cacheOptions 
+                    value = { this.state.modeloSeleccionado }
+                    loadOptions = {this.loadModelos}
+                    onChange={this.handleChangeSelectModelo}
+                    placeholder={<div>Escriba el modelo de su Vehículo</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                  <span className="text-danger error_negrita">
+                    {this.state.errors["modeloSeleccionado"]}
+                  </span>
+                  {/* fin 2da columna */}
                 </div>
-                <span id="buscar" className="text-danger error_negrita">
-                  {this.state.errors["buscar"]}
-                </span> 
-            </div> */}
+                <div className="col-12 col-sm-12 col-md-12 col-lg-4">
+                  <label forhtml="repuesto">Tipo repuesto</label>  
+                  <AsyncSelect 
+                    id="repuesto"
+                    cacheOptions 
+                    value = { this.state.repuestoSeleccionado }
+                    loadOptions = {this.loadRepuestos}
+                    onChange={this.handleChangeSelectRepuesto}
+                    placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
+                    noOptionsMessage= {() => "No se encontraron resultados"}
+                  />
+                  <span className="text-danger error_negrita">
+                    {this.state.errors["repuestoSeleccionado"]}
+                  </span>
+                </div>
           </div>
-        </div>
+          <br></br>
           <div className="row">
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-2">
-              <button type="submit" onClick={this.buscarRepuestoSolicitado}
-                className="btn btn-primary btn-block">Buscar</button>
+              <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+                <button type="submit" onClick={this.buscarRepuestoSolicitado}
+                  className="btn btn-primary btn-block">Buscar
+                </button>
           </div>
           <div className="col-6 col-sm-6 col-md-3 col-lg-2">
               <button 
@@ -247,6 +305,61 @@ class SolicitudesGeneradas extends React.Component {
           </Table>
     );
   }
+
+  consumirApi = (name,url,minimaCantLetras) => {
+    // revisar evento onkey
+    // if(name.length > minimaCantLetras && this.state.peticionActiva == true)
+    if(name.length > minimaCantLetras) {
+      const config = {
+        headers: { 
+          Authorization: `Bearer ${this.props.token}`
+        }
+      };
+      console.log(config);
+      // console.log(this.state.token['token']);
+      this.setState({peticionActiva: true});
+      //seteo peticionActiva true para evitar que se desaten continuas peticiones
+      return  axios.get(url,config)
+            .then(response => {
+                this.setState({peticionActiva: false});
+                let lista = response.data.data;
+                let options = lista.map(elemento => {    
+                  return { value:  `${elemento.id}`, label: `${elemento.name}` };
+                });
+                return options;
+            })
+            .catch(e => {
+              this.setState({peticionActiva: false});
+              if(e.response)
+              {
+                  let error = '';
+                  error = e.response.data.message;
+                  console.log(error);
+                  // this.setState({errorApi: error});
+                  this.setState({
+                    isLogin : false
+                  });
+              }
+            });
+    }
+}
+
+loadRepuestos = (name) => { 
+  let url = API_REPUESTOS_FILTER + `?name=${name}`; 
+  return this.consumirApi(name,url,3) 
+}
+
+loadMarcas = (name) => { 
+  let url = API_AUTO_MARCA_FILTER + `?name=${name}`; 
+  return this.consumirApi(name,url,1) 
+} 
+
+loadModelos = (name) => { 
+  // console.log(this.state.marcaSeleccionado);
+  let id = this.state.marcaSeleccionado.value;
+  let url = API_AUTO_MODELO_FILTER + `?name=${name}&idMarca=${id}`; 
+  return this.consumirApi(name,url,1);
+}
 
   render() {
     if(this.state.isLogin == false)
