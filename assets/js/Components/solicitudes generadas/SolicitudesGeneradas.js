@@ -23,7 +23,9 @@ class SolicitudesGeneradas extends React.Component {
       misSolicitudes: [],
       repuestoBuscar: '',
       errors:{},
-      isLogin: true
+      isLogin: true,
+      monto: 0,
+      fechaVencimiento: '',
     });
 
     this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -31,6 +33,13 @@ class SolicitudesGeneradas extends React.Component {
     this.loadRepuestos = this.loadRepuestos.bind(this);
     this.loadMarcas = this.loadMarcas.bind(this);
     this.loadModelos = this.loadModelos.bind(this);
+  }
+
+  obtenerFechaVencimiento = () => {
+    let hoy = new Date();
+    hoy.setDate(hoy.getDate()+7);
+    let fechaFormateada = this.formatearFecha(hoy.toJSON().slice(0,10));
+    this.setState({ fechaVencimiento :  fechaFormateada});
   }
 
   handleChangeSelectRepuesto = (e) => {
@@ -58,6 +67,8 @@ class SolicitudesGeneradas extends React.Component {
       let response = await axios.get(API_ULTIMAS_SOLICITUDES,config);
       this.setState({isLoading: false});
       if(response.data.code == 200) {
+        this.obtenerFechaVencimiento();
+        console.log(this.state.fechaVencimiento);
         // console.log('code 200')
         this.setState({misSolicitudes: response.data.data});
         // console.log(this.state.misSolicitudes);
@@ -284,14 +295,48 @@ class SolicitudesGeneradas extends React.Component {
                       </div>
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                              <Collapsible title="Enviar cotización"  className="btn btn-warning">
-                                <p>soy un previo de respuesta</p>
-                              </Collapsible>
+                            <Collapsible title="Enviar cotización"  className="btn btn-warning">
+                              <hr></hr>
+                              <div className="row">
+                                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                                  <p>Ingrese el monto que sera notificado al solicitante</p>
+                                </div>
+                                <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                                <div className="form-group">
+                                  <label htmlFor="monto">Monto</label>
+                                  <div className="input-group">
+                                    <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                                      <input type="text" className="form-control" name="monto" 
+                                              defaultValue = {this.state.monto} onChange={this.handleChangeInput}
+                                              placeholder="Ej: 200.10" />	
+                                  </div>
+                                  <span id="monto" className="text-danger error_negrita">
+                                    {this.state.errors["monto"]}
+                                  </span> 
+                                </div>
+                                </div>
+                              </div>
+                              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                              <p>Se informara que la cotización vence el {this.state.fechaVencimiento}</p>
+                              </div>
+                              <div className="row">
+                                  <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+                                    <button type="submit" onClick={this.enviarCotizacion}
+                                      className="btn btn-primary btn-block">Enviar
+                                    </button>
+                                  </div>
+                              </div>
+                              <hr></hr>
+                            </Collapsible>
                         </div>
                       </div>
             </Td>
           </Tr>
     )
+  }
+
+  enviarCotizacion = () => {
+    console.log()
   }
 
   renderTabla() {
