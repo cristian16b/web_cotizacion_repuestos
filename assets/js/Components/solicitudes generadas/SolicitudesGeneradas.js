@@ -149,7 +149,7 @@ class SolicitudesGeneradas extends React.Component {
     return(
       <>
         <div className="row">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-4">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12">
             <span id="buscar" className="text-danger error_negrita">
                     {this.state.errors["buscar"]}
                   </span> 
