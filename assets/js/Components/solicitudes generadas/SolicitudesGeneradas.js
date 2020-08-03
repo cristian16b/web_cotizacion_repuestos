@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import Loading from '../loading/loading.js';
-import {API_REPUESTOS_FILTER,API_AUTO_MODELO_FILTER,API_AUTO_MARCA_FILTER,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES,API_ULTIMAS_SOLICITUDES} from '../../Constantes/constantes';
+import {API_BUSCAR_SOLICITUDES,API_REPUESTOS_FILTER,API_AUTO_MODELO_FILTER,API_AUTO_MARCA_FILTER,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES,API_ULTIMAS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
 import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
@@ -93,15 +93,15 @@ class SolicitudesGeneradas extends React.Component {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
     let repuestoBuscar = this.state.repuestoBuscar;
-    if(repuestoBuscar.length >= 3) {
+    if(this.state.repuestoSeleccionado == '' && this.state.modeloSeleccionado == '' && this.state.marcaSeleccionado == '') {
       this.setState({errors: {}});
       this.setState({isLoading: true});
-      let url = API_BUSCAR_MIS_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
+      let url = API_BUSCAR_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
       this.getData(url,config);
     }
     else {
       let error = {};
-      error["buscar"] = "Debes escribir al menos 3 caracteres";
+      error["buscar"] = "Debes seleccionar al menos uno de los filtros";
       this.setState({errors: error});
     }
   }
@@ -154,7 +154,7 @@ class SolicitudesGeneradas extends React.Component {
                     value = { this.state.marcaSeleccionado }
                     loadOptions = {this.loadMarcas}
                     onChange={this.handleChangeSelectMarca}
-                    placeholder={<div>Escriba la marca de su Vehículo</div>}
+                    placeholder={<div>Escriba la marca del Vehículo</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
@@ -170,7 +170,7 @@ class SolicitudesGeneradas extends React.Component {
                     value = { this.state.modeloSeleccionado }
                     loadOptions = {this.loadModelos}
                     onChange={this.handleChangeSelectModelo}
-                    placeholder={<div>Escriba el modelo de su Vehículo</div>}
+                    placeholder={<div>Escriba el modelo del Vehículo</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
@@ -186,7 +186,7 @@ class SolicitudesGeneradas extends React.Component {
                     value = { this.state.repuestoSeleccionado }
                     loadOptions = {this.loadRepuestos}
                     onChange={this.handleChangeSelectRepuesto}
-                    placeholder={<div>Escriba el nombre del respuesto que esta buscando</div>}
+                    placeholder={<div>Escriba el nombre del respuesto</div>}
                     noOptionsMessage= {() => "No se encontraron resultados"}
                   />
                   <span className="text-danger error_negrita">
