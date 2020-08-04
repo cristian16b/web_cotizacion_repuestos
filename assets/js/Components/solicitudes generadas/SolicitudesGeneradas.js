@@ -221,7 +221,6 @@ class SolicitudesGeneradas extends React.Component {
 
   setIsLoading = (loading) => {
     this.setState({isLoading: loading})
-    console.log(this.state.isLoading);
   }
 
   render() {

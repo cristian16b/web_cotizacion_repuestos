@@ -30,6 +30,18 @@ class Filtros extends React.Component {
     this.loadModelos = this.loadModelos.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      isMount : true
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      isMount : false
+    });
+  }
+
   renderFilTrosBusqueda() {
     return(
       <>
@@ -111,7 +123,6 @@ class Filtros extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
-    console.log(this.state);
     if(this.state.repuestoSeleccionado == '' && this.state.modeloSeleccionado == '' && this.state.marcaSeleccionado == '') {
       let error = {};
       error["buscar"] = "Debes seleccionar al menos uno de los filtros";
@@ -119,7 +130,7 @@ class Filtros extends React.Component {
     }
     else {
       this.setState({errors: {}});
-      this.setState({isLoading: true});
+      this.props.setIsLoading(true);
       let url = API_BUSCAR_SOLICITUDES + `?repuesto=${this.state.repuestoSeleccionado.value}&marca=${this.state.marcaSeleccionado.value}&modelo=${this.state.modeloSeleccionado.value}`;
       this.getData(url,config);
     }
@@ -129,7 +140,7 @@ class Filtros extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
-    this.setState({isLoading: true});
+    this.props.setIsLoading(true);
     this.setState({repuestoBuscar: ''});
     this.setState({errors: {}});
     this.setState({repuestoSeleccionado: ''});
@@ -148,12 +159,11 @@ class Filtros extends React.Component {
           Authorization: `Bearer ${this.props.token}`
         }
       };
-      // console.log(this.state.token['token']);
-      this.setState({peticionActiva: true});
       //seteo peticionActiva true para evitar que se desaten continuas peticiones
       return  axios.get(url,config)
             .then(response => {
                 this.setState({peticionActiva: false});
+                this.props.setIsLoading(false);
                 let lista = response.data.data;
                 let options = lista.map(elemento => {    
                   return { value:  `${elemento.id}`, label: `${elemento.name}` };
@@ -167,11 +177,7 @@ class Filtros extends React.Component {
                   let error = '';
                   error = e.response.data.message;
                   console.log(error);
-                  // this.setState({errorApi: error});
-                  this.setState({
-                    isLogin : false
-                  });
-                  this.props.setIsLoading(isLoading);
+                  this.props.setIsLoading(false);
               }
             });
     }
@@ -216,25 +222,20 @@ class Filtros extends React.Component {
       // Load async data from an inexistent endpoint.
       const response = await axios.get(url,headers);
       const { data } = await response;
-      this.setState({ catchaValido: false });
   
       let code = response.data.code;
       if(code == 200){
         // this.setState({misSolicitudes: response.data.data});
         this.props.getSolicitudes(response.data.data);
       }
-      this.setState({isLoading: false});
-      this.props.setIsLoading(this.state.isLoading);
+      this.props.setIsLoading(false);
     } 
     catch (e) 
     {
       console.log(`😱 Axios request failed: ${e}`);
       this.setState({isLoading: false});
       // alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
-      this.setState({
-        isLogin : false
-      });
-      this.props.setIsLoading(this.state.isLoading);
+      this.props.setIsLoading(false);
     }
   }
   
