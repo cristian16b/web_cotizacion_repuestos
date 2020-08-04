@@ -321,9 +321,12 @@ class SolicitudesGeneradas extends React.Component {
                               </div>
                               <div className="row">
                                   <div className="col-6 col-sm-6 col-md-3 col-lg-2">
-                                    <button type="submit" onClick={this.enviarCotizacion}
-                                      className="btn btn-primary btn-block">Enviar
-                                    </button>
+                                        <button
+                                            type="submit" 
+                                            onClick={() => this.enviarCotizacion(elemento.id)}
+                                            className="btn btn-primary btn-block">
+                                            Enviar
+                                        </button>
                                   </div>
                               </div>
                               <hr></hr>
@@ -335,8 +338,9 @@ class SolicitudesGeneradas extends React.Component {
     )
   }
 
-  enviarCotizacion = () => {
-    console.log()
+  enviarCotizacion = (id) => {
+    // console.log()
+    console.log(id);
   }
 
   renderTabla() {
