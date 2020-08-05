@@ -36,7 +36,7 @@ class CotizacionesController extends AbstractController
     }
 
        /**
-     * @Rest\Get("/enviar", name="cotizaciones_enviar", defaults={"_format":"json"})
+     * @Rest\Post("/enviar", name="cotizaciones_enviar", defaults={"_format":"json"})
      *
      * @SWG\Response(
      *     response=200,
@@ -48,7 +48,15 @@ class CotizacionesController extends AbstractController
      *     description="Un error ocurrio al enviar la cotizacion."
      * )
      *
-     * @SWG\Tag(name="Repuesto")
+     * @SWG\Parameter(
+     *     name="idSolicitud",
+     *     in="body",
+     *     type="number",
+     *     description="id de la solicitud",
+     *     schema={}
+     * )
+     * 
+     * @SWG\Tag(name="EnviarCotizacion")
      */
     public function enviarCotizacionAction(Request $request)
     {
@@ -62,14 +70,12 @@ class CotizacionesController extends AbstractController
 
             $idSolicitud = $request->request->get('idSolicitud');
             $monto = $request->request->get('monto');
-
-            dump($idSolicitud);dump($monto);die;
-
-
-            if(is_null($nombreArchivo)) {
+            if(is_null($idSolicitud) || is_null($monto)) {
                 throw new \Exception('Something went wrong!');
             }
 
+            dump($idSolicitud);dump($monto);die;
+            
             $em = $this->getDoctrine()->getManager();
             $repuestos= $em->getRepository(MarcaAuto::class)
                     ->buscarPorNombre($nameIngresado);
