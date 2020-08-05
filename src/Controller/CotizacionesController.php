@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
 * @Route("/cotizaciones")
 */
-class MisCotizacionesController extends AbstractController
+class CotizacionesController extends AbstractController
 {
     /**
      * @Route("/", name="mis_cotizaciones")
