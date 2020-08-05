@@ -89,7 +89,7 @@ class SolicitudesGeneradas extends React.Component {
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
-                <h5>Solicitudes generadas</h5>
+                <h5>Solicitudes</h5>
                 <p>Listado de las últimas solicitudes que fueron generadas por los usuarios</p>
                 <p>Para buscar solicitudes para un tipo de repuesto,marca o modelo debe seleccionar los filtros.</p>
                 <hr/>

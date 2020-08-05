@@ -28,7 +28,7 @@ class NavbarLogueado extends React.Component {
                             <Link to="/" className="navbar-brand"><span className="nav-link">¿Quienes somos?</span></Link>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
-                            <Link to="/solicitudes" className="navbar-brand"><span className="nav-link">Solicitudes generadas</span></Link>
+                            <Link to="/solicitudes" className="navbar-brand"><span className="nav-link">Solicitudes</span></Link>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
                             <Link to="/perfil" className="navbar-brand"><span className="nav-link">Mi perfil</span></Link>
