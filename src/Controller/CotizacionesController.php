@@ -15,6 +15,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
+use App\Entity\Solicitud;
+use App\Entity\Cotizacion;
+use App\Entity\EstadoCotizacion;
+
 /**
 * @Route("/api/v1/cotizaciones")
 */
@@ -67,22 +71,23 @@ class CotizacionesController extends AbstractController
         try {
             $code = 200;
             $error = false;
+            $user = $this->getUser();
 
             $idSolicitud = $request->request->get('idSolicitud');
             $monto = $request->request->get('monto');
-            if(is_null($idSolicitud) || is_null($monto)) {
+            if(is_null($idSolicitud) || is_null($monto) || is_null($user)) {
                 throw new \Exception('Something went wrong!');
             }
 
-            dump($idSolicitud);dump($monto);die;
-            
-            $em = $this->getDoctrine()->getManager();
-            $repuestos= $em->getRepository(MarcaAuto::class)
-                    ->buscarPorNombre($nameIngresado);
+            $solicitud = $this->obtenerSolicitud($idSolicitud);
 
-            if (is_null($repuestos)) {
-                $repuestos = [];
-            }
+            $cotizacion = new Cotizacion();
+            $cotizacion->setMonto($monto);
+            $cotizacion->setEstado($this->obtenerEstadoCotizacionEnviada());
+            $cotizacion->setSolicitud($solicitud);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
 
         } catch (Exception $ex) {
             $code = 500;
@@ -102,5 +107,15 @@ class CotizacionesController extends AbstractController
                 "json"
             )
         );
+    }
+
+    private function obtenerSolicitud($id) {
+        return $this->getDoctrine()->getManager()->getRepository(Solicitud::class)->find($id);
+    }
+
+    private function obtenerEstadoCotizacionEnviada() {
+        return $this->getDoctrine()->getManager()->getRepository(EstadoCotizacion::class)->findOneBy(array(
+            'descripcion' => 'ENVIADA'
+        ));
     }
 }
