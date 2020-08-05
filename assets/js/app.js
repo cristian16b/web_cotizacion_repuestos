@@ -61,7 +61,7 @@ class App extends React.Component {
                 <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/solicitudes" render={() => <SolicitudesGeneradas token={this.state.token['token']} rol={this.state.rol}/>} />
                 {/* <Route exact path="/contacto" component={Contacto} /> */}
-                <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
+                <Route exact path="/salir" render={() => <Salir obtenerToken={this.obtenerToken}/>} />
                 <Route component={NotFound}/>
               </Switch>
             </div>
@@ -81,7 +81,7 @@ class App extends React.Component {
                 <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} />
                 {/* <Route exact path="/contacto" component={Contacto} /> */}
-                <Route exact path="/salir" render={() => <Salir obtenerTokenPadre={this.obtenerToken}/>} />
+                <Route exact path="/salir" render={() => <Salir obtenerToken={this.obtenerToken}/>} />
                 <Route component={NotFound}/>
               </Switch>
             </div>
