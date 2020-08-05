@@ -43,6 +43,10 @@ class Tabla extends React.Component {
     );
   }
 
+  setIsLoading = (loading) => {
+    this.props.setIsLoading(loading);
+  }
+
   obtenerFechaVencimiento = () => {
     let hoy = new Date();
     hoy.setDate(hoy.getDate()+7);

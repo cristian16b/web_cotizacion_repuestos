@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 /**
-* @Route("/cotizaciones")
+* @Route("/api/v1/cotizaciones")
 */
 class CotizacionesController extends AbstractController
 {

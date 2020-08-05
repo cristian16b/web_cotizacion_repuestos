@@ -3,6 +3,7 @@ import {  Tr, Td } from 'react-super-responsive-Table';
 import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
 import {API_OBTENER_FOTO_REPUESTO,API_ENVIAR_COTIZACION} from '../../Constantes/constantes';
+import axios from 'axios';
 
 class Fila extends React.Component {
 
@@ -56,26 +57,20 @@ class Fila extends React.Component {
           }
       };
       this.props.setIsLoading(true);
-      axios.post(API_GUARDAR_SOLICITUD_REPUESTO,payload,config)
+      axios.post(API_ENVIAR_COTIZACION,payload,config)
         .then(response => {
-            this.setState({isLoading: false});
             let code = response.data.code;
             if(code == 200 && this.state.isMount == true){
               this.setState({ isGuardado: true }); // after signing up, set the state to true. This will trigger a re-render
             }
-            else {
-              this.mostrarErroresApi(response);
-            }
+            // else {
+            //   this.mostrarErroresApi(response);
+            // }
+            this.props.setIsLoading(false);
         })
         .catch(e => {
-          // si retorna que el jwt expiro por el tiempo que vuelva al login
-          // if(e.code == 401) {
-          //   this.redirectToLogin();
-          // }
-          this.setState({
-            isLogin : false
-          });
-          //alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+          this.props.setIsLoading(false);
+          alert('Ocurrio un error al consultar al servidor, intente nuevamente');
         });
 
     }

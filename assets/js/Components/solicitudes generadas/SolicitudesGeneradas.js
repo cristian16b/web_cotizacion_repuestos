@@ -80,8 +80,8 @@ class SolicitudesGeneradas extends React.Component {
   }
 
   render() {
-    // if(this.state.isLogin == false)
-    //   return <Salir/>
+    if(this.state.isLogin == false)
+      return <Salir/>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     return (        
