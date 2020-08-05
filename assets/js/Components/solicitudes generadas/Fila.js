@@ -14,6 +14,7 @@ class Fila extends React.Component {
       errors: '',
       monto: '',
       fechaVencimiento: '',
+      notificacionEnviada: false,
     });
   }
 
@@ -61,23 +62,21 @@ class Fila extends React.Component {
         .then(response => {
             let code = response.data.code;
             if(code == 200 && this.state.isMount == true){
-              this.setState({ isGuardado: true }); // after signing up, set the state to true. This will trigger a re-render
+              this.setState({notificacionEnviada: true});              
             }
-            // else {
-            //   this.mostrarErroresApi(response);
-            // }
+            else {
+              this.setState({errors: 'Ocurrio un error inesperado, intente nuevamente!'});
+            }
             this.props.setIsLoading(false);
         })
         .catch(e => {
           this.props.setIsLoading(false);
           alert('Ocurrio un error al consultar al servidor, intente nuevamente');
         });
-
     }
   }
 
-
-    handleChangeInput = e => {
+  handleChangeInput = e => {
     this.setState({
       [e.target.name] : e.target.value
     });
@@ -123,7 +122,10 @@ class Fila extends React.Component {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12"> 
+                          { 
+                            this.state.notificacionEnviada == false 
+                            ?
                             <Collapsible title="Enviar cotización"  className="btn btn-warning">
                               <hr></hr>
                               <div className="row">
@@ -132,7 +134,7 @@ class Fila extends React.Component {
                                 </div>
                                 <div className="col-6 col-sm-4 col-md-4 col-lg-4">
                                 <div className="form-group">
-                                  <label htmlFor="monto">Monto</label>
+                                  <label htmlFor="monto">Monto en pesos</label>
                                   <div className="input-group">
                                     <span className="input-group-addon"><i className="fa fa-lock"></i></span>
                                       <input type="number" className="form-control" name="monto" 
@@ -160,6 +162,9 @@ class Fila extends React.Component {
                               </div>
                               <hr></hr>
                             </Collapsible>
+                            : 
+                            <b>La cotización fue enviada al usuario.</b>
+                          }
                         </div>
                       </div>
             </Td>

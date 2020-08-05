@@ -18,6 +18,7 @@ use JMS\Serializer\SerializerInterface;
 use App\Entity\Solicitud;
 use App\Entity\Cotizacion;
 use App\Entity\EstadoCotizacion;
+use DateTime;
 
 /**
 * @Route("/api/v1/cotizaciones")
@@ -85,8 +86,10 @@ class CotizacionesController extends AbstractController
             $cotizacion->setMonto($monto);
             $cotizacion->setEstado($this->obtenerEstadoCotizacionEnviada());
             $cotizacion->setSolicitud($solicitud);
+            $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
 
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($cotizacion);
             $entityManager->flush();
 
         } catch (Exception $ex) {
@@ -117,5 +120,11 @@ class CotizacionesController extends AbstractController
         return $this->getDoctrine()->getManager()->getRepository(EstadoCotizacion::class)->findOneBy(array(
             'descripcion' => 'ENVIADA'
         ));
+    }
+
+    private function obtenerFechaVencimiento() {
+        $hoy = new DateTime('now');
+        $hoy->modify('+7 day');
+        return $hoy;
     }
 }

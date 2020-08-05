@@ -153,12 +153,12 @@ class Cotizacion
         return $this;
     }
 
-    public function getFechaLimiteValidez(): ?\DateTimeInterface
+    public function getFechaLimiteValidez()
     {
         return $this->fechaLimiteValidez;
     }
 
-    public function setFechaLimiteValidez(\DateTimeInterface $fechaLimiteValidez): self
+    public function setFechaLimiteValidez($fechaLimiteValidez)
     {
         $this->fechaLimiteValidez = $fechaLimiteValidez;
 
