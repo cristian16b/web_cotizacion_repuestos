@@ -87,6 +87,7 @@ class CotizacionesController extends AbstractController
             $cotizacion->setEstado($this->obtenerEstadoCotizacionEnviada());
             $cotizacion->setSolicitud($solicitud);
             $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
+            $cotizacion->setOferente($user);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cotizacion);
