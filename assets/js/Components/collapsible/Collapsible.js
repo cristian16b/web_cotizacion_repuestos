@@ -1,5 +1,10 @@
 import React , { Component } from 'react';
 
+const paddingContenido = {
+    'padding-left': '10%',
+    'padding-right': '10%',
+}
+
 export class Collapsible extends React.Component {
     constructor(props){
         super(props);
@@ -28,7 +33,7 @@ export class Collapsible extends React.Component {
                     {
                         this.state.open ? 
                         (
-                            <div className='content'>
+                            <div className='content' style={paddingContenido}>
                                 {this.props.children}
                             </div>
                         )              

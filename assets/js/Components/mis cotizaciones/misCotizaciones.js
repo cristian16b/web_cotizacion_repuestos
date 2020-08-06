@@ -201,7 +201,7 @@ class MisCotizaciones extends React.Component {
                             <Collapsible title="Ver fotos" className="btn btn-secondary">
                               <div className="row">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                                  <p>Imagenes adjuntadas en la solicitud.Haga click para previsualizar las imagenes</p>
+                                  <p>Imagenes adjuntadas en la solicitud.Haga click en las mismas para previsualizar.</p>
                                 </div>
                               </div>
                               <div className="row justify-content-center"> 
@@ -217,8 +217,19 @@ class MisCotizaciones extends React.Component {
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                               <Collapsible title="Ver cotizaciones"  className="btn btn-warning">
-                                    <div> <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
-                                    </div>
+                                <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
+                              </Collapsible>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                              <Collapsible title="Cancelar"  className="btn btn-danger">
+                                <p>¿Esta seguro de cancelar el pedido de cotizacion?</p>
+                                <button type="button" 
+                                        onClick={() => this.enviarCotizacion(elemento.id)} 
+                                        class="btn btn-danger">
+                                          Cancelar pedido
+                                </button>
                               </Collapsible>
                         </div>
                       </div>
