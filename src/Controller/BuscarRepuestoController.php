@@ -180,6 +180,14 @@ class BuscarRepuestoController extends AbstractController
         return $this->getDoctrine()->getRepository(ModeloAuto::class)->find($id);
     }
 
+    private function obtenerEstadoIniciada() {
+        return $this->getDoctrine()->getRepository(EstadoSolicitud::class)->findOneBy(
+            array(
+                'descripcion' => 'INICIADA'
+            )
+        );
+    }
+    
     private function obtenerErrores($solicitud,$validator) {
         $formErrors = [];
 

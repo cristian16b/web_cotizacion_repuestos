@@ -24,7 +24,7 @@ class EstadoSolicitud
     private $descripcion;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date",nullable=true)
      */
     private $fechaAlta;
 
