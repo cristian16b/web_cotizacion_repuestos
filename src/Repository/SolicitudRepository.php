@@ -44,14 +44,21 @@ class SolicitudRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function buscarUltimas() {
-        return $this->createQueryBuilder('s')
-            ->where('s.fechaBaja is null')
-            ->orderBy('s.fechaAlta', 'DESC')
-            ->setMaxResults(40)
-            ->getQuery()
-            ->getResult()
-        ;
+    public function buscarUltimas($usuario) {
+
+        $em = $this->getEntityManager();
+        $dql = "
+            SELECT s FROM App\Entity\Solicitud s
+                WHERE s NOT IN (
+                    SELECT ss FROM App\Entity\Solicitud ss
+                    INNER JOIN ss.cotizaciones c
+                    WHERE ss.fechaBaja IS NULL AND 
+                            c.fechaBaja IS NULL AND 
+                            c.oferente = :usuario
+                )
+        ";
+
+        return $em->createQuery($dql)->setParameter('usuario', $usuario)->getResult();
     }
 
     public function buscarUltimasPorId($usuario) {

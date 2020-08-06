@@ -189,7 +189,7 @@ class SolicitudesController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
             $solicitudes= $em->getRepository(Solicitud::class)
-                    ->buscarUltimas();
+                    ->buscarUltimas($user);
 
             if (is_null($solicitudes)) {
                 $solicitudes = [];
