@@ -94,15 +94,24 @@ class Fila extends React.Component {
     });
   }
 
+  formatearNroSolicitud = (id) => {
+    return id.toString().padStart(5, "0");
+  }
+
 
   armarFilaTabla(elemento){
     const recursos = elemento.recursos;
     return (
             <Tr key={elemento.id}>
               <Td>
-                <div className="row">
+                      <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                          <b>Fecha: </b> {this.formatearFecha(elemento.fecha_alta)} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}
+                          <b>Nro de solicitud: </b> {this.formatearNroSolicitud(elemento.id)} 
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                          <b>Fecha de solicitud: </b> {this.formatearFecha(elemento.fecha_alta)} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}
                         </div>
                       </div>
                       <div className="row">
@@ -120,7 +129,7 @@ class Fila extends React.Component {
                             <Collapsible title="Ver fotos" className="btn btn-secondary">
                               <div className="row">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                                  <p>Imagenes adjuntadas en la solicitud.Haga click para previsualizar las imagenes</p>
+                                  <p>Imagenes adjuntadas en la solicitud.</p><p>Haga click sobre la misma para previsualizar.</p>
                                 </div>
                               </div>
                               <div className="row justify-content-center"> 
