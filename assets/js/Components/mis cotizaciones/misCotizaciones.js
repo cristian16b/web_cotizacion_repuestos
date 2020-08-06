@@ -201,7 +201,7 @@ class MisCotizaciones extends React.Component {
                             <Collapsible title="Ver fotos" className="btn btn-secondary">
                               <div className="row">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                                  <p>Imagenes adjuntadas en la solicitud.Haga click en las mismas para previsualizar.</p>
+                                  <p>Imagenes adjuntadas en la solicitud.</p>
                                 </div>
                               </div>
                               <div className="row justify-content-center"> 
@@ -211,6 +211,7 @@ class MisCotizaciones extends React.Component {
                                 })
                               }
                               </div>
+                              <p>Haga click en las mismas para previsualizar.</p>
                             </Collapsible>
                         </div>
                       </div>
