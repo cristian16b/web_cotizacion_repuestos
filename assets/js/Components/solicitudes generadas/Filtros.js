@@ -111,7 +111,7 @@ class Filtros extends React.Component {
           <div className="col-6 col-sm-6 col-md-3 col-lg-2">
               <button 
                 onClick={this.reiniciar}
-                className="btn btn-light btn-block">Reiniciar</button>
+                className="btn btn-light btn-block">Actualizar listado</button>
           </div>
         </div>
       </>
