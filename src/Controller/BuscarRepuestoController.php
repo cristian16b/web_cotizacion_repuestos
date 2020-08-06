@@ -7,6 +7,7 @@ use App\Entity\ModeloAuto;
 use App\Entity\Repuesto;
 use App\Entity\RecursoSolicitud;
 use App\Entity\Solicitud;
+use App\Entity\EstadoSolicitud;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
