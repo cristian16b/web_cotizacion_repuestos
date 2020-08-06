@@ -19,7 +19,9 @@ class Tabla extends React.Component {
             <Tbody>
               {
                 this.props.misSolicitudes.map(elemento => {
-                    <Fila elemento = {elemento} />
+                    return (
+                      <Fila elemento = {elemento} />
+                    )
                   }
                 )
               }

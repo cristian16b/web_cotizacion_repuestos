@@ -100,7 +100,7 @@ class Fila extends React.Component {
 
   render() {
     return (
-      <h1>Mensaje desde React, otra prueba!</h1>
+      <>{this.armarFilaTabla(this.props.elemento)}</>
     );
   }
 }

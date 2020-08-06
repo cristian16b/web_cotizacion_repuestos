@@ -88,7 +88,6 @@ class MisCotizaciones extends React.Component {
       // Load async data from an inexistent endpoint.
       const response = await axios.get(url,headers);
       const { data } = await response;
-      this.setState({ catchaValido: false });
   
       let code = response.data.code;
       if(code == 200){
