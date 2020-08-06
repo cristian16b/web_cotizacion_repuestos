@@ -129,6 +129,7 @@ class BuscarRepuestoController extends AbstractController
             // no necesito setear la marca por la relacion con 
             $solicitud->setModeloAuto($modelo);
             $solicitud->setObservacion($observaciones);
+            $solicitud->setEstado($this->obtenerEstadoIniciada());
 
             // $recurso->set
             $errorFiles = '';
@@ -187,7 +188,7 @@ class BuscarRepuestoController extends AbstractController
             )
         );
     }
-    
+
     private function obtenerErrores($solicitud,$validator) {
         $formErrors = [];
 
