@@ -15,7 +15,17 @@ class Fila extends React.Component {
       monto: '',
       fechaVencimiento: '',
       notificacionEnviada: false,
+      isMount: false,
+      botonHabilitado: false,
     });
+  }
+
+  componentDidMount() {
+    this.setState({isMount: true});
+  }
+
+  componentWillUnmount() {
+    this.setState({isMount: false})
   }
 
   // la fecha viene con el formato aaaa/mm/dd t00:00
@@ -57,17 +67,19 @@ class Fila extends React.Component {
               Authorization: `Bearer ${this.props.token}`
           }
       };
-      this.props.setIsLoading(true);
+      this.setState({botonHabilitado: true});
       axios.post(API_ENVIAR_COTIZACION,payload,config)
         .then(response => {
             let code = response.data.code;
             if(code == 200 && this.state.isMount == true){
-              this.setState({notificacionEnviada: true});              
+              this.setState({notificacionEnviada: true});
+              // alert('todo ok,  salida = ' + this.state.notificacionEnviada);        
             }
             else {
-              this.setState({errors: 'Ocurrio un error inesperado, intente nuevamente!'});
+              this.setState({errors: response.data.error });
             }
             this.props.setIsLoading(false);
+            this.setState({botonHabilitado: false});
         })
         .catch(e => {
           this.props.setIsLoading(false);
@@ -153,6 +165,7 @@ class Fila extends React.Component {
                               <div className="row">
                                   <div className="col-6 col-sm-6 col-md-3 col-lg-2">
                                         <button
+                                            disabled = {this.state.botonHabilitado}
                                             type="submit" 
                                             onClick={() => this.enviarCotizacion(elemento.id)}
                                             className="btn btn-primary btn-block">
@@ -163,7 +176,7 @@ class Fila extends React.Component {
                               <hr></hr>
                             </Collapsible>
                             : 
-                            <b>La cotización fue enviada al usuario.</b>
+                            <b>La cotización por un monto de $ {this.state.monto} fue enviada al usuario.</b>
                           }
                         </div>
                       </div>

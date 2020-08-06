@@ -81,17 +81,33 @@ class CotizacionesController extends AbstractController
             }
 
             $solicitud = $this->obtenerSolicitud($idSolicitud);
+            $cotizaciones = $solicitud->getCotizaciones();
+            $badera = true;
+            foreach($cotizaciones as $cotizacion) {
+                $oferente = $cotizacion->getOferente();
+                if($oferente == $user) {
+                    $bandera = false;
+                    break;
+                }
+            }
 
-            $cotizacion = new Cotizacion();
-            $cotizacion->setMonto($monto);
-            $cotizacion->setEstado($this->obtenerEstadoCotizacionEnviada());
-            $cotizacion->setSolicitud($solicitud);
-            $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
-            $cotizacion->setOferente($user);
+            if($badera) {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($cotizacion);
-            $entityManager->flush();
+                $cotizacion = new Cotizacion();
+                $cotizacion->setMonto($monto);
+                $cotizacion->setEstado($this->obtenerEstadoCotizacionEnviada());
+                $cotizacion->setSolicitud($solicitud);
+                $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
+                $cotizacion->setOferente($user);
+    
+                $entityManager = $this->getDoctrine()->getManager();
+                // $entityManager->persist($cotizacion);
+                // $entityManager->flush();
+
+            } else {
+                $error = 'Previamente ha sido enviada una cotizacion para este usuario.';
+                $code = 201;
+            }
 
         } catch (Exception $ex) {
             $code = 500;
