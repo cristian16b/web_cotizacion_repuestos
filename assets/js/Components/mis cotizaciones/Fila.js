@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
-import {API_OBTENER_FOTO_REPUESTO, API_MIS_SOLICITUDES, API_CANCELAR_SOLICITUD} from '../../Constantes/constantes';
+import {API_OBTENER_FOTO_REPUESTO, API_LISTAR_MIS_COTIZACIONES, API_CANCELAR_SOLICITUD} from '../../Constantes/constantes';
 import axios from 'axios';
 
 class Fila extends React.Component {
@@ -18,11 +18,11 @@ class Fila extends React.Component {
   }
 
   componentDidMount() {
-    this.state.isMount = true;
+    this.setState({isMount: true});
   }
 
   componentWillUnmount() {
-    this.state.isMount = false;
+    this.setState({isMount: false})
   }
 
      // la fecha viene con el formato aaaa/mm/dd t00:00
@@ -129,6 +129,38 @@ class Fila extends React.Component {
       // Load async data from an inexistent endpoint.
       let url = API_CANCELAR_SOLICITUD + `${id}`;
       let response = await axios.delete(url,config);
+
+      this.setState({isLoading: false});
+      if(response.data.code == 200 && this.state.isMount == true) {
+        this.props.reiniciar();
+      }
+      this.setState({botonHabilitado: false});
+    } 
+    catch (e) {
+      this.setState({botonHabilitado: false});
+      console.log(`😱 Axios request failed: ${e}`);
+      // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+      this.setState({
+        isLogin : false
+      });
+    }
+  } 
+
+  cancelarSolicitud = async(id) => {
+
+    const config = {
+      headers: { Authorization: `Bearer ${this.props.token}` }
+    };
+    if(id == "") {
+      alert('fallo');
+      return;
+    }
+    try 
+    {
+      this.setState({botonHabilitado: true});
+      // Load async data from an inexistent endpoint.
+      let url = API_LISTAR_MIS_COTIZACIONES + `${id}`;
+      let response = await axios.get(url,config);
 
       this.setState({isLoading: false});
       if(response.data.code == 200 && this.state.isMount == true) {
