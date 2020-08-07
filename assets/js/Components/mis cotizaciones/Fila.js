@@ -58,6 +58,7 @@ class Fila extends React.Component {
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                             <Collapsible title="Ver fotos" className="btn btn-secondary">
+                              <hr></hr>
                               <div className="row">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                                   <p>Imagenes adjuntadas en la solicitud.</p>
@@ -71,25 +72,30 @@ class Fila extends React.Component {
                               }
                               </div>
                               <p>Haga click en las mismas para previsualizar.</p>
+                              <hr></hr>
                             </Collapsible>
                         </div>
                       </div>
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                               <Collapsible title="Ver cotizaciones"  className="btn btn-warning">
+                                <hr></hr>
                                 <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
+                                <hr></hr>
                               </Collapsible>
                         </div>
                       </div>
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                               <Collapsible title="Cancelar"  className="btn btn-danger">
+                                <hr></hr>
                                 <p>¿Esta seguro de cancelar el pedido de cotizacion?</p>
                                 <button type="button" 
                                         onClick={() => this.enviarCotizacion(elemento.id)} 
                                         class="btn btn-danger">
                                           Cancelar pedido
                                 </button>
+                                <hr></hr>
                               </Collapsible>
                         </div>
                       </div>

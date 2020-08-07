@@ -127,6 +127,7 @@ class Fila extends React.Component {
                       <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                             <Collapsible title="Ver fotos" className="btn btn-secondary">
+                              <hr></hr>
                               <div className="row">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                                   <p>Imagenes adjuntadas en la solicitud.</p>
@@ -140,6 +141,7 @@ class Fila extends React.Component {
                               }
                               </div>
                               <p>Haga click en las mismas para previsualizar.</p>
+                              <hr></hr>
                             </Collapsible>
                         </div>
                       </div>
@@ -188,6 +190,20 @@ class Fila extends React.Component {
                             : 
                             <b>La cotización por un monto de $ {this.state.monto} fue enviada al usuario.</b>
                           }
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                              <Collapsible title="Cancelar"  className="btn btn-danger">
+                                <hr></hr>
+                                <p>¿Esta seguro de cancelar el pedido de cotizacion?</p>
+                                <button type="button" 
+                                        onClick={() => this.enviarCotizacion(elemento.id)} 
+                                        class="btn btn-danger">
+                                          Cancelar pedido
+                                </button>
+                                <hr></hr>
+                              </Collapsible>
                         </div>
                       </div>
             </Td>
