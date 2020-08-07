@@ -223,4 +223,31 @@ class BuscarRepuestoController extends AbstractController
 
         return $formErrors;
     }
+
+    /**
+     * @Rest\Delete("/cancelar/{id}", name="solicitud_repuesto_cancelar")
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Se ha registrado la baja."
+     * )
+     *
+     * @SWG\Response(
+     *     response=500,
+     *     description="El pedido no pudo ser registrado."
+     * )
+     *
+     * @SWG\Parameter(
+     *     name="id",
+     *     in="get",
+     *     type="string",
+     *     description="Id de la solicitud",
+     *     schema={}
+     * )
+     * @SWG\Tag(name="Cancelar")
+     */
+    public function cancelarSolicitudAction(Request $request,$id) {
+        dump($id);
+        die;
+    }
 }

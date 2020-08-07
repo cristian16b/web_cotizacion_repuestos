@@ -2,13 +2,18 @@ import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
-import {API_OBTENER_FOTO_REPUESTO} from '../../Constantes/constantes';
-
+import {API_OBTENER_FOTO_REPUESTO, API_MIS_SOLICITUDES, API_CANCELAR_SOLICITUD} from '../../Constantes/constantes';
+import axios from 'axios';
 
 class Fila extends React.Component {
 
   constructor(props){
     super(props);
+
+    this.state = ({
+      errors: '',
+      botonHabilitado: false,
+    });
   }
 
 
@@ -91,7 +96,8 @@ class Fila extends React.Component {
                                 <hr></hr>
                                 <p>¿Esta seguro de cancelar el pedido de cotizacion?</p>
                                 <button type="button" 
-                                        onClick={() => this.enviarCotizacion(elemento.id)} 
+                                        disabled = {this.state.botonHabilitado}
+                                        onClick={() => this.cancelarSolicitud(elemento.id)} 
                                         class="btn btn-danger">
                                           Cancelar pedido
                                 </button>
@@ -103,6 +109,40 @@ class Fila extends React.Component {
           </Tr>
     )
   }
+
+  cancelarSolicitud = async(id) => {
+
+    const config = {
+      headers: { Authorization: `Bearer ${this.props.token}` }
+    };
+    if(id == "") {
+      alert('fallo');
+      return;
+    }
+    try 
+    {
+      this.setState({botonHabilitado: true});
+      // Load async data from an inexistent endpoint.
+      let url = API_CANCELAR_SOLICITUD + `${id}`;
+      let response = await axios.delete(url,config);
+
+      this.setState({isLoading: false});
+      if(response.data.code == 200) {
+        // console.log('code 200')
+        this.setState({misSolicitudes: response.data.data});
+        // console.log(this.state.misSolicitudes);
+      }
+      this.setState({botonHabilitado: false});
+    } 
+    catch (e) {
+      this.setState({botonHabilitado: false});
+      console.log(`😱 Axios request failed: ${e}`);
+      // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+      this.setState({
+        isLogin : false
+      });
+    }
+  } 
 
   render() {
     return (

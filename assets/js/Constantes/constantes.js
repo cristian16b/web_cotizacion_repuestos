@@ -14,7 +14,7 @@ export const API_MI_PERFIL = API_BASE_URL + '/api/v1/perfil/getPerfil';
 export const API_ULTIMAS_SOLICITUDES = API_BASE_URL + '/api/v1/solicitudes/ultimas/listar';
 export const API_BUSCAR_SOLICITUDES = API_BASE_URL + '/api/v1/solicitudes/buscar';
 export const API_ENVIAR_COTIZACION = API_BASE_URL + '/api/v1/cotizaciones/enviar';
-export const API_CANCELAR_SOLICITUD = API_BASE_URL + '/api/v1/solicitud/repuesto/cancelar';
+export const API_CANCELAR_SOLICITUD = API_BASE_URL + '/api/v1/solicitud/repuesto/cancelar/';
 export const API_LISTAR_MIS_COTIZACIONES = API_BASE_URL + '/api/v1/cotizaciones/listar';
 // las siguientes son apis publiucas
 export const API_OBTENER_FOTO_REPUESTO = API_BASE_URL + '/recurso/get/foto';
