@@ -29,7 +29,8 @@ class BuscarRepuesto extends React.Component {
       observaciones: '',
       isLoading: false,
       isGuardado: false,
-      isLogin: true
+      isLogin: true,
+      isMount: false,
     })
     
     this.loadRepuestos = this.loadRepuestos.bind(this);

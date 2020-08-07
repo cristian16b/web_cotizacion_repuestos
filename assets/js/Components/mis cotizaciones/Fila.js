@@ -12,13 +12,17 @@ class Fila extends React.Component {
 
     this.state = ({
       errors: '',
+      isMount: false,
       botonHabilitado: false,
     });
   }
 
+  componentDidMount() {
+    this.state.isMount = true;
+  }
 
-  obtenerFotos() {
-    console.log('click');
+  componentWillUnmount() {
+    this.state.isMount = false;
   }
 
      // la fecha viene con el formato aaaa/mm/dd t00:00
@@ -127,10 +131,8 @@ class Fila extends React.Component {
       let response = await axios.delete(url,config);
 
       this.setState({isLoading: false});
-      if(response.data.code == 200) {
-        // console.log('code 200')
-        this.setState({misSolicitudes: response.data.data});
-        // console.log(this.state.misSolicitudes);
+      if(response.data.code == 200 && this.state.isMount == true) {
+        this.props.reiniciar();
       }
       this.setState({botonHabilitado: false});
     } 

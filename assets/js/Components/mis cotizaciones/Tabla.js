@@ -20,7 +20,11 @@ class Tabla extends React.Component {
               {
                 this.props.misSolicitudes.map(elemento => {
                     return (
-                      <Fila elemento = {elemento} token = {this.props.token} />
+                      <Fila 
+                          elemento = {elemento} 
+                          token = {this.props.token} 
+                          reiniciar = {this.reiniciar}
+                      />
                     )
                   }
                 )
@@ -29,6 +33,8 @@ class Tabla extends React.Component {
           </Table>
     );
   }
+
+  reiniciar = () => { this.props.reiniciar(); }
 
   render() {
     return (

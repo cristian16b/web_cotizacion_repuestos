@@ -25,6 +25,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
+use DateTime;
 
 /**
 * @Route("/api/v1/solicitud/repuesto")
@@ -190,6 +191,14 @@ class BuscarRepuestoController extends AbstractController
         );
     }
 
+    private function obtenerEstadoCancelada() {
+        return $this->getDoctrine()->getRepository(EstadoSolicitud::class)->findOneBy(
+            array(
+                'descripcion' => 'CANCELADA'
+            )
+        );
+    }
+
     private function obtenerErrores($solicitud,$validator) {
         $formErrors = [];
 
@@ -247,7 +256,48 @@ class BuscarRepuestoController extends AbstractController
      * @SWG\Tag(name="Cancelar")
      */
     public function cancelarSolicitudAction(Request $request,$id) {
-        dump($id);
-        die;
+
+        $serializer = $this->container->get('jms_serializer');
+        $repuestos = [];
+        $message = "";
+
+        try {
+            $code = 200;
+            $error = false;
+            $user = $this->getUser();
+            $solicitud = $this->obtenerSolicitud($id);
+
+            if(is_null($id) || is_null($solicitud) ||  is_null($user)) {
+                throw new \Exception('Something went wrong!');
+            }
+    
+            $hoy = new DateTime('now');
+            $solicitud->setFechaBaja($hoy);
+            $solicitud->setEstado($this->obtenerEstadoCancelada());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            $salida = array();
+        } catch (Exception $ex) {
+            $code = 500;
+            $error = true;
+            $message = "Error: {$ex->getMessage()}";
+        }
+
+        $response = [
+            'code' => $code,
+            'error' => $error,
+            'data' => $code == 200 ? $salida : $message,
+        ];
+        
+        return new Response(
+            $serializer->serialize(
+                $response,
+                "json"
+            )
+        );
+    }
+
+    private function obtenerSolicitud($id) {
+        return $this->getDoctrine()->getManager()->getRepository(Solicitud::class)->find($id);
     }
 }

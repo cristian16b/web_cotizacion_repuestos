@@ -28,12 +28,15 @@ class MisCotizaciones extends React.Component {
     const config = {
       headers: { Authorization: `Bearer ${this.props.token}` }
     };
+    this.setState({
+      isMount : true
+    });
     try 
     {
       // Load async data from an inexistent endpoint.
       let response = await axios.get(API_MIS_SOLICITUDES,config);
       this.setState({isLoading: false});
-      if(response.data.code == 200) {
+      if(response.data.code == 200 && this.state.isMount == true) {
         // console.log('code 200')
         this.setState({misSolicitudes: response.data.data});
         // console.log(this.state.misSolicitudes);
@@ -46,10 +49,6 @@ class MisCotizaciones extends React.Component {
         isLogin : false
       });
     }
-    
-    this.setState({
-      isMount : true
-    });
   }
 
   componentWillUnmount() {
@@ -114,7 +113,8 @@ class MisCotizaciones extends React.Component {
     this.setState({repuestoBuscar: ''});
     this.setState({errors: {}});
     let url = API_MIS_SOLICITUDES;
-    this.getData(url,config);
+    if(this.state.isMount == true)
+      this.getData(url,config);
   }
 
   renderFilTrosBusqueda() {
@@ -169,6 +169,7 @@ class MisCotizaciones extends React.Component {
                   <Tabla
                     misSolicitudes = {this.state.misSolicitudes}
                     token = {this.props.token}
+                    reiniciar = {this.reiniciar}
                   >
                   </Tabla>
               </div>
