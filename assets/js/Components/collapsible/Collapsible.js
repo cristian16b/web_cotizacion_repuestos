@@ -1,8 +1,8 @@
 import React , { Component } from 'react';
 
 const paddingContenido = {
-    'padding-left': '10%',
-    'padding-right': '10%',
+    'paddingLeft': '10%',
+    'paddingRight': '10%',
 }
 
 export class Collapsible extends React.Component {
