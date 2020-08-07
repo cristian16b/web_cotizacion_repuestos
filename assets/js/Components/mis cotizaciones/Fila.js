@@ -14,6 +14,7 @@ class Fila extends React.Component {
       errors: '',
       isMount: false,
       botonHabilitado: false,
+      misCotizaciones: [],
     });
   }
 
@@ -157,16 +158,15 @@ class Fila extends React.Component {
     }
     try 
     {
-      this.setState({botonHabilitado: true});
       // Load async data from an inexistent endpoint.
       let url = API_LISTAR_MIS_COTIZACIONES + `${id}`;
       let response = await axios.get(url,config);
 
       this.setState({isLoading: false});
       if(response.data.code == 200 && this.state.isMount == true) {
-        this.props.reiniciar();
+        // cargo las cotizaciones que se encontraron
+        this.setState({misCotizaciones: response.data.data});
       }
-      this.setState({botonHabilitado: false});
     } 
     catch (e) {
       this.setState({botonHabilitado: false});
