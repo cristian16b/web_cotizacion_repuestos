@@ -20,7 +20,7 @@ class Tabla extends React.Component {
               {
                 this.props.misSolicitudes.map(elemento => {
                     return (
-                      <Fila elemento = {elemento} />
+                      <Fila elemento = {elemento} token = {this.props.token} />
                     )
                   }
                 )

@@ -168,6 +168,7 @@ class MisCotizaciones extends React.Component {
                 <hr/>
                   <Tabla
                     misSolicitudes = {this.state.misSolicitudes}
+                    token = {this.props.token}
                   >
                   </Tabla>
               </div>
