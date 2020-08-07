@@ -192,7 +192,7 @@ class Fila extends React.Component {
                           }
                         </div>
                       </div>
-                      <div className="row">
+                      {/* <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                               <Collapsible title="Cancelar"  className="btn btn-danger">
                                 <hr></hr>
@@ -205,7 +205,7 @@ class Fila extends React.Component {
                                 <hr></hr>
                               </Collapsible>
                         </div>
-                      </div>
+                      </div> */}
             </Td>
           </Tr>
     )
