@@ -41,7 +41,7 @@ class Fila extends React.Component {
                     <ModalImage
                             small={url}
                             large={url}
-                            alt="Ocurrio un error inesperado y no es posible visualizar la imagen"
+                            alt=""
                         />
             </div>
     );
