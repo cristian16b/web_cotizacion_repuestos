@@ -64,6 +64,8 @@ class SolicitudRepository extends ServiceEntityRepository
     public function buscarUltimasPorId($usuario) {
         return $this->createQueryBuilder('s')
             ->innerJoin('s.solicitante','u','WITH','u.fechaBaja IS null')
+            ->innerJoin('s.cotizaciones','c','WITH','c.fechaBaja IS null')
+            ->innerJoin('c.oferente','o','WITH','o.fechaBaja IS null')
             ->where('s.fechaBaja is null')
             ->andWhere('s.solicitante = :usuario')
             ->setParameter('usuario', $usuario)

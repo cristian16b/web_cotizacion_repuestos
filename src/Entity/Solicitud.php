@@ -76,6 +76,7 @@ class Solicitud
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Cotizacion", mappedBy="solicitud")
+     * @Expose
      */
     private $cotizaciones;
 

@@ -87,10 +87,21 @@ class Fila extends React.Component {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                              <Collapsible title="Ver cotizaciones"  className="btn btn-warning">
+                        <div 
+                          className="col-12 col-sm-12 col-md-12 col-lg-12">
+                              <Collapsible 
+                                title="Ver cotizaciones"  
+                                className="btn btn-warning"
+                                onClick={() => this.prueba(elemento.id)}                                 
+                              >
                                 <hr></hr>
-                                <p>Aca se va a ver el listado de cotizaciones recibidas...en construcción!</p>
+                                {
+                                  this.state.misCotizaciones == [] 
+                                  ?
+                                  <b>No se encontraron cotizaciones </b>
+                                  :
+                                  <>{this.renderCotizacionesRecibidas()}</>
+                                }
                                 <hr></hr>
                               </Collapsible>
                         </div>
@@ -112,6 +123,25 @@ class Fila extends React.Component {
                       </div>
             </Td>
           </Tr>
+    )
+  }
+
+  prueba (id) {
+    alert('detecto click, id =' + id);
+  }
+
+  renderCotizacionesRecibidas = () => {
+    return (
+      this.state.misCotizaciones.map(elemento => {
+        return ( 
+          <div className="row">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+              <b>$ {elemento.monto}</b>
+            </div>
+          </div>
+          )
+        }
+      ) 
     )
   }
 

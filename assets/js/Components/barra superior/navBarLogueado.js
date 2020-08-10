@@ -24,9 +24,9 @@ class NavbarLogueado extends React.Component {
 
                             data-toggle="collapse" data-target=".navbar-collapse"
                         */}
-                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
+                        {/* <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
                             <Link to="/" className="navbar-brand"><span className="nav-link">¿Quienes somos?</span></Link>
-                        </li>
+                        </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
                             <Link to="/solicitudes" className="navbar-brand"><span className="nav-link">Solicitudes</span></Link>
                         </li>
@@ -57,9 +57,9 @@ class NavbarLogueado extends React.Component {
 
                             data-toggle="collapse" data-target=".navbar-collapse"
                         */}
-                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
+                        {/* <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
                             <Link to="/" className="navbar-brand"><span className="nav-link">¿Quienes somos?</span></Link>
-                        </li>
+                        </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
                             <Link to="/repuesto" className="navbar-brand"><span className="nav-link">Buscar un repuesto</span></Link>
                         </li>
