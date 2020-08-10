@@ -100,16 +100,27 @@ class Fila extends React.Component {
                           className="col-12 col-sm-12 col-md-12 col-lg-12">
                               <Collapsible 
                                 title="Ver cotizaciones"  
-                                className="btn btn-warning"
-                                onClick={() => this.prueba(elemento.id)}                                 
+                                className="btn btn-warning"                       
                               >
+                                  <div className="row" align="center">
+                                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                                      <button type="button" 
+                                        disabled = {this.state.botonHabilitado}
+                                        // onClick={() => this.cancelarSolicitud(elemento.id)} 
+                                        class="btn btn-secondary">
+                                          Actualizar listado
+                                      </button>              
+                                    </div>    
+                                  </div>
                                 <hr></hr>
                                 {
-                                  this.state.misCotizaciones == [] 
+                                  elemento.cotizaciones == [] 
                                   ?
                                   <b>No se encontraron cotizaciones </b>
                                   :
-                                  <>{this.renderCotizacionesRecibidas()}</>
+                                  <>
+                                    {this.renderCotizacionesRecibidas(elemento.cotizaciones)}
+                                  </>
                                 }
                                 <hr></hr>
                               </Collapsible>
@@ -139,13 +150,29 @@ class Fila extends React.Component {
     alert('detecto click, id =' + id);
   }
 
-  renderCotizacionesRecibidas = () => {
+  renderCotizacionesRecibidas = (cotizaciones) => {
     return (
-      this.state.misCotizaciones.map(elemento => {
+      cotizaciones.map(elemento => {
         return ( 
           <div className="row">
-            <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div className="col-3 col-sm-3 col-md-3 col-lg-3">
               <b>$ {elemento.monto}</b>
+            </div>        
+            <div className="col-5 col-sm-5 col-md-5 col-lg-5">
+              <button type="button" 
+                disabled = {this.state.botonHabilitado}
+                // onClick={() => this.cancelarSolicitud(elemento.id)} 
+                class="btn btn-primary">
+                  Comprar con Mercado Pago
+              </button>             
+            </div>
+            <div className="col-4 col-sm-4 col-md-4 col-lg-4">
+              <button type="button" 
+                disabled = {this.state.botonHabilitado}
+                // onClick={() => this.cancelarSolicitud(elemento.id)} 
+                class="btn btn-danger">
+                  Rechazar
+              </button>             
             </div>
           </div>
           )
