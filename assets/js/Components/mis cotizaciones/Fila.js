@@ -45,11 +45,20 @@ class Fila extends React.Component {
     );
   }
 
+  formatearNroSolicitud = (id) => {
+    return id.toString().padStart(5, "0");
+  }
+  
   armarFilaTabla(elemento){
     const recursos = elemento.recursos;
     return (
             <Tr key={elemento.id}>
               <Td>
+                      <div className="row">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                          <b>Nro de solicitud: </b> {this.formatearNroSolicitud(elemento.id)} 
+                        </div>
+                      </div>
                 <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                           <b>Fecha: </b> {this.formatearFecha(elemento.fecha_alta)} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}

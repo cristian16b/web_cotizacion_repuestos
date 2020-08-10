@@ -48,13 +48,13 @@ class Fila extends React.Component {
   }
 
   enviarCotizacion = (id) => {
-    let patron =  /^[0-9]+([,][0-9]{1,2})?$/;
+    let patron =  /^\d+(\.\d{1,2})?$/;
 
     if(this.state.monto == '') {
-      this.setState({errors: 'Debe completar el monto'});
+      this.setState({errors: 'Debe completar el monto, ingresando un número positivo con hasta dos decimales despues del . Ej: 120.50' });
     }
     else if(patron.test(this.state.monto) == false){
-      this.setState({errors: 'Debe ingresar un numero positivo. Ejemplo 1200'});
+      this.setState({errors: 'Debe ingresar un número positivo. Ej: 120.50'});
     }
     else {
       this.setState({errors: ''});
@@ -156,19 +156,19 @@ class Fila extends React.Component {
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                                   <p>Ingrese el monto que sera notificado al solicitante</p>
                                 </div>
-                                <div className="col-6 col-sm-4 col-md-4 col-lg-4">
-                                <div className="form-group">
-                                  <label htmlFor="monto">Monto en pesos</label>
-                                  <div className="input-group">
-                                    <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                                      <input type="number" className="form-control" name="monto" 
-                                              defaultValue = {this.state.monto} onChange={this.handleChangeInput}
-                                              placeholder="Ej: 200" />	
+                                <div className="col-10 col-sm-6 col-md-6 col-lg-6">
+                                  <div className="form-group">
+                                    <label htmlFor="monto">Monto en pesos</label>
+                                    <div className="input-group">
+                                      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                                        <input type="number" className="form-control" name="monto" 
+                                                defaultValue = {this.state.monto} onChange={this.handleChangeInput}
+                                                placeholder="Ej: 200" />	
+                                    </div>
+                                    <span id="monto" className="text-danger error_negrita">
+                                      {this.state.errors}
+                                    </span> 
                                   </div>
-                                  <span id="monto" className="text-danger error_negrita">
-                                    {this.state.errors}
-                                  </span> 
-                                </div>
                                 </div>
                               </div>
                               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
