@@ -26,6 +26,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mailer\MailerInterface;
 
 /**
 * @Route("/api")
@@ -43,6 +45,13 @@ class RegistrarmeController extends AbstractController
     private $errorEmail = "El e-mail ingresado ya se encuentra registrado";
 
     private $baseUrlEisenPartProduccion = 'https://www.eisenparts.com';
+
+    private $mailer;
+    
+    public function __construct(MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+    }
 
     public static function getSubscribedServices() 
     {
@@ -238,11 +247,12 @@ class RegistrarmeController extends AbstractController
                 return new JsonResponse($response);
             }
 
+
+            $this->enviarCorreoNotificacion($persona,$user);
+ 
             $em->persist($persona);
             $em->flush();
 
-            // $this->enviarCorreoNotificacion($persona,$user);
- 
         } catch (Exception $ex) {
             $code = 500;
             $error = true;
@@ -264,19 +274,22 @@ class RegistrarmeController extends AbstractController
     public function verificarCuenta(Request $request,$token) {
 
         if(is_null($token)) {
-            throw new \Exception('Something went wrong!');
+            throw new ¥Exception('Something went wrong!');
         }
+        
+        $entityManager = $this->getDoctrine()->getManager();
 
         $usuario = $this->obtenerUsuarioAsociadaToken($token);
 
         if(is_null($usuario)) {
-            throw new \Exception('Something went wrong!');
+            throw new ¥Exception('Something went wrong!');
         }
 
         $usuario->setConfirmado(true);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($persona);
+
+
         $entityManager->flush();
+        
 
         // en esta instancia, no se validara si el token expiro, 
         // simplemente que es valido y esta asoc a un usuario
@@ -301,13 +314,13 @@ class RegistrarmeController extends AbstractController
         return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('socialToken'=>$token));
     }
 
-    private function obtenerUrlConfirmacionCuenta() {
-        return $this->baseUrlEisenPartProduccion . '/api/verificar/' . $this->obtenerTokenAutenticacion();
+    private function obtenerUrlConfirmacionCuenta($usuario) {
+        return $this->baseUrlEisenPartProduccion . '/api/verificar/' . $usuario->getSocialToken();
     }
 
     private function enviarCorreoNotificacion($persona,$usuario) {
 
-        $url = $this->obtenerUrlConfirmacionCuenta();
+        $url = $this->obtenerUrlConfirmacionCuenta($usuario);
 
         $email = (new TemplatedEmail())
             ->from('info@eisenparts.com')
@@ -320,9 +333,10 @@ class RegistrarmeController extends AbstractController
             // pass variables (name => value) to the template
             ->context([
                 'url' => $url,
-                'email' => $persona->getEmail(),
+                'emailUsuario' => $persona->getEmail(),
             ])
         ;
+        $this->mailer->send($email);
     }
 
     private function obtenerTokenAutenticacion() {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2020 a las 02:26:59
+-- Tiempo de generación: 10-08-2020 a las 23:09:58
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -52,16 +52,6 @@ CREATE TABLE `constancia_persona` (
   `persona_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `constancia_persona`
---
-
-INSERT INTO `constancia_persona` (`id`, `nombre_logico`, `nombre_fisico`, `pesgo_mega`, `fecha_alta`, `fecha_baja`, `tipo_id`, `persona_id`) VALUES
-(1, 'Solicitud protesis.png', 'ed3046d2090dbc564291aae502fb0d9f.png', 0.052115440368652, '2020-07-06', NULL, 2, 6),
-(2, 'CV-BUDZICZ.pdf', '04257ecadc6864d72a4a4821ab041ccd.pdf', 0.047978401184082, '2020-07-06', NULL, 1, 6),
-(3, 'CV-BUDZICZ.pdf', '9bf57e55e0f431b9e6a26d29e5c8448b.pdf', 0.047978401184082, '2020-07-06', NULL, 2, 7),
-(4, '106571278_1146413055722721_9051077943535246814_o.jpg', 'c556b70cbbbebd41e0650fc997fb0fa2.jpeg', 0.32494735717773, '2020-07-06', NULL, 1, 7);
-
 -- --------------------------------------------------------
 
 --
@@ -75,7 +65,8 @@ CREATE TABLE `cotizacion` (
   `oferente_id` int(11) NOT NULL,
   `fecha_alta` date NOT NULL,
   `fecha_baja` date DEFAULT NULL,
-  `monto` double NOT NULL
+  `monto` double NOT NULL,
+  `fecha_limite_validez` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -91,14 +82,6 @@ CREATE TABLE `domicilio` (
   `numero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `domicilio`
---
-
-INSERT INTO `domicilio` (`id`, `localidad_id`, `calle`, `numero`) VALUES
-(1, 2383, 'gral paz', '5746'),
-(4, 2383, 'gral paz', '5746'),
-(5, 2127, 'gral paz', '5746');
 
 -- --------------------------------------------------------
 
@@ -112,6 +95,37 @@ CREATE TABLE `estado_cotizacion` (
   `fecha_alta` date NOT NULL,
   `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `estado_cotizacion`
+--
+
+INSERT INTO `estado_cotizacion` (`id`, `descripcion`, `fecha_alta`, `fecha_baja`) VALUES
+(1, 'ENVIADA', '2020-08-05', NULL),
+(2, 'ACEPTADA', '0000-00-00', NULL),
+(3, 'RECHAZADA', '0000-00-00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_solicitud`
+--
+
+CREATE TABLE `estado_solicitud` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_alta` date NOT NULL,
+  `fecha_baja` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `estado_solicitud`
+--
+
+INSERT INTO `estado_solicitud` (`id`, `descripcion`, `fecha_alta`, `fecha_baja`) VALUES
+(1, 'INICIADA', '2020-08-06', NULL),
+(2, 'CANCELADA', '2020-08-06', NULL),
+(3, 'FINALIZADA', '2020-08-06', NULL);
 
 -- --------------------------------------------------------
 
@@ -2601,8 +2615,6 @@ INSERT INTO `marca_auto` (`id`, `name`, `mla_id`, `fecha_alta`, `fecha_baja`) VA
 (65, 'Otras Marcas', 'MLA1939', '2020-05-21', NULL);
 
 -- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `modelo_auto`
 --
 
@@ -3558,18 +3570,6 @@ CREATE TABLE `persona` (
   `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `persona`
---
-
-INSERT INTO `persona` (`id`, `domicilio_id`, `usuario_id`, `nombre`, `email`, `apellido`, `cod_area`, `telefono`, `created_at`, `updated_at`, `usuario_ultima_modificacion`, `fecha_baja`) VALUES
-(1, NULL, 4, 'prueba', 'prueba@usuario.com', 'user', '0342', '4694604', '2020-07-05 17:04:12', '2020-07-05 17:04:12', 'prueba@usuario.com', NULL),
-(2, 1, 5, 'prueba', 'comerciante@prueba.com', 'comerciante', '0342', '4600700', '2020-07-05 17:26:14', '2020-07-05 17:26:14', 'comerciante@prueba.com', NULL),
-(3, NULL, 6, 'CRISTIAN GONZALO', 'cristian.budzicz@gmail.com', 'budzicz', '0342', '4606060', '2020-07-05 17:31:38', '2020-07-05 17:31:38', 'cristian.budzicz@gmail.com', NULL),
-(6, 4, 9, 'rodrigo', 'repuestossantafe@correo.com', 'gonzalez', '0342', '4607668', '2020-07-06 13:52:47', '2020-07-06 13:52:47', 'repuestossantafe@correo.com', NULL),
-(7, 5, 11, 'prueba', 'repuestossantafe@prueba.com', 'comerciante', '343', '155316982', '2020-07-06 22:12:38', '2020-07-06 22:12:38', 'repuestossantafe@prueba.com', NULL),
-(8, NULL, 16, 'Cristian Budzicz', 'cristian16b@hotmail.com', 'Budzicz', 'NO INFORMADO', 'NO INFORMADO', '2020-07-10 03:39:15', '2020-07-10 03:39:15', 'cristian16b@hotmail.com', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -3627,15 +3627,6 @@ CREATE TABLE `recurso_solicitud` (
   `fecha_baja` date DEFAULT NULL,
   `peso_mega` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `recurso_solicitud`
---
-
-INSERT INTO `recurso_solicitud` (`id`, `solicitud_id`, `nombre_logico`, `nombre_fisico`, `fecha_alta`, `fecha_baja`, `peso_mega`) VALUES
-(1, 1, 'Bujías_0_10/07/2020.jpeg', 'a20a87982d07c04c453bd2b5fc4aa410.jpeg', '2020-07-10', NULL, 0.007889986038208),
-(2, 2, 'Motores Completos_0_11/07/2020.jpeg', '8d8510c29528b2c116b2e437cb8fc350.jpeg', '2020-07-11', NULL, 0.15254044532776),
-(3, 3, 'Baterías_0_11/07/2020.jpeg', 'a3df9b5ee67f29ec7b73f6aeaa2b6782.jpeg', '2020-07-11', NULL, 0.0079529285430908);
 
 -- --------------------------------------------------------
 
@@ -3903,19 +3894,10 @@ CREATE TABLE `solicitud` (
   `repuesto_id` int(11) NOT NULL,
   `observacion` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_alta` date NOT NULL,
-  `fecha_baja` date DEFAULT NULL
+  `fecha_baja` date DEFAULT NULL,
+  `estado_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `solicitud`
---
-
-INSERT INTO `solicitud` (`id`, `modelo_auto_id`, `compra_id`, `solicitante_id`, `repuesto_id`, `observacion`, `fecha_alta`, `fecha_baja`) VALUES
-(1, 309, NULL, 16, 60, 'modelo 2020 usadas o nuevas', '2020-07-10', NULL),
-(2, 114, NULL, 16, 121, 'con urgencia por necesitarlo, saludos', '2020-07-11', NULL),
-(3, 317, NULL, 16, 81, 'nueva o con poco uso para modelo 2020', '2020-07-11', NULL);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tipo_constancia`
@@ -3992,22 +3974,10 @@ CREATE TABLE `usuario` (
   `social_provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `social_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `social_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fecha_baja` date DEFAULT NULL
+  `fecha_baja` date DEFAULT NULL,
+  `confirmado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id`, `username`, `password`, `roles`, `created_at`, `updated_at`, `usuario_ultima_modificacion`, `social_provider`, `social_id`, `social_token`, `fecha_baja`) VALUES
-(4, 'prueba@usuario.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_USER\"', '2020-07-05 17:04:12', '2020-07-05 17:04:12', 'prueba@usuario.com', NULL, NULL, NULL, NULL),
-(5, 'comerciante@prueba.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_COMERCIANTE\"', '2020-07-05 17:26:14', '2020-07-05 17:26:14', 'comerciante@prueba.com', NULL, NULL, NULL, NULL),
-(6, 'cristian.budzicz@gmail.com', 'Atw8HUEDLVdr3kw1Fzbf0XWPGlbpSG9R9qf4Ord4OmEQf3nqibpX4C3VVH2ZC5xXCflYRkR42G7u/i68Gg3OwQ==', '\"ROLE_USER\"', '2020-07-05 17:31:38', '2020-07-12 21:02:49', 'cristian.budzicz@gmail.com', 'GMAIL', '115032604460116739525', 'ya29.a0AfH6SMDsRp_guOrO-SNxe8ZOnU1FmOF6_fz1sA9551Tz6HNhc39J6GYrJ6ZHWyUq3qFwY8JsQXJu7NNfJBj-Aw-K_8T7LSlx0XLZUzyT26toOn2Uqy63GULVXUGv7e6xlBLTKLvQMC0W1Ef35yqe-myl7xxhmrxTI4h7', NULL),
-(9, 'repuestossantafe@correo.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_COMERCIANTE\"', '2020-07-06 13:52:47', '2020-07-06 13:52:47', 'repuestossantafe@correo.com', NULL, NULL, NULL, NULL),
-(11, 'repuestossantafe@prueba.com', 'q6JiDRt9rMd1dgAN1g4BYuQNLBzGxhbzGqkJLKPfFlPYjmG07mWxlRzkHr3EydTDs5n/d+1PXJ/w4qS1wR4aqg==', '\"ROLE_COMERCIANTE\"', '2020-07-06 22:12:38', '2020-07-06 22:12:38', 'repuestossantafe@prueba.com', NULL, NULL, NULL, NULL),
-(16, 'cristian16b@hotmail.com', '42Xgm9Z5AE49KpQ69tevCOEdpPwK6nGs88y4KUs2WK3j7zdsFtfeKhmBpBhoGrXVjW++nrHHmDF9uv4gOamPXA==', '\"ROLE_USER\"', '2020-07-10 03:39:15', '2020-07-13 01:56:16', 'cristian16b@hotmail.com', 'FACEBOOK', '3282297848450174', 'EAADfqssBOiQBAOGZBfBwIlFCzZBRZCzvzoi4iZAIO7RpgZCZCK0moyHNES1kgjzZCCGUsDmP77C0KBC9B8ZCtkA0NIZB5giRSxxBkUJEjL6Cy53ZBdKNVpJ6hvzrxOBTjnZBsOgA9oOHpMZCAATIPLCKmVU0X0j0cV88nEupqbVSPcrLqEHg6gr8JfzrtOXRlta60Sp6n2YX0A1ZCZBAZDZD', NULL);
-
---
 -- Índices para tablas volcadas
 --
 
@@ -4048,6 +4018,12 @@ ALTER TABLE `estado_cotizacion`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `estado_solicitud`
+--
+ALTER TABLE `estado_solicitud`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `localidad`
 --
 ALTER TABLE `localidad`
@@ -4059,7 +4035,6 @@ ALTER TABLE `localidad`
 --
 ALTER TABLE `marca_auto`
   ADD PRIMARY KEY (`id`);
-
 --
 -- Indices de la tabla `modelo_auto`
 --
@@ -4072,8 +4047,8 @@ ALTER TABLE `modelo_auto`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_51E5B69BE7927C74` (`email`),
-  ADD UNIQUE KEY `UNIQ_51E5B69BDB38439E` (`usuario_id`),
+  ADD UNIQUE KEY `UNIQ_usuario` (`usuario_id`),
+  ADD UNIQUE KEY `UNIQ_email` (`email`),
   ADD KEY `domicilio_id` (`domicilio_id`);
 
 --
@@ -4101,10 +4076,12 @@ ALTER TABLE `repuesto`
 --
 ALTER TABLE `solicitud`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_96D27CC0F2E704D7` (`compra_id`),
+  ADD UNIQUE KEY `UNIQ_compra` (`compra_id`),
   ADD KEY `modelo_auto_id` (`modelo_auto_id`),
-  ADD KEY `solicitante_id` (`repuesto_id`),
-  ADD KEY `IDX_96D27CC0C680A87` (`solicitante_id`);
+  ADD KEY `solicitante_id` (`solicitante_id`),
+  ADD KEY `repuesto_id` (`repuesto_id`),
+  ADD KEY `estado_id` (`estado_id`),
+  ADD KEY `compra_id` (`compra_id`);
 
 --
 -- Indices de la tabla `tipo_constancia`
@@ -4123,7 +4100,7 @@ ALTER TABLE `tipo_repuesto`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_2265B05DF85E0677` (`username`);
+  ADD UNIQUE KEY `UNIQ_username` (`username`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -4139,25 +4116,31 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de la tabla `constancia_persona`
 --
 ALTER TABLE `constancia_persona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `cotizacion`
 --
 ALTER TABLE `cotizacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_cotizacion`
 --
 ALTER TABLE `estado_cotizacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `estado_solicitud`
+--
+ALTER TABLE `estado_solicitud`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `localidad`
@@ -4181,7 +4164,7 @@ ALTER TABLE `modelo_auto`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `provincia`
@@ -4193,7 +4176,7 @@ ALTER TABLE `provincia`
 -- AUTO_INCREMENT de la tabla `recurso_solicitud`
 --
 ALTER TABLE `recurso_solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `repuesto`
@@ -4205,7 +4188,7 @@ ALTER TABLE `repuesto`
 -- AUTO_INCREMENT de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_constancia`
@@ -4223,7 +4206,7 @@ ALTER TABLE `tipo_repuesto`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- Restricciones para tablas volcadas
@@ -4287,6 +4270,7 @@ ALTER TABLE `repuesto`
 ALTER TABLE `solicitud`
   ADD CONSTRAINT `FK_96D27CC04C3B689E` FOREIGN KEY (`repuesto_id`) REFERENCES `repuesto` (`id`),
   ADD CONSTRAINT `FK_96D27CC08DF6C969` FOREIGN KEY (`modelo_auto_id`) REFERENCES `modelo_auto` (`id`),
+  ADD CONSTRAINT `FK_96D27CC09F5A440B` FOREIGN KEY (`estado_id`) REFERENCES `estado_solicitud` (`id`),
   ADD CONSTRAINT `FK_96D27CC0C680A87` FOREIGN KEY (`solicitante_id`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `FK_96D27CC0F2E704D7` FOREIGN KEY (`compra_id`) REFERENCES `compra` (`id`);
 COMMIT;
