@@ -36,7 +36,7 @@ class RecursoController extends AbstractController
 
         $extension = substr($nombreArchivo,strripos($nombreArchivo, '.'));
 
-        $filepath = '../fotosSolicitudes/' . $nombreArchivo;
+        $filepath = $this->getParameter('kernel.project_dir') . '/fotosSolicitudes/' . $nombreArchivo;
         $response = new Response();
         
         if(file_exists($filepath)){

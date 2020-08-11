@@ -32,7 +32,6 @@ class Registrarme extends React.Component {
 
 
 cambioComerciante = () => {
-  console.log('click sobre boton de comerciante');
   this.setState({
     esComerciante: true
   });
@@ -43,7 +42,6 @@ cambioComerciante = () => {
 }
 
 cambioUsuario = () => {
-  console.log('click sobre boton de usuari');
   this.setState({
     esComerciante: false
   });

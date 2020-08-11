@@ -248,7 +248,7 @@ class RegistrarmeController extends AbstractController
             }
 
 
-            $this->enviarCorreoNotificacion($persona,$user);
+            //$this->enviarCorreoNotificacion($persona,$user);
  
             $em->persist($persona);
             $em->flush();

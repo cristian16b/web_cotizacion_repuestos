@@ -5,6 +5,7 @@ import {API_REGISTER,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 import Loading from '../loading/loading.js';
+import { Redirect } from 'react-router-dom';
 
 class FormularioAltaUsuario extends React.Component {
 
@@ -130,7 +131,7 @@ class FormularioAltaUsuario extends React.Component {
   }
   
   handleChangeSelectProvincia = (e) => {
-    console.log(e);
+    // console.log(e);
     this.setState({provincia: e}); 
   }
   
@@ -312,7 +313,7 @@ class FormularioAltaUsuario extends React.Component {
       "password":this.state.password,
       "password2":this.state.password2,
       "email":this.state.email,
-      "esComerciante":this.state.esComerciante,
+      "esComerciante":this.props.esComerciante,
       "calle":this.state.calle,
       "nro":this.state.nro,
       "provincia":this.state.provincia['value'],
@@ -320,7 +321,7 @@ class FormularioAltaUsuario extends React.Component {
       "constanciaDni":this.state.constanciaDni,
       "constanciaAfip":this.state.constanciaAfip
     };
-    console.log(payload);
+    // console.log(payload);
     const headers = {
       'Content-Type': 'multipart/form-data',
     };
@@ -337,7 +338,6 @@ class FormularioAltaUsuario extends React.Component {
   async getData(url,payload,headers){
     try 
     {
-      console.log('entra');
       // Load async data from an inexistent endpoint.
       const response = await axios.post(url,payload,headers);
       const { data } = await response;
@@ -393,6 +393,8 @@ class FormularioAltaUsuario extends React.Component {
   render() {
     if(this.state.isLoading == true)
       return  <Loading></Loading>
+    if(this.state.isSignedUp == true)
+      return <Redirect to = {{ pathname: "/login" }} />
     return (
       <>{this.renderFormulario()}</>
     );
