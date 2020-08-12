@@ -85,16 +85,16 @@ class Contacto extends React.Component {
                     {/* <!--Grid column--> */}
                     <div className="col-md-3 text-center">
                         <ul className="list-unstyled mb-0">
-                            <li><i className="fas fa-map-marker-alt fa-2x"></i>
+                            {/* <li><i className="fas fa-map-marker-alt fa-2x"></i>
                                 <p>Santa fe ...</p>
                             </li>
 
                             <li><i className="fas fa-phone mt-4 fa-2x"></i>
                                 <p>342 .....</p>
-                            </li>
+                            </li> */}
 
                             <li><i className="fas fa-envelope mt-4 fa-2x"></i>
-                                <p>contacto@correo.com</p>
+                                <p>info@eisenparts.com</p>
                             </li>
                         </ul>
                     </div>
