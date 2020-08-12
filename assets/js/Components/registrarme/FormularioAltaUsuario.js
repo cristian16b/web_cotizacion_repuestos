@@ -43,7 +43,10 @@ class FormularioAltaUsuario extends React.Component {
       // para ocultar/mostrar los campos de contrasenia/campos de archivos
       ocultarCampos: false,
       // para habilitar modo lectura (true) o modo editar (false)
-      soloLectura: false
+      soloLectura: false,
+      // banderas para volver al login y form de contacto
+      redirectLogin: false,
+      redirectContacto: false,
   })
 
   this.handleSubmit   = this.handleSubmit.bind(this); 
@@ -100,34 +103,34 @@ class FormularioAltaUsuario extends React.Component {
 
   cancelar() {
     this.props.mostrarBotones();
-    // this.setState({
-    //   nombre:'',
-    //   apellido: '',
-    //   codArea: '',
-    //   telefono: '',
-    //   email: '',
-    //   cuitCuit: '',
-    //   // datos del comerciante
-    //   constanciaDni: '',
-    //   constanciaAfip: '',
-    //   calle: '',
-    //   nro: '',
-    //   localidad: '',
-    //   provincia: '',
-    //   //
-    //   password:'',
-    //   password2: '',
-    //   // errores locales o retornados por la api
-    //   errors: {},
-    //   errorApi: '',
-    //   // 
-    //   catchaValido: false,
-    //   // <-- initialize the signup state as false
-    //   isSignedUp: false, 
-    //   // para mostrar el loop de cargando
-    //   isLoading: false,
-    //   edit: true
-    // });
+    this.setState({
+      nombre:'',
+      apellido: '',
+      codArea: '',
+      telefono: '',
+      email: '',
+      cuitCuit: '',
+      // datos del comerciante
+      constanciaDni: '',
+      constanciaAfip: '',
+      calle: '',
+      nro: '',
+      localidad: '',
+      provincia: '',
+      //
+      password:'',
+      password2: '',
+      // errores locales o retornados por la api
+      errors: {},
+      errorApi: '',
+      // 
+      catchaValido: false,
+      // <-- initialize the signup state as false
+      isSignedUp: false, 
+      // para mostrar el loop de cargando
+      isLoading: false,
+      edit: true
+    });
   }
   
   handleChangeSelectProvincia = (e) => {
@@ -390,11 +393,67 @@ class FormularioAltaUsuario extends React.Component {
     });
   }
 
+  renderInstruccionesRegistroCorrecto = () => {
+    return (
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+            <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+              <div className="card-body">
+                <h5>Registrarme</h5>
+                <hr></hr>
+                <p>
+                  Su inscripción fue finalizada correctamente. Se envió un correo de confirmación a su correo  &nbsp;
+                  <b>{this.state.email}</b>.
+                </p>
+                <p>
+                  Debe ingresar en el mismo y hacer click en el enlace, si el el proceso finaliza con éxito sera dirigido a &nbsp;
+                  <i>www.eisenparts.com</i>
+                </p>
+                <hr></hr>
+                <div className="row">
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <p>
+                        Ante consultas o dudas, no duden en comunicarse usando nuestro formulario de contacto
+                      </p>
+                      <button onClick={this.redirectToContacto}
+                        className="btn btn-primary btn-block">Contactate!</button>
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <button 
+                        onClick={this.redirectToLogin}
+                        className="btn btn-light btn-block">Volver al inicio de sesion!</button>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>      
+    );
+  }
+
+  redirectToContacto = () => {
+    this.setState({redirectContacto: true});
+  }
+
+  redirectToLogin = () => {
+    this.setState({redirectLogin: true});
+  }
+
   render() {
+    if(this.state.redirectContacto)
+      return <Redirect to = {{ pathname: "/contacto" }} />;      
+    if(this.state.redirectLogin)
+      return <Redirect to = {{ pathname: "/login" }} />;
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     if(this.state.isSignedUp == true)
-      return <Redirect to = {{ pathname: "/login" }} />
+      return (
+        <>{this.renderInstruccionesRegistroCorrecto()}</>
+      )
     return (
       <>{this.renderFormulario()}</>
     );
