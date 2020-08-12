@@ -7,6 +7,7 @@ import axios from 'axios';
 import { FacebookLoginButton,GoogleLoginButton,API_GMAIL_KEY,API_GMAIL_PRIVATE } from "react-social-login-buttons";
 import { OldSocialLogin as SocialLogin } from 'react-social-login';
 import Loading from '../loading/loading.js';
+// import Logo  from '/build/img/Logotipo_Eisen_Parts.jpg';
  
 class Login extends React.Component {
 
@@ -251,6 +252,11 @@ class Login extends React.Component {
                     <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
+                                {/* <img  className="card-img-top img-fluid"
+                                    src={Logo} 
+                                    alt="Cargando..." 
+                                    border="0">
+                                </img>  */}
                                 <h5 className="text-center">Ingresar</h5>
                                 <div className="form-group">
                                     <span className="text-danger error_negrita">
