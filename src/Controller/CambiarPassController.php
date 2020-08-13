@@ -19,9 +19,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/**
- * @Route("/cambiarContrasenia")
-*/
 class CambiarPassController extends AbstractController
 {
     // /**
