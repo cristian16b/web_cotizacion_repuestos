@@ -44,13 +44,98 @@ class RecuperarContrasenia extends React.Component {
     this.setState({
       catchaValido: false
     });
-}
+  }
 
+  validarFormulario = () => {
+    let formularioValido = true;
+    let errors = {};
+  
+    if(this.state.password2.length == 0) {
+      errors["password2"] = "Debe ingresar nuevamente la contraseña";
+      formularioValido = false;
+    }
+
+    if(this.state.password.length == 0) {
+      errors["password"] = "La contraseña no puede estar vacia";
+      formularioValido = false;
+    }
+
+    if(this.state.password != this.state.password2) {
+      errors["passdistintas"] = "Las contraseñas ingresadas son diferentes";
+      formularioValido = false;
+    }
+
+    this.setState({
+      errors: errors
+    });
+  
+    return formularioValido;
+  }
+
+  consumirApiRegister(){
+    this.setState({isLoading:true});
+    this.setState({captcha: false });
+  
+    const payload={
+      "apellido":this.state.apellido,
+      "nombre":this.state.nombre,
+      "codArea":this.state.codArea,
+      "telefono":this.state.telefono,
+      "password":this.state.password,
+      "password2":this.state.password2,
+      "email":this.state.email,
+      "esComerciante":this.props.esComerciante,
+      "calle":this.state.calle,
+      "nro":this.state.nro,
+      "provincia":this.state.provincia['value'],
+      "localidad":this.state.localidad['value'],
+      "constanciaDni":this.state.constanciaDni,
+      "constanciaAfip":this.state.constanciaAfip
+    };
+    // console.log(payload);
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+    };
+    const formData = new FormData();
+    for (let indice in payload) {
+      // console.log(x + '-' + payload[x]);
+      formData.append(indice,payload[indice]);
+    } 
+    // llamamos a la api
+    this.getData(API_REGISTER,formData,headers);
+    event.preventDefault();
+  }
+  
+  async getData(url,payload,headers){
+    try 
+    {
+      // Load async data from an inexistent endpoint.
+      const response = await axios.post(url,payload,headers);
+      const { data } = await response;
+      this.setState({ catchaValido: false });
+  
+      let code = response.data.code;
+      if(code == 200){
+        this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+      }
+      else if(code == 400) {
+        this.mostrarErroresApi(response.data.error);
+      }
+      this.setState({isLoading: false});
+    } 
+    catch (e) 
+    {
+      console.log(`😱 Axios request failed: ${e}`);
+      this.setState({isLoading: false});
+      this.setState({ catchaValido: false });
+      alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
+    }
+  }
 
   handleSubmit = (event) => {
-    // if(this.validarFormulario() == true) {
-    //   this.consumirApiRegister();
-    // } 
+    if(this.validarFormulario() == true) {
+      this.consumirApiRegister();
+    } 
     event.preventDefault();
   }
 
@@ -82,7 +167,7 @@ class RecuperarContrasenia extends React.Component {
         <div className="col-lg-6">
           <div className="form-group">
             <button type="submit" onClick={this.handleSubmit}
-                    className="btn btn-primary btn-block">Registrarme</button>
+                    className="btn btn-primary btn-block">Confirmar</button>
           </div>
         </div>
         <div className="col-lg-6">
@@ -97,7 +182,6 @@ class RecuperarContrasenia extends React.Component {
   }
 
   renderContrasenia() {
-    const {handleChangeInput} = this.props;
     return(
       <div className="row">
       <div className="col-lg-6">
@@ -105,17 +189,17 @@ class RecuperarContrasenia extends React.Component {
           <label htmlFor="password">Contraseña</label>
           <div className="input-group">
             <span id="passwordHelp" className="text-danger error_negrita">
-              {this.props.errors["passdistintas"]}
+              {this.state.errors["passdistintas"]}
             </span> 
           </div>
           <div className="input-group">
             <span className="input-group-addon"><i className="fa fa-lock"></i></span>
               <input type="password" className="form-control" name="password" 
-                                          defaultValue = {this.props.password} onChange={this.handleChangeInput}
+                                          defaultValue = {this.state.password} onChange={this.handleChangeInput}
                                           placeholder="Ingrese su contraseña" />	
             </div>
             <span id="passwordHelp" className="text-danger error_negrita">
-              {this.props.errors["password"]}
+              {this.state.errors["password"]}
             </span> 
         </div>
       </div>
@@ -125,11 +209,11 @@ class RecuperarContrasenia extends React.Component {
           <div className="input-group">
             <span className="input-group-addon"><i className="fa fa-lock"></i></span>
               <input type="password" className="form-control" name="password2" 
-                                          defaultValue = {this.props.password2} onChange={this.handleChangeInput}
+                                          defaultValue = {this.state.password2} onChange={this.handleChangeInput}
                                           placeholder="Escribala de nuevo" />	
             </div>
             <span id="password2Help" className="text-danger error_negrita">
-              {this.props.errors["password2"]}
+              {this.state.errors["password2"]}
             </span> 
         </div>
       </div>
@@ -175,9 +259,21 @@ class RecuperarContrasenia extends React.Component {
                       </span>
                     </div>
                     <div className="row justify-content-center">
-                      <>{this.renderEmail()}</>
-                      <>{this.renderCaptcha()}</>
-                      <>{this.renderBotones()}</>
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <p>Para reestablecer su contraseña debe ingresar el e-mail con el que usted se registro.</p>
+                      </div>
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <>{this.renderEmail()}</>
+                      </div>
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <>{this.renderContrasenia()}</>
+                      </div>
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <>{this.renderCaptcha()}</>
+                      </div>
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <>{this.renderBotones()}</>
+                      </div>
                     </div>
                 </form>
               </div>
