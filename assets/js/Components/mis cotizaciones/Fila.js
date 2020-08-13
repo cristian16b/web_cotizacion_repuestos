@@ -166,14 +166,14 @@ class Fila extends React.Component {
                   Comprar con Mercado Pago
               </button>             
             </div>
-            <div className="col-4 col-sm-4 col-md-4 col-lg-4">
+            {/* <div className="col-4 col-sm-4 col-md-4 col-lg-4">
               <button type="button" 
                 disabled = {this.state.botonHabilitado}
                 // onClick={() => this.cancelarSolicitud(elemento.id)} 
                 class="btn btn-danger">
                   Rechazar
               </button>             
-            </div>
+            </div> */}
           </div>
           )
         }
