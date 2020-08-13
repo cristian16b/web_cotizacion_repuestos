@@ -19,6 +19,7 @@ class RecuperarContrasenia extends React.Component {
         email: '',
         password:'',
         password2: '',
+        catchaValido: false,
       }
     );
 
@@ -50,6 +51,11 @@ class RecuperarContrasenia extends React.Component {
   validarFormulario = () => {
     let formularioValido = true;
     let errors = {};
+
+    if(this.state.email.length == 0) {
+      errors["email"] = "Debe completar su e-mail";
+      formularioValido = false;
+    }
   
     if(this.state.password2.length == 0) {
       errors["password2"] = "Debe ingresar nuevamente la contraseña";
@@ -63,6 +69,11 @@ class RecuperarContrasenia extends React.Component {
 
     if(this.state.password != this.state.password2) {
       errors["passdistintas"] = "Las contraseñas ingresadas son diferentes";
+      formularioValido = false;
+    }
+
+    if(this.state.catchaValido == false) {
+      errors["captcha"] = "Debe completar el captcha";
       formularioValido = false;
     }
 
@@ -186,7 +197,7 @@ class RecuperarContrasenia extends React.Component {
             <span className="input-group-addon"><i className="fa fa-lock"></i></span>
               <input type="password" className="form-control" name="password" 
                                           defaultValue = {this.state.password} onChange={this.handleChangeInput}
-                                          placeholder="Ingrese su contraseña" />	
+                                          placeholder="Ingrese su nueva contraseña" />	
             </div>
             <span id="passwordHelp" className="text-danger error_negrita">
               {this.state.errors["password"]}
