@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import {API_REGISTER,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
+import {API_CAMBIAR_CONTRASENIA,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 import Loading from '../loading/loading.js';
@@ -102,7 +102,7 @@ class RecuperarContrasenia extends React.Component {
       formData.append(indice,payload[indice]);
     } 
     // llamamos a la api
-    this.getData(API_REGISTER,formData,headers);
+    this.getData(API_CAMBIAR_CONTRASENIA,formData,headers);
     event.preventDefault();
   }
   
