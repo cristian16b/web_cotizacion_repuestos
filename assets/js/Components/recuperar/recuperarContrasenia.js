@@ -17,7 +17,8 @@ class RecuperarContrasenia extends React.Component {
         errors: {},
         errorApi: '',
         email: '',
-
+        password:'',
+        password2: '',
       }
     );
 
@@ -77,20 +78,9 @@ class RecuperarContrasenia extends React.Component {
     this.setState({captcha: false });
   
     const payload={
-      "apellido":this.state.apellido,
-      "nombre":this.state.nombre,
-      "codArea":this.state.codArea,
-      "telefono":this.state.telefono,
       "password":this.state.password,
       "password2":this.state.password2,
       "email":this.state.email,
-      "esComerciante":this.props.esComerciante,
-      "calle":this.state.calle,
-      "nro":this.state.nro,
-      "provincia":this.state.provincia['value'],
-      "localidad":this.state.localidad['value'],
-      "constanciaDni":this.state.constanciaDni,
-      "constanciaAfip":this.state.constanciaAfip
     };
     // console.log(payload);
     const headers = {
