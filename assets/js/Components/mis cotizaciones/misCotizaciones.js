@@ -161,7 +161,7 @@ class MisCotizaciones extends React.Component {
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
-                <h5>Mis Cotizaciones</h5>
+                <h5>Mis Pedidos</h5>
                 <p>Listado de las últimas solicitudes generadas</p>
                 <hr/>
                 <>{ this.renderFilTrosBusqueda() }</>
