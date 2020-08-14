@@ -18,6 +18,7 @@ use JMS\Serializer\SerializerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Entity\Usuario;
 
 class CambiarPassController extends AbstractController
 {
@@ -75,32 +76,39 @@ class CambiarPassController extends AbstractController
 
             $code = 200;
             $error = false;
+            $formErrors = [];
 
-            // $email = $request->request->get('email');
-            // $contraseniaI = $request->request->get('contrasenia');
-            // $contraseniaII = $request->request->get('contrasenia');
+            $email = $request->request->get('email');
+            $contraseniaI = $request->request->get('password');
+            $contraseniaII = $request->request->get('password2');
 
-            dump($request->request);
-            die;
- 
-            $repuesto = $this->obtenerRepuesto($idRepuesto);
-            $modelo = $this->obtenerModeloAuto($idModelo);
-            $marca = $this->obtenerMarcaAuto($idMarca);
-
-            if(is_null($repuesto) || is_null($marca) || is_null($modelo) || is_null($imagenes)) {
+            if(is_null($email) || is_null($contraseniaI) || is_null($contraseniaII)) {
                 throw new \Exception('Something went wrong!');
             }
 
+            if($contraseniaI != $contraseniaII) {
+                $formErrors['passdistintas'] = "Las contraseñas ingresadas no son iguales.";
+            }
+
+            $user = $this->obtenerUsuario($email);
+            $user->setPlainPassword($contraseniaI);
+            $user->setPassword($encoder->encodePassword($user, $contraseniaI));
+            $user->setUsuarioUltimaModificacion($email);
+
+            $passwordError = $validator->validateProperty($user, 'plainPassword');
+            if(count($passwordError)>0){
+                $formErrors['password'] =  $passwordError[0]->getMessage();
+            }
 
             if($formErrors) {
                 $response = [
-                    'code' => 0,
+                    'code' => 400,
                     'error' => $formErrors,
                 ];
                 return new JsonResponse($response);
             }
 
-            $em->persist($solicitud);
+            $em->persist($user);
             $em->flush();
  
         } catch (Exception $ex) {
@@ -116,5 +124,9 @@ class CambiarPassController extends AbstractController
         ];
  
         return new Response($serializer->serialize($response, "json"));
+    }
+
+    private function obtenerUsuario($email){
+        return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('username'=>$email));
     }
 }
