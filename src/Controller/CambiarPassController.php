@@ -22,6 +22,8 @@ use App\Entity\Usuario;
 
 class CambiarPassController extends AbstractController
 {
+    private $baseUrlEisenPartProduccion = 'https://www.eisenparts.com';
+    
     // /**
     //  * @Route("/cambiar/pass", name="cambiar_pass")
     //  */
@@ -94,6 +96,8 @@ class CambiarPassController extends AbstractController
             $user->setPlainPassword($contraseniaI);
             $user->setPassword($encoder->encodePassword($user, $contraseniaI));
             $user->setUsuarioUltimaModificacion($email);
+            // en el registro se le asigna un token al usuario
+            $user->setSocialToken($this->obtenerTokenAutenticacion());
 
             $passwordError = $validator->validateProperty($user, 'plainPassword');
             if(count($passwordError)>0){
@@ -110,6 +114,8 @@ class CambiarPassController extends AbstractController
 
             $em->persist($user);
             $em->flush();
+
+            $this->enviarCorreoNotificacion($user);
  
         } catch (Exception $ex) {
             $code = 500;
@@ -124,6 +130,35 @@ class CambiarPassController extends AbstractController
         ];
  
         return new Response($serializer->serialize($response, "json"));
+    }
+
+    private function obtenerTokenAutenticacion() {
+        return rtrim(strtr(base64_encode(random_bytes(20)), '+/', '-_'), '=');
+    }
+
+    private function enviarCorreoNotificacion($usuario) {
+
+        $url = $this->obtenerUrlConfirmacionCuenta($usuario);
+
+        $email = (new TemplatedEmail())
+            ->from('info@eisenparts.com')
+            ->to(new Address($usuario->getUsername()))
+            ->subject('EisenPart - Cambiar contraseña')
+        
+            // path of the Twig template to render
+            ->htmlTemplate('cambiar_pas/confirmation_email.html.twig')
+        
+            // pass variables (name => value) to the template
+            ->context([
+                'url' => $url,
+                'emailUsuario' => $usuario->getUsername(),
+            ])
+        ;
+        $this->mailer->send($email);
+    }
+
+    private function obtenerUrlConfirmacionCuenta($usuario) {
+        return $this->baseUrlEisenPartProduccion . '/api/verificar/' . $usuario->getSocialToken();
     }
 
     private function obtenerUsuario($email){
