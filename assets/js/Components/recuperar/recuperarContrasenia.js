@@ -117,7 +117,7 @@ class RecuperarContrasenia extends React.Component {
   
       let code = response.data.code;
       if(code == 200){
-        this.setState({ isSignedUp: true }); // after signing up, set the state to true. This will trigger a re-render
+        this.setState({ redirectLogin: true }); // after signing up, set the state to true. This will trigger a re-render
       }
       else if(code == 400) {
         this.mostrarErroresApi(response.data.error);
@@ -131,6 +131,17 @@ class RecuperarContrasenia extends React.Component {
       this.setState({ catchaValido: false });
       alert('Ocurrio un error inesperado, intente nuevamente mas tarde!');
     }
+  }
+
+  mostrarErroresApi = (response) => {
+    let errors = {};
+    for (const prop in response) {
+      // console.log(`obj.${prop} = ${mensajes[prop]}`);
+      errors[prop] = response[prop];
+    }
+    this.setState({
+      errors: errors
+    });
   }
 
   handleSubmit = (event) => {
