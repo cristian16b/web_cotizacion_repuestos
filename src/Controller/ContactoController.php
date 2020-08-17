@@ -62,7 +62,7 @@ class ContactoController extends AbstractController
                 throw new \Exception('Something went wrong!');
             }
 
-
+            $this->enviarCorreoNotificacion($email,$nombreApellido,$mensaje);
 
         } catch (Exception $ex) {
             $code = 500;
@@ -83,4 +83,26 @@ class ContactoController extends AbstractController
             )
         );
     }
+
+    private function enviarCorreoNotificacion($email,$nombreApellido,$mensaje) {
+
+        $url = $this->obtenerUrlConfirmacionCuenta($usuario);
+
+        $email = (new TemplatedEmail())
+            ->from('info@eisenparts.com')
+            ->to('info@eisenparts.com')
+            ->subject('EisenPart - Consulta recibida')
+        
+            // path of the Twig template to render
+            ->htmlTemplate('registrarme/confirmation_email.html.twig')
+        
+            // pass variables (name => value) to the template
+            ->context([
+                'url' => $url,
+                'emailUsuario' => $persona->getEmail(),
+            ])
+        ;
+        $this->mailer->send($email);
+    }
+
 }
