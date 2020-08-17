@@ -204,6 +204,9 @@ class Contacto extends React.Component {
                                     <div className="md-form mb-0">
                                       <label forhtml="name" className="">Nombre y apellido</label>
                                       <input type="text" id="name" name="name" className="form-control" />
+                                      <span id="password2Help" className="text-danger error_negrita">
+                                        {this.state.errors["nombreApellido"]}
+                                      </span> 
                                     </div>
                                 </div>
                                 {/* <!--Grid column--> */}
@@ -213,6 +216,9 @@ class Contacto extends React.Component {
                                     <div className="md-form mb-0">
                                       <label forhtml="email" className="">Email</label>
                                       <input type="text" id="email" name="email" className="form-control" />
+                                      <span id="password2Help" className="text-danger error_negrita">
+                                        {this.state.errors["email"]}
+                                      </span> 
                                     </div>
                                 </div>
                                 {/* <!--Grid column--> */}
@@ -228,7 +234,9 @@ class Contacto extends React.Component {
                                     <div className="md-form">
                                         <label forhtml="message">Tu pregunta</label>
                                         <textarea type="text" id="message" name="message" rows="2" className="form-control md-textarea"></textarea>
-                                        
+                                        <span id="password2Help" className="text-danger error_negrita">
+                                          {this.state.errors["mensaje"]}
+                                        </span> 
                                     </div>
 
                                 </div>
