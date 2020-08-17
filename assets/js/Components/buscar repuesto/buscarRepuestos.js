@@ -22,7 +22,6 @@ class BuscarRepuesto extends React.Component {
       marcaSeleccionado: '',
       modeloSeleccionado: '',
       listadoImagenes: [],
-      botonesHabilitados: false,
       errors: {},
       errorApi: '',
       isSignedUp: false, 
@@ -41,21 +40,6 @@ class BuscarRepuesto extends React.Component {
     this.cancelar = this.cancelar.bind(this);
   }
 
-  isHabilitado = () => { return this.state.botonesHabilitados}
-
-  cambioHabilitado = () => { 
-    if(this.state.botonesHabilitados == true) {
-      this.setState({
-        botonesHabilitados: false
-      });
-    }
-    else {
-      this.setState({
-        botonesHabilitados: true
-      });
-    }
-    // console.log(this.state.botonesHabilitados);
-  }
 
   // evento change de las fotos subidas
   // onChange = (imageList) => {
@@ -73,8 +57,6 @@ class BuscarRepuesto extends React.Component {
     if(this.validarFormulario() == true) {
       this.consumirApiGuardarSolicitud();
     } 
-    // console.log('entra y falla');
-    this.cambioHabilitado();
   }
 
   redirectToLogin = () => {
@@ -351,7 +333,6 @@ class BuscarRepuesto extends React.Component {
       marcaSeleccionado: '',
       modeloSeleccionado: '',
       listadoImagenes: [],
-      botonesHabilitados: false,
       errors: {},
       errorApi: '',
       isSignedUp: false, 
