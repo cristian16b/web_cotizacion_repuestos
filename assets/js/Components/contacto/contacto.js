@@ -69,9 +69,6 @@ class Contacto extends React.Component {
   }
 
   validarFormulario = () => {
-
-    console.log('click');
-
     this.setState({
       errors: {}
     });
