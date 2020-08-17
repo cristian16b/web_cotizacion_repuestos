@@ -83,7 +83,15 @@ class Contacto extends React.Component {
       errors["email"] = "Debe completar su e-mail";
       formularioValido = false;
     }
-  
+    else {
+      let patron = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      let email = this.state.email; 
+      if(!patron.test(email)) {
+        errors["email"] = "El email ingresado no es valido";
+        formularioValido = false;
+      }  
+    }
+
     if(this.state.nombreApellido.length == 0) {
       errors["nombreApellido"] = "Debe ingresar nuevamente la contraseña";
       formularioValido = false;
@@ -172,10 +180,10 @@ class Contacto extends React.Component {
   }
 
   handleSubmit = (event) => {
+    event.preventDefault();
     if(this.validarFormulario() == true) {
       this.consumirApiRegister();
     } 
-    event.preventDefault();
   }
 
   cancelar = () => {
