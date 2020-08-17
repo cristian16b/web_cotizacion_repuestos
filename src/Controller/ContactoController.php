@@ -94,12 +94,13 @@ class ContactoController extends AbstractController
             ->subject('EisenPart - Consulta recibida')
         
             // path of the Twig template to render
-            ->htmlTemplate('registrarme/confirmation_email.html.twig')
+            ->htmlTemplate('contacto/contacto_email.html.twig')
         
             // pass variables (name => value) to the template
             ->context([
-                'url' => $url,
-                'emailUsuario' => $persona->getEmail(),
+                'email' => $email,
+                'mensaje' => $mensaje,
+                'nombreApellido' => $nombreApellido
             ])
         ;
         $this->mailer->send($email);
