@@ -404,18 +404,14 @@ class BuscarRepuesto extends React.Component {
                 <h5 className="my-4">Buscar un repuesto</h5>
                 <hr/>
                 <h6>Para solicitar cotizaciones sobre un repuesto debe cargar los siguientes datos</h6>
-                  {this.renderSelectPrimerFila()}
-                  {this.renderSelectSegundaFila()}
-                  {this.renderObservaciones()}
-                  {this.renderSubidaPrevisualizacionFotos()}
-                    {/* Nota: si el html <form> engloba todos los campos, me genera un error
-                        al pulsar sobre <agregar imagen>, se valida el form y no es lo que se espera
-                        con esta modificacion funciona correctamente
-                    */}
-                    <form onSubmit={this.handleSubmit}>
-                      <>{this.renderBotones()}</>
-                      <hr/>
-                    </form>
+                  <form method="post" onSubmit={this.handleSubmit}>
+                    {this.renderSelectPrimerFila()}
+                    {this.renderSelectSegundaFila()}
+                    {this.renderObservaciones()}
+                    {this.renderSubidaPrevisualizacionFotos()}
+                    {this.renderBotones()}
+                    <hr/>
+                  </form>
                 {/* FIN CARDBODY */}
               </div>
               {/* FIN CARD */}

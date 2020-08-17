@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import {API_CAMBIAR_CONTRASENIA,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
+import {API_CONTACTO,API_CAPTCHA_PUBLIC} from '../../Constantes/constantes';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 import Loading from '../loading/loading.js';
@@ -17,9 +17,10 @@ class Contacto extends React.Component {
         errors: {},
         errorApi: '',
         email: '',
-        password:'',
+        nombreApellido:'',
         password2: '',
         catchaValido: false,
+        mensaje: '',
       }
     );
 
@@ -76,18 +77,13 @@ class Contacto extends React.Component {
       formularioValido = false;
     }
   
-    if(this.state.password2.length == 0) {
-      errors["password2"] = "Debe ingresar nuevamente la contraseña";
+    if(this.state.nombreApellido.length == 0) {
+      errors["nombreApellido"] = "Debe ingresar nuevamente la contraseña";
       formularioValido = false;
     }
 
-    if(this.state.password.length == 0) {
-      errors["password"] = "La contraseña no puede estar vacia";
-      formularioValido = false;
-    }
-
-    if(this.state.password != this.state.password2) {
-      errors["passdistintas"] = "Las contraseñas ingresadas son diferentes";
+    if(this.state.mensaje.length == 0) {
+      errors["mensaje"] = "La contraseña no puede estar vacia";
       formularioValido = false;
     }
 
@@ -122,7 +118,7 @@ class Contacto extends React.Component {
       formData.append(indice,payload[indice]);
     } 
     // llamamos a la api
-    this.getData(API_CAMBIAR_CONTRASENIA,formData,headers);
+    this.getData(API_CONTACTO,formData,headers);
     event.preventDefault();
   }
   
@@ -136,7 +132,12 @@ class Contacto extends React.Component {
   
       let code = response.data.code;
       if(code == 200){
-        this.setState({ redirectLogin: true }); // after signing up, set the state to true. This will trigger a re-render
+        // this.setState({ redirectLogin: true }); // after signing up, set the state to true. This will trigger a re-render
+        this.setState({email: ''});
+        this.setState({nombreApellido: ''});
+        this.setState({mensaje: ''});
+        this.setState({captcha: false});
+        alert('Su consulta ha sido enviada.');
       }
       else if(code == 400) {
         this.mostrarErroresApi(response.data.error);
@@ -193,7 +194,7 @@ class Contacto extends React.Component {
 
                     {/* <!--Grid column--> */}
                     <div className="col-md-9 mb-md-0 mb-5">
-                        <form id="contact-form" name="contact-form">
+                        <form method="post" onSubmit={this.handleSubmit}>
 
                             {/* <!--Grid row--> */}
                             <div className="row">
@@ -232,6 +233,9 @@ class Contacto extends React.Component {
 
                                 </div>
                             </div>
+                            <>{this.renderCaptcha()}</>
+
+
                             {/* <!--Grid row--> */}
                             <div className="row">
 
