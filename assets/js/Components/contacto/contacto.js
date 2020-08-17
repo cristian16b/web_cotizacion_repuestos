@@ -69,6 +69,13 @@ class Contacto extends React.Component {
   }
 
   validarFormulario = () => {
+
+    console.log('click');
+
+    this.setState({
+      errors: {}
+    });
+
     let formularioValido = true;
     let errors = {};
 
@@ -104,8 +111,8 @@ class Contacto extends React.Component {
     this.setState({captcha: false });
   
     const payload={
-      "password":this.state.password,
-      "password2":this.state.password2,
+      "apellidoNombre":this.state.nombreApellido,
+      "mensaje":this.state.mensaje,
       "email":this.state.email,
     };
     // console.log(payload);
@@ -203,7 +210,9 @@ class Contacto extends React.Component {
                                 <div className="col-md-6">
                                     <div className="md-form mb-0">
                                       <label forhtml="name" className="">Nombre y apellido</label>
-                                      <input type="text" id="name" name="name" className="form-control" />
+                                      <input type="text" id="name" name="nombreApellido" 
+                                      defaultValue = {this.state.password2} onChange={this.handleChangeInput}
+                                      className="form-control" />
                                       <span id="password2Help" className="text-danger error_negrita">
                                         {this.state.errors["nombreApellido"]}
                                       </span> 
@@ -215,7 +224,9 @@ class Contacto extends React.Component {
                                 <div className="col-md-6">
                                     <div className="md-form mb-0">
                                       <label forhtml="email" className="">Email</label>
-                                      <input type="text" id="email" name="email" className="form-control" />
+                                      <input type="text" id="email" name="email"
+                                      defaultValue = {this.state.password2} onChange={this.handleChangeInput}
+                                      className="form-control" />
                                       <span id="password2Help" className="text-danger error_negrita">
                                         {this.state.errors["email"]}
                                       </span> 
@@ -233,7 +244,9 @@ class Contacto extends React.Component {
 
                                     <div className="md-form">
                                         <label forhtml="message">Tu pregunta</label>
-                                        <textarea type="text" id="message" name="message" rows="2" className="form-control md-textarea"></textarea>
+                                        <textarea type="text" id="message"
+                                        defaultValue = {this.state.password2} onChange={this.handleChangeInput}
+                                        name="mensaje" rows="2" className="form-control md-textarea"></textarea>
                                         <span id="password2Help" className="text-danger error_negrita">
                                           {this.state.errors["mensaje"]}
                                         </span> 

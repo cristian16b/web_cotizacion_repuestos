@@ -38,6 +38,7 @@ class BuscarRepuesto extends React.Component {
     this.loadModelos = this.loadModelos.bind(this);
     this.handleSubmit   = this.handleSubmit.bind(this); 
     this.handleChange = this.handleChange.bind(this);
+    this.cancelar = this.cancelar.bind(this);
   }
 
   isHabilitado = () => { return this.state.botonesHabilitados}
@@ -343,6 +344,25 @@ class BuscarRepuesto extends React.Component {
     );
   }
 
+  cancelar = () => {
+    this.setState({
+      peticionActiva:false,
+      repuestoSeleccionado: '',
+      marcaSeleccionado: '',
+      modeloSeleccionado: '',
+      listadoImagenes: [],
+      botonesHabilitados: false,
+      errors: {},
+      errorApi: '',
+      isSignedUp: false, 
+      observaciones: '',
+      isLoading: false,
+      isGuardado: false,
+      isLogin: true,
+      isMount: false,
+    });
+  }
+
   renderBotones = () => {
     return (
       <div className="row">
@@ -350,15 +370,14 @@ class BuscarRepuesto extends React.Component {
           <div className="form-group">
             <button type="submit" 
                     className="btn btn-primary btn-block"
-                    disabled={this.isHabilitado()}
-                    onClick={this.cambioHabilitado}
+                    onClick={this.handleSubmit}
                     >Enviar Pedido de cotización</button>
           </div>
         </div>
         <div className="col-lg-6">
           <div className="form-group">
             <button type="reset" 
-                    disabled={this.isHabilitado()}
+                    onClick={this.cancelar}
                     className="btn btn-light btn-block">Cancelar
             </button>
           </div>
