@@ -22,7 +22,7 @@ export const API_PROVINCIA = API_BASE_URL + '/provincia/getByName';
 export const API_LOCALIDAD = API_BASE_URL + '/localidad/getByName';
 export const API_OBTENER_CONSTANCIA = API_BASE_URL + '/recurso/get/archivo/';
 export const API_CAMBIAR_CONTRASENIA = API_BASE_URL +  '/cambiarContrasenia';
-export const API_CONTACTO = API_BASE_URL +  '/contacto';
+export const API_CONTACTO = API_BASE_URL +  '/contacto/enviar';
 // lo siguiente son las key del captcha de verificacion de persona
 export const API_CAPTCHA_PUBLIC = '6Ld2A_0UAAAAADDGvROkBFyPOPDkZWqoLLkbaWym';
 export const API_CAPTCHA_PRIVATE = '6Ld2A_0UAAAAALQJE4OHpHCktkGQRsIwbuzZKDZ4';
