@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mailer\MailerInterface;
 
 /**
 * @Route("/contacto")
@@ -23,6 +27,13 @@ class ContactoController extends AbstractController
     //         'controller_name' => 'ContactoController',
     //     ]);
     // }
+
+    private $mailer;
+    
+    public function __construct(MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+    }
 
     public static function getSubscribedServices() 
     {
@@ -42,16 +53,16 @@ class ContactoController extends AbstractController
             $code = 200;
             $error = false;
 
-            $nameIngresado = trim($request->query->get('name'));
-            $em = $this->getDoctrine()->getManager();
-            $provincias= $em->getRepository(Provincia::class)
-                    ->buscarPorNombre($nameIngresado);
+            $email = trim($request->request->get('email'));
+            $mensaje = trim($request->request->get('mensaje'));
+            $nombreApellido = trim($request->request->get('nombreApellido'));
 
-                    
-
-            if (is_null($provincias)) {
-                $provincias = [];
+            
+            if(is_null($email) || is_null($mensaje) || is_null($nombreApellido)) {
+                throw new \Exception('Something went wrong!');
             }
+
+
 
         } catch (Exception $ex) {
             $code = 500;
