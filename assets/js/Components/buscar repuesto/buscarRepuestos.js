@@ -404,11 +404,11 @@ class BuscarRepuesto extends React.Component {
                 <h5 className="my-4">Buscar un repuesto</h5>
                 <hr/>
                 <h6>Para solicitar cotizaciones sobre un repuesto debe cargar los siguientes datos</h6>
-                  <form method="post" onSubmit={this.handleSubmit}>
                     {this.renderSelectPrimerFila()}
                     {this.renderSelectSegundaFila()}
                     {this.renderObservaciones()}
                     {this.renderSubidaPrevisualizacionFotos()}
+                  <form method="post" onSubmit={this.handleSubmit}>
                     {this.renderBotones()}
                     <hr/>
                   </form>

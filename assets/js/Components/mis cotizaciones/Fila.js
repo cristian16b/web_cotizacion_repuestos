@@ -107,7 +107,7 @@ class Fila extends React.Component {
                                       <button type="button" 
                                         disabled = {this.state.botonHabilitado}
                                         // onClick={() => this.cancelarSolicitud(elemento.id)} 
-                                        class="btn btn-secondary">
+                                        className="btn btn-secondary">
                                           Actualizar listado
                                       </button>              
                                     </div>    
@@ -162,7 +162,7 @@ class Fila extends React.Component {
               <button type="button" 
                 disabled = {this.state.botonHabilitado}
                 // onClick={() => this.cancelarSolicitud(elemento.id)} 
-                class="btn btn-primary">
+                className="btn btn-primary">
                   Comprar con Mercado Pago
               </button>             
             </div>

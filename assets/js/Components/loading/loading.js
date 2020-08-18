@@ -18,7 +18,7 @@ const divMensaje = {
 const Loading = () => (
     <div className="row justify-content-center" style={divLoading}>
             <div className="row justify-content-center"  align="center" style={divBucle}>
-                <div className="col-12 col-md-6 col-lg-6">
+                <div className="col-12 col-md-8 col-lg-10">
                     <ReactLoading type={'spin'} color="#153D57" height={'35%'} width={'35%'}/>
                 </div>
             </div>

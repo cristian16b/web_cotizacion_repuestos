@@ -60,8 +60,8 @@ redirectToLogin = () => {
 
 renderBotonesUsuarioComercio () {
   return (
-    <div className="row justify-content-center"  style={divLoading}>
-      <div className="col-12 col-sm-12 col-md-12 col-lg-8">
+    <div className="row justify-content-center">
+      <div className="col-12 col-sm-12 col-md-12 col-lg-9">
       <div className="card shadow-sm p-3 mb-5 bg-white rounded">
         <div className="card-body">
         <h5>Registrarme</h5>
