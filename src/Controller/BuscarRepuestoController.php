@@ -140,6 +140,7 @@ class BuscarRepuestoController extends AbstractController
                 $imagenBase64 = $imagen['dataURL'];
                 $recurso->setBase64($imagenBase64);
                 $recurso->obtenerNombreLogico($index,$repuesto->getName());
+                $recurso->setDirectorio($this->getParameter('kernel.project_dir'));
                 $solicitud->addRecurso($recurso);
             }
 

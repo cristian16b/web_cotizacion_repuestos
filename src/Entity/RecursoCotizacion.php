@@ -201,7 +201,7 @@ class RecursoCotizacion
      * @ORM\PreUpdate
      */
     public function guardarArchivo() {
-        file_put_contents($this->directorio .'/fotosSolicitudes'.'/'.$this->nombreFisico, file_get_contents($this->base64));
+        file_put_contents($this->directorio .'/fotosCotizaciones'.'/'.$this->nombreFisico, file_get_contents($this->base64));
     }
 
     public function setDirectorio($directorio) {
