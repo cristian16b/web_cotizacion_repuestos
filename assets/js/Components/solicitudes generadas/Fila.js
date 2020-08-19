@@ -154,7 +154,7 @@ class Fila extends React.Component {
                           { 
                             this.state.notificacionEnviada == false 
                             ?
-                            <>{this.renderCollapsibleEnviarCotizacion()}</>
+                            <>{this.renderCollapsibleEnviarCotizacion(elemento)}</>
                             : 
                             <b>La cotización por un monto de $ {this.state.monto} fue enviada al usuario.</b>
                           }
@@ -179,7 +179,7 @@ class Fila extends React.Component {
     )
   }
 
-  renderCollapsibleEnviarCotizacion = () => {
+  renderCollapsibleEnviarCotizacion = (elemento) => {
     return(
         <Collapsible title="Enviar cotización"  className="btn btn-warning">
         <hr></hr>
@@ -204,7 +204,7 @@ class Fila extends React.Component {
         </div>
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            <p>Se informara que la cotización vence el {this.props.fechaVencimiento}</p>
+            <p><b>Se informara que la cotización vence el {this.props.fechaVencimiento}</b></p>
           </div>
         </div>
         <>{this.renderObservaciones()}</>
