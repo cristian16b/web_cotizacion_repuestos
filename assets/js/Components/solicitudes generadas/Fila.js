@@ -4,6 +4,8 @@ import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
 import {API_OBTENER_FOTO_REPUESTO,API_ENVIAR_COTIZACION} from '../../Constantes/constantes';
 import axios from 'axios';
+import MultipleImageUploadComponent from './../buscar repuesto/subcomponentes/MultipleImageUploadComponent';
+
 
 class Fila extends React.Component {
 
@@ -17,6 +19,8 @@ class Fila extends React.Component {
       notificacionEnviada: false,
       isMount: false,
       botonHabilitado: false,
+      listadoImagenes: [],
+      observaciones: '',
     });
   }
 
@@ -150,43 +154,7 @@ class Fila extends React.Component {
                           { 
                             this.state.notificacionEnviada == false 
                             ?
-                            <Collapsible title="Enviar cotización"  className="btn btn-warning">
-                              <hr></hr>
-                              <div className="row">
-                                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                                  <p>Ingrese el monto que sera notificado al solicitante</p>
-                                </div>
-                                <div className="col-10 col-sm-6 col-md-6 col-lg-6">
-                                  <div className="form-group">
-                                    <label htmlFor="monto">Monto en pesos</label>
-                                    <div className="input-group">
-                                      <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                                        <input type="number" className="form-control" name="monto" 
-                                                defaultValue = {this.state.monto} onChange={this.handleChangeInput}
-                                                placeholder="Ej: 200" />	
-                                    </div>
-                                    <span id="monto" className="text-danger error_negrita">
-                                      {this.state.errors}
-                                    </span> 
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                              <p>Se informara que la cotización vence el {this.props.fechaVencimiento}</p>
-                              </div>
-                              <div className="row">
-                                  <div className="col-6 col-sm-6 col-md-3 col-lg-2">
-                                        <button
-                                            disabled = {this.state.botonHabilitado}
-                                            type="submit" 
-                                            onClick={() => this.enviarCotizacion(elemento.id)}
-                                            className="btn btn-primary btn-block">
-                                            Enviar
-                                        </button>
-                                  </div>
-                              </div>
-                              <hr></hr>
-                            </Collapsible>
+                            <>{this.renderCollapsibleEnviarCotizacion()}</>
                             : 
                             <b>La cotización por un monto de $ {this.state.monto} fue enviada al usuario.</b>
                           }
@@ -209,6 +177,85 @@ class Fila extends React.Component {
             </Td>
           </Tr>
     )
+  }
+
+  renderCollapsibleEnviarCotizacion = () => {
+    return(
+        <Collapsible title="Enviar cotización"  className="btn btn-warning">
+        <hr></hr>
+        <div className="row">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p>Ingrese el monto que sera notificado al solicitante</p>
+          </div>
+          <div className="col-10 col-sm-6 col-md-6 col-lg-6">
+            <div className="form-group">
+              <label htmlFor="monto">Monto en pesos</label>
+              <div className="input-group">
+                <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                  <input type="number" className="form-control" name="monto" 
+                          defaultValue = {this.state.monto} onChange={this.handleChangeInput}
+                          placeholder="Ej: 200" />	
+              </div>
+              <span id="monto" className="text-danger error_negrita">
+                {this.state.errors}
+              </span> 
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p>Se informara que la cotización vence el {this.props.fechaVencimiento}</p>
+          </div>
+        </div>
+        <>{this.renderObservaciones()}</>
+        <>{this.renderSubidaPrevisualizacionFotos()}</>
+        <div className="row">
+          <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+            <button
+              disabled = {this.state.botonHabilitado}
+              type="submit" 
+              onClick={() => this.enviarCotizacion(elemento.id)}
+              className="btn btn-primary btn-block">
+              Enviar
+            </button>
+          </div>
+        </div>
+        <hr></hr>
+      </Collapsible>
+    )
+  }
+
+  renderObservaciones = () => {
+    return(
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <label forhtml="message">Observaciones (año de su vehículo u otros detalles que considere importantes)</label>
+                        <textarea onChange={this.handleChange} type="text" id="observaciones" name="observaciones" rows="2" className="form-control md-textarea">
+                        </textarea>
+                        <span className="text-danger error_negrita">
+                          {this.state.errors["observaciones"]}
+                        </span>
+                      </div>
+                    </div>
+    );
+  }
+
+  renderSubidaPrevisualizacionFotos = () => {
+    return (
+            <div className="row justify-content-center">
+              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <div className="form-group">
+                    <p>Debe adjuntar al menos una foto del repuesto que usted esta necesitando.</p> 
+                    <p><b>Como máximo se aceptarán cuatro y cada archivo no puede exeder los 5 megabytes.</b></p>
+                    <p><i>Si el archivo no es cargado, se debe a que no es el formato valido(.jpg o .png) o que su tamaño es mayor al especificado</i></p>
+                      <MultipleImageUploadComponent onChangeI={this.getImagen}></MultipleImageUploadComponent>
+                      <span className="text-danger error_negrita">
+                        {this.state.errors["listadoImagenes"]}
+                      </span>
+                  </div>
+              </div>
+            </div>
+      );
   }
 
   render() {
