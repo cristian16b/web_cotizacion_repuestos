@@ -78,6 +78,7 @@ class MultipleImageUploadComponent extends React.Component {
                                     {errors.resolution && <span className="text-danger error_negrita">Selected file is not match your desired resolution.&nbsp;</span>}
                                 </div>
                             </div>
+                            <hr></hr>
                             {imageList.map(image => (
                                 <div className="row">
                                     <div className="col-12 col-md-12 col-lg-12">
