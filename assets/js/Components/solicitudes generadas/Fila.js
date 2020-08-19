@@ -58,7 +58,7 @@ class Fila extends React.Component {
       this.setState({errors: 'Debe completar el monto, ingresando un número positivo con hasta dos decimales despues del . Ej: 120.50' });
     }
     else if(patron.test(this.state.monto) == false){
-      this.setState({errors: 'Debe ingresar un número positivo. Ej: 120.50'});
+      this.setState({errors: 'Debe ingresar un número positivo. Ej: 120'});
     }
     else {
       this.setState({errors: ''});
@@ -192,7 +192,7 @@ class Fila extends React.Component {
               <label htmlFor="monto">Monto en pesos</label>
               <div className="input-group">
                 <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                  <input type="number" className="form-control" name="monto" 
+                  <input type="number" min="1" className="form-control" name="monto" 
                           defaultValue = {this.state.monto} onChange={this.handleChangeInput}
                           placeholder="Ej: 200" />	
               </div>
