@@ -58,16 +58,17 @@ class Fila extends React.Component {
     let errors = {};
     let patron =  /^\d+(\.\d{1,2})?$/;
 
-    console.log(this.state.monto);
     if(this.state.monto == '') {
-      this.setState({errors: 'Debe completar el monto, ingresando un número positivo con hasta dos decimales despues del . Ej: 120.50' });
+      errors["monto"] = "Debe completar el monto.";
+      formularioValido = false;
     }
     else if(patron.test(this.state.monto) == false){
-      this.setState({errors: 'Debe ingresar un número positivo. Ej: 120'});
+      errors["monto"] = "Debe ingresar un número positivo.";
+      formularioValido = false;
     }
 
     if(this.state.listadoImagenes.length === 0) {
-      errors["listadoImagenes"] = "Debe cargar al menos una imagen del repuesto que necesita";
+      errors["listadoImagenes"] = "Debe cargar al menos una imagen del repuesto que usted esta ofreciendo.";
       formularioValido = false;
     }
 
@@ -85,6 +86,8 @@ class Fila extends React.Component {
       const payload={
         "idSolicitud":id,
         "monto":this.state.monto,
+        "imagenes":this.state.listadoImagenes,
+        "observaciones":this.state.observaciones,
       }
       const config = {
           headers: { 
@@ -270,7 +273,7 @@ class Fila extends React.Component {
               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                   <div className="form-group">
                     <p>Debe adjuntar al menos una foto del repuesto que usted esta necesitando.</p> 
-                    <p><b>Como máximo se aceptarán cuatro y cada archivo no puede exeder los 5 megabytes.</b></p>
+                    <p><b>Como máximo se aceptarán hasta cuatro y cada archivo no puede exeder los 5 megabytes.</b></p>
                     <p><i>Si el archivo no es cargado, se debe a que no es el formato valido(.jpg o .png) o que su tamaño es mayor al especificado</i></p>
                       <MultipleImageUploadComponent onChangeI={this.getImagen}></MultipleImageUploadComponent>
                       <span className="text-danger error_negrita">
