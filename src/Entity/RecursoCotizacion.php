@@ -11,14 +11,14 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RecursoSolicitudRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\RecursoCotizacionRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
  * @ORM\Table(indexes={
- *   @ORM\Index(name="solicitud_id", columns={"solicitud_id"})
+ *   @ORM\Index(name="cotizacion_id", columns={"cotizacion_id"})
  * })
  */
-class RecursoSolicitud
+class RecursoCotizacion
 {
     /**
      * @ORM\Id()
@@ -34,7 +34,6 @@ class RecursoSolicitud
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Expose
      */
     private $nombreFisico;
 
@@ -50,20 +49,14 @@ class RecursoSolicitud
 
     /**
      * @ORM\Column(type="float")
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 2,
-     *      minMessage = "Debe cargar un archivo",
-     *      maxMessage = "No puede subir archivos de más de 2 MegaBytes"
-     * )
      */
     private $pesoMega;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Solicitud", inversedBy="recursos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\cotizacion", inversedBy="recursoCotizacions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $solicitud;
+    private $cotizacion;
 
     /**
      * atributos no mapeables, usados para calculos u operaciones auxiliares
@@ -73,6 +66,7 @@ class RecursoSolicitud
     private $extensionArchivo;
 
     private $directorio;
+
     // 
 
     public function getId(): ?int
@@ -128,31 +122,31 @@ class RecursoSolicitud
         return $this;
     }
 
-    public function getPesoMega(): ?string
+    public function getPesoMega(): ?float
     {
         return $this->pesoMega;
     }
 
-    public function setPesoMega(string $pesoMega): self
+    public function setPesoMega(float $pesoMega): self
     {
         $this->pesoMega = $pesoMega;
-    
-        return $this;
-    }
-
-    public function getSolicitud(): ?Solicitud
-    {
-        return $this->solicitud;
-    }
-
-    public function setSolicitud(?Solicitud $solicitud): self
-    {
-        $this->solicitud = $solicitud;
 
         return $this;
     }
 
-        /**
+    public function getCotizacion(): ?cotizacion
+    {
+        return $this->cotizacion;
+    }
+
+    public function setCotizacion(?cotizacion $cotizacion): self
+    {
+        $this->cotizacion = $cotizacion;
+
+        return $this;
+    }
+
+            /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
@@ -207,7 +201,7 @@ class RecursoSolicitud
      * @ORM\PreUpdate
      */
     public function guardarArchivo() {
-        file_put_contents( $this->directorio .'/fotosCotizaciones'. '/'.$this->nombreFisico, file_get_contents($this->base64));
+        file_put_contents($this->directorio .'/fotosSolicitudes'.'/'.$this->nombreFisico, file_get_contents($this->base64));
     }
 
     public function setDirectorio($directorio) {

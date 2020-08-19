@@ -63,6 +63,21 @@ class Cotizacion
      */
     private $fechaLimiteValidez;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $observacion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RecursoCotizacion", mappedBy="cotizacion")
+     */
+    private $recursoCotizacions;
+
+    public function __construct()
+    {
+        $this->recursoCotizacions = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -161,6 +176,49 @@ class Cotizacion
     public function setFechaLimiteValidez($fechaLimiteValidez)
     {
         $this->fechaLimiteValidez = $fechaLimiteValidez;
+
+        return $this;
+    }
+
+    public function getObservacion(): ?string
+    {
+        return $this->observacion;
+    }
+
+    public function setObservacion(?string $observacion): self
+    {
+        $this->observacion = $observacion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RecursoCotizacion[]
+     */
+    public function getRecursoCotizacions(): Collection
+    {
+        return $this->recursoCotizacions;
+    }
+
+    public function addRecursoCotizacion(RecursoCotizacion $recursoCotizacion): self
+    {
+        if (!$this->recursoCotizacions->contains($recursoCotizacion)) {
+            $this->recursoCotizacions[] = $recursoCotizacion;
+            $recursoCotizacion->setCotizacion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecursoCotizacion(RecursoCotizacion $recursoCotizacion): self
+    {
+        if ($this->recursoCotizacions->contains($recursoCotizacion)) {
+            $this->recursoCotizacions->removeElement($recursoCotizacion);
+            // set the owning side to null (unless already changed)
+            if ($recursoCotizacion->getCotizacion() === $this) {
+                $recursoCotizacion->setCotizacion(null);
+            }
+        }
 
         return $this;
     }
