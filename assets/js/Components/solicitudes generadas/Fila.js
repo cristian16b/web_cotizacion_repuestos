@@ -21,6 +21,8 @@ class Fila extends React.Component {
       botonHabilitado: false,
       listadoImagenes: [],
       observaciones: '',
+      errors: {},
+      errorApi: '',
     });
   }
 
@@ -51,16 +53,34 @@ class Fila extends React.Component {
     );
   }
 
-  enviarCotizacion = (id) => {
+  validarFormulario = () => {
+    let formularioValido = true;
+    let errors = {};
     let patron =  /^\d+(\.\d{1,2})?$/;
 
+    console.log(this.state.monto);
     if(this.state.monto == '') {
       this.setState({errors: 'Debe completar el monto, ingresando un número positivo con hasta dos decimales despues del . Ej: 120.50' });
     }
     else if(patron.test(this.state.monto) == false){
       this.setState({errors: 'Debe ingresar un número positivo. Ej: 120'});
     }
-    else {
+
+    if(this.state.listadoImagenes.length === 0) {
+      errors["listadoImagenes"] = "Debe cargar al menos una imagen del repuesto que necesita";
+      formularioValido = false;
+    }
+
+    this.setState({
+      errors: errors
+    });
+
+    return formularioValido;
+  }
+
+  enviarCotizacion = (id) => {
+    if(this.validarFormulario())
+    {
       this.setState({errors: ''});
       const payload={
         "idSolicitud":id,
@@ -196,9 +216,9 @@ class Fila extends React.Component {
                           defaultValue = {this.state.monto} onChange={this.handleChangeInput}
                           placeholder="Ej: 200" />	
               </div>
-              <span id="monto" className="text-danger error_negrita">
-                {this.state.errors}
-              </span> 
+              <span className="text-danger error_negrita">
+                {this.state.errors["monto"]}
+              </span>
             </div>
           </div>
         </div>
@@ -238,6 +258,10 @@ class Fila extends React.Component {
                       </div>
                     </div>
     );
+  }
+
+  getImagen = (imagenes) => {
+    this.setState({listadoImagenes: imagenes});
   }
 
   renderSubidaPrevisualizacionFotos = () => {
