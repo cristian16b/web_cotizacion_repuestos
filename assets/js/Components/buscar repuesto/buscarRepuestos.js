@@ -376,7 +376,9 @@ class BuscarRepuesto extends React.Component {
             <div className="row justify-content-center">
               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                   <div className="form-group">
-                    <p>Debe adjuntar al menos una foto del repuesto solicitado. Como máximo se aceptarán cuatro.</p>
+                    <p>Debe adjuntar al menos una foto del repuesto que usted esta necesitando.</p> 
+                    <p><b>Como máximo se aceptarán cuatro y cada archivo no puede exeder los 5 megabytes.</b></p>
+                    <p><i>Si el archivo no es cargado, se debe a que no es el formato valido(.jpg o .png) o que su tamaño es mayor al especificado</i></p>
                       <MultipleImageUploadComponent onChangeI={this.getImagen}></MultipleImageUploadComponent>
                       <span className="text-danger error_negrita">
                         {this.state.errors["listadoImagenes"]}
@@ -390,7 +392,7 @@ class BuscarRepuesto extends React.Component {
   // ref: https://gist.github.com/darklilium/183ce1405788f2aef7e8
   render() {
     if(this.state.isLogin == false)
-      return <Salir/>
+      return <Redirect to = {{ pathname: "/login" }} />
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     if(this.state.isGuardado == true)

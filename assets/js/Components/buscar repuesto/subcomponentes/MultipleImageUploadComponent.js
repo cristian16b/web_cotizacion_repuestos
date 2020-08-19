@@ -43,74 +43,57 @@ class MultipleImageUploadComponent extends React.Component {
     this.props.onChangeI(imageList);
   }
 
+  onError = (errors, files) => {
+    console.log(errors, files);
+  }
+
   getImagenes = () => { return this.state.listadoImagenes }
 
     render() {
         return (
-<div className="App">
-  <ImageUploading 
-    onChange={this.onChangeI}
-    maxNumber={maxNumber}
-    multiple
-    maxFileSize={maxMbFileSize}
-    acceptType={["jpg", "gif", "png"]}
-  >
-    {({ imageList, onImageUpload, onImageRemoveAll }) => (
-      // write your building UI
-      <div className="upload__image-wrapper">
-        <button className="btn btn-danger" onClick={onImageUpload}>Agregar</button>&nbsp;
-        <button className="btn btn-secondary" onClick={onImageRemoveAll}>Borrar todas</button>
-        {imageList.map(image => (
-          <div key={image.key} className="image-item">
-            <img src={image.dataURL} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
-            <div className="image-item__btn-wrapper">
-                <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
+            <div className="App">
+                <ImageUploading 
+                    onChange={this.onChangeI}
+                    maxNumber={maxNumber}
+                    multiple
+                    maxFileSize={maxMbFileSize}
+                    acceptType={["jpg", "gif", "png"]}
+                    onError={this.onError}
+                >
+                    {({ imageList, onImageUpload, onImageRemoveAll , errors }) => (
+                    // write your building UI
+                        <div className="upload__image-wrapper">
+                            <div className="row">
+                                <div className="col-12 col-md-12 col-lg-12">
+                                    <button className="btn btn-danger" onClick={onImageUpload}>Agregar</button>&nbsp;
+                                    <button className="btn btn-secondary" onClick={onImageRemoveAll}>Borrar todas</button>
+                                </div>
+                            </div>
+                            <hr></hr>
+                            <div className="row">
+                                <div className="col-12 col-md-12 col-lg-12">
+                                    {errors.maxNumber && <span className="text-danger error_negrita">La cantidad de imagenes seleccionadas exede el limite.&nbsp;</span>}
+                                    {errors.acceptType && <span className="text-danger error_negrita">Solo pueden subir archivos con formato (.png o .jpg).&nbsp;</span>}
+                                    {errors.maxFileSize && <span className="text-danger error_negrita">El tamaño del archivo excede los 5 megabytes.&nbsp;</span>}
+                                    {errors.resolution && <span className="text-danger error_negrita">Selected file is not match your desired resolution.&nbsp;</span>}
+                                </div>
+                            </div>
+                            {imageList.map(image => (
+                                <div className="row">
+                                    <div className="col-12 col-md-12 col-lg-12">
+                                        <div key={image.key} className="image-item">
+                                            <img src={image.dataURL} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
+                                            <div className="image-item__btn-wrapper">
+                                                <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </ImageUploading>
             </div>
-          </div>
-        ))}
-      </div>
-    )}
-  </ImageUploading>
-</div>
-            // <div className="row justify-content-center">
-            //     <br/>
-            //     <br/>
-            //     <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            //         <div className="form-group">
-            //             <ImageUploading
-            //                 onChange={this.onChangeI}
-            //                 maxNumber={maxNumber}
-            //                 multiple
-            //                 maxFileSize={maxMbFileSize}
-            //                 acceptType={["jpg", "gif", "png"]}
-            //             >
-            //                 {({ imageList, onImageUpload, onImageRemoveAll }) => (
-            //                 // write your building UI
-            //                     <div>
-            //                         <div className="row">
-            //                             <div className="col-lg-12">
-            //                                 <button className="btn btn-danger" onClick={onImageUpload}>Agregar</button>
-            //                                 <button className="btn btn-secondary" onClick={onImageRemoveAll}>Borrar todas</button>
-            //                             </div>
-            //                         </div>
-                                    
-            //                         <div className="row">
-            //                             <div className="col-lg-12">
-            //                                 {imageList.map((image) => (
-            //                                     <div key={image.key}>
-            //                                         <img src={image.dataURL} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
-            //                                         {/* <button style={boton_carga_imagen} onClick={image.onUpdate}>Update</button> */}
-            //                                         <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
-            //                                     </div>
-            //                                 ))}
-            //                             </div>
-            //                         </div>
-            //                     </div>
-            //                 )}
-            //             </ImageUploading>
-            //         </div>
-            //     </div>
-            // </div>
         )
     }
 }
