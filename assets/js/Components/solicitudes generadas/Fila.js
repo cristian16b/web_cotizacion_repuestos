@@ -99,11 +99,10 @@ class Fila extends React.Component {
         .then(response => {
             let code = response.data.code;
             if(code == 200 && this.state.isMount == true){
-              this.setState({notificacionEnviada: true});
-              // alert('todo ok,  salida = ' + this.state.notificacionEnviada);        
+              this.setState({notificacionEnviada: true});    
             }
             else {
-              this.setState({errors: response.data.error });
+              this.mostrarErroresApi(response);
             }
             this.props.setIsLoading(false);
             this.setState({botonHabilitado: false});
@@ -113,6 +112,19 @@ class Fila extends React.Component {
           alert('Ocurrio un error al consultar al servidor, intente nuevamente');
         });
     }
+    event.preventDefault();
+  }
+
+  mostrarErroresApi = (response) => {
+    let mensajes = response.data;
+    let errors = {};
+    for (const prop in mensajes) {
+      // console.log(`obj.${prop} = ${mensajes[prop]}`);
+      errors[prop] = mensajes[prop];
+    }
+    this.setState({
+      errors: errors
+    });
   }
 
   handleChangeInput = e => {

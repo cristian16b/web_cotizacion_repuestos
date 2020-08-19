@@ -76,9 +76,18 @@ class CotizacionesController extends AbstractController
 
             $idSolicitud = $request->request->get('idSolicitud');
             $monto = $request->request->get('monto');
-            if(is_null($idSolicitud) || is_null($monto) || is_null($user)) {
+            $imagenes =  $request->request->get('imagenes');
+            $observaciones =  $request->request->get('observaciones');
+
+            
+
+            die;
+            if(is_null($idSolicitud) || is_null($monto) || is_null($user) || is_null($imagenes)) {
                 throw new \Exception('Something went wrong!');
             }
+
+
+
 
             $solicitud = $this->obtenerSolicitud($idSolicitud);
             $cotizacion = new Cotizacion();
