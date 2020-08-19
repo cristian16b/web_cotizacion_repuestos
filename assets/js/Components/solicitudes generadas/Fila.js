@@ -204,7 +204,7 @@ class Fila extends React.Component {
         </div>
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            <p><b>Se informara que la cotización vence el {this.props.fechaVencimiento}</b></p>
+            <p><b>Se informará que la cotización vence el {this.props.fechaVencimiento}</b></p>
           </div>
         </div>
         <>{this.renderObservaciones()}</>
@@ -229,7 +229,7 @@ class Fila extends React.Component {
     return(
                     <div className="row">
                       <div className="col-lg-12">
-                        <label forhtml="message">Observaciones (año de su vehículo u otros detalles que considere importantes)</label>
+                        <label forhtml="message">Observaciones (opcional)</label>
                         <textarea onChange={this.handleChange} type="text" id="observaciones" name="observaciones" rows="2" className="form-control md-textarea">
                         </textarea>
                         <span className="text-danger error_negrita">
