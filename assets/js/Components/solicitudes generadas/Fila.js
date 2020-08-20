@@ -265,7 +265,9 @@ class Fila extends React.Component {
                     <div className="row">
                       <div className="col-lg-12">
                         <label forhtml="message">Observaciones (opcional)</label>
-                        <textarea onChange={this.handleChange} type="text" id="observaciones" name="observaciones" rows="2" className="form-control md-textarea">
+                        <textarea
+                          placeholder="No esta permitido el envió de correos, teléfonos o direcciones web por este medio. "
+                          onChange={this.handleChangeInput} type="text" id="observaciones" name="observaciones" rows="2" className="form-control md-textarea">
                         </textarea>
                         <span className="text-danger error_negrita">
                           {this.state.errors["observaciones"]}
