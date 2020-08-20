@@ -19,6 +19,9 @@ use App\Entity\Solicitud;
 use App\Entity\Cotizacion;
 use App\Entity\EstadoCotizacion;
 use DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
 * @Route("/api/v1/cotizaciones")
@@ -121,6 +124,8 @@ class CotizacionesController extends AbstractController
             $entityManager->persist($cotizacion);
             $entityManager->flush();
 
+            // implementar funcion para enviar notificacion por correo
+
         } catch (Exception $ex) {
             $code = 500;
             $error = true;
@@ -143,54 +148,72 @@ class CotizacionesController extends AbstractController
 
     private function obtenerErrores($cotizacion,$validator) {
         $observaciones = $cotizacion->getObservacion();
+        $formErrors = [];
+
+        $mensajeErrorCorreo = "No pueden ingresarse correos en el campo de observación";
+        $mensajeErrorWeb = "No pueden ingresarse correos en el campo de observación";
+        $mensajeErrorTelefono = "No pueden ingresarse teléfonos en el campo de observación";
+        $mensajeErrorRedes = "No pueden ingresarse redes sociales en el campo de observación";
+        $mensajeErrorDomicilio = "No pueden ingresarse domicilios en el campo de observación";
+
         if($observaciones != "") {
             // debo investigar si tiene un correo 
             // o si aparece un arroba 
             // o un dominio (hotmail, outlook, gmail, yahoo, aol)
             // 
             if(preg_match("/@|arroba/", $observaciones)) {
-                die('falla porque hay un arroba');
-                return false;
+                $formErrors['observaciones'] = $mensajeErrorCorreo;
             }
 
             if(preg_match("/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*/", $observaciones, $matches)) {
-                die('falla porque hay un correo');
-                return false;
+                $formErrors['observaciones'] = $mensajeErrorCorreo;
             }
 
             if(preg_match("/hotmail|outlook|gmail|yahoo|aol/",$observaciones)) {
-                die('falla porque hay un dominio de correo');
-                return false;
+                $formErrors['observaciones'] = $mensajeErrorCorreo;
             }
-
 
             // verificar que no se mandan paginas web
             if(preg_match("/www|www.|.com|http|https/",$observaciones)) {
-                die('falla porque hay una web');
-                return false;
+                $formErrors['observaciones'] = $mensajeErrorWeb;
             }
 
             // verificiar que no tiene redes sociales
             if(preg_match("/face|facebook|insta|instagram/",$observaciones)) {
-                die('falla porque hay una red social');
-                return false;
+                $formErrors['observaciones'] = $mensajeErrorRedes;
             }
 
             // verificar que no se pasa direccion
             if(preg_match("/domicilio|dirección|encontranos en|buscanos en|dir es|dirección es|direccion es/",$observaciones)) {
-                die('falla porque hay un domicilio');
-                return false;
+                $formErrors['observaciones'] = $mensajeErrorDomicilio;
             }
 
             // verificar que no mande un telefono
             // ver casos posibles de detectar telefonos
-            if(preg_match("/face|facebook|insta|instagram/",$observaciones)) {
-                die('falla porque hay una red social');
-                return false;
-            }               
+            if(preg_match("/llamamos|celular/",$observaciones)) {
+                $formErrors['observaciones'] = $mensajeErrorTelefono;
+            } 
+            
+            if(preg_match("/llamamos|celular/",$observaciones)) {
+                $formErrors['observaciones'] = $mensajeErrorCorreo;
+            } 
+            
         }
 
-        die;
+        $recursos = $cotizacion->getRecursoCotizacions();
+        $recursoErrors = [];
+        foreach($recursos as $index => $recurso) {
+            $recursoError = $validator->validateProperty($recurso, 'pesoMega');
+            if(count($recursoError)>0) {
+                $recursoError[$index] =  $recursoError[0]->getMessage();
+            }
+        }
+
+        if(!empty($recursoErrors)) {
+            $formErrors['fotos'] = $recursoErrors;
+        }
+
+        return $formErrors;
     }
 
     private function obtenerSolicitud($id) {
