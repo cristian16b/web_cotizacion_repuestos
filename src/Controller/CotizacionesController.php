@@ -63,7 +63,7 @@ class CotizacionesController extends AbstractController
      * 
      * @SWG\Tag(name="EnviarCotizacion")
      */
-    public function enviarCotizacionAction(Request $request)
+    public function enviarCotizacionAction(Request $request,ValidatorInterface $validator)
     {
         $serializer = $this->container->get('jms_serializer');
         $repuestos = [];
@@ -74,79 +74,42 @@ class CotizacionesController extends AbstractController
             $error = false;
             $user = $this->getUser();
 
-            $idSolicitud = $request->request->get('idSolicitud');
-            $monto = $request->request->get('monto');
+            $idSolicitud = trim($request->request->get('idSolicitud'));
+            $monto = trim($request->request->get('monto'));
             $imagenes =  $request->request->get('imagenes');
-            $observaciones =  $request->request->get('observaciones');
+            $observaciones =  trim($request->request->get('observaciones'));
 
-            // pregunto si es no vacio
-            $observaciones = trim($observaciones);
-            if($observaciones != "") {
-                // debo investigar si tiene un correo 
-                // o si aparece un arroba 
-                // o un dominio (hotmail, outlook, gmail, yahoo, aol)
-                // 
-                if(preg_match("/@|arroba/", $observaciones)) {
-                    die('falla porque hay un arroba');
-                    return false;
-                }
-
-                if(preg_match("/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*/", $observaciones, $matches)) {
-                    die('falla porque hay un correo');
-                    return false;
-                }
-
-                if(preg_match("/hotmail|outlook|gmail|yahoo|aol/",$observaciones)) {
-                    die('falla porque hay un dominio de correo');
-                    return false;
-                }
-
-
-                // verificar que no se mandan paginas web
-                if(preg_match("/www|www.|.com|http|https/",$observaciones)) {
-                    die('falla porque hay una web');
-                    return false;
-                }
-
-                // verificiar que no tiene redes sociales
-                if(preg_match("/face|facebook|insta|instagram/",$observaciones)) {
-                    die('falla porque hay una red social');
-                    return false;
-                }
-
-                // verificar que no se pasa direccion
-                if(preg_match("/domicilio|dirección|encontranos en|buscanos en|dir es|dirección es|direccion es/",$observaciones)) {
-                    die('falla porque hay un domicilio');
-                    return false;
-                }
-
-                // verificar que no mande un telefono
-                // ver casos posibles de detectar telefonos
-                if(preg_match("/face|facebook|insta|instagram/",$observaciones)) {
-                    die('falla porque hay una red social');
-                    return false;
-                }               
-            }
-
-            die;
             if(is_null($idSolicitud) || is_null($monto) || is_null($user) || is_null($imagenes)) {
                 throw new \Exception('Something went wrong!');
             }
 
-
-
-
             $solicitud = $this->obtenerSolicitud($idSolicitud);
+
+            if(is_null($idSolicitud)) {
+                throw new \Exception('Something went wrong!');
+            }
+
             $cotizacion = new Cotizacion();
             $cotizacion->setMonto($monto);
             $cotizacion->setEstado($this->obtenerEstadoCotizacionEnviada());
             $cotizacion->setSolicitud($solicitud);
             $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
             $cotizacion->setOferente($user);
+
+            $formErrors = $this->obtenerErrores($cotizacion,$validator);
+
+            if($formErrors) {
+                $response = [
+                    'code' => 0,
+                    'error' => $formErrors,
+                ];
+                return new JsonResponse($response);
+            }
     
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cotizacion);
             $entityManager->flush();
+            
         } catch (Exception $ex) {
             $code = 500;
             $error = true;
@@ -167,7 +130,57 @@ class CotizacionesController extends AbstractController
         );
     }
 
-    // private function obtenerErrores()
+    private function obtenerErrores($cotizacion,$validator) {
+        $observaciones = $cotizacion->getObservacion();
+        if($observaciones != "") {
+            // debo investigar si tiene un correo 
+            // o si aparece un arroba 
+            // o un dominio (hotmail, outlook, gmail, yahoo, aol)
+            // 
+            if(preg_match("/@|arroba/", $observaciones)) {
+                die('falla porque hay un arroba');
+                return false;
+            }
+
+            if(preg_match("/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*/", $observaciones, $matches)) {
+                die('falla porque hay un correo');
+                return false;
+            }
+
+            if(preg_match("/hotmail|outlook|gmail|yahoo|aol/",$observaciones)) {
+                die('falla porque hay un dominio de correo');
+                return false;
+            }
+
+
+            // verificar que no se mandan paginas web
+            if(preg_match("/www|www.|.com|http|https/",$observaciones)) {
+                die('falla porque hay una web');
+                return false;
+            }
+
+            // verificiar que no tiene redes sociales
+            if(preg_match("/face|facebook|insta|instagram/",$observaciones)) {
+                die('falla porque hay una red social');
+                return false;
+            }
+
+            // verificar que no se pasa direccion
+            if(preg_match("/domicilio|dirección|encontranos en|buscanos en|dir es|dirección es|direccion es/",$observaciones)) {
+                die('falla porque hay un domicilio');
+                return false;
+            }
+
+            // verificar que no mande un telefono
+            // ver casos posibles de detectar telefonos
+            if(preg_match("/face|facebook|insta|instagram/",$observaciones)) {
+                die('falla porque hay una red social');
+                return false;
+            }               
+        }
+
+        die;
+    }
 
     private function obtenerSolicitud($id) {
         return $this->getDoctrine()->getManager()->getRepository(Solicitud::class)->find($id);
