@@ -96,6 +96,17 @@ class CotizacionesController extends AbstractController
             $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
             $cotizacion->setOferente($user);
 
+            // $recurso->set
+            $errorFiles = '';
+            foreach($imagenes as $index => $imagen) {
+                $recurso = new RecursoCotizacion();
+                $imagenBase64 = $imagen['dataURL'];
+                $recurso->setBase64($imagenBase64);
+                $recurso->obtenerNombreLogico($index,$repuesto->getName());
+                $recurso->setDirectorio($this->getParameter('kernel.project_dir'));
+                $cotizacion->addRecursoCotizacion($recurso);
+            }
+
             $formErrors = $this->obtenerErrores($cotizacion,$validator);
 
             if($formErrors) {
@@ -109,7 +120,7 @@ class CotizacionesController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cotizacion);
             $entityManager->flush();
-            
+
         } catch (Exception $ex) {
             $code = 500;
             $error = true;
