@@ -113,16 +113,17 @@ class Fila extends React.Component {
         .catch(e => {
           this.props.setIsLoading(false);
           alert('Ocurrio un error al consultar al servidor, intente nuevamente');
+          this.setState({botonHabilitado: false});
         });
     }
     event.preventDefault();
   }
 
   mostrarErroresApi = (response) => {
-    let mensajes = response.data;
+    let mensajes = response.data.error;
     let errors = {};
     for (const prop in mensajes) {
-      // console.log(`obj.${prop} = ${mensajes[prop]}`);
+      console.log(`obj.${prop} = ${mensajes[prop]}`);
       errors[prop] = mensajes[prop];
     }
     this.setState({

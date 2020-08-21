@@ -155,7 +155,7 @@ class CotizacionesController extends AbstractController
         $formErrors = [];
 
         $mensajeErrorCorreo = "No pueden ingresarse correos en el campo de observación";
-        $mensajeErrorWeb = "No pueden ingresarse correos en el campo de observación";
+        $mensajeErrorWeb = "No pueden ingresarse webs en el campo de observación";
         $mensajeErrorTelefono = "No pueden ingresarse teléfonos en el campo de observación";
         $mensajeErrorRedes = "No pueden ingresarse redes sociales en el campo de observación";
         $mensajeErrorDomicilio = "No pueden ingresarse domicilios en el campo de observación";
@@ -203,8 +203,8 @@ class CotizacionesController extends AbstractController
             } 
         }
 
-        if(preg_match("/^\d+(.\d{1,2})?$/",$monto)) {
-            $formErrors['monto'] = "Debe ingresar un monto. Sin usar separador para los miles.";
+        if(!preg_match("/^\d+(.\d{1,2})?$/",$monto)) {
+            $formErrors['monto'] = "Debe ingresar un monto. Sin usar separador para los miles y opcionalmente hasta dos decimales, Ejemplo 1200,50.";
         } 
 
         $recursos = $cotizacion->getRecursoCotizacions();
