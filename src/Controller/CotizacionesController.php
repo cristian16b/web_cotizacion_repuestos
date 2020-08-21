@@ -151,6 +151,7 @@ class CotizacionesController extends AbstractController
 
     private function obtenerErrores($cotizacion,$validator) {
         $observaciones = $cotizacion->getObservacion();
+        $monto = $cotizacion->getMonto();
         $formErrors = [];
 
         $mensajeErrorCorreo = "No pueden ingresarse correos en el campo de observación";
@@ -200,8 +201,11 @@ class CotizacionesController extends AbstractController
             if(preg_match("/[0-9]{7,}/",$observaciones)) {
                 $formErrors['observaciones'] = $mensajeErrorTelefono;
             } 
-            
         }
+
+        if(preg_match("/^\d+(.\d{1,2})?$/",$monto)) {
+            $formErrors['monto'] = "Debe ingresar un monto. Sin usar separador para los miles.";
+        } 
 
         $recursos = $cotizacion->getRecursoCotizacions();
         $recursoErrors = [];

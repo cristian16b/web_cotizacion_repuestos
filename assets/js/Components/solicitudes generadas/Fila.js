@@ -83,6 +83,9 @@ class Fila extends React.Component {
     if(this.validarFormulario())
     {
       this.setState({errors: ''});
+      // modificico si lo hubiera una ',' por '.' para que sea validado/guardado
+      let monto = this.state.monto;
+      this.setState({monto: monto.replace(",", ".")})
       const payload={
         "idSolicitud":id,
         "monto":this.state.monto,
@@ -224,12 +227,12 @@ class Fila extends React.Component {
           </div>
           <div className="col-10 col-sm-6 col-md-6 col-lg-6">
             <div className="form-group">
-              <label htmlFor="monto">Monto en pesos</label>
+              <label htmlFor="monto">Monto en pesos (ingresarlo sin seperador de miles)</label>
               <div className="input-group">
                 <span className="input-group-addon"><i className="fa fa-lock"></i></span>
-                  <input type="number" min="1" className="form-control" name="monto" 
+                  <input type="number" min="1" step="0.1" className="form-control" name="monto" 
                           defaultValue = {this.state.monto} onChange={this.handleChangeInput}
-                          placeholder="Ej: 200" />	
+                          placeholder="Ej: 2100,50" />	
               </div>
               <span className="text-danger error_negrita">
                 {this.state.errors["monto"]}
