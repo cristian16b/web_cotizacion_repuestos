@@ -88,11 +88,12 @@ class CotizacionesController extends AbstractController
             }
 
             $solicitud = $this->obtenerSolicitud($idSolicitud);
-            $repuesto = $solicitud->getRepuesto();
 
-            if(is_null($idSolicitud)) {
+            if(is_null($solicitud)) {
                 throw new \Exception('Something went wrong!');
             }
+            $repuesto = $solicitud->getRepuesto();
+            $user = $solicitud->getSolicitante();
 
             $cotizacion = new Cotizacion();
             $cotizacion->setMonto($monto);
@@ -127,7 +128,7 @@ class CotizacionesController extends AbstractController
             $entityManager->persist($cotizacion);
             $entityManager->flush();
 
-            // implementar funcion para enviar notificacion por correo
+            // $this->enviarCorreoNotificacion($user,$repuesto,$cotizacion);
 
         } catch (Exception $ex) {
             $code = 500;
@@ -147,6 +148,25 @@ class CotizacionesController extends AbstractController
                 "json"
             )
         );
+    }
+
+    private function enviarCorreoNotificacion($user,$repuesto,$cotizacion) {
+
+        $email = (new TemplatedEmail())
+            ->from('info@eisenparts.com')
+            ->to(new Address($usuario->getUsername()))
+            ->subject('EisenPart - Notificación de cotización')
+        
+            // path of the Twig template to render
+            ->htmlTemplate('cotizacion_email/cotizacion_email.html.twig')
+        
+            // pass variables (name => value) to the template
+            ->context([
+                'nombreRepuesto' => $repuesto->getName(),
+                'monto' => $cotizacion->getMonto(),
+            ])
+        ;
+        $this->mailer->send($email);
     }
 
     private function obtenerErrores($cotizacion,$validator) {
