@@ -18,6 +18,7 @@ use JMS\Serializer\SerializerInterface;
 use App\Entity\Solicitud;
 use App\Entity\Cotizacion;
 use App\Entity\EstadoCotizacion;
+use App\Entity\RecursoCotizacion;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -87,6 +88,7 @@ class CotizacionesController extends AbstractController
             }
 
             $solicitud = $this->obtenerSolicitud($idSolicitud);
+            $repuesto = $solicitud->getRepuesto();
 
             if(is_null($idSolicitud)) {
                 throw new \Exception('Something went wrong!');
@@ -98,6 +100,7 @@ class CotizacionesController extends AbstractController
             $cotizacion->setSolicitud($solicitud);
             $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
             $cotizacion->setOferente($user);
+            $cotizacion->setObservacion($observaciones);
 
             // $recurso->set
             $errorFiles = '';
@@ -184,7 +187,7 @@ class CotizacionesController extends AbstractController
             }
 
             // verificar que no se pasa direccion
-            if(preg_match("/domicilio|dirección|encontranos en|buscanos en|dir es|dirección es|direccion es/",$observaciones)) {
+            if(preg_match("/domicilio|dirección|encontranos en|dir es|dirección es|direccion es/",$observaciones)) {
                 $formErrors['observaciones'] = $mensajeErrorDomicilio;
             }
 
@@ -194,8 +197,8 @@ class CotizacionesController extends AbstractController
                 $formErrors['observaciones'] = $mensajeErrorTelefono;
             } 
             
-            if(preg_match("/llamamos|celular/",$observaciones)) {
-                $formErrors['observaciones'] = $mensajeErrorCorreo;
+            if(preg_match("/[0-9]{7,}/",$observaciones)) {
+                $formErrors['observaciones'] = $mensajeErrorTelefono;
             } 
             
         }

@@ -10,6 +10,8 @@
 ###< symfony/framework-bundle ###
 
 /fotosSolicitudes/*
+/constancias/*
+/fotosCotizaciones/*
 /constancia DNI/*
 /constancia INSCRIPCIÒN AFIP/*
 

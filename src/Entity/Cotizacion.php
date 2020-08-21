@@ -6,10 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CotizacionRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  * @ORM\Table(indexes={
  *   @ORM\Index(name="estado_id", columns={"estado_id"}),
  *   @ORM\Index(name="oferente_id", columns={"oferente_id"}),
@@ -22,11 +26,13 @@ class Cotizacion
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="date")
+     * @Expose
      */
     private $fechaAlta;
 
@@ -37,6 +43,7 @@ class Cotizacion
 
     /**
      * @ORM\Column(type="float")
+     * @Expose
      */
     private $monto;
 
@@ -49,6 +56,7 @@ class Cotizacion
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Solicitud", inversedBy="cotizaciones")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose
      */
     private $solicitud;
 
@@ -60,6 +68,7 @@ class Cotizacion
 
     /**
      * @ORM\Column(type="date")
+     * @Expose
      */
     private $fechaLimiteValidez;
 
@@ -69,7 +78,9 @@ class Cotizacion
     private $observacion;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RecursoCotizacion", mappedBy="cotizacion")
+     * @ORM\OneToMany(targetEntity="App\Entity\RecursoCotizacion", mappedBy="cotizacion", orphanRemoval=true, cascade={"persist", "remove"})
+     * @Assert\NotBlank(message="Debe cargar al menos una imagen y a lo sumo 4")
+     * @Expose
      */
     private $recursoCotizacions;
 
