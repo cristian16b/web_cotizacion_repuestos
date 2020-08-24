@@ -34,6 +34,7 @@ class Fila extends React.Component {
 
   armarPrevisualizacionImagen = (recurso,u) => {
     const url = u + `?fileName=${recurso.nombre_fisico}`;
+    console.log(url);
     return (
             <div className="col-12 col-sm-12 col-md-3 col-lg-3">
                     <ModalImage
@@ -182,8 +183,10 @@ class Fila extends React.Component {
               }
              </div>
              <div className="row">
-                <div className="col-12 col-sm-12 col-md-8 col-lg-8">
-                  <p>....</p>
+                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <b>Importante</b>
+                  <p>El único medio de pago habilitado actualmente es con MercadoPago.
+Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación. Una vez completada, le informaremos los datos de contacto (teléfono y domicilio) del vendedor para que pueda retirar su repuesto.</p>
                 </div>
               </div>
              <div className="row">
@@ -211,7 +214,6 @@ class Fila extends React.Component {
       return (
         <p>El vendedor no ha adjuntado imagenes para este presupuesto.</p>
       );
-    console.log(elemento);
     return (
       <div className="row justify-content-center"> 
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">

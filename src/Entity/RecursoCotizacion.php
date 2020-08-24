@@ -34,6 +34,7 @@ class RecursoCotizacion
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $nombreFisico;
 
