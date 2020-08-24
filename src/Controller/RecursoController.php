@@ -49,6 +49,32 @@ class RecursoController extends AbstractController
         return $response;
     }
 
+    /**
+    * @Route("/get/foto/cotizacion", name="get_recurso_foto_cotizacion")
+    */
+    public function getRecursoCotizacion(Request $request) {
+
+        $nombreArchivo = $request->query->get('fileName');
+
+        if(is_null($nombreArchivo)) {
+            throw new \Exception('Something went wrong!');
+        }
+
+        $extension = substr($nombreArchivo,strripos($nombreArchivo, '.'));
+
+        $filepath = $this->getParameter('kernel.project_dir') . '/fotosCotizaciones/' . $nombreArchivo;
+        $response = new Response();
+        
+        if(file_exists($filepath)){
+            $response->headers->set('Content-Type', 'image/' . $extension);
+            $response->setContent(file_get_contents($filepath));
+        }
+        else {
+            throw new \Exception('Something went wrong!');
+        }
+        return $response;
+    }
+
    /**
     * @Route("/get/archivo/{nombreArchivo}", name="get_recurso_archivo")
     */
