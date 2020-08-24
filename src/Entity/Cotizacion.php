@@ -74,6 +74,7 @@ class Cotizacion
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Expose
      */
     private $observacion;
 

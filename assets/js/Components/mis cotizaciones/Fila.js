@@ -160,15 +160,15 @@ class Fila extends React.Component {
             <hr></hr>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                <b>Monto informado por el vendedor: $ {elemento.monto}</b>
+                <b>Monto informado por el vendedor: $ {elemento.monto}</b> <br></br>
                 <i>Fecha limite del presupuesto: {this.formatearFecha(elemento.fecha_limite_validez)}</i>
               </div>        
             </div>
             <div className="row">
-              <div className="col-12 col-sm-12 col-md-8 col-lg-8">
+              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                   <p>Observaciones:</p>
                     {
-                      elemento.observacion == [] 
+                      elemento.observacion == ""
                       ?
                       <p>No se informo ninguna observación</p>
                       :
@@ -209,15 +209,18 @@ class Fila extends React.Component {
   renderImagenesAdjuntadasCotizacion = (elemento) => {
     if(elemento == [])
       return (
-        <p>El vendedor no ha adjuntado cotizaciones</p>
+        <p>El vendedor no ha adjuntado imagenes para este presupuesto.</p>
       );
+    console.log(elemento);
     return (
       <div className="row justify-content-center"> 
-        {
-            elemento.map(e => {
-                return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_COTIZACION)
-            })
-        }
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          {
+              elemento.map(e => {
+                  return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_COTIZACION)
+              })
+          }
+        </div>
         <p>Haga click en las mismas para previsualizar.</p>
         <hr></hr>
       </div>
