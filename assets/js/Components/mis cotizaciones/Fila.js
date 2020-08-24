@@ -156,7 +156,7 @@ class Fila extends React.Component {
     return (
       cotizaciones.map(elemento => {
         return ( 
-          <div className="row">
+          <>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                 <b>Monto informado por el vendedor: $ {elemento.monto}</b>
@@ -185,7 +185,7 @@ class Fila extends React.Component {
                 </div>
               </div>
              <div className="row">
-                <div className="col-12 col-sm-12 col-md-8 col-lg-8" align="right">
+                <div className="col-12 col-sm-12 col-md-12 col-lg-12" align="right">
                   <button type="button" 
                     onClick={() => this.redirigirMercadoPago(elemento.id)} 
                     className="btn btn-primary">
@@ -193,7 +193,7 @@ class Fila extends React.Component {
                   </button>             
                 </div>
              </div>
-          </div>
+          </>
           )
         }
       ) 
