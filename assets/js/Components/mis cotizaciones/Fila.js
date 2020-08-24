@@ -163,20 +163,21 @@ class Fila extends React.Component {
               </div>        
             </div>
             <div className="row">
-              <p>Observaciones:</p>
-              {
-                elemento.observacion == [] 
-                ?
-                <p>No se informo ninguna observación</p>
-                :
-                <p>elemento.observacion</p>
-              }
+              <div className="col-12 col-sm-12 col-md-8 col-lg-8">
+                  <p>Observaciones:</p>
+                    {
+                      elemento.observacion == [] 
+                      ?
+                      <p>No se informo ninguna observación</p>
+                      :
+                      <p>{elemento.observacion}</p>
+                    }
+              </div>
             </div>
             <div className="row justify-content-center"> 
               {
                 this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
               }
-              <p>Haga click en las mismas para previsualizar.</p>
               <hr></hr>
              </div>
              <div className="row">
