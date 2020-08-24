@@ -157,9 +157,11 @@ class Fila extends React.Component {
       cotizaciones.map(elemento => {
         return ( 
           <>
+            <hr></hr>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                 <b>Monto informado por el vendedor: $ {elemento.monto}</b>
+                <i>Fecha limite del presupuesto: {this.formatearFecha(elemento.fecha_limite_validez)}</i>
               </div>        
             </div>
             <div className="row">
@@ -178,7 +180,6 @@ class Fila extends React.Component {
               {
                 this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
               }
-              <hr></hr>
              </div>
              <div className="row">
                 <div className="col-12 col-sm-12 col-md-8 col-lg-8">
