@@ -113,12 +113,12 @@ class Fila extends React.Component {
                                       </button>              
                                     </div>    
                                   </div>
-                                  <hr></hr> 
                                 */}
+                                <hr></hr> 
                                 {
-                                  elemento.cotizaciones == [] 
+                                  elemento.cotizaciones.length == 0 
                                   ?
-                                  <b>No se encontraron cotizaciones </b>
+                                  <b>No se encontraron cotizaciones para este pedido</b>
                                   :
                                   <>
                                     {this.renderCotizacionesRecibidas(elemento.cotizaciones)}
@@ -183,7 +183,7 @@ class Fila extends React.Component {
              </div>
              <div className="row">
                 <div className="col-12 col-sm-12 col-md-8 col-lg-8">
-                  <p></p>
+                  <p>....</p>
                 </div>
               </div>
              <div className="row">
