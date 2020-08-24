@@ -52,9 +52,12 @@ class SolicitudRepository extends ServiceEntityRepository
                 WHERE s NOT IN (
                     SELECT ss FROM App\Entity\Solicitud ss
                     INNER JOIN ss.cotizaciones c
+                    INNER JOIN c.recursoCotizacions rc
                     WHERE ss.fechaBaja IS NULL AND 
                             c.fechaBaja IS NULL AND 
-                            c.oferente = :usuario
+                            c.oferente = :usuario AND
+                            rc.fechaBaja IS NULL
+                    ORDER BY c.monto ASC
                 )
         ";
 

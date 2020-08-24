@@ -102,6 +102,7 @@ class Fila extends React.Component {
                                 title="Ver cotizaciones"  
                                 className="btn btn-warning"                       
                               >
+                              {/*
                                   <div className="row" align="center">
                                     <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                                       <button type="button" 
@@ -112,7 +113,8 @@ class Fila extends React.Component {
                                       </button>              
                                     </div>    
                                   </div>
-                                <hr></hr>
+                                  <hr></hr> 
+                                */}
                                 {
                                   elemento.cotizaciones == [] 
                                   ?
@@ -155,30 +157,69 @@ class Fila extends React.Component {
       cotizaciones.map(elemento => {
         return ( 
           <div className="row">
-            <div className="col-3 col-sm-3 col-md-3 col-lg-3">
-              <b>$ {elemento.monto}</b>
-            </div>        
-            <div className="col-5 col-sm-5 col-md-5 col-lg-5">
-              <button type="button" 
-                disabled = {this.state.botonHabilitado}
-                // onClick={() => this.cancelarSolicitud(elemento.id)} 
-                className="btn btn-primary">
-                  Comprar con Mercado Pago
-              </button>             
+            <div className="row">
+              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                <b>Monto informado por el vendedor: $ {elemento.monto}</b>
+              </div>        
             </div>
-            {/* <div className="col-4 col-sm-4 col-md-4 col-lg-4">
-              <button type="button" 
-                disabled = {this.state.botonHabilitado}
-                // onClick={() => this.cancelarSolicitud(elemento.id)} 
-                class="btn btn-danger">
-                  Rechazar
-              </button>             
-            </div> */}
+            <div className="row">
+              <p>Observaciones:</p>
+              {
+                elemento.observacion == [] 
+                ?
+                <p>No se informo ninguna observación</p>
+                :
+                <p>elemento.observacion</p>
+              }
+            </div>
+            <div className="row justify-content-center"> 
+              {
+                this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
+              }
+              <p>Haga click en las mismas para previsualizar.</p>
+              <hr></hr>
+             </div>
+             <div className="row">
+                <div className="col-12 col-sm-12 col-md-8 col-lg-8">
+                  <p></p>
+                </div>
+              </div>
+             <div className="row">
+                <div className="col-12 col-sm-12 col-md-8 col-lg-8" align="right">
+                  <button type="button" 
+                    onClick={() => this.redirigirMercadoPago(elemento.id)} 
+                    className="btn btn-primary">
+                      Comprar con Mercado Pago
+                  </button>             
+                </div>
+             </div>
           </div>
           )
         }
       ) 
     )
+  }
+
+  redirigirMercadoPago = (id) => {
+    alert('en construccion!');
+  }
+
+  renderImagenesAdjuntadasCotizacion = (elemento) => {
+    if(elemento == [])
+      return (
+        <p>El vendedor no ha adjuntado cotizaciones</p>
+      );
+    return (
+      <div className="row justify-content-center"> 
+        {
+            elemento.map(e => {
+                return this.armarPrevisualizacionImagen(e)
+            })
+        }
+        <p>Haga click en las mismas para previsualizar.</p>
+        <hr></hr>
+      </div>
+    );    
   }
 
   cancelarSolicitud = async(id) => {
@@ -213,36 +254,36 @@ class Fila extends React.Component {
     }
   } 
 
-  cancelarSolicitud = async(id) => {
+  // cancelarSolicitud = async(id) => {
 
-    const config = {
-      headers: { Authorization: `Bearer ${this.props.token}` }
-    };
-    if(id == "") {
-      alert('fallo');
-      return;
-    }
-    try 
-    {
-      // Load async data from an inexistent endpoint.
-      let url = API_LISTAR_MIS_COTIZACIONES + `${id}`;
-      let response = await axios.get(url,config);
+  //   const config = {
+  //     headers: { Authorization: `Bearer ${this.props.token}` }
+  //   };
+  //   if(id == "") {
+  //     alert('fallo');
+  //     return;
+  //   }
+  //   try 
+  //   {
+  //     // Load async data from an inexistent endpoint.
+  //     let url = API_LISTAR_MIS_COTIZACIONES + `${id}`;
+  //     let response = await axios.get(url,config);
 
-      this.setState({isLoading: false});
-      if(response.data.code == 200 && this.state.isMount == true) {
-        // cargo las cotizaciones que se encontraron
-        this.setState({misCotizaciones: response.data.data});
-      }
-    } 
-    catch (e) {
-      this.setState({botonHabilitado: false});
-      console.log(`😱 Axios request failed: ${e}`);
-      // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
-      this.setState({
-        isLogin : false
-      });
-    }
-  } 
+  //     this.setState({isLoading: false});
+  //     if(response.data.code == 200 && this.state.isMount == true) {
+  //       // cargo las cotizaciones que se encontraron
+  //       this.setState({misCotizaciones: response.data.data});
+  //     }
+  //   } 
+  //   catch (e) {
+  //     this.setState({botonHabilitado: false});
+  //     console.log(`😱 Axios request failed: ${e}`);
+  //     // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+  //     this.setState({
+  //       isLogin : false
+  //     });
+  //   }
+  // } 
 
   render() {
     return (
