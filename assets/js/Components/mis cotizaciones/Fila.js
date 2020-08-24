@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
-import {API_OBTENER_FOTO_REPUESTO, API_LISTAR_MIS_COTIZACIONES, API_CANCELAR_SOLICITUD} from '../../Constantes/constantes';
+import {API_OBTENER_FOTO_REPUESTO, API_OBTENER_FOTO_COTIZACION, API_CANCELAR_SOLICITUD} from '../../Constantes/constantes';
 import axios from 'axios';
 
 class Fila extends React.Component {
@@ -32,8 +32,8 @@ class Fila extends React.Component {
     return fecha.substr(0,10).split('-').reverse().join('/');
   }
 
-  armarPrevisualizacionImagen = (recurso) => {
-    const url = API_OBTENER_FOTO_REPUESTO + `?fileName=${recurso.nombre_fisico}`;
+  armarPrevisualizacionImagen = (recurso,u) => {
+    const url = u + `?fileName=${recurso.nombre_fisico}`;
     return (
             <div className="col-12 col-sm-12 col-md-3 col-lg-3">
                     <ModalImage
@@ -86,7 +86,7 @@ class Fila extends React.Component {
                               <div className="row justify-content-center"> 
                               {
                                 recursos.map(e=>{
-                                  return this.armarPrevisualizacionImagen(e)
+                                  return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_REPUESTO)
                                 })
                               }
                               </div>
@@ -213,7 +213,7 @@ class Fila extends React.Component {
       <div className="row justify-content-center"> 
         {
             elemento.map(e => {
-                return this.armarPrevisualizacionImagen(e)
+                return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_COTIZACION)
             })
         }
         <p>Haga click en las mismas para previsualizar.</p>
