@@ -34,7 +34,6 @@ class Fila extends React.Component {
 
   armarPrevisualizacionImagen = (recurso,u) => {
     const url = u + `?fileName=${recurso.nombre_fisico}`;
-    console.log(url);
     return (
             <div className="col-12 col-sm-12 col-md-3 col-lg-3">
                     <ModalImage
@@ -171,9 +170,9 @@ class Fila extends React.Component {
                     {
                       elemento.observacion == ""
                       ?
-                      <p>No se informo ninguna observación</p>
+                      <>-</>
                       :
-                      <p>{elemento.observacion}</p>
+                      <>{elemento.observacion}</>
                     }
               </div>
             </div>
@@ -185,8 +184,13 @@ class Fila extends React.Component {
              <div className="row">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                   <b>Importante</b>
-                  <p>El único medio de pago habilitado actualmente es con MercadoPago.
-Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación. Una vez completada, le informaremos los datos de contacto (teléfono y domicilio) del vendedor para que pueda retirar su repuesto.</p>
+                  <p>
+                    El único medio de pago habilitado actualmente es con MercadoPago.
+                    Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación.
+                  </p> 
+                  <p>
+                    Una vez completada, le informaremos los datos de contacto (teléfono y domicilio) del vendedor para que pueda retirar su repuesto.
+                  </p>
                 </div>
               </div>
              <div className="row">
@@ -212,7 +216,11 @@ Para adquirir el repuesto, sera dirigido a mercado pago para completar la operac
   renderImagenesAdjuntadasCotizacion = (elemento) => {
     if(elemento == [])
       return (
-        <p>El vendedor no ha adjuntado imagenes para este presupuesto.</p>
+        <div className="row justify-content-center"> 
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p>El vendedor no ha adjuntado imagenes para este presupuesto.</p>
+          </div>
+        </div>
       );
     return (
       <div className="row justify-content-center"> 
@@ -223,7 +231,6 @@ Para adquirir el repuesto, sera dirigido a mercado pago para completar la operac
               })
           }
         </div>
-        <p>Haga click en las mismas para previsualizar.</p>
         <hr></hr>
       </div>
     );    
