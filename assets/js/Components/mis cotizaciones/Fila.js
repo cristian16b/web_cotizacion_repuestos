@@ -166,24 +166,25 @@ class Fila extends React.Component {
             </div>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                  <p>Observaciones:</p>
+                  <p>Observaciones:&nbsp;
                     {
-                      elemento.observacion == ""
+                      elemento.observacion == undefined
                       ?
                       <>-</>
                       :
                       <>{elemento.observacion}</>
                     }
+                  </p>
               </div>
             </div>
-            <div className="row justify-content-center"> 
               {
                 this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
               }
-             </div>
              <div className="row">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                  <b>Importante</b>
+                  <br/>
+                    <b>Importante</b>
+                  <br/>
                   <p>
                     El único medio de pago habilitado actualmente es con MercadoPago.
                     Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación.
@@ -214,16 +215,16 @@ class Fila extends React.Component {
   }
 
   renderImagenesAdjuntadasCotizacion = (elemento) => {
-    if(elemento == [])
+    if(elemento.length == 0)
       return (
-        <div className="row justify-content-center"> 
+        <div className="row"> 
           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            <p>El vendedor no ha adjuntado imagenes para este presupuesto.</p>
+            <i>El vendedor no ha adjuntado imagenes para este presupuesto.</i>
           </div>
         </div>
       );
     return (
-      <div className="row justify-content-center"> 
+      <div className="row"> 
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
           {
               elemento.map(e => {
