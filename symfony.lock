@@ -185,6 +185,9 @@
     "limenius/react-renderer": {
         "version": "v5.0.2"
     },
+    "mercadopago/dx-php": {
+        "version": "2.1.0"
+    },
     "monolog/monolog": {
         "version": "2.0.2"
     },
