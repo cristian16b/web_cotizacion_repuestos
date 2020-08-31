@@ -205,12 +205,12 @@ class Fila extends React.Component {
                   */}
                   
                     <form action="/mercadoPago/pago" method="POST">
-                      <button type="button" 
+                      <a type="button" 
                         href={API_MERCADO_PAGO_MOSTRAR_BOTON_PAGO}
                         onClick={() => this.redirigirMercadoPago(elemento.id)} 
                         className="btn btn-primary">
                           Comprar con Mercado Pago
-                      </button>     
+                      </a>     
                       <script
                         src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
                         data-preference-id={elemento.id}>

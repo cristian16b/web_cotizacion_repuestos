@@ -28,12 +28,17 @@ use JMS\Serializer\SerializerInterface;
 use DateTime;
 
 /**
- * @Route("/mercadoPago", name="mercadopago")
+ * @Route("/api/v1/mercadoPago", name="mercadopago")
 */
 class MercadoPagoController extends AbstractController
 {
     private $accessTokenPrueba = "TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015";
     private $publickeyPrueba = "TEST-475bb8d5-e6b2-4798-a5d3-367310196faf";
+
+    public static function getSubscribedServices() 
+    {
+        return array_merge(parent::getSubscribedServices(), [ 'jms_serializer' => '?'.SerializerInterface::class, ]); 
+    }
 
     /**
      * @Route("/pagar", name="_pagar")
