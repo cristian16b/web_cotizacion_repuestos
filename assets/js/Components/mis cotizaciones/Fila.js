@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
 import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
-import {API_OBTENER_FOTO_REPUESTO, API_OBTENER_FOTO_COTIZACION, API_CANCELAR_SOLICITUD} from '../../Constantes/constantes';
+import {API_OBTENER_FOTO_REPUESTO, API_OBTENER_FOTO_COTIZACION, API_CANCELAR_SOLICITUD,API_MERCADO_PAGO_MOSTRAR_BOTON_PAGO} from '../../Constantes/constantes';
 import axios from 'axios';
 
 class Fila extends React.Component {
@@ -196,11 +196,26 @@ class Fila extends React.Component {
               </div>
              <div className="row">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-12" align="right">
+                  {/* 
                   <button type="button" 
                     onClick={() => this.redirigirMercadoPago(elemento.id)} 
                     className="btn btn-primary">
                       Comprar con Mercado Pago
-                  </button>             
+                  </button>              
+                  */}
+                  
+                    <form action="/mercadoPago/pago" method="POST">
+                      <button type="button" 
+                        href={API_MERCADO_PAGO_MOSTRAR_BOTON_PAGO}
+                        onClick={() => this.redirigirMercadoPago(elemento.id)} 
+                        className="btn btn-primary">
+                          Comprar con Mercado Pago
+                      </button>     
+                      <script
+                        src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                        data-preference-id={elemento.id}>
+                      </script>
+                    </form> 
                 </div>
              </div>
           </>
@@ -210,9 +225,37 @@ class Fila extends React.Component {
     )
   }
 
-  redirigirMercadoPago = (id) => {
-    alert('en construccion!');
-  }
+  // redirigirMercadoPago = async(id) => {
+
+  //   const config = {
+  //     headers: { Authorization: `Bearer ${this.props.token}` }
+  //   };
+  //   if(id == "") {
+  //     alert('fallo');
+  //     return;
+  //   }
+  //   try 
+  //   {
+  //     this.setState({botonHabilitado: true});
+  //     // Load async data from an inexistent endpoint.
+  //     let url = API_MERCADO_PAGO_REGISTRAR_PAGO + `${id}`;
+  //     let response = await axios.get(url,config);
+
+  //     this.setState({isLoading: false});
+  //     if(response.data.code == 200 && this.state.isMount == true) {
+  //       // this.props.reiniciar();
+  //     }
+  //     this.setState({botonHabilitado: false});
+  //   } 
+  //   catch (e) {
+  //     this.setState({botonHabilitado: false});
+  //     console.log(`😱 Axios request failed: ${e}`);
+  //     // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
+  //     this.setState({
+  //       isLogin : false
+  //     });
+  //   }
+  // }
 
   renderImagenesAdjuntadasCotizacion = (elemento) => {
     if(elemento.length == 0)
