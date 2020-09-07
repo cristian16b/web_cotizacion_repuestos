@@ -26,6 +26,7 @@ use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
 use DateTime;
+use MercadoPago;
 
 /**
  * @Route("/api/v1/mercadoPago", name="mercadopago")
@@ -81,21 +82,22 @@ class MercadoPagoController extends AbstractController
                 throw new \Exception('Something went wrong!');
             }
 
-            require_once 'vendor/autoload.php'; // You have to require the library from your Composer vendor folder
-
             // Agrega credenciales
-            MercadoPago\SDK::setAccessToken($this->$accessTokenPrueba);
-    
+            MercadoPago\SDK::setAccessToken($this->accessTokenPrueba);
+
             // Crea un objeto de preferencia
             $preference = new MercadoPago\Preference();
-    
+        
             // Crea un ítem en la preferencia
             $item = new MercadoPago\Item();
             $item->title = 'Mi producto';
+            $item->description = 'Descripción de Mi producto';
             $item->quantity = 1;
-            $item->unit_price = 75.56;
-            $preference->items = array($item);
+            $item->unit_price = 75;
+            $preference->items = array($item);   
             $preference->save();
+        
+
             // $idMarca = $request->request->get('idMarca');
             // $idModelo = $request->request->get('idModelo');
             // $idRepuesto = $request->request->get('idRepuesto');
