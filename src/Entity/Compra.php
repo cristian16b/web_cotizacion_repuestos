@@ -29,11 +29,6 @@ class Compra
     private $fechaBaja;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idMercadoPago;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $monto;
@@ -63,18 +58,6 @@ class Compra
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
-
-        return $this;
-    }
-
-    public function getIdMercadoPago(): ?string
-    {
-        return $this->idMercadoPago;
-    }
-
-    public function setIdMercadoPago(string $idMercadoPago): self
-    {
-        $this->idMercadoPago = $idMercadoPago;
 
         return $this;
     }
