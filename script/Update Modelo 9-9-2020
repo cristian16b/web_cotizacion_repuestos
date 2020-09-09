@@ -18,3 +18,5 @@ fecha_alta DATE NOT NULL, fecha_baja DATE DEFAULT NULL,
 fecha_ultima_actualizacion DATE DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER 
 SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
 --
+ALTER TABLE compra DROP tipo_pago;
+--

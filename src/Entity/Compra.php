@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompraRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class Compra
 {
@@ -15,11 +18,13 @@ class Compra
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="date")
+     * @Expose
      */
     private $fechaAlta;
 
@@ -30,16 +35,19 @@ class Compra
 
     /**
      * @ORM\Column(type="float")
+     * @Expose
      */
     private $monto;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $idPagoML;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $estadoPagoML;
 
@@ -47,11 +55,6 @@ class Compra
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $referenciaExterna;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $tipoPago;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -65,16 +68,19 @@ class Compra
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $estadoML;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $estadoDetalleML;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Expose
      */
     private $tipoPagoML;
 
@@ -164,18 +170,6 @@ class Compra
     public function setReferenciaExterna(?string $referenciaExterna): self
     {
         $this->referenciaExterna = $referenciaExterna;
-
-        return $this;
-    }
-
-    public function getTipoPago(): ?string
-    {
-        return $this->tipoPago;
-    }
-
-    public function setTipoPago(string $tipoPago): self
-    {
-        $this->tipoPago = $tipoPago;
 
         return $this;
     }
