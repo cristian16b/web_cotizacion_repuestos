@@ -3,9 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CredencialMLRepository")
+ * @ExclusionPolicy("all")
+ * @ORM\HasLifecycleCallbacks()
  */
 class CredencialML
 {
@@ -121,5 +127,18 @@ class CredencialML
         $this->fechaUltimaActualizacion = $fechaUltimaActualizacion;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $dateTimeNow = new DateTime('now');
+        $this->setFechaAlta($dateTimeNow);
+        if ($this->getFechaAlta() === null) {
+            $this->setFechaAlta($dateTimeNow);
+        }
     }
 }
