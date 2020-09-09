@@ -20,3 +20,7 @@ SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
 --
 ALTER TABLE compra DROP tipo_pago;
 --
+ALTER TABLE credencial_ml ADD usuario_id INT NOT NULL;
+ALTER TABLE credencial_ml ADD CONSTRAINT FK_ED9648D3DB38439E FOREIGN KEY (usuario_id) REFERENCES usuario (id);
+CREATE INDEX IDX_ED9648D3DB38439E ON credencial_ml (usuario_id);
+--

@@ -52,6 +52,12 @@ class CredencialML
      */
     private $fechaUltimaActualizacion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\usuario")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $usuario;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,5 +146,17 @@ class CredencialML
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    public function getUsuario(): ?usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?usuario $usuario): self
+    {
+        $this->usuario = $usuario;
+
+        return $this;
     }
 }
