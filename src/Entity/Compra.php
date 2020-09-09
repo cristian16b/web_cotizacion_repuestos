@@ -33,6 +33,51 @@ class Compra
      */
     private $monto;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $idPagoML;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $estadoPagoML;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referenciaExterna;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tipoPago;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $preferenciaIdML;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $referenciaExternaML;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $estadoML;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $estadoDetalleML;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tipoPagoML;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,5 +130,113 @@ class Compra
         if ($this->getFechaAlta() === null) {
             $this->setFechaAlta($dateTimeNow);
         }
+    }
+
+    public function getIdPagoML(): ?string
+    {
+        return $this->idPagoML;
+    }
+
+    public function setIdPagoML(string $idPagoML): self
+    {
+        $this->idPagoML = $idPagoML;
+
+        return $this;
+    }
+
+    public function getEstadoPagoML(): ?string
+    {
+        return $this->estadoPagoML;
+    }
+
+    public function setEstadoPagoML(string $estadoPagoML): self
+    {
+        $this->estadoPagoML = $estadoPagoML;
+
+        return $this;
+    }
+
+    public function getReferenciaExterna(): ?string
+    {
+        return $this->referenciaExterna;
+    }
+
+    public function setReferenciaExterna(?string $referenciaExterna): self
+    {
+        $this->referenciaExterna = $referenciaExterna;
+
+        return $this;
+    }
+
+    public function getTipoPago(): ?string
+    {
+        return $this->tipoPago;
+    }
+
+    public function setTipoPago(string $tipoPago): self
+    {
+        $this->tipoPago = $tipoPago;
+
+        return $this;
+    }
+
+    public function getPreferenciaIdML(): ?string
+    {
+        return $this->preferenciaIdML;
+    }
+
+    public function setPreferenciaIdML(string $preferenciaIdML): self
+    {
+        $this->preferenciaIdML = $preferenciaIdML;
+
+        return $this;
+    }
+
+    public function getReferenciaExternaML(): ?string
+    {
+        return $this->referenciaExternaML;
+    }
+
+    public function setReferenciaExternaML(string $referenciaExternaML): self
+    {
+        $this->referenciaExternaML = $referenciaExternaML;
+
+        return $this;
+    }
+
+    public function getEstadoML(): ?string
+    {
+        return $this->estadoML;
+    }
+
+    public function setEstadoML(string $estadoML): self
+    {
+        $this->estadoML = $estadoML;
+
+        return $this;
+    }
+
+    public function getEstadoDetalleML(): ?string
+    {
+        return $this->estadoDetalleML;
+    }
+
+    public function setEstadoDetalleML(string $estadoDetalleML): self
+    {
+        $this->estadoDetalleML = $estadoDetalleML;
+
+        return $this;
+    }
+
+    public function getTipoPagoML(): ?string
+    {
+        return $this->tipoPagoML;
+    }
+
+    public function setTipoPagoML(?string $tipoPagoML): self
+    {
+        $this->tipoPagoML = $tipoPagoML;
+
+        return $this;
     }
 }

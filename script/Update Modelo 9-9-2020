@@ -1,0 +1,12 @@
+Correr en produccion los siguientes comandos:
+--
+ALTER TABLE compra ADD id_pago_ml VARCHAR(255) NOT NULL, 
+ADD estado_pago_ml VARCHAR(255) NOT NULL, 
+ADD referencia_externa VARCHAR(255) DEFAULT NULL, 
+ADD tipo_pago VARCHAR(255) NOT NULL, 
+ADD preferencia_id_ml VARCHAR(255) NOT NULL, 
+ADD referencia_externa_ml VARCHAR(255) NOT NULL, 
+ADD estado_ml VARCHAR(255) NOT NULL, 
+ADD estado_detalle_ml VARCHAR(255) NOT NULL, 
+ADD tipo_pago_ml VARCHAR(255) DEFAULT NULL;
+--
