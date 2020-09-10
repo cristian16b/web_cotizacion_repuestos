@@ -12,6 +12,7 @@ class AuthenticationSuccessListener
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
     {
         $usuario = $event->getUser();
+        // dump($usuario->getRoles());die;
         if($usuario->getConfirmado()) {
             $event->setData([
                 'code' => 200,
