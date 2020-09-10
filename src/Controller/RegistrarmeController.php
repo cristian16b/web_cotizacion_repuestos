@@ -40,7 +40,7 @@ class RegistrarmeController extends AbstractController
     private $userRolAdmin = "ROLE_ADMIN";
 
     private $tipoDNI = "DNI";
-    private $tipoAfip = "INSCRIPCIÒN AFIP";
+    private $tipoAfip = "Inscripción AFIP";
 
     private $errorEmail = "El e-mail ingresado ya se encuentra registrado";
 
