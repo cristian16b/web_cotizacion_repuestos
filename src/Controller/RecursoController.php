@@ -91,7 +91,7 @@ class RecursoController extends AbstractController
             ]
         );
 
-        $filepath =  $this->getParameter('kernel.project_dir') . '/constancias/' .  $archivo->getTipo()->getNombre() . 
+        $filepath =  $this->getParameter('kernel.project_dir') . '/constancias/' . 
                         '/' . $nombreArchivo;
 
         $extension = substr($nombreArchivo,strripos($nombreArchivo, '.'));
