@@ -221,7 +221,7 @@ class ConstanciaPersona
      * @ORM\PreUpdate
      */
     public function guardarArchivo() {
-        $path =  $this->directorio . '/constancias'. '/' . $this->getTipo()->getNombre();
+        $path =  $this->directorio . '/constancias'. '/' . $this->getNombreFisico();
         $this->file->move($path,$this->nombreFisico);
     }
 
