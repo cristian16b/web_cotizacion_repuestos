@@ -12,8 +12,8 @@
 /fotosSolicitudes/*
 /constancias/*
 /fotosCotizaciones/*
-/constancia DNI/*
-/constancia INSCRIPCIÒN AFIP/*
+/constancias/DNI/*
+/constancias/AFIP/*
 
 ###> symfony/phpunit-bridge ###
 .phpunit

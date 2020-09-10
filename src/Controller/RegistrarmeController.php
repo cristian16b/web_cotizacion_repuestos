@@ -248,8 +248,9 @@ class RegistrarmeController extends AbstractController
             }
 
 
-            $this->enviarCorreoNotificacion($persona,$user);
- 
+            // $this->enviarCorreoNotificacion($persona,$user);
+            // dump($persona);
+            // die;
             $em->persist($persona);
             $em->flush();
 
@@ -274,7 +275,7 @@ class RegistrarmeController extends AbstractController
     public function verificarCuenta(Request $request,$token) {
 
         if(is_null($token)) {
-            throw new ¥Exception('Something went wrong!');
+            throw new Exception('Something went wrong!');
         }
         
         $entityManager = $this->getDoctrine()->getManager();
@@ -282,7 +283,7 @@ class RegistrarmeController extends AbstractController
         $usuario = $this->obtenerUsuarioAsociadaToken($token);
 
         if(is_null($usuario)) {
-            throw new ¥Exception('Something went wrong!');
+            throw new Exception('Something went wrong!');
         }
 
         $usuario->setConfirmado(true);
