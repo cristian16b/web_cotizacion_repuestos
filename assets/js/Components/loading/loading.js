@@ -20,10 +20,6 @@ const centrar = {
     'alignItems': 'center',
 }
 
-const centrarH = {
-    'display': 'flex',
-    'alignItems': 'center',
-}
 
 const Loading = () => (
     <div style={divLoading}>
@@ -36,15 +32,15 @@ const Loading = () => (
         <div style={divMensaje}>
             <div className="row" style={centrar}>
                 <div className="col-8 col-md-8 col-lg-4">
-                    <h5 style={centrarH}>Cargando</h5>
+                    <h5 align="center">Cargando</h5>
                 </div>
             </div>
-            <div className="row" style={centrar}>
+            <div className="row" align="center" style={centrar}>
                 <div className="col-8 col-md-8 col-lg-4">
                     <h5>...</h5>
                 </div>
             </div> 
-            <div className="row" style={centrar}>
+            <div className="row" align="center" style={centrar}>
                 <div className="col-8 col-md-8 col-lg-4">
                     <h5>Espere un momento</h5>
                 </div>
