@@ -12,8 +12,16 @@ class AuthenticationSuccessListener
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
     {
         $usuario = $event->getUser();
-        // dump($usuario->getRoles());die;
         if($usuario->getConfirmado()) {
+            $roles = $usuario->getRoles();
+            // dump($roles);die;
+            if(in_array("ROLE_COMERCIANTE", $roles)) {
+                dump('es comerciante');
+            }
+            else {
+                dump('no lo es');
+            }
+            die;
             $event->setData([
                 'code' => 200,
                 'rol' => $event->getUser()->getRoles(),
