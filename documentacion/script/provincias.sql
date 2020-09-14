@@ -1,5 +1,5 @@
 
-INSERT INTO `provincia` (`id`, `provincia`) VALUES
+INSERT INTO `provincia` (`id`, `name`) VALUES
 (1, 'Buenos Aires'),
 (2, 'Buenos Aires-GBA'),
 (3, 'Capital Federal'),
