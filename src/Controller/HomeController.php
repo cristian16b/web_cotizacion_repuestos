@@ -10,9 +10,19 @@ use App\Entity\ModeloAuto;
 use App\Entity\TipoRepuesto;
 use App\Entity\Repuesto;
 use APP\Repository\TipoRepuestoRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends AbstractController
 {
+    /**
+    * @Route("/vincular/vendedor", name="vincular_vendedor")
+    */
+    public function vincularVendedorAction(Request $request) {
+        dump($request->query->get('code'));
+        die('en desarollo...');
+    }
+
     /**
      * @Route("/{reactRouting}", name="index", defaults={"reactRouting": null})
      */

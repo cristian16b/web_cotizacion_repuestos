@@ -1,6 +1,5 @@
 Para operar en Mercado Pago en nombre de tu vendedor, debes primero solicitarle autorización.
-https://auth.mercadopago.com.ar/authorization?client_id=6864113784926029&response_type=code&platform_id=mp&redirect_uri=http://localhost/symfony_mercado_pago/public/index.php/vincular/vendedor
-
+https://auth.mercadopago.com.ar/authorization?client_id=6864113784926029&response_type=code&platform_id=mp&redirect_uri=http://localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor
 El enlace anterior retorna lo siguiente
 TG-5f594ff5192036000650c515-167188015
 ----
@@ -9,7 +8,7 @@ TG-5f594ff5192036000650c515-167188015
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://auth.mercadopago.com.ar/authorization?client_id=6864113784926029&response_type=code&platform_id=mp&redirect_uri=http://localhost/symfony_mercado_pago/public/index.php/vincular/vendedor",
+  CURLOPT_URL => "https://auth.mercadopago.com.ar/authorization?client_id=6864113784926029&response_type=code&platform_id=mp&redirect_uri=http://localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
