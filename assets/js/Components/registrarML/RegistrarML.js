@@ -17,7 +17,7 @@ class RegistrarML extends React.Component {
                 EisenPart es una plataforma de venta de respuestos vinculada con MercadoPago para que puedas recibir los pagos. Para completar debes apretar confirmar y el sistema te va a dirigir a la pagina principal de MercadoPago.
               </p>
               <p>En la misma se te van a solicitar tu usuario/contraseña de tu cuenta de MercadoPago.</p>
-              <a type="button" href={this.props.url} class="btn btn-primary">Confirmar</a>
+              <a type="button" href={this.props.url} className="btn btn-primary">Confirmar</a>
             </div>
           </div>
         </div>

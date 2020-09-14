@@ -16,18 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 class HomeController extends AbstractController
 {
     /**
-    * @Route("/vincular/vendedor", name="vincular_vendedor")
-    */
-    public function vincularVendedorAction(Request $request) {
-        // dump($request->query->get('code'));
-        // die('en desarollo...');
-        dump($request);
-        $user = $this->getUser();
-        dump($user);
-        die;
-    }
-
-    /**
      * @Route("/{reactRouting}", name="index", defaults={"reactRouting": null})
      */
     public function index()
