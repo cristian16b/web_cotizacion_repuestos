@@ -18,6 +18,7 @@ import Salir from './Components/salir/salir';
 import RecuperarContrasenia from './Components/recuperar/recuperarContrasenia';
 import NotFound from './Components/not found/notfound';
 import {ROL_COMERCIANTE} from './Constantes/constantes';
+import RegistrarML from './Components/registrarML/RegistrarML';
 
 class App extends React.Component {
 
@@ -29,12 +30,14 @@ class App extends React.Component {
       isUserLogin: false,
       token: '',
       rol: '',
+      credencialML: '',
+      url: '',
     })
 
     this.obtenerToken = this.obtenerToken.bind(this);
   }
 
-  obtenerToken = (bandera,rolObtenido,tokenObtenido,code) => {
+  obtenerToken = (bandera,rolObtenido,tokenObtenido,code,credencialML,url) => {
     // console.log(rolObtenido + ' ' + tokenObtenido + ' ' + code);
     // 
     if(code == 200) {
@@ -42,14 +45,16 @@ class App extends React.Component {
       this.setState({
         isUserLogin: bandera,
         token: tokenObtenido,
-        rol: rolObtenido
+        rol: rolObtenido,
+        credencialML: credencialML,
+        url: url,
       })
     }
     // alert(this.state.isUserLogin);
   }
 
   returnTemplateLogueado = () => {
-    if(this.state.rol == ROL_COMERCIANTE)
+    if(this.state.rol == ROL_COMERCIANTE && this.state.credencialML == true)
       return (
         <div className="row">
         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -65,6 +70,27 @@ class App extends React.Component {
                 <Route component={NotFound}/>
               </Switch>
             </div>
+          <PiePagina />
+        </div>
+      </div>
+      )
+      if(this.state.rol == ROL_COMERCIANTE && this.state.credencialML == false)
+      return (
+        <div className="row">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          <NavbarLogueado rol={this.state.rol}/>
+          <div className="containerCentral">
+              <Switch>
+                <Redirect exact from='/login' to='/registrarML'/>
+                <Redirect exact from="/" to='/registrarML'/>
+                <Redirect exact from="/solicitudes" to='/registrarML'/>
+                <Redirect exact from="/perfil" to='/registrarML'/>
+                <Redirect exact from="/cotizaciones" to='/registrarML'/>
+                <Route exact path="/registrarML" component={RegistrarML} />
+                <Route exact path="/salir" render={() => <Salir obtenerToken={this.obtenerToken}/>} />
+                <Route component={NotFound}/>
+              </Switch>
+          </div>
           <PiePagina />
         </div>
       </div>

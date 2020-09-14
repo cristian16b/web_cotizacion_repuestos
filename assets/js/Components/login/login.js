@@ -128,6 +128,7 @@ class Login extends React.Component {
             let token = response.data.token;
             let code = response.data.code;
             let credencialML = response.data.credencialML;
+            let url = response.data.url;
             this.setState({isLoading: false});
             if(code != 200) 
             {
@@ -137,7 +138,7 @@ class Login extends React.Component {
             else {
                 // console.log(rol + ' ' + code );
                 // Llamo al componente app para que muestre habilite rutas segun corresponda por el rol
-                this.props.obtenerTokenPadre(true,rol,token,code,credencialML);
+                this.props.obtenerTokenPadre(true,rol,token,code,credencialML,url);
             }
         })
         .catch(e => {
