@@ -2,26 +2,35 @@
 
 namespace App\EventListener;
 
+use App\Entity\CredencialML;
+use App\Entity\Usuario;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationFailureEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-class AuthenticationSuccessListener
+class AuthenticationSuccessListener extends AbstractController
 {
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
     {
+        $usuario = new Usuario();
         $usuario = $event->getUser();
         if($usuario->getConfirmado()) {
+            $tieneCredencialML = false;
             $roles = $usuario->getRoles();
-            // dump($roles);die;
             if(in_array("ROLE_COMERCIANTE", $roles)) {
-                dump('es comerciante');
+                // debemos obtener si tiene una credencial ML activa
+                $em = $this->getDoctrine()->getManager();
+                $credencial= $em->getRepository(CredencialML::class)
+                                ->buscarPorUsuario($usuario);
+
+                // dump(empty($credencial));die;
+                // si no tiene credencial debemos solicitarlas
+                if(empty($credencial)) {
+                    
+                }
             }
-            else {
-                dump('no lo es');
-            }
-            die;
             $event->setData([
                 'code' => 200,
                 'rol' => $event->getUser()->getRoles(),

@@ -19,6 +19,19 @@ class CredencialMLRepository extends ServiceEntityRepository
         parent::__construct($registry, CredencialML::class);
     }
 
+    public function buscarPorUsuario($usuario)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.usuario = :usuario')
+            ->andWhere('c.fechaBaja IS null')
+            ->setParameter('usuario', $usuario)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return CredencialML[] Returns an array of CredencialML objects
     //  */
