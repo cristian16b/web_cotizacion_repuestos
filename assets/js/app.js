@@ -86,7 +86,8 @@ class App extends React.Component {
                 <Redirect exact from="/solicitudes" to='/registrarML'/>
                 <Redirect exact from="/perfil" to='/registrarML'/>
                 <Redirect exact from="/cotizaciones" to='/registrarML'/>
-                <Route exact path="/registrarML" component={RegistrarML} />
+                <Route exact path="/registrarML" 
+                  render={() => <RegistrarML url={this.state.url} token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/salir" render={() => <Salir obtenerToken={this.obtenerToken}/>} />
                 <Route component={NotFound}/>
               </Switch>
