@@ -17,7 +17,7 @@ class AuthenticationSuccessListener extends AbstractController
         $usuario = new Usuario();
         $usuario = $event->getUser();
         if($usuario->getConfirmado()) {
-            $tieneCredencialML = false;
+            $tieneCredencialML = true;
             $roles = $usuario->getRoles();
             if(in_array("ROLE_COMERCIANTE", $roles)) {
                 // debemos obtener si tiene una credencial ML activa
@@ -28,13 +28,14 @@ class AuthenticationSuccessListener extends AbstractController
                 // dump(empty($credencial));die;
                 // si no tiene credencial debemos solicitarlas
                 if(empty($credencial)) {
-                    
+                    $tieneCredencialML = false;
                 }
             }
             $event->setData([
                 'code' => 200,
                 'rol' => $event->getUser()->getRoles(),
                 'token' => $event->getData(),
+                'credencialML' => $tieneCredencialML,
             ]);
         }
         else {
