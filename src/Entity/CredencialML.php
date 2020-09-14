@@ -30,11 +30,6 @@ class CredencialML
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $clavePublica;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $tokenActualizar;
 
     /**
@@ -71,18 +66,6 @@ class CredencialML
     public function setTokenAcceso(string $tokenAcceso): self
     {
         $this->tokenAcceso = $tokenAcceso;
-
-        return $this;
-    }
-
-    public function getClavePublica(): ?string
-    {
-        return $this->clavePublica;
-    }
-
-    public function setClavePublica(string $clavePublica): self
-    {
-        $this->clavePublica = $clavePublica;
 
         return $this;
     }
