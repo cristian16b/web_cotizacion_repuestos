@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegistrarVendedorController extends AbstractController
 {
@@ -25,6 +26,10 @@ class RegistrarVendedorController extends AbstractController
         // dump($request->query->get('code'));
         $code = $request->query->get('code');
         $curl = curl_init();
+        $contenidoPost = "client_secret=TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015&
+        code=".$code."&
+        grant_type=authorization_code&
+        redirect_uri=http://localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor";
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.mercadopago.com/oauth/token",
@@ -35,19 +40,19 @@ class RegistrarVendedorController extends AbstractController
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "client_secret=TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015&
-                code=". $code . "
-                grant_type=authorization_code&
-                redirect_uri=http%3A//localhost/web_cotizacion_repuestos/public/index.php/registrar/vendedor",
+            CURLOPT_POSTFIELDS => "client_secret=TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015
+            &code=".$code."
+            &grant_type=authorization_code
+            &redirect_uri=http%3A//localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor",
             CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/x-www-form-urlencoded"
+              "Content-Type: application/x-www-form-urlencoded"
             ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
+          ));
+          
+          $response = curl_exec($curl);
+          
+          curl_close($curl);
+          echo $response;
         die;
     }
 }
