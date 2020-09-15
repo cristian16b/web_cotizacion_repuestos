@@ -143,7 +143,7 @@ class RegistrarmeController extends AbstractController
             $user->setUsuarioUltimaModificacion($email);
             $user->setUsername($email);
             // en el registro se le asigna un token al usuario
-            $user->setSocialToken($this->obtenerTokenAutenticacion());
+            $user->setTokenCorreoConfirmacion($this->obtenerTokenAutenticacion());
             // inicialmente el usuario esta deshabilitado
             $user->setConfirmado(false);
             // se activara su cuenta cuando ingrese a su correo y click en el link
@@ -171,6 +171,8 @@ class RegistrarmeController extends AbstractController
             
             if($esComerciante == "true") 
             {
+                // seteo el token de mercadopago
+                $user->setTokenProvisorioMP($this->obtenerTokenAutenticacion());
 
                 $localidad = $this->obtenerLocalidad($localidadId);     
                 $archivos = $request->files;
@@ -312,11 +314,11 @@ class RegistrarmeController extends AbstractController
     }
 
     private function obtenerUsuarioAsociadaToken($token) {
-        return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('socialToken'=>$token));
+        return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('tokenCorreoConfirmacion'=>$token));
     }
 
     private function obtenerUrlConfirmacionCuenta($usuario) {
-        return $this->baseUrlEisenPartProduccion . '/api/verificar/' . $usuario->getSocialToken();
+        return $this->baseUrlEisenPartProduccion . '/api/verificar/' . $usuario->getTokenCorreoConfirmacion();
     }
 
     private function enviarCorreoNotificacion($persona,$usuario) {

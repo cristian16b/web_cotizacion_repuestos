@@ -34,12 +34,6 @@ class AuthenticationSuccessListener extends AbstractController
                 // si no tiene credencial debemos solicitarlas
                 if(empty($credencial)) {
                     $tieneCredencialML = false;
-                    $usuario->setUsuarioUltimaModificacion($usuario->getUsername());
-                    // en el registro se le asigna un token al usuario
-                    $usuario->setSocialToken($this->obtenerTokenAutenticacion());
-                    $usuario->setUpdatedAt(new DateTime('now'));
-                    $em->persist($usuario);
-                    $em->flush();
                 }
             }
             $event->setData([
