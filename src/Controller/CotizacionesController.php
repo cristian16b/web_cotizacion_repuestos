@@ -93,7 +93,6 @@ class CotizacionesController extends AbstractController
                 throw new \Exception('Something went wrong!');
             }
             $repuesto = $solicitud->getRepuesto();
-            $user = $solicitud->getSolicitante();
 
             $cotizacion = new Cotizacion();
             $cotizacion->setMonto($monto);
