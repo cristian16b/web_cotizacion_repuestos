@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\CredencialML;
+use App\Entity\Usuario;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,11 +27,14 @@ class RegistrarVendedorController extends AbstractController
     * @Route("/vincular/vendedor", name="vincular_vendedor")
     */
     public function vincularVendedorAction(Request $request) {
-        // dump($request->query->get('code'));
-        dump($request);
+
         try 
         {
             $code = $request->query->get('code');
+            $token = $request->query->get('state');
+            $t = substr($token, 3);
+            $tokenUsuario = substr($t, 0, -1);
+            // dump($tokenUsuario);die;
             $curl = curl_init();
     
             curl_setopt_array($curl, array(
@@ -52,7 +57,7 @@ class RegistrarVendedorController extends AbstractController
               
             $json = curl_exec($curl);
             $response = json_decode($json, true);
-            dump($response); 
+            // dump($response); 
             curl_close($curl);
             if(array_key_exists('message', $response)) {
                 throw new \Exception('Something went wrong!');
@@ -60,13 +65,13 @@ class RegistrarVendedorController extends AbstractController
             $credencial = new CredencialML();
             $credencial->setTokenAcceso($response["access_token"]);
             $credencial->setTokenActualizar($response["refresh_token"]);
-            $session = $request->getSession();
-            $user = $session->get('usuario');
-            $credencial->setUsuario($user);
-            dump($credencial);
+            $credencial->setUsuario($this->obtenerUsuario($tokenUsuario));
+            $credencial->setFechaUltimaActualizacion(new DateTime('now'));
 
-            die;
-
+            // preparamos y persistimos 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($credencial);
+            $entityManager->flush();
 
             $mensaje = "Se ha vinculado exitosamente ";
         } catch (Exception $ex) {
@@ -79,5 +84,9 @@ class RegistrarVendedorController extends AbstractController
             'controller_name' => 'RegistrarVendedorController',
             'mensaje' => $mensaje,
         ]);
+    }
+
+    private function obtenerUsuario($token) {
+        return $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(array('tokenProvisorioMP'=>$token));
     }
 }
