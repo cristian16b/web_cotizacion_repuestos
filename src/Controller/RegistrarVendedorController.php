@@ -30,6 +30,7 @@ class RegistrarVendedorController extends AbstractController
 
         try 
         {
+            $bandera = false;
             $code = $request->query->get('code');
             $token = $request->query->get('state');
             $t = substr($token, 3);
@@ -73,16 +74,15 @@ class RegistrarVendedorController extends AbstractController
             $entityManager->persist($credencial);
             $entityManager->flush();
 
-            $mensaje = "Se ha vinculado exitosamente ";
+            $bandera = true;
         } catch (Exception $ex) {
                 $code = 500;
                 $error = true;
-                $mensaje = "Ocurrio un error inesperado, intente nuevamente mas tarde!";
+                $bandera = false;
         }
 
         return $this->render('registrar_vendedor/index.html.twig', [
-            'controller_name' => 'RegistrarVendedorController',
-            'mensaje' => $mensaje,
+            'bandera' => $bandera,
         ]);
     }
 
