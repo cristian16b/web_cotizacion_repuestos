@@ -114,6 +114,16 @@ class Usuario implements UserInterface
      * @ORM\Column(type="boolean",options={"default":"0"})
      */
     private $confirmado;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tokenCorreoConfirmacion;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tokenProvisorioMP;
     
     public function __construct()
     {
@@ -394,6 +404,30 @@ class Usuario implements UserInterface
     public function setConfirmado(bool $confirmado): self
     {
         $this->confirmado = $confirmado;
+
+        return $this;
+    }
+
+    public function getTokenCorreoConfirmacion(): ?string
+    {
+        return $this->tokenCorreoConfirmacion;
+    }
+
+    public function setTokenCorreoConfirmacion(?string $tokenCorreoConfirmacion): self
+    {
+        $this->tokenCorreoConfirmacion = $tokenCorreoConfirmacion;
+
+        return $this;
+    }
+
+    public function getTokenProvisorioMP(): ?string
+    {
+        return $this->tokenProvisorioMP;
+    }
+
+    public function setTokenProvisorioMP(string $tokenProvisorioMP): self
+    {
+        $this->tokenProvisorioMP = $tokenProvisorioMP;
 
         return $this;
     }

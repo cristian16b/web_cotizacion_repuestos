@@ -22,4 +22,5 @@ ALTER TABLE compra DROP tipo_pago;
 ALTER TABLE credencial_ml ADD usuario_id INT NOT NULL;
 ALTER TABLE credencial_ml ADD CONSTRAINT FK_ED9648D3DB38439E FOREIGN KEY (usuario_id) REFERENCES usuario (id);
 CREATE INDEX IDX_ED9648D3DB38439E ON credencial_ml (usuario_id);
---
+--modificaciones del 15/9
+ ALTER TABLE usuario ADD token_correo_confirmacion VARCHAR(255) DEFAULT NULL, ADD token_provisorio_mp VARCHAR(255) NOT NULL;
