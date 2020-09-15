@@ -26,6 +26,7 @@ class RegistrarVendedorController extends AbstractController
     */
     public function vincularVendedorAction(Request $request) {
         // dump($request->query->get('code'));
+        dump($request);
         try 
         {
             $code = $request->query->get('code');
@@ -49,12 +50,22 @@ class RegistrarVendedorController extends AbstractController
                 ),
               ));
               
-            $response = curl_exec($curl);
+            $json = curl_exec($curl);
+            $response = json_decode($json, true);
             dump($response); 
             curl_close($curl);
+            if(array_key_exists('message', $response)) {
+                throw new \Exception('Something went wrong!');
+            }
             $credencial = new CredencialML();
-            $credencial->setTokenAcceso($response['access_token']);
-            $credencial->setTokenActualizar($response['refresh_token']);
+            $credencial->setTokenAcceso($response["access_token"]);
+            $credencial->setTokenActualizar($response["refresh_token"]);
+            $session = $request->getSession();
+            $user = $session->get('usuario');
+            $credencial->setUsuario($user);
+            dump($credencial);
+
+            die;
 
 
             $mensaje = "Se ha vinculado exitosamente ";
