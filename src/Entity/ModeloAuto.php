@@ -138,4 +138,9 @@ class ModeloAuto
 
         return $this;
     }
+
+    public function toString() {
+        $marca = $this->marcaAuto->getName();
+        return "Marca: " . $marca . " Modelo: " .$this->name;
+    }
 }

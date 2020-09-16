@@ -63,6 +63,7 @@ class Cotizacion
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="cotizacionesRealizadas")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose
      */
     private $oferente;
 

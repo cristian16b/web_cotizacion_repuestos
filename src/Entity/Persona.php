@@ -363,4 +363,8 @@ class Persona
 
         return $this;
     }
+
+    public function toStringNombreApellido() {
+        return $this->apellido . '-' . $this->nombre;
+    }
 }

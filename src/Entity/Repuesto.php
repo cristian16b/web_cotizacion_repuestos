@@ -172,4 +172,8 @@ class Repuesto
 
         return $this;
     }
+
+    public function toString() {
+        return "Repuesto: " . $this->name;
+    }
 }
