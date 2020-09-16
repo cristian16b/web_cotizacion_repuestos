@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Solicitud;
+use App\Entity\Persona;
+use App\Entity\Cotizacion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,6 +25,10 @@ use MercadoPago;
 */
 class SolicitudesController extends AbstractController
 {
+    private $accessToken = 'TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015';
+    // mercadopago cobra un 4.5
+    private $comisionUsoPagina = 3;
+
     // /**
     //  * @Route("/mis/solicitudes", name="mis_solicitudes")
     //  */
@@ -109,7 +115,7 @@ class SolicitudesController extends AbstractController
 
     private function obtenerPreferencia($solicitud,$cotizacion) {
 
-        MercadoPago\SDK::setAccessToken('TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015');
+        MercadoPago\SDK::setAccessToken($this->accessToken);
         
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
@@ -148,16 +154,27 @@ class SolicitudesController extends AbstractController
         $payer->name = $persona->getNombre();
         $payer->surname = $persona->getApellido();
         $payer->email = $persona->getEmail();
-        $payer->date_created = "2018-06-02T12:58:41.425-04:00";
+        $payer->date_created = $cotizacion->getFechaAlta();
         $payer->phone = array(
-            "area_code" => "",
-            "number" => "949 128 866"
+            "area_code" => $persona->getCodArea(),
+            "number" => $persona->getTelefono()
         );
         
         $preference->items = array($item);
         $preference->payer = $payer;
-        $preference->marketplace_fee = 100;
+
+        // calculamos el monto de comision 
+        $comision = ($this->comisionUsoPagina * $cotizacion->getMonto()) / 100;
+        // 
+        $preference->marketplace_fee = $comision;
+        // lo dejo comentado pero se deberia hacer una funcion que mande un email notificando cuando se vende
+        // TODO
+        // $preference->notification_url = "http://urlmarketplace.com/notification_ipn";
+
         $preference->save();
+
+        dump($preference);
+        die;
 
         return $preference->id;
     }
