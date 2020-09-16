@@ -201,7 +201,7 @@ class Fila extends React.Component {
                     <form action="/procesar-pago" method="POST">
                       <a href={'https://www.mercadopago.com.ar/checkout/v1/modal/?preference-id=' + elemento.preferencia } 
                         className="btn btn-primary btn-block"
-                        target="_blank">
+                        target="_self">
                           PAGAR!
                       </a>   
                       <script
