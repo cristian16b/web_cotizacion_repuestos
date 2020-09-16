@@ -86,11 +86,11 @@ class Cotizacion
      */
     private $recursoCotizacions;
 
-    // variables que no se van a persistir en la basee datos
-    // solo son axuiliares para mostrar o hacer calculos
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Expose
+     */
     private $preferencia;
-
-    // 
 
     public function __construct()
     {
