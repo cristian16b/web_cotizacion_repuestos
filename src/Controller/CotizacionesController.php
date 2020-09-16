@@ -35,7 +35,7 @@ class CotizacionesController extends AbstractController
     private $accessToken = 'TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015';
     // mercadopago cobra un 4.5
     private $comisionUsoPagina = 3;
-    
+
     // /**
     //  * @Route("/", name="mis_cotizaciones")
     //  */
@@ -108,6 +108,8 @@ class CotizacionesController extends AbstractController
             $cotizacion->setfechaLimiteValidez($this->obtenerFechaVencimiento());
             $cotizacion->setOferente($user);
             $cotizacion->setObservacion($observaciones);
+            // obtengo el id de preferencia de mercado pago
+            $cotizacion->setPreferencia($this->obtenerPreferencia($solicitud,$cotizacion));
 
             // $recurso->set
             $errorFiles = '';
@@ -265,6 +267,8 @@ class CotizacionesController extends AbstractController
         return $hoy;
     }
 
+    // la siguiente funcion obtiene el id de mercado pago
+    // que debe ser asociarse a un boton para redirigir a mercadopago
     private function obtenerPreferencia($solicitud,$cotizacion) {
 
         MercadoPago\SDK::setAccessToken($this->accessToken);

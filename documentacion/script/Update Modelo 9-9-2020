@@ -25,3 +25,5 @@ CREATE INDEX IDX_ED9648D3DB38439E ON credencial_ml (usuario_id);
 --modificaciones del 15/9
  ALTER TABLE usuario ADD token_correo_confirmacion VARCHAR(255) DEFAULT NULL, ADD token_provisorio_mp VARCHAR(255) NOT NULL;
  ALTER TABLE usuario CHANGE token_provisorio_mp token_provisorio_mp VARCHAR(255) DEFAULT NULL;
+ --modificaciones del 16/9
+ ALTER TABLE cotizacion ADD preferencia VARCHAR(255) NOT NULL;
