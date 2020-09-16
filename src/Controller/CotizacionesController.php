@@ -32,6 +32,10 @@ use App\Entity\Persona;
 */
 class CotizacionesController extends AbstractController
 {
+    private $accessToken = 'TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015';
+    // mercadopago cobra un 4.5
+    private $comisionUsoPagina = 3;
+    
     // /**
     //  * @Route("/", name="mis_cotizaciones")
     //  */
