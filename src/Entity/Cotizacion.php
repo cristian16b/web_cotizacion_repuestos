@@ -86,6 +86,12 @@ class Cotizacion
      */
     private $recursoCotizacions;
 
+    // variables que no se van a persistir en la basee datos
+    // solo son axuiliares para mostrar o hacer calculos
+    private $preferencia;
+
+    // 
+
     public function __construct()
     {
         $this->recursoCotizacions = new ArrayCollection();
@@ -94,6 +100,18 @@ class Cotizacion
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getPreferencia()
+    {
+        return $this->preferencia;
+    }
+
+    public function setPreferencia($preferencia): self
+    {
+        $this->preferencia = $preferencia;
+
+        return $this;
     }
 
     public function getFechaAlta(): ?\DateTimeInterface

@@ -88,9 +88,10 @@ class SolicitudesController extends AbstractController
                 foreach($cotizaciones as $cotizacion) {
                     // dump($cotizacion);
                     $idPreferencia = $this->obtenerPreferencia($solicitud,$cotizacion);
-                    die($idPreferencia);
+                    // die($idPreferencia);
                 }
             }
+            dump($solicitudes);
             die;
 
         } catch (Exception $ex) {
