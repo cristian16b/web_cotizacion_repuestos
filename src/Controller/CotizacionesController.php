@@ -23,6 +23,9 @@ use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
+use MercadoPago;
+use App\Entity\Persona;
+
 
 /**
 * @Route("/api/v1/cotizaciones")
@@ -256,5 +259,76 @@ class CotizacionesController extends AbstractController
         $hoy = new DateTime('now');
         $hoy->modify('+7 day');
         return $hoy;
+    }
+
+    private function obtenerPreferencia($solicitud,$cotizacion) {
+
+        MercadoPago\SDK::setAccessToken($this->accessToken);
+        
+        // Crea un objeto de preferencia
+        $preference = new MercadoPago\Preference();
+        $preference->back_urls = array(
+            "success" => "/success",
+            "failure" => "/failure",
+            "pending" => "/pending"
+        );
+        // $preference->auto_return = "approved";
+        $preference->payment_methods = array(
+            "excluded_payment_types" => array(
+              array("id" => "ticket")
+            ),
+            "installments" => 12,
+        );
+
+        // Crea un ítem en la preferencia
+        $repuesto = $solicitud->getRepuesto();
+        $repuestoString = $repuesto->toString();
+        $modelo = $solicitud->getModeloAuto();
+        $modeloString = $modelo->toString();
+
+        $item = new MercadoPago\Item();
+        $item->title = "EisenParts - Compra repuesto";
+        $item->description = $repuestoString . ' ' . $modeloString;
+        $item->quantity = 1;
+        $item->unit_price = $cotizacion->getMonto();
+        $item->category_id = "automotive";
+        $item->currency_id = "ARS";
+
+
+        $vendedor = $cotizacion->getOferente();
+        $persona = $this->obtenerPersona($vendedor);
+
+        $payer = new MercadoPago\Payer();
+        // $payer->name = $persona->getNombre();
+        // $payer->surname = $persona->getApellido();
+        $payer->email = $persona->getEmail();
+        // $payer->date_created = $cotizacion->getFechaAlta();
+        // $payer->phone = array(
+        //     "area_code" => $persona->getCodArea(),
+        //     "number" => $persona->getTelefono()
+        // );
+        
+        $preference->items = array($item);
+        $preference->payer = $payer;
+
+        // calculamos el monto de comision 
+        $comision = ($this->comisionUsoPagina * $cotizacion->getMonto()) / 100;
+        // 
+        $preference->marketplace_fee = $comision;
+        // lo dejo comentado pero se deberia hacer una funcion que mande un email notificando cuando se vende
+        // TODO
+        // $preference->notification_url = "http://urlmarketplace.com/notification_ipn";
+
+        $preference->save();
+
+        // dump($preference);
+        // die;
+
+        return $preference->id;
+    }
+
+    private function obtenerPersona($usuario) {
+        $email = $usuario->getUsername();
+        return $this->getDoctrine()->getRepository(Persona::class)->findOneBy(array('email'=>$email));
     }
 }

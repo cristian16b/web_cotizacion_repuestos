@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Solicitud;
-use App\Entity\Persona;
-use App\Entity\Cotizacion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +16,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
-use MercadoPago;
 
 /**
  * @Route("/api/v1/solicitudes")
@@ -83,17 +80,6 @@ class SolicitudesController extends AbstractController
                 $solicitudes = [];
             }
 
-            foreach($solicitudes as $solicitud) {
-                $cotizaciones = $solicitud->getCotizaciones();
-                foreach($cotizaciones as $cotizacion) {
-                    // dump($cotizacion);
-                    $idPreferencia = $this->obtenerPreferencia($solicitud,$cotizacion);
-                    // die($idPreferencia);
-                }
-            }
-            dump($solicitudes);
-            die;
-
         } catch (Exception $ex) {
             $code = 500;
             $error = true;
@@ -112,77 +98,6 @@ class SolicitudesController extends AbstractController
                 "json"
             )
         );
-    }
-
-    private function obtenerPreferencia($solicitud,$cotizacion) {
-
-        MercadoPago\SDK::setAccessToken($this->accessToken);
-        
-        // Crea un objeto de preferencia
-        $preference = new MercadoPago\Preference();
-        $preference->back_urls = array(
-            "success" => "/success",
-            "failure" => "/failure",
-            "pending" => "/pending"
-        );
-        // $preference->auto_return = "approved";
-        $preference->payment_methods = array(
-            "excluded_payment_types" => array(
-              array("id" => "ticket")
-            ),
-            "installments" => 12,
-        );
-
-        // Crea un ítem en la preferencia
-        $repuesto = $solicitud->getRepuesto();
-        $repuestoString = $repuesto->toString();
-        $modelo = $solicitud->getModeloAuto();
-        $modeloString = $modelo->toString();
-
-        $item = new MercadoPago\Item();
-        $item->title = "EisenParts - Compra repuesto";
-        $item->description = $repuestoString . ' ' . $modeloString;
-        $item->quantity = 1;
-        $item->unit_price = $cotizacion->getMonto();
-        $item->category_id = "automotive";
-        $item->currency_id = "ARS";
-
-
-        $vendedor = $cotizacion->getOferente();
-        $persona = $this->obtenerPersona($vendedor);
-
-        $payer = new MercadoPago\Payer();
-        // $payer->name = $persona->getNombre();
-        // $payer->surname = $persona->getApellido();
-        $payer->email = $persona->getEmail();
-        // $payer->date_created = $cotizacion->getFechaAlta();
-        // $payer->phone = array(
-        //     "area_code" => $persona->getCodArea(),
-        //     "number" => $persona->getTelefono()
-        // );
-        
-        $preference->items = array($item);
-        $preference->payer = $payer;
-
-        // calculamos el monto de comision 
-        $comision = ($this->comisionUsoPagina * $cotizacion->getMonto()) / 100;
-        // 
-        $preference->marketplace_fee = $comision;
-        // lo dejo comentado pero se deberia hacer una funcion que mande un email notificando cuando se vende
-        // TODO
-        // $preference->notification_url = "http://urlmarketplace.com/notification_ipn";
-
-        $preference->save();
-
-        // dump($preference);
-        // die;
-
-        return $preference->id;
-    }
-
-    private function obtenerPersona($usuario) {
-        $email = $usuario->getUsername();
-        return $this->getDoctrine()->getRepository(Persona::class)->findOneBy(array('email'=>$email));
     }
 
     /**
