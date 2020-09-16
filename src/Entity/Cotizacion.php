@@ -38,6 +38,7 @@ class Cotizacion
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Expose
      */
     private $fechaBaja;
 

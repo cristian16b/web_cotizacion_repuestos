@@ -155,71 +155,74 @@ class Fila extends React.Component {
   renderCotizacionesRecibidas = (cotizaciones) => {
     return (
       cotizaciones.map(elemento => {
-        return ( 
-          <>
-            <hr></hr>
-            <div className="row">
-              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                <b>Monto informado por el vendedor: $ {elemento.monto}</b> <br></br>
-                <i>Fecha limite del presupuesto: {this.formatearFecha(elemento.fecha_limite_validez)}</i>
-              </div>        
-            </div>
-            <div className="row">
-              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                  <p>Observaciones:&nbsp;
-                    {
-                      elemento.observacion == undefined
-                      ?
-                      <>-</>
-                      :
-                      <>{elemento.observacion}</>
-                    }
-                  </p>
-              </div>
-            </div>
-              {
-                this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
-              }
-             <div className="row">
+        if(elemento.fecha_baja == null)
+        {
+          return ( 
+            <>
+              <hr></hr>
+              <div className="row">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                  <br/>
-                    <b>Importante</b>
-                  <br/>
-                  <p>
-                    El único medio de pago habilitado actualmente es con MercadoPago.
-                    Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación.
-                  </p> 
-                  <p>
-                    Una vez completada, le informaremos los datos de contacto (teléfono y domicilio) del vendedor para que pueda retirar su repuesto.
-                  </p>
+                  <b>Monto informado por el vendedor: $ {elemento.monto}</b> <br></br>
+                  <i>Fecha limite del presupuesto: {this.formatearFecha(elemento.fecha_limite_validez)}</i>
+                </div>        
+              </div>
+              <div className="row">
+                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <p>Observaciones:&nbsp;
+                      {
+                        elemento.observacion == undefined
+                        ?
+                        <>-</>
+                        :
+                        <>{elemento.observacion}</>
+                      }
+                    </p>
                 </div>
               </div>
-             <div className="row">
-                <div className="col-12 col-sm-12 col-md-12 col-lg-12" align="right">
-                  {/* 
-                  <button type="button" 
-                    onClick={() => this.redirigirMercadoPago(elemento.id)} 
-                    className="btn btn-primary">
-                      Comprar con Mercado Pago
-                  </button>              
-                  */}
-                  
-                    <form action="/mercadoPago/pago" method="POST">
-                      <a type="button" 
-                        href={API_MERCADO_PAGO_MOSTRAR_BOTON_PAGO}
-                        onClick={() => this.redirigirMercadoPago(elemento.id)} 
-                        className="btn btn-primary">
-                          Comprar con Mercado Pago
-                      </a>     
-                      <script
-                        src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-                        data-preference-id={elemento.id}>
-                      </script>
-                    </form> 
+                {
+                  this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
+                }
+               <div className="row">
+                  <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <br/>
+                      <b>Importante</b>
+                    <br/>
+                    <p>
+                      El único medio de pago habilitado actualmente es con MercadoPago.
+                      Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación.
+                    </p> 
+                    <p>
+                      Una vez completada, le informaremos los datos de contacto (teléfono y domicilio) del vendedor para que pueda retirar su repuesto.
+                    </p>
+                  </div>
                 </div>
-             </div>
-          </>
-          )
+               <div className="row">
+                  <div className="col-12 col-sm-12 col-md-12 col-lg-12" align="right">
+                    {/* 
+                    <button type="button" 
+                      onClick={() => this.redirigirMercadoPago(elemento.id)} 
+                      className="btn btn-primary">
+                        Comprar con Mercado Pago
+                    </button>              
+                    */}
+                    
+                      <form action="/mercadoPago/pago" method="POST">
+                        <a type="button" 
+                          href={API_MERCADO_PAGO_MOSTRAR_BOTON_PAGO}
+                          onClick={() => this.redirigirMercadoPago(elemento.id)} 
+                          className="btn btn-primary">
+                            Comprar con Mercado Pago
+                        </a>     
+                        <script
+                          src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                          data-preference-id={elemento.preferencia}>
+                        </script>
+                      </form> 
+                  </div>
+               </div>
+            </>
+            )
+          }
         }
       ) 
     )
