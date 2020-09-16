@@ -206,9 +206,9 @@ class CotizacionesController extends AbstractController
             }
 
             // verificar que no se mandan paginas web
-            if(preg_match("/www|www.|.com|http|https/",$observaciones)) {
-                $formErrors['observaciones'] = $mensajeErrorWeb;
-            }
+            // if(preg_match("/www|www.|.com/",$observaciones)) {
+            //     $formErrors['observaciones'] = $mensajeErrorWeb;
+            // }
 
             // verificiar que no tiene redes sociales
             if(preg_match("/face|facebook|insta|instagram/",$observaciones)) {
