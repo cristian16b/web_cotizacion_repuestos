@@ -151,14 +151,14 @@ class SolicitudesController extends AbstractController
         $persona = $this->obtenerPersona($vendedor);
 
         $payer = new MercadoPago\Payer();
-        $payer->name = $persona->getNombre();
-        $payer->surname = $persona->getApellido();
+        // $payer->name = $persona->getNombre();
+        // $payer->surname = $persona->getApellido();
         $payer->email = $persona->getEmail();
-        $payer->date_created = $cotizacion->getFechaAlta();
-        $payer->phone = array(
-            "area_code" => $persona->getCodArea(),
-            "number" => $persona->getTelefono()
-        );
+        // $payer->date_created = $cotizacion->getFechaAlta();
+        // $payer->phone = array(
+        //     "area_code" => $persona->getCodArea(),
+        //     "number" => $persona->getTelefono()
+        // );
         
         $preference->items = array($item);
         $preference->payer = $payer;
@@ -173,8 +173,8 @@ class SolicitudesController extends AbstractController
 
         $preference->save();
 
-        dump($preference);
-        die;
+        // dump($preference);
+        // die;
 
         return $preference->id;
     }
