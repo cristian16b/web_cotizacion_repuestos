@@ -196,22 +196,21 @@ class Fila extends React.Component {
                     </p>
                   </div>
                 </div>
-                <form action="/procesar-pago" method="POST">
-  <script
-   src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-   data-preference-id={elemento.preferencia}>
-  </script>
-</form>
-
-               <div className="row">
-                  <div className="col-12 col-sm-12 col-md-12 col-lg-12" align="right">          
-                    <button type="button" 
-                      onClick={() => this.redirigirMercadoPago(elemento.preferencia)} 
-                      className="btn btn-primary">
-                        Comprar
-                    </button>              
+                <div align="right">
+                  <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                    <form action="/procesar-pago" method="POST">
+                      <a href={'https://www.mercadopago.com.ar/checkout/v1/modal/?preference-id=' + elemento.preferencia } 
+                        className="btn btn-primary btn-block"
+                        target="_blank">
+                          PAGAR!
+                      </a>   
+                      <script
+                        src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                        data-preference-id={elemento.preferencia}>
+                      </script>
+                    </form>
                   </div>
-               </div>
+                </div>
             </>
             )
           }
