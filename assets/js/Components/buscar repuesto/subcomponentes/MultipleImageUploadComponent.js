@@ -84,6 +84,8 @@ class MultipleImageUploadComponent extends React.Component {
                                     <div className="col-12 col-md-12 col-lg-12">
                                         <div key={image.key} className="image-item">
                                             <img src={image.dataURL} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
+                                            <br></br>
+                                            <br></br>
                                             <div className="image-item__btn-wrapper">
                                                 <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
                                             </div>
