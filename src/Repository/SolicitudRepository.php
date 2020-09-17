@@ -70,7 +70,7 @@ class SolicitudRepository extends ServiceEntityRepository
             ->where('s.fechaBaja is null')
             ->andWhere('s.solicitante = :usuario')
             ->setParameter('usuario', $usuario)
-            ->orderBy('s.fechaAlta', 'DESC')
+            ->orderBy('s.id', 'DESC')
             ->setMaxResults(20)
             ->getQuery()
             ->getResult()
