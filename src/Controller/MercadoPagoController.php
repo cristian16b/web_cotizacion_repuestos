@@ -29,11 +29,12 @@ use DateTime;
 use MercadoPago;
 
 /**
- * @Route("/api/v1/mercadoPago", name="mercadopago")
+ * @Route("/mercadoPago", name="mercadopago")
 */
 class MercadoPagoController extends AbstractController
 {
-    private $accessTokenPrueba = "TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015";
+    // private $accessTokenPrueba = "TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015";
+    private $accessTokenPrueba = "TEST-6377095623153819-091715-cd70a72465f42ba608c0c7f8abe8fdd6-646196739";
     private $publickeyPrueba = "TEST-475bb8d5-e6b2-4798-a5d3-367310196faf";
 
     public static function getSubscribedServices() 
@@ -44,8 +45,9 @@ class MercadoPagoController extends AbstractController
     /**
      * @Route("/pagar", name="_pagar")
      */
-    public function index()
+    public function index(Request $request)
     {
+        dump($request);die;
         return $this->render('mercado_pago/index.html.twig', [
             'controller_name' => 'MercadoPagoController',
         ]);
@@ -66,96 +68,97 @@ class MercadoPagoController extends AbstractController
      */
     public function registrarPagoAction(Request $request,$id) {
 
-        $code = 200;
-        $error = false;
-        $serializer = $this->container->get('jms_serializer');
-        $em = $this->getDoctrine()->getManager();
+        die('registrar');
+        // $code = 200;
+        // $error = false;
+        // $serializer = $this->container->get('jms_serializer');
+        // $em = $this->getDoctrine()->getManager();
  
-        $user = [];
-        $message = "";
+        // $user = [];
+        // $message = "";
 
 
-        try {
-            $user = $this->getUser();
-            // si no se obtiene correctamente el usuario falla
-            if(is_null($user)) {
-                throw new \Exception('Something went wrong!');
-            }
+        // try {
+        //     $user = $this->getUser();
+        //     // si no se obtiene correctamente el usuario falla
+        //     if(is_null($user)) {
+        //         throw new \Exception('Something went wrong!');
+        //     }
 
-            // Agrega credenciales
-            MercadoPago\SDK::setAccessToken($this->accessTokenPrueba);
+        //     // Agrega credenciales
+        //     MercadoPago\SDK::setAccessToken($this->accessTokenPrueba);
 
-            // Crea un objeto de preferencia
-            $preference = new MercadoPago\Preference();
+        //     // Crea un objeto de preferencia
+        //     $preference = new MercadoPago\Preference();
         
-            // Crea un ítem en la preferencia
-            $item = new MercadoPago\Item();
-            $item->title = 'Mi producto';
-            $item->description = 'Descripción de Mi producto';
-            $item->quantity = 1;
-            $item->unit_price = 75;
-            $preference->items = array($item);   
-            $preference->save();
+        //     // Crea un ítem en la preferencia
+        //     $item = new MercadoPago\Item();
+        //     $item->title = 'Mi producto';
+        //     $item->description = 'Descripción de Mi producto';
+        //     $item->quantity = 1;
+        //     $item->unit_price = 75;
+        //     $preference->items = array($item);   
+        //     $preference->save();
         
 
-            // $idMarca = $request->request->get('idMarca');
-            // $idModelo = $request->request->get('idModelo');
-            // $idRepuesto = $request->request->get('idRepuesto');
-            // $imagenes = $request->request->get('imagenes');
-            // $observaciones = $request->request->get('observaciones');
+        //     // $idMarca = $request->request->get('idMarca');
+        //     // $idModelo = $request->request->get('idModelo');
+        //     // $idRepuesto = $request->request->get('idRepuesto');
+        //     // $imagenes = $request->request->get('imagenes');
+        //     // $observaciones = $request->request->get('observaciones');
  
-            // $repuesto = $this->obtenerRepuesto($idRepuesto);
-            // $modelo = $this->obtenerModeloAuto($idModelo);
-            // $marca = $this->obtenerMarcaAuto($idMarca);
+        //     // $repuesto = $this->obtenerRepuesto($idRepuesto);
+        //     // $modelo = $this->obtenerModeloAuto($idModelo);
+        //     // $marca = $this->obtenerMarcaAuto($idMarca);
 
-            // if(is_null($repuesto) || is_null($marca) || is_null($modelo) || is_null($imagenes)) {
-            //     throw new \Exception('Something went wrong!');
-            // }
+        //     // if(is_null($repuesto) || is_null($marca) || is_null($modelo) || is_null($imagenes)) {
+        //     //     throw new \Exception('Something went wrong!');
+        //     // }
 
-            // $solicitud = new Solicitud();
-            // $solicitud->setSolicitante($user);
-            // $solicitud->setRepuesto($repuesto);
-            // // no necesito setear la marca por la relacion con 
-            // $solicitud->setModeloAuto($modelo);
-            // $solicitud->setObservacion($observaciones);
-            // $solicitud->setEstado($this->obtenerEstadoIniciada());
+        //     // $solicitud = new Solicitud();
+        //     // $solicitud->setSolicitante($user);
+        //     // $solicitud->setRepuesto($repuesto);
+        //     // // no necesito setear la marca por la relacion con 
+        //     // $solicitud->setModeloAuto($modelo);
+        //     // $solicitud->setObservacion($observaciones);
+        //     // $solicitud->setEstado($this->obtenerEstadoIniciada());
 
-            // // $recurso->set
-            // $errorFiles = '';
-            // foreach($imagenes as $index => $imagen) {
-            //     $recurso = new RecursoSolicitud();
-            //     $imagenBase64 = $imagen['dataURL'];
-            //     $recurso->setBase64($imagenBase64);
-            //     $recurso->obtenerNombreLogico($index,$repuesto->getName());
-            //     $recurso->setDirectorio($this->getParameter('kernel.project_dir'));
-            //     $solicitud->addRecurso($recurso);
-            // }
+        //     // // $recurso->set
+        //     // $errorFiles = '';
+        //     // foreach($imagenes as $index => $imagen) {
+        //     //     $recurso = new RecursoSolicitud();
+        //     //     $imagenBase64 = $imagen['dataURL'];
+        //     //     $recurso->setBase64($imagenBase64);
+        //     //     $recurso->obtenerNombreLogico($index,$repuesto->getName());
+        //     //     $recurso->setDirectorio($this->getParameter('kernel.project_dir'));
+        //     //     $solicitud->addRecurso($recurso);
+        //     // }
 
-            // $formErrors = $this->obtenerErrores($solicitud,$validator);
+        //     // $formErrors = $this->obtenerErrores($solicitud,$validator);
 
-            // if($formErrors) {
-            //     $response = [
-            //         'code' => 0,
-            //         'error' => $formErrors,
-            //     ];
-            //     return new JsonResponse($response);
-            // }
+        //     // if($formErrors) {
+        //     //     $response = [
+        //     //         'code' => 0,
+        //     //         'error' => $formErrors,
+        //     //     ];
+        //     //     return new JsonResponse($response);
+        //     // }
 
-            // $em->persist($solicitud);
-            // $em->flush();
+        //     // $em->persist($solicitud);
+        //     // $em->flush();
  
-        } catch (Exception $ex) {
-            $code = 500;
-            $error = true;
-            $message = "Ocurrio un error al intentar agregar al usuario - Error: {$ex->getMessage()}";
-        }
+        // } catch (Exception $ex) {
+        //     $code = 500;
+        //     $error = true;
+        //     $message = "Ocurrio un error al intentar agregar al usuario - Error: {$ex->getMessage()}";
+        // }
  
-        $response = [
-            'code' => $code,
-            'error' => $error,
-            // 'data' => $code == 200 ? $user : $message,
-        ];
+        // $response = [
+        //     'code' => $code,
+        //     'error' => $error,
+        //     // 'data' => $code == 200 ? $user : $message,
+        // ];
  
-        return new Response($serializer->serialize($response, "json"));
+        // return new Response($serializer->serialize($response, "json"));
     }
 }

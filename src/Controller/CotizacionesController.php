@@ -32,7 +32,9 @@ use App\Entity\Persona;
 */
 class CotizacionesController extends AbstractController
 {
-    private $accessToken = 'TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015';
+    // private $accessToken = 'TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015';
+    private $accessToken = "TEST-6377095623153819-091715-cd70a72465f42ba608c0c7f8abe8fdd6-646196739";
+    
     // mercadopago cobra un 4.5
     private $comisionUsoPagina = 3;
 
@@ -110,6 +112,7 @@ class CotizacionesController extends AbstractController
             $cotizacion->setObservacion($observaciones);
             // obtengo el id de preferencia de mercado pago
             $cotizacion->setPreferencia($this->obtenerPreferencia($solicitud,$cotizacion));
+            $cotizacion->setComision(($this->comisionUsoPagina * $cotizacion->getMonto()) / 100);
 
             // $recurso->set
             $errorFiles = '';
@@ -276,9 +279,9 @@ class CotizacionesController extends AbstractController
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
         $preference->back_urls = array(
-            "success" => "/success",
-            "failure" => "/failure",
-            "pending" => "/pending"
+            "success" => "http://localhost/web_cotizacion_repuestos/public/mercadoPago/pagar",
+            "failure" => "http://localhost/web_cotizacion_repuestos/public/mercadoPago/pagar",
+            "pending" => "http://localhost/web_cotizacion_repuestos/public/mercadoPago/pagar"
         );
         // $preference->auto_return = "approved";
         $preference->payment_methods = array(
@@ -303,14 +306,14 @@ class CotizacionesController extends AbstractController
         $item->currency_id = "ARS";
 
 
-        $vendedor = $cotizacion->getOferente();
-        $persona = $this->obtenerPersona($vendedor);
+        $payer = $solicitud->getSolicitante();
+        $persona = $this->obtenerPersona($payer);
 
         $payer = new MercadoPago\Payer();
-        // $payer->name = $persona->getNombre();
-        // $payer->surname = $persona->getApellido();
+        $payer->name = $persona->getNombre();
+        $payer->surname = $persona->getApellido();
         $payer->email = $persona->getEmail();
-        // $payer->date_created = $cotizacion->getFechaAlta();
+        $payer->date_created = $cotizacion->getFechaAlta();
         // $payer->phone = array(
         //     "area_code" => $persona->getCodArea(),
         //     "number" => $persona->getTelefono()
@@ -321,18 +324,20 @@ class CotizacionesController extends AbstractController
 
         // calculamos el monto de comision 
         $comision = ($this->comisionUsoPagina * $cotizacion->getMonto()) / 100;
+        // $comision = 5;
         // 
         $preference->marketplace_fee = $comision;
         // lo dejo comentado pero se deberia hacer una funcion que mande un email notificando cuando se vende
         // TODO
-        // $preference->notification_url = "http://urlmarketplace.com/notification_ipn";
-
+        // $preference->notification_url = "http://localhost/web_cotizacion_repuestos/public/mercadoPago/pagar";
         $preference->save();
 
-        // dump($preference);
+        // dump($preference->init_point);
         // die;
 
-        return $preference->id;
+        // return $preference->id; ESTO NO FUNCIONA
+        // se usa lo siguiente para que haga redirect
+        return $preference->init_point;
     }
 
     private function obtenerPersona($usuario) {

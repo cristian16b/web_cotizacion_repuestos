@@ -47,7 +47,7 @@ class RegistrarVendedorController extends AbstractController
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "client_secret=TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015
+                CURLOPT_POSTFIELDS => "client_secret=TEST-6377095623153819-091715-cd70a72465f42ba608c0c7f8abe8fdd6-646196739
                 &code=".$code."
                 &grant_type=authorization_code
                 &redirect_uri=http%3A//localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor",
@@ -58,7 +58,6 @@ class RegistrarVendedorController extends AbstractController
               
             $json = curl_exec($curl);
             $response = json_decode($json, true);
-            // dump($response); 
             curl_close($curl);
             if(array_key_exists('message', $response)) {
                 throw new \Exception('Something went wrong!');

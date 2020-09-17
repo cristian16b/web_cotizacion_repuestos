@@ -199,7 +199,12 @@ class Fila extends React.Component {
                 <div align="right">
                   <div className="col-12 col-sm-6 col-md-4 col-lg-4">
                     <form action="/procesar-pago" method="POST">
-                      <a href={'https://www.mercadopago.com.ar/checkout/v1/modal/?preference-id=' + elemento.preferencia } 
+                      {/* <a href={'https://www.mercadopago.com.ar/checkout/v1/modal/?preference-id=' + elemento.preferencia } 
+                        className="btn btn-primary btn-block"
+                        target="_self">
+                          PAGAR!
+                      </a>    */}
+                      <a href={elemento.preferencia } 
                         className="btn btn-primary btn-block"
                         target="_self">
                           PAGAR!

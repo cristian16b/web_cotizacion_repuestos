@@ -93,6 +93,11 @@ class Cotizacion
      */
     private $preferencia;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $comision;
+
     public function __construct()
     {
         $this->recursoCotizacions = new ArrayCollection();
@@ -251,6 +256,18 @@ class Cotizacion
                 $recursoCotizacion->setCotizacion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getComision(): ?string
+    {
+        return $this->comision;
+    }
+
+    public function setComision(string $comision): self
+    {
+        $this->comision = $comision;
 
         return $this;
     }
