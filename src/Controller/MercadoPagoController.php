@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cotizacion;
 use App\Entity\MarcaAuto;
 use App\Entity\ModeloAuto;
 use App\Entity\Repuesto;
@@ -27,6 +28,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
 use DateTime;
 use MercadoPago;
+use App\Entity\Compra;
 
 /**
  * @Route("/mercadoPago", name="mercadopago")
@@ -47,7 +49,23 @@ class MercadoPagoController extends AbstractController
      */
     public function index(Request $request)
     {
-        dump($request);die;
+        die('proceso de registro de ventas en construccion');
+        $idPagoML = $request->query->get('collection_id');
+        $estadoPagoML = $request->query->get('collection_status');
+        $estadoDetalleML = $request->query->get('merchant_order_id');
+        $tipoPagoML = $request->query->get('payment_type');
+        $preference_id = $request->query->get('preference_id');
+
+        $compra = new Compra();
+        $compra->setIdPagoML($idPagoML);
+        $compra->setPreferenciaIdML($preference_id);
+        $compra->setEstadoDetalleML($estadoDetalleML);
+        $compra->setEstadoPagoML($estadoPagoML);
+        $compra->setTipoPagoML($tipoPagoML);
+            
+        $em = $this->getDoctrine()->getManager();
+        // $cotizacion = $em->getRepository(Solicitud::class)
+        //         ->buscarUltimasPorId($user);
         return $this->render('mercado_pago/index.html.twig', [
             'controller_name' => 'MercadoPagoController',
         ]);

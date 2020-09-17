@@ -63,11 +63,6 @@ class Compra
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $referenciaExternaML;
-
-    /**
-     * @ORM\Column(type="string", length=255)
      * @Expose
      */
     private $estadoML;
