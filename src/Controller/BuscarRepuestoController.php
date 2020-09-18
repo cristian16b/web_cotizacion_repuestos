@@ -143,7 +143,6 @@ class BuscarRepuestoController extends AbstractController
                 $recurso->setDirectorio($this->getParameter('kernel.project_dir'));
                 $solicitud->addRecurso($recurso);
             }
-
             $formErrors = $this->obtenerErrores($solicitud,$validator);
 
             if($formErrors) {

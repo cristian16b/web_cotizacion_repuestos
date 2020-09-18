@@ -12,7 +12,7 @@ class Home extends React.Component {
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
           <h5>Eisen Part</h5>
             <img  className="card-img-top img-fluid"
-                  src="https://i.ibb.co/pzH2yTP/Eisen-Aplicativo03.jpg" 
+                  src="https://www.eisenparts.com/imagenes/Eisen_Aplicativo02.jpg" 
                   alt="Cargando..." 
                   border="0">
             </img> 

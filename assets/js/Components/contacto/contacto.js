@@ -90,12 +90,12 @@ class Contacto extends React.Component {
     }
 
     if(this.state.nombreApellido.length == 0) {
-      errors["nombreApellido"] = "Debe ingresar nuevamente la contraseña";
+      errors["nombreApellido"] = "Debe ingresar su nombre y apellido";
       formularioValido = false;
     }
 
     if(this.state.mensaje.length == 0) {
-      errors["mensaje"] = "La contraseña no puede estar vacia";
+      errors["mensaje"] = "Debe ingresar su consulta";
       formularioValido = false;
     }
 

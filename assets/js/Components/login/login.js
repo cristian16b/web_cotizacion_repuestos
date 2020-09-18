@@ -260,6 +260,17 @@ class Login extends React.Component {
                                     border="0">
                                 </img>  */}
                                 <h5 className="text-center">Ingresar</h5>
+                                <div className="row justify-content-center">
+                                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <img  className="card-img-top img-fluid"
+                                        src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts.png" 
+                                        alt="Cargando..." 
+                                        height="100"
+                                        border="0"
+                                    >
+                                    </img>
+                                    </div>
+                                </div>
                                 <div className="form-group">
                                     <span className="text-danger error_negrita">
                                         {this.state.errorApi}

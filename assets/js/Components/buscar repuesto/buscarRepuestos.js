@@ -119,7 +119,7 @@ class BuscarRepuesto extends React.Component {
             Authorization: `Bearer ${this.props.token}`
         }
     };
-    // console.log(config);
+    // console.log(payload);
     this.setState({isLoading: true});
     axios.post(API_GUARDAR_SOLICITUD_REPUESTO,payload,config)
         .then(response => {
