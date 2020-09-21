@@ -12,7 +12,7 @@ class FormularioDatosComunes extends React.Component {
       <div className="form-group">
       <label htmlFor="apellido">Apellido</label>
         <div className="input-group">
-          <span className="input-group-addon"><i className="fa fa-user"></i></span>
+          <span className="input-group-addon"></span>
             {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
             <input type="text" className="form-control" name="apellido" 
                     readOnly={this.props.soloLectura}
@@ -32,7 +32,7 @@ class FormularioDatosComunes extends React.Component {
       <div className="form-group">
       <label htmlFor="apellido">Nombre</label>
         <div className="input-group">
-          <span className="input-group-addon"><i className="fa fa-user"></i></span>
+          <span className="input-group-addon"></span>
             {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
             <input type="text" className="form-control" name="nombre" 
                                 readOnly={this.props.soloLectura}
@@ -54,7 +54,7 @@ class FormularioDatosComunes extends React.Component {
                   <div className="form-group">
                     <label htmlFor="codArea">Código de área</label>
                     <div className="input-group">
-                      <span className="input-group-addon"><i className="fa fa-user"></i></span>
+                      <span className="input-group-addon"></span>
                           <input type="text" className="form-control" name="codArea" 
                                               readOnly={this.props.soloLectura}
                                                       defaultValue={this.props.codArea} onChange={handleChangeInput}
@@ -69,7 +69,7 @@ class FormularioDatosComunes extends React.Component {
                   <div className="form-group">
                     <label htmlFor="telefono">Telefóno</label>
                       <div className="input-group">
-                        <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                        <span className="input-group-addon"></span>
                           <input type="text" className="form-control" name="telefono" 
                                               readOnly={this.props.soloLectura}
                                                       defaultValue = {this.props.telefono} onChange={handleChangeInput}
@@ -90,7 +90,7 @@ class FormularioDatosComunes extends React.Component {
       <div className="form-group">
       <label htmlFor="email">Email</label>
       <div className="input-group">
-        <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+        <span className="input-group-addon"></span>
           <input type="text" className="form-control" name="email" 
                               readOnly={this.props.soloLectura}
                                       defaultValue = {this.props.email} onChange={handleChangeInput}
@@ -116,7 +116,7 @@ class FormularioDatosComunes extends React.Component {
             </span> 
           </div>
           <div className="input-group">
-            <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+            <span className="input-group-addon"></span>
               <input type="password" className="form-control" name="password" 
                                           defaultValue = {this.props.password} onChange={handleChangeInput}
                                           placeholder="Ingrese su contraseña" />	
@@ -130,7 +130,7 @@ class FormularioDatosComunes extends React.Component {
         <div className="form-group">
         <label htmlFor="password2">Ingresela de nuevo</label>
           <div className="input-group">
-            <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+            <span className="input-group-addon"></span>
               <input type="password" className="form-control" name="password2" 
                                           defaultValue = {this.props.password2} onChange={handleChangeInput}
                                           placeholder="Escribala de nuevo" />	

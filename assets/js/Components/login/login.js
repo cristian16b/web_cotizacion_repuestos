@@ -202,7 +202,7 @@ class Login extends React.Component {
         return(
             <div className="form-group">
                 <div className="input-group">
-                    <span className="input-group-addon"><i className="fa fa-user"></i></span>
+                    <span className="input-group-addon"></span>
                     {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                     <input type="text" className="form-control" name="username" 
                             defaultValue={this.state.username} onChange={this.cambioUsername}
@@ -219,7 +219,7 @@ class Login extends React.Component {
         return(
             <div className="form-group">
                 <div className="input-group">
-                    <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                    <span className="input-group-addon"></span>
                         <input type="password" className="form-control" name="password" 
                         defaultValue = {this.state.password} onChange={this.cambioPassword}
                         placeholder="Ingrese su contraseña" />	

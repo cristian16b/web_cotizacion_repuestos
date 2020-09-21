@@ -21,7 +21,7 @@ class FormularioDatosComerciante extends React.Component {
           <div className="form-group">
             <label htmlFor="calle">Calle</label>
               <div className="input-group">
-                <span className="input-group-addon"><i className="fa fa-user"></i></span>
+                <span className="input-group-addon"></span>
                   {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                   <input type="text" className="form-control" name="calle" 
                                       readOnly={this.props.soloLectura}
@@ -38,7 +38,7 @@ class FormularioDatosComerciante extends React.Component {
             <div className="form-group">
             <label htmlFor="nro">Nro.</label>
               <div className="input-group">
-                <span className="input-group-addon"><i className="fa fa-user"></i></span>
+                <span className="input-group-addon"></span>
                   {/* importante los elementos input deben terminar así: <input /> y no <input></input> porque genera error */}
                   <input type="text" className="form-control" name="nro" 
                                       readOnly={this.props.soloLectura}

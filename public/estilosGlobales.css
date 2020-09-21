@@ -32,9 +32,10 @@ h1,h2,h3,h4,h5 {
     font-weight: bold;
     /* color: rgb(21, 61, 87); */
     color: rgba(244,179,27);
-    background-color: rgb(21, 61, 87);
+    background-color: rgba(21, 61, 87);
     padding-left: 10%;
     border-radius: 25px;
+    opacity:0.9;
 }
 
 /* h5 {
