@@ -47,10 +47,10 @@ class RegistrarVendedorController extends AbstractController
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "client_secret=TEST-6377095623153819-091715-cd70a72465f42ba608c0c7f8abe8fdd6-646196739
+                CURLOPT_POSTFIELDS => "client_secret=".$this->getParameter('clienteSecretoMercadoPago')."
                 &code=".$code."
                 &grant_type=authorization_code
-                &redirect_uri=http%3A//localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor",
+                &redirect_uri=".$this->getParameter('urlRedirectMercadoPago'),
                 CURLOPT_HTTPHEADER => array(
                   "Content-Type: application/x-www-form-urlencoded"
                 ),
@@ -82,6 +82,7 @@ class RegistrarVendedorController extends AbstractController
 
         return $this->render('registrar_vendedor/index.html.twig', [
             'bandera' => $bandera,
+            'url' => $this->getParameter('url'),
         ]);
     }
 

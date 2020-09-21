@@ -4,6 +4,34 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    # la url base del sistema
+    # localmente
+    url: http://localhost/web_cotizacion_repuestos/public/
+    # produccion
+    # url: https://www.eisenparts.com/
+
+    # app id de la aplicacion registrada en mercadopago
+    # localmente
+    appIdMercadoPago: 6377095623153819
+    # produccion
+
+    # cliente secreto de mercadopago
+    # local
+    clienteSecretoMercadoPago: TEST-6377095623153819-091715-cd70a72465f42ba608c0c7f8abe8fdd6-646196739
+    # prod
+
+    # url a la que se redirect cuando se registra correctamente el vendedor
+    # local
+    urlRedirectMercadoPago: http://localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor
+    # prod
+    # urlRedirectMercadoPago: https://www.eisenparts.com/login
+
+    # url a la que se redirect al vendedor cuando se quiere obtener su id
+    # esto es previo a ejecutar el curl para obtener los tokens de autorizacion y de refrescado (expira cada 6 meses)
+    # localmente 
+    urlObtenerIdVendedorMercadoPago: http://localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor
+    # prod 
+
 
 services:
     # default configuration for services in *this* file

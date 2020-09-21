@@ -30,7 +30,7 @@ class AuthenticationSuccessListener extends AbstractController
                 // si no tiene credencial debemos solicitarlas
                 if(empty($credencial)) {
                     $tieneCredencialML = false;
-                    $urlML = "https://auth.mercadopago.com.ar/authorization?client_id=6377095623153819&response_type=code&platform_id=mp&state=id=".$usuario->getTokenProvisorioMP()."=&redirect_uri=http://localhost/web_cotizacion_repuestos/public/index.php/vincular/vendedor";
+                    $urlML = "https://auth.mercadopago.com.ar/authorization?client_id=".$this->getParameter('appIdMercadoPago')."&response_type=code&platform_id=mp&state=id=".$usuario->getTokenProvisorioMP()."=&redirect_uri=".$this->getParameter('urlObtenerIdVendedorMercadoPago');
                 }
             }
             $event->setData([
