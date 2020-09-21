@@ -89,6 +89,8 @@ class MultipleImageUploadComponent extends React.Component {
                                             <div className="image-item__btn-wrapper">
                                                 <button className="btn btn-warning" onClick={image.onRemove}>Eliminar</button>
                                             </div>
+                                            <br></br>
+                                            <br></br>
                                         </div>
                                     </div>
                                 </div>
