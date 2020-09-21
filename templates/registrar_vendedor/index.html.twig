@@ -3,7 +3,7 @@
 <div class="containerColorFondo">
 {% if bandera %}
 <div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Operación exitosa</h4>
+  <h4>Operación exitosa</h4>
   <hr>
   <p class="mb-0">Hemos vinculado correctamente tu cuenta con MercadoPago. Para comenzar operar debes hacer click en el siguient enlace: <a href="http://localhost/web_cotizacion_repuestos/public/" class="alert-link">Ingresar</a></p>
   <p class="mb-0">Seras redirigido al login del sistema, usando tu usuario/contraseña podrás ingresar.</p>
@@ -13,13 +13,13 @@
   <h4 class="alert-heading">Ha ocurrido un error</h4>
   <hr>
   <p class="mb-0">Ocurrio un error inesperado, intente nuevamente mas tarde. Para volver al inicio haga click en el siguiente enlace.</p>
-  <a href="http://localhost/web_cotizacion_repuestos/public/" class="alert-link">Volver</a>
+  <a href="http://localhost/web_cotizacion_repuestos/public/login" class="alert-link">Volver</a>
 </div>
 {% endif %}
 </div>
 {% block stylesheets %}
-    <!-- Bootstrap core CSS -->
-    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./estilosGlobales.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="https://www.eisenparts.com/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://www.eisenparts.com/estilosGlobales.css" rel="stylesheet">
 {% endblock %}
 {% endblock %}
