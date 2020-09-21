@@ -130,6 +130,6 @@ h1,h2,h3,h4,h5 {
 	color:rgba(244,179,27);
 }
 
-input[readonly=""] {
-    background-color: red;
+.iconoColor {
+    color:rgba(244,179,27);
 }
