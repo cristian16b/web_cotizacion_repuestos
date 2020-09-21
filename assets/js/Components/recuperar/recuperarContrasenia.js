@@ -160,7 +160,7 @@ class RecuperarContrasenia extends React.Component {
       <div className="form-group">
       <label htmlFor="email">Email</label>
       <div className="input-group">
-        <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+        <span className="input-group-addon"></span>
           <input type="text" className="form-control" name="email" 
                               readOnly={this.state.soloLectura}
                                       defaultValue = {this.state.email} onChange={this.handleChangeInput}
@@ -205,7 +205,7 @@ class RecuperarContrasenia extends React.Component {
             </span> 
           </div>
           <div className="input-group">
-            <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+            <span className="input-group-addon"></span>
               <input type="password" className="form-control" name="password" 
                                           defaultValue = {this.state.password} onChange={this.handleChangeInput}
                                           placeholder="Ingrese su nueva contraseña" />	
@@ -219,7 +219,7 @@ class RecuperarContrasenia extends React.Component {
         <div className="form-group">
         <label htmlFor="password2">Ingresela de nuevo</label>
           <div className="input-group">
-            <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+            <span className="input-group-addon"></span>
               <input type="password" className="form-control" name="password2" 
                                           defaultValue = {this.state.password2} onChange={this.handleChangeInput}
                                           placeholder="Escribala de nuevo" />	

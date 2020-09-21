@@ -125,7 +125,7 @@ class MisCotizaciones extends React.Component {
             <div className="form-group">
               <label htmlFor="password">Buscar repuesto solicitado</label>
               <div className="input-group">
-                <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                <span className="input-group-addon"></span>
                   <input type="text" className="form-control" name="repuestoBuscar" 
                                               defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
                                               placeholder="Escribala el repuesto que solicito" />	
