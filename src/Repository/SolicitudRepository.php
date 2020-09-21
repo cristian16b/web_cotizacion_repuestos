@@ -59,6 +59,7 @@ class SolicitudRepository extends ServiceEntityRepository
                             rc.fechaBaja IS NULL
                     ORDER BY c.monto ASC
                 )
+                ORDER BY s.id DESC
         ";
 
         return $em->createQuery($dql)->setParameter('usuario', $usuario)->getResult();
