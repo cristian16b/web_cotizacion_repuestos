@@ -77,7 +77,6 @@ renderBotonesUsuarioComercio () {
                 </div>
                 <hr></hr>
                 <div className="row justify-content-center">
-                    <i className="fa fa-user fa-5x"></i><br/>
                     <button onClick={this.cambioComerciante} className="btn btn-secondary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
                       <b>
                         Vendedor
