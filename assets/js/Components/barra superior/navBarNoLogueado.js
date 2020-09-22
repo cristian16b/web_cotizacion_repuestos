@@ -23,21 +23,21 @@ class NavbarNoLogueado extends React.Component {
                                     */}
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
                                         <Link to="/" className="navbar-brand">
-                                            <i class="fa fa-hand-o-right iconoColor">
+                                            <i className="fa fa-hand-o-right iconoColor">
                                             </i>
                                             <span className="nav-link">¿Quienes somos?</span>
                                         </Link>
                                 </li>
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/registrarme")}>
                                         <Link to="/registrarme" className="navbar-brand">
-                                            <i class="fa fa fa-edit iconoColor">
+                                            <i className="fa fa fa-edit iconoColor">
                                             </i>
                                             <span className="nav-link">Registrarme</span>
                                         </Link>
                                 </li>
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/contacto")}>
                                         <Link to="/contacto" className="navbar-brand">
-                                            <i class="fa fa-envelope-o iconoColor">
+                                            <i className="fa fa-envelope-o iconoColor">
                                             </i>
                                             <span className="nav-link">¿Dudas, Consultas?</span>
                                         </Link>
@@ -46,7 +46,7 @@ class NavbarNoLogueado extends React.Component {
                             <ul className="nav navbar-nav navbar-right">
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/login")}>
                                     <Link to="/login" className="navbar-brand">
-                                        <i class="fa fa-sign-in iconoColor">
+                                        <i className="fa fa-sign-in iconoColor">
                                         </i>
                                         <span className="nav-link">Ingresar</span>
                                     </Link>
