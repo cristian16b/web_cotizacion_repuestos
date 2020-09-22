@@ -31,7 +31,7 @@ class HomeUsuario extends React.Component {
           <div className="card shadow-sm p-3 mb-5 bg-white rounded">
             <div className="row justify-content-center">
               <div className="col-12 col-sm-12 col-md-12 col-lg-11">
-                <h5>Eisen Part</h5>
+                <h5>Cotizaciones recibidas</h5>
               </div>
             </div>
             <div className="row justify-content-center">

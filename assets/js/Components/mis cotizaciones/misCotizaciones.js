@@ -156,26 +156,18 @@ class MisCotizaciones extends React.Component {
       return <Redirect to = {{ pathname: "/login" }} />
     if(this.state.isLoading == true)
       return  <Loading></Loading>
-    return (        
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-            <div className="card shadow-sm p-3 mb-5 bg-white rounded">
-              <div className="card-body">
-                <h5>Mis Pedidos</h5>
-                <p>Listado de las últimas solicitudes generadas</p>
+    return (  
+            <>
                 <hr/>
                 <>{ this.renderFilTrosBusqueda() }</>
                 <hr/>
-                  <Tabla
+                <Tabla
                     misSolicitudes = {this.state.misSolicitudes}
                     token = {this.props.token}
                     reiniciar = {this.reiniciar}
                   >
-                  </Tabla>
-              </div>
-            </div>
-          </div>
-      </div>
+                </Tabla>
+            </>      
     );
   }
 }
