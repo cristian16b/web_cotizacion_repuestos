@@ -3,8 +3,8 @@ import React , { Component } from 'react';
 import Loading from '../loading/loading.js';
 import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
+import Salir from '../salir/salir.js';
 import Tabla from './Tabla.js';
-import { Redirect } from 'react-router';
 
 class MisCotizaciones extends React.Component {
 
@@ -153,7 +153,7 @@ class MisCotizaciones extends React.Component {
 
   render() {
     if(this.state.isLogin == false)
-      return <Redirect to = {{ pathname: "/login" }} />
+      return <Salir/>
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     return (        

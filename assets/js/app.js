@@ -99,7 +99,7 @@ class App extends React.Component {
           <div>
               <Switch>
                 <Redirect exact from='/login' to='/home'/>
-                <Route exact path="/home" component={HomeUsuario} />
+                <Route exact path="/home" render={() => <HomeUsuario token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/repuesto" render={() => <BuscarRepuesto token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} />

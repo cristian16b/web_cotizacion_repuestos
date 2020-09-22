@@ -6,7 +6,6 @@ import {API_REPUESTOS_FILTER,API_AUTO_MARCA_FILTER,API_AUTO_MODELO_FILTER,API_GU
 import axios from 'axios';
 import Loading from '../loading/loading.js';
 import { Redirect } from 'react-router';
-import Salir from '../salir/salir.js';
 
 class BuscarRepuesto extends React.Component {
 

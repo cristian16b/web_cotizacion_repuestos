@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import MisCotizaciones from '../mis cotizaciones/misCotizaciones';
 
 const div = {
   height: "100%",
@@ -23,6 +24,7 @@ class HomeUsuario extends React.Component {
   }
 
   render() {
+    // console.log(this.props);
     return (
       <div className="row justify-content-center" style={div}>
         <div className="col-12 col-sm-12 col-md-12 col-lg-11">
@@ -35,7 +37,11 @@ class HomeUsuario extends React.Component {
             <div className="row justify-content-center">
               <div className="col-12 col-sm-12 col-md-12 col-lg-11">
                 {/* <h5>Eisen Part</h5> */}
-                <p>Ultimas cotizaciones recibidas recibidas</p>
+                {/* <p>Ultimas cotizaciones recibidas recibidas</p> */}
+                <MisCotizaciones 
+                  token={this.props.token} 
+                  rol={this.props.rol}>
+                </MisCotizaciones>
               </div>
             </div>
             <div className="row justify-content-center" style={divListado}>
