@@ -8,8 +8,7 @@ class Home extends React.Component {
   }
   // https://i.ibb.co/pzH2yTP/Eisen-Aplicativo03.jpg
   render() {
-    return (        
-      <div>
+    return (     
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-12 col-lg-11">
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
@@ -72,7 +71,6 @@ class Home extends React.Component {
             </div>
           </div>
         </div> 
-      </div>
     );
   }
 }

@@ -29,14 +29,14 @@ class NavbarLogueado extends React.Component {
                         </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
                             <Link to="/solicitudes" className="navbar-brand">
-                            <i class="fa fa-file-text-o iconoColor">
+                            <i className="fa fa-file-text-o iconoColor">
                                             </i>
                                             <span className="nav-link">Solicitudes</span></Link>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
                             
                             <Link to="/perfil" className="navbar-brand">
-                                <i class="fa fa-drivers-license iconoColor">
+                                <i className="fa fa-drivers-license iconoColor">
                                 </i>
                                 <span className="nav-link">Mi perfil</span>
                             </Link>
@@ -46,7 +46,7 @@ class NavbarLogueado extends React.Component {
                         </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/salir")}>
                             <Link to="/salir" className="navbar-brand">
-                            <i class="fa fa-sign-out iconoColor">
+                            <i className="fa fa-sign-out iconoColor">
                                             </i>
                                             <span className="nav-link">Salir</span></Link>
                         </li>
@@ -73,19 +73,19 @@ class NavbarLogueado extends React.Component {
                         </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
                             <Link to="/repuesto" className="navbar-brand">
-                            <i class="fa fa-search iconoColor">
+                            <i className="fa fa-search iconoColor">
                                             </i>
                                 <span className="nav-link">Buscar un repuesto</span></Link>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
                             <Link to="/cotizaciones" className="navbar-brand">
-                            <i class="fa fa-file-text-o iconoColor">
+                            <i className="fa fa-file-text-o iconoColor">
                                             </i>
                                 <span className="nav-link">Mis pedidos</span></Link>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
                             <Link to="/perfil" className="navbar-brand">                            
-                                <i class="fa fa-drivers-license iconoColor">
+                                <i className="fa fa-drivers-license iconoColor">
                                             </i><span className="nav-link">Mi perfil</span></Link>
                         </li>
                         {/* <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/contacto")}>
@@ -93,7 +93,7 @@ class NavbarLogueado extends React.Component {
                         </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/salir")}>
                             <Link to="/salir" className="navbar-brand">
-                            <i class="fa fa-sign-out iconoColor">
+                            <i className="fa fa-sign-out iconoColor">
                                             </i>    
                                 <span className="nav-link">Salir</span></Link>
                         </li>
