@@ -57,10 +57,9 @@ class App extends React.Component {
   returnTemplateLogueado = () => {
     if(this.state.rol == ROL_COMERCIANTE && this.state.credencialML == true)
       return (
-        <div className="row">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+        <>
           <NavbarLogueado rol={this.state.rol}/>
-          <div className="containerCentral">
+          <div>
               <Switch>
                 <Redirect exact from='/login' to='/solicitudes'/>
                 <Route exact path="/" component={Home} />
@@ -72,15 +71,13 @@ class App extends React.Component {
               </Switch>
             </div>
           <PiePagina />
-        </div>
-      </div>
+      </>
       )
       if(this.state.rol == ROL_COMERCIANTE && this.state.credencialML == false)
       return (
-        <div className="row">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+        <>
           <NavbarLogueado rol={this.state.rol}/>
-          <div className="containerCentral">
+          <div>
               <Switch>
                 <Redirect exact from='/login' to='/registrarML'/>
                 <Redirect exact from="/" to='/registrarML'/>
@@ -94,14 +91,12 @@ class App extends React.Component {
               </Switch>
           </div>
           <PiePagina />
-        </div>
-      </div>
+      </>
       )
     return (
-      <div className="row">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+      <>
           <NavbarLogueado rol={this.state.rol}/>
-          <div className="containerCentral">
+          <div>
               <Switch>
                 <Redirect exact from='/login' to='/home'/>
                 <Route exact path="/home" component={HomeUsuario} />
@@ -114,17 +109,15 @@ class App extends React.Component {
               </Switch>
             </div>
           <PiePagina />
-        </div>
-      </div>
+      </>
     );
   }
 
   returnTemplateNoLogueado = () => {
     return (
-      <div className="row">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+      <>
           <NavbarNoLogueado />    
-              <div className="containerCentral">
+              <div>
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/repuesto" component={BuscarRepuesto} />
@@ -135,8 +128,7 @@ class App extends React.Component {
                   </Switch>
               </div>
           <PiePagina />
-        </div>
-      </div>
+      </>
     );
   }
 
