@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 10-08-2020 a las 23:09:58
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.4.7
+-- Servidor: localhost:3306
+-- Tiempo de generación: 22-09-2020 a las 17:55:17
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,8 +31,14 @@ CREATE TABLE `compra` (
   `id` int(11) NOT NULL,
   `fecha_alta` date NOT NULL,
   `fecha_baja` date DEFAULT NULL,
-  `id_mercado_pago` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `monto` double NOT NULL
+  `monto` double NOT NULL,
+  `id_pago_ml` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_pago_ml` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `referencia_externa` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `preferencia_id_ml` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_ml` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_detalle_ml` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_pago_ml` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -43,13 +49,13 @@ CREATE TABLE `compra` (
 
 CREATE TABLE `constancia_persona` (
   `id` int(11) NOT NULL,
+  `tipo_id` int(11) NOT NULL,
+  `persona_id` int(11) NOT NULL,
   `nombre_logico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nombre_fisico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `pesgo_mega` double NOT NULL,
   `fecha_alta` date NOT NULL,
-  `fecha_baja` date DEFAULT NULL,
-  `tipo_id` int(11) NOT NULL,
-  `persona_id` int(11) NOT NULL
+  `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -66,7 +72,26 @@ CREATE TABLE `cotizacion` (
   `fecha_alta` date NOT NULL,
   `fecha_baja` date DEFAULT NULL,
   `monto` double NOT NULL,
-  `fecha_limite_validez` date NOT NULL
+  `fecha_limite_validez` date NOT NULL,
+  `observacion` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `preferencia` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comision` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `credencial_ml`
+--
+
+CREATE TABLE `credencial_ml` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `token_acceso` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token_actualizar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_alta` date NOT NULL,
+  `fecha_baja` date DEFAULT NULL,
+  `fecha_ultima_actualizacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -82,7 +107,6 @@ CREATE TABLE `domicilio` (
   `numero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -96,15 +120,6 @@ CREATE TABLE `estado_cotizacion` (
   `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `estado_cotizacion`
---
-
-INSERT INTO `estado_cotizacion` (`id`, `descripcion`, `fecha_alta`, `fecha_baja`) VALUES
-(1, 'ENVIADA', '2020-08-05', NULL),
-(2, 'ACEPTADA', '0000-00-00', NULL),
-(3, 'RECHAZADA', '0000-00-00', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -117,15 +132,6 @@ CREATE TABLE `estado_solicitud` (
   `fecha_alta` date NOT NULL,
   `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `estado_solicitud`
---
-
-INSERT INTO `estado_solicitud` (`id`, `descripcion`, `fecha_alta`, `fecha_baja`) VALUES
-(1, 'INICIADA', '2020-08-06', NULL),
-(2, 'CANCELADA', '2020-08-06', NULL),
-(3, 'FINALIZADA', '2020-08-06', NULL);
 
 -- --------------------------------------------------------
 
@@ -2526,8 +2532,7 @@ INSERT INTO `localidad` (`id`, `provincia_id`, `name`) VALUES
 (2379, 25, 'Villa Quinteros'),
 (2380, 25, 'Yánima'),
 (2381, 25, 'Yerba Buena'),
-(2382, 25, 'Yerba Buena (S)'),
-(2383, 22, 'Santa Fe');
+(2382, 25, 'Yerba Buena (S)');
 
 -- --------------------------------------------------------
 
@@ -2615,6 +2620,8 @@ INSERT INTO `marca_auto` (`id`, `name`, `mla_id`, `fecha_alta`, `fecha_baja`) VA
 (65, 'Otras Marcas', 'MLA1939', '2020-05-21', NULL);
 
 -- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `modelo_auto`
 --
 
@@ -3615,6 +3622,22 @@ INSERT INTO `provincia` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recurso_cotizacion`
+--
+
+CREATE TABLE `recurso_cotizacion` (
+  `id` int(11) NOT NULL,
+  `cotizacion_id` int(11) NOT NULL,
+  `nombre_logico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_fisico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_alta` date NOT NULL,
+  `fecha_baja` date DEFAULT NULL,
+  `peso_mega` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `recurso_solicitud`
 --
 
@@ -3892,12 +3915,13 @@ CREATE TABLE `solicitud` (
   `compra_id` int(11) DEFAULT NULL,
   `solicitante_id` int(11) NOT NULL,
   `repuesto_id` int(11) NOT NULL,
+  `estado_id` int(11) NOT NULL,
   `observacion` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_alta` date NOT NULL,
-  `fecha_baja` date DEFAULT NULL,
-  `estado_id` int(11) NOT NULL
+  `fecha_baja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tipo_constancia`
@@ -3914,7 +3938,7 @@ CREATE TABLE `tipo_constancia` (
 
 INSERT INTO `tipo_constancia` (`id`, `nombre`) VALUES
 (1, 'DNI'),
-(2, 'INSCRIPCIÒN AFIP');
+(2, 'Inscripción AFIP');
 
 -- --------------------------------------------------------
 
@@ -3975,9 +3999,12 @@ CREATE TABLE `usuario` (
   `social_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `social_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha_baja` date DEFAULT NULL,
-  `confirmado` tinyint(1) NOT NULL DEFAULT 0
+  `confirmado` tinyint(1) NOT NULL DEFAULT 0,
+  `token_correo_confirmacion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token_provisorio_mp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
 -- Índices para tablas volcadas
 --
 
@@ -4003,6 +4030,13 @@ ALTER TABLE `cotizacion`
   ADD KEY `estado_id` (`estado_id`),
   ADD KEY `oferente_id` (`oferente_id`),
   ADD KEY `solicitud_id` (`solicitud_id`);
+
+--
+-- Indices de la tabla `credencial_ml`
+--
+ALTER TABLE `credencial_ml`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_ED9648D3DB38439E` (`usuario_id`);
 
 --
 -- Indices de la tabla `domicilio`
@@ -4035,6 +4069,7 @@ ALTER TABLE `localidad`
 --
 ALTER TABLE `marca_auto`
   ADD PRIMARY KEY (`id`);
+
 --
 -- Indices de la tabla `modelo_auto`
 --
@@ -4047,8 +4082,8 @@ ALTER TABLE `modelo_auto`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_usuario` (`usuario_id`),
-  ADD UNIQUE KEY `UNIQ_email` (`email`),
+  ADD UNIQUE KEY `UNIQ_51E5B69BE7927C74` (`email`),
+  ADD UNIQUE KEY `UNIQ_51E5B69BDB38439E` (`usuario_id`),
   ADD KEY `domicilio_id` (`domicilio_id`);
 
 --
@@ -4056,6 +4091,13 @@ ALTER TABLE `persona`
 --
 ALTER TABLE `provincia`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `recurso_cotizacion`
+--
+ALTER TABLE `recurso_cotizacion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cotizacion_id` (`cotizacion_id`);
 
 --
 -- Indices de la tabla `recurso_solicitud`
@@ -4076,7 +4118,7 @@ ALTER TABLE `repuesto`
 --
 ALTER TABLE `solicitud`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_compra` (`compra_id`),
+  ADD UNIQUE KEY `UNIQ_96D27CC0F2E704D7` (`compra_id`),
   ADD KEY `modelo_auto_id` (`modelo_auto_id`),
   ADD KEY `solicitante_id` (`solicitante_id`),
   ADD KEY `repuesto_id` (`repuesto_id`),
@@ -4100,7 +4142,7 @@ ALTER TABLE `tipo_repuesto`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_username` (`username`);
+  ADD UNIQUE KEY `UNIQ_2265B05DF85E0677` (`username`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -4116,37 +4158,43 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de la tabla `constancia_persona`
 --
 ALTER TABLE `constancia_persona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cotizacion`
 --
 ALTER TABLE `cotizacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `credencial_ml`
+--
+ALTER TABLE `credencial_ml`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_cotizacion`
 --
 ALTER TABLE `estado_cotizacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_solicitud`
 --
 ALTER TABLE `estado_solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `localidad`
 --
 ALTER TABLE `localidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2384;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2383;
 
 --
 -- AUTO_INCREMENT de la tabla `marca_auto`
@@ -4164,7 +4212,7 @@ ALTER TABLE `modelo_auto`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `provincia`
@@ -4173,10 +4221,16 @@ ALTER TABLE `provincia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT de la tabla `recurso_cotizacion`
+--
+ALTER TABLE `recurso_cotizacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `recurso_solicitud`
 --
 ALTER TABLE `recurso_solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `repuesto`
@@ -4188,13 +4242,13 @@ ALTER TABLE `repuesto`
 -- AUTO_INCREMENT de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_constancia`
 --
 ALTER TABLE `tipo_constancia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_repuesto`
@@ -4206,7 +4260,7 @@ ALTER TABLE `tipo_repuesto`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -4226,6 +4280,12 @@ ALTER TABLE `cotizacion`
   ADD CONSTRAINT `FK_44A5EC031CB9D6E4` FOREIGN KEY (`solicitud_id`) REFERENCES `solicitud` (`id`),
   ADD CONSTRAINT `FK_44A5EC039F5A440B` FOREIGN KEY (`estado_id`) REFERENCES `estado_cotizacion` (`id`),
   ADD CONSTRAINT `FK_44A5EC03FE09A557` FOREIGN KEY (`oferente_id`) REFERENCES `usuario` (`id`);
+
+--
+-- Filtros para la tabla `credencial_ml`
+--
+ALTER TABLE `credencial_ml`
+  ADD CONSTRAINT `FK_ED9648D3DB38439E` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `domicilio`
@@ -4251,6 +4311,12 @@ ALTER TABLE `modelo_auto`
 ALTER TABLE `persona`
   ADD CONSTRAINT `FK_51E5B69B166FC4DD` FOREIGN KEY (`domicilio_id`) REFERENCES `domicilio` (`id`),
   ADD CONSTRAINT `FK_51E5B69BDB38439E` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
+
+--
+-- Filtros para la tabla `recurso_cotizacion`
+--
+ALTER TABLE `recurso_cotizacion`
+  ADD CONSTRAINT `FK_132EEF1A307090AA` FOREIGN KEY (`cotizacion_id`) REFERENCES `cotizacion` (`id`);
 
 --
 -- Filtros para la tabla `recurso_solicitud`
