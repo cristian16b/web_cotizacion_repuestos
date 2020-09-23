@@ -56,8 +56,7 @@ h1,h2,h3,h4,h5 {
 
 /* Modify the backgorund color */ 
 .navbar-custom { 
-    /* background-color: #fff159;  */
-    background-color: rgba(244,179,27);
+    background-color: #fff159; 
 } 
 
 /* Set the border color to the desired color */ 
@@ -84,7 +83,8 @@ h1,h2,h3,h4,h5 {
 } 
 
 .nav-link-blanco {
-    color: black; 
+    /* color: black;  */
+    color:  rgb(21, 61, 87);
 }
 
 
@@ -139,6 +139,6 @@ h1,h2,h3,h4,h5 {
 }
 
 .iconoColor {
-    /* color:rgba(244,179,27); */
-    color: black;
+    color: rgb(21, 61, 87);
+    /* color: black; */
 }
