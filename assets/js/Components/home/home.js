@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
-import Carousel from 'react-bootstrap/Carousel'
+import Carousel from 'react-bootstrap/Carousel';
+
 
 class Home extends React.Component {
 
@@ -9,13 +10,10 @@ class Home extends React.Component {
   // https://i.ibb.co/pzH2yTP/Eisen-Aplicativo03.jpg
   render() {
     return (     
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
-            <div className="card shadow-sm p-3 mb-5 bg-white rounded">
-            <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
-          <h5>Eisen Part</h5>
-              <Carousel>
+      <div>
+        <div className="row justify-content-center altoCarruselImagenes">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          <Carousel>
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
@@ -63,6 +61,14 @@ class Home extends React.Component {
                   </Carousel.Caption> */}
                 </Carousel.Item>
               </Carousel>
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+            <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+            <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+          <h5>Eisen Part</h5>
               </div>
             </div>
               <div className="card-body">
@@ -71,6 +77,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div> 
+      </div>
     );
   }
 }

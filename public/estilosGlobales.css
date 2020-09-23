@@ -9,9 +9,9 @@ body {
 }
 
 .containerColorFondo {
-    
-    background: rgba(21, 61, 87);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 20%, rgba(83,89,95,1) 100%); 
+    background: #ebebeb;
+    /* background: rgba(21, 61, 87);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 20%, rgba(83,89,95,1) 100%);  */
 }
 
 footer {
@@ -20,7 +20,8 @@ footer {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: rgba(244,179,27);
+    /* background: rgba(244,179,27); */
+    background: rgba(21, 61, 87);
     opacity:0.9;
 }
 
@@ -52,7 +53,7 @@ h1,h2,h3,h4,h5 {
 
 /* Modify the backgorund color */ 
 .navbar-custom { 
-	background-color: rgb(21, 61, 87); 
+	background-color: #fff159;; 
 } 
 
 /* Set the border color to the desired color */ 
@@ -70,8 +71,8 @@ h1,h2,h3,h4,h5 {
 .navbar-custom .navbar-brand,
 .navbar-brand,.navbar-nav li a, 
 .navbar-custom .navbar-text { 
-    /* color: white;  */
-    color: rgba(244,179,27);
+    color: #fff159;; 
+    /* color: rgba(244,179,27); */
     height: 0%;
     line-height: 95%;
     font-weight: 800;
@@ -134,5 +135,10 @@ h1,h2,h3,h4,h5 {
 }
 
 .iconoColor {
-    color:rgba(244,179,27);
+    /* color:rgba(244,179,27); */
+    color: black;
+}
+
+.altoCarruselImagenes {
+    height: "20%",
 }
