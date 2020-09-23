@@ -9,7 +9,12 @@ class NavbarNoLogueado extends React.Component {
     render() {
         return (
                 <nav className="navbar navbar-custom navbar-fixed-top">
-                    <Link to="/" className="navbar-brand"><span className="navbar-brand"></span></Link>
+                    <Link to="/" className="navbar-brand">
+                        <img src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png"
+                            height="50"
+                        />
+                        <span className="navbar-brand"></span>
+                    </Link>
                     <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
