@@ -152,64 +152,73 @@ class FormularioAltaUsuario extends React.Component {
   
   renderFormulario() {
     return(
-      <div className="row justify-content-center containerCentral">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-        <div className="card shadow-sm p-3 mb-5 bg-white rounded">
-          <div className="card-body">
-            <h5>Registrarme</h5>
-            <form  method="post" onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <span className="text-danger error_negrita">
-                {this.state.errorApi}
-              </span>
-            </div>
-            <FormularioDatosComunes 
-                    handleChangeInput={this.handleChangeInput} 
-                    errors={this.state.errors}
-                    errorsApi={this.state.errorApi}
-                    nombre={this.state.nombre}
-                    apellido={this.state.apellido}
-                    codArea={this.state.codArea}
-                    telefono={this.state.telefono}
-                    email={this.state.email}
-                    password={this.state.password}
-                    password2={this.state.password2}
-                    ocultarCampos={this.props.ocultarCampos}
-                    soloLectura={this.state.soloLectura}
-                  >
-            </FormularioDatosComunes>
-              <>
-                {
-                  this.props.esComerciante == true &&
-                  <>
-                    <hr></hr>
-                    <FormularioDatosComerciante
+      <div className="containerCentral">
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+          <h5>Completá tus datos</h5>
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+          <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+            <div className="card-body">
+              <form  method="post" onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <span className="text-danger error_negrita">
+                  {this.state.errorApi}
+                </span>
+              </div>
+              <FormularioDatosComunes 
                       handleChangeInput={this.handleChangeInput} 
-                      handleChangeSelectLocalidad={this.handleChangeSelectLocalidad}
-                      handleChangeSelectProvincia={this.handleChangeSelectProvincia}
-                      constanciaDni={this.state.constanciaDni}
-                      constanciaAfip={this.state.constanciaAfip}
-                      calle={this.props.calle}
-                      nro={this.props.nro}
-                      provincia={this.state.provincia}
-                      localidad={this.state.localidad}
                       errors={this.state.errors}
                       errorsApi={this.state.errorApi}
-                      onChangeValueDni={this.handleChangeValueArchivoDni}
-                      onChangeValueAfip={this.handleChangeValueArchivoAfip}
+                      nombre={this.state.nombre}
+                      apellido={this.state.apellido}
+                      codArea={this.state.codArea}
+                      telefono={this.state.telefono}
+                      email={this.state.email}
+                      password={this.state.password}
+                      password2={this.state.password2}
                       ocultarCampos={this.props.ocultarCampos}
                       soloLectura={this.state.soloLectura}
                     >
-                    </FormularioDatosComerciante>
-                  </>
-                }
-              </>
-              <hr></hr>
-            { this.renderCaptcha() }
-              <hr></hr>
-            { this.renderBotones() }
-            </form>
+              </FormularioDatosComunes>
+                <>
+                  {
+                    this.props.esComerciante == true &&
+                    <>
+                      <hr></hr>
+                      <FormularioDatosComerciante
+                        handleChangeInput={this.handleChangeInput} 
+                        handleChangeSelectLocalidad={this.handleChangeSelectLocalidad}
+                        handleChangeSelectProvincia={this.handleChangeSelectProvincia}
+                        constanciaDni={this.state.constanciaDni}
+                        constanciaAfip={this.state.constanciaAfip}
+                        calle={this.props.calle}
+                        nro={this.props.nro}
+                        provincia={this.state.provincia}
+                        localidad={this.state.localidad}
+                        errors={this.state.errors}
+                        errorsApi={this.state.errorApi}
+                        onChangeValueDni={this.handleChangeValueArchivoDni}
+                        onChangeValueAfip={this.handleChangeValueArchivoAfip}
+                        ocultarCampos={this.props.ocultarCampos}
+                        soloLectura={this.state.soloLectura}
+                      >
+                      </FormularioDatosComerciante>
+                    </>
+                  }
+                </>
+                <hr></hr>
+              { this.renderCaptcha() }
+              </form>
+            </div>
           </div>
+        </div>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+          { this.renderBotones() }
         </div>
       </div>
     </div>
