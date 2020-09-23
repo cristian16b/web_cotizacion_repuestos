@@ -11,7 +11,7 @@ class Home extends React.Component {
   render() {
     return (     
       <div>
-        <div className="row justify-content-center">
+        <div className="row justify-content-center containerCentral">
           <div className="col-8 col-sm-8 col-md-8 col-lg-8">
           <Carousel>
                 <Carousel.Item>

@@ -74,8 +74,8 @@ h1,h2,h3,h4,h5 {
     color: black; 
     /* color: rgba(244,179,27); */
     height: 0%;
-    line-height: 95%;
-    font-weight: 800;
+    line-height: 60%;
+    font-weight: 100;
     font-size: large;
 } 
 

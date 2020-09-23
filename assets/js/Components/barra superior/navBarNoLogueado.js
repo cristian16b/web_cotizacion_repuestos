@@ -8,7 +8,7 @@ class NavbarNoLogueado extends React.Component {
 
     render() {
         return (
-                <nav className="navbar navbar-custom navbar-fixed-top">
+                <nav className="navbar navbar-custom navbar-fixed-top navbar-expand-md">
                     <Link to="/" className="navbar-brand">
                         <img src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png"
                             height="50"
@@ -28,32 +28,30 @@ class NavbarNoLogueado extends React.Component {
                                     */}
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/")}>
                                         <Link to="/" className="navbar-brand">
-                                            <i className="fa fa-hand-o-right iconoColor">
-                                            </i>
-                                            <span className="nav-link">¿Quienes somos?</span>
+                                            <span className="nav-link">  
+                                                <i className="fa fa-hand-o-right iconoColor">
+                                                </i>&nbsp;¿Quienes somos?
+                                            </span>
                                         </Link>
                                 </li>
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/registrarme")}>
                                         <Link to="/registrarme" className="navbar-brand">
-                                            <i className="fa fa fa-edit iconoColor">
-                                            </i>
-                                            <span className="nav-link">Registrarme</span>
+                                            <span className="nav-link">                                            <i className="fa fa fa-edit iconoColor">
+                                            </i>&nbsp;Registrarme</span>
                                         </Link>
                                 </li>
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/contacto")}>
                                         <Link to="/contacto" className="navbar-brand">
-                                            <i className="fa fa-envelope-o iconoColor">
-                                            </i>
-                                            <span className="nav-link">¿Dudas, Consultas?</span>
+                                            <span className="nav-link">                                            <i className="fa fa-envelope-o iconoColor">
+                                            </i>&nbsp;¿Dudas, Consultas?</span>
                                         </Link>
                                 </li>                
                             </ul>
-                            <ul className="nav navbar-nav navbar-right">
+                            <ul className="nav navbar-nav navbar-right" align="right">
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/login")}>
                                     <Link to="/login" className="navbar-brand">
-                                        <i className="fa fa-sign-in iconoColor">
-                                        </i>
-                                        <span className="nav-link">Ingresar</span>
+                                        <span className="nav-link">                                        <i className="fa fa-sign-in iconoColor">
+                                        </i>&nbsp;Ingresar</span>
                                     </Link>
                                 </li>
                             </ul>
