@@ -8,7 +8,7 @@ class PiePagina extends React.Component {
 
   render() {
     return (
-        <footer className="py-1">
+        <footer className="py-1 fixed-bottom">
             <div className="container">
                 <p className="m-0 text-center text-white"></p>
             </div>

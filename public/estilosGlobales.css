@@ -53,7 +53,7 @@ h1,h2,h3,h4,h5 {
 
 /* Modify the backgorund color */ 
 .navbar-custom { 
-	background-color: #fff159;; 
+	background-color: #fff159; 
 } 
 
 /* Set the border color to the desired color */ 
@@ -71,7 +71,7 @@ h1,h2,h3,h4,h5 {
 .navbar-custom .navbar-brand,
 .navbar-brand,.navbar-nav li a, 
 .navbar-custom .navbar-text { 
-    color: #fff159;; 
+    color: black; 
     /* color: rgba(244,179,27); */
     height: 0%;
     line-height: 95%;
