@@ -70,7 +70,7 @@ renderBotonesUsuarioComercio () {
       <div className="col-12 col-sm-12 col-md-12 col-lg-9">
       <div className="card shadow-sm p-3 mb-5 bg-white rounded">
         <div className="card-body">
-            <hr></hr>
+            {/* <hr></hr> */}
                 <div className="row justify-content-center">
                     <button onClick={this.cambioUsuario} className="btn btn-primary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
                       <b>
@@ -80,7 +80,7 @@ renderBotonesUsuarioComercio () {
                       </b>
                     </button>
                 </div>
-                <hr></hr>
+                {/* <hr></hr> */}
                 <div className="row justify-content-center">
                     <button onClick={this.cambioComerciante} className="btn btn-secondary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
                       <b>
@@ -90,7 +90,7 @@ renderBotonesUsuarioComercio () {
                       </b>
                     </button>
                 </div>
-                <hr></hr>
+                {/* <hr></hr> */}
             </div>
           </div>
         </div>
