@@ -17,7 +17,7 @@ class FormularioDatosComerciante extends React.Component {
     const {handleChangeInput} = this.props;
     return(
       <div className="row">
-        <div className="col-lg-9 col-12 col-md-12">
+        <div className="col-lg-6 col-12 col-md-6">
           <div className="form-group">
             <label htmlFor="calle">Calle</label>
               <div className="input-group">
@@ -34,7 +34,7 @@ class FormularioDatosComerciante extends React.Component {
             </div>
           </div>
           {/* fin primer columna */}
-          <div className="col-lg-3 col-12 col-md-12">
+          <div className="col-lg-3 col-12 col-md-3">
             <div className="form-group">
             <label htmlFor="nro">Nro.</label>
               <div className="input-group">

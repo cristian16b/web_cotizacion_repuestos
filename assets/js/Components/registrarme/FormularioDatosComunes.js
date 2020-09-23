@@ -87,19 +87,23 @@ class FormularioDatosComunes extends React.Component {
   renderEmail() {
     const {handleChangeInput} = this.props;
     return (
-      <div className="form-group">
-      <label htmlFor="email">Email</label>
-      <div className="input-group">
-        <span className="input-group-addon"></span>
-          <input type="text" className="form-control" name="email" 
-                              readOnly={this.props.soloLectura}
-                                      defaultValue = {this.props.email} onChange={handleChangeInput}
-                                      placeholder="Ingrese su email" />	
+      <div className="row">
+        <div className="col-lg-6 col-12 col-md-6">
+          <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <div className="input-group">
+                <span className="input-group-addon"></span>
+                  <input type="text" className="form-control" name="email" 
+                                      readOnly={this.props.soloLectura}
+                                              defaultValue = {this.props.email} onChange={handleChangeInput}
+                                              placeholder="Ingrese su email" />	
+                </div>
+                <span id="emailHelp" className="text-danger error_negrita">
+                  {this.props.errors["email"]}
+                </span> 
+            </div>
         </div>
-        <span id="emailHelp" className="text-danger error_negrita">
-          {this.props.errors["email"]}
-        </span> 
-    </div>
+      </div>
     );
   }
   
@@ -143,14 +147,26 @@ class FormularioDatosComunes extends React.Component {
     </div>
     );
   }
+
+  renderApellidoNombre = () => {
+    return(
+      <div className="row">
+        <div className="col-lg-6 col-12 col-md-6">
+          <>{this.renderApellido()}</>
+        </div>
+        <div className="col-lg-6 col-12 col-md-6">
+          <>{this.renderNombre()}</>
+        </div>
+      </div> 
+    );
+  }
   
   render() {
     const {handleChangeInput} = this.props;
     return (
       <div className="row">
         <div className="col-lg-11 col-12 col-md-12">
-          <>{this.renderApellido()}</>
-          <>{this.renderNombre()}</>
+          <>{this.renderApellidoNombre()}</>
           <>{this.renderEmail()}</>
           <>{this.renderTelefono()}</>
           <>
