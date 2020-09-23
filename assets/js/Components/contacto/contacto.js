@@ -187,23 +187,16 @@ class Contacto extends React.Component {
     this.setState({redirectLogin: true});
   }
 
-  render() {
-    if(this.state.isLoading == true)
-      return  <Loading></Loading>
-    if(this.state.redirectLogin)
-      return <Redirect to = {{ pathname: "/contacto" }} />;
-    return (        
-      <div className="row justify-content-center containerCentral">
+  renderFormulario = () => {
+    return(
+      <>
+      <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-          
-            <div className="card shadow-sm p-3 mb-5 bg-white rounded">
-              <div className="card-body">
+        
+          <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+            <div className="card-body">
               <section className="mb-4">
-                <h5>Formulario de contacto</h5>
-                <p className="text-center w-responsive mx-auto mb-5">¿Tenes alguna consulta?</p>
-
                 <div className="row">
-
                     {/* <!--Grid column--> */}
                     <div className="col-md-9 mb-md-0 mb-5">
                         <form method="post" onSubmit={this.handleSubmit}>
@@ -260,26 +253,37 @@ class Contacto extends React.Component {
                                 </div>
                             </div>
                             <>{this.renderCaptcha()}</>
-
-
-                            {/* <!--Grid row--> */}
-                            <div className="row">
-
-                                {/* <!--Grid column--> */}
-                                <div className="col-md-6">
-
-                                    <div className="md-form">
-                                      <br />
-                                      <button type="submit" className="btn btn-primary login-btn btn-block">Enviar</button>
-                                    </div>
-                                </div>
-                            </div>
                         </form>
                     </div>
                   </div>
                 </section>
               </div>
+              {/* fin del card */}
             </div>
+            {/* <!--Grid row--> */}
+        </div>
+      </div>
+    </>
+    );
+  }
+
+  render() {
+    if(this.state.isLoading == true)
+      return  <Loading></Loading>
+    if(this.state.redirectLogin)
+      return <Redirect to = {{ pathname: "/contacto" }} />;
+    return (        
+      <div className=" containerCentral">
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+            <h5>Contactate con nosotros</h5>
+          </div>
+        </div>
+        <>{this.renderFormulario()}</>
+        <div className="row">
+          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+            <button type="submit" className="btn btn-primary login-btn btn-block">Enviar</button>
+          </div>
         </div>
       </div>
     );
