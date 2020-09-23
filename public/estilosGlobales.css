@@ -31,14 +31,17 @@ footer {
 }
 
 h1,h2,h3,h4,h5 {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: bold;
+    color: black;
+    padding-top: 1%;
+    padding-bottom: 1%;
     /* color: rgb(21, 61, 87); */
-    color: rgba(244,179,27);
+    /* color: rgba(244,179,27);
     background-color: rgba(21, 61, 87);
     padding-left: 10%;
     border-radius: 25px;
-    opacity:0.9;
+    opacity:0.9; */
 }
 
 /* h5 {

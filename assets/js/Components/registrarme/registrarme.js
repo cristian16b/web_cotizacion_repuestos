@@ -60,11 +60,16 @@ redirectToLogin = () => {
 
 renderBotonesUsuarioComercio () {
   return (
-    <div className="row justify-content-center containerCentral">
+    <div className="containerCentral">
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+          <h5>Completá tus datos</h5>
+        </div>
+      </div>
+    <div className="row justify-content-center">
       <div className="col-12 col-sm-12 col-md-12 col-lg-9">
       <div className="card shadow-sm p-3 mb-5 bg-white rounded">
         <div className="card-body">
-        <h5>Registrarme</h5>
             <hr></hr>
                 <div className="row justify-content-center">
                     <button onClick={this.cambioUsuario} className="btn btn-primary btn-block btn btn-sq-lg shadow-lg p-3 mb-5 rounded">
@@ -89,7 +94,8 @@ renderBotonesUsuarioComercio () {
             </div>
           </div>
         </div>
-      </div>
+      </div>    
+    </div>
   );
 }
 
