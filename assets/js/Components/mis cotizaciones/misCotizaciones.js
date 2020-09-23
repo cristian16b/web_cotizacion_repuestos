@@ -121,27 +121,25 @@ class MisCotizaciones extends React.Component {
     return(
       <>
         <div className="row">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-6">
+          <div className="col-6 col-sm-6 col-md-6 col-lg-6">
             <div className="form-group">
-              <label htmlFor="password">Buscar repuesto solicitado</label>
+              {/* <label htmlFor="password">Buscar repuesto solicitado</label> */}
               <div className="input-group">
                 <span className="input-group-addon"></span>
                   <input type="text" className="form-control" name="repuestoBuscar" 
                                               defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
-                                              placeholder="Escribala el repuesto que solicito" />	
+                                              placeholder="Buscar el repuesto que solicitaste..." />	
                 </div>
                 <span id="buscar" className="text-danger error_negrita">
                   {this.state.errors["buscar"]}
                 </span> 
             </div>
           </div>
-        </div>
-          <div className="row">
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+          <div className="col-3 col-sm-3 col-md-3 col-lg-3">
               <button type="submit" onClick={this.buscarRepuestoSolicitado}
                 className="btn btn-primary btn-block">Buscar</button>
           </div>
-          <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+          <div className="col-3 col-sm-3 col-md-3 col-lg-3">
               <button 
                 onClick={this.reiniciar}
                 className="btn btn-light btn-block">Reiniciar</button>
@@ -158,9 +156,7 @@ class MisCotizaciones extends React.Component {
       return  <Loading></Loading>
     return (  
             <>
-                <hr/>
                 <>{ this.renderFilTrosBusqueda() }</>
-                <hr/>
                 <Tabla
                     misSolicitudes = {this.state.misSolicitudes}
                     token = {this.props.token}
