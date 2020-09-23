@@ -56,7 +56,8 @@ h1,h2,h3,h4,h5 {
 
 /* Modify the backgorund color */ 
 .navbar-custom { 
-	background-color: #fff159; 
+    /* background-color: #fff159;  */
+    background-color: rgba(244,179,27);
 } 
 
 /* Set the border color to the desired color */ 

@@ -189,7 +189,6 @@ class Contacto extends React.Component {
 
   renderFormulario = () => {
     return(
-      <>
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
         
@@ -263,7 +262,6 @@ class Contacto extends React.Component {
             {/* <!--Grid row--> */}
         </div>
       </div>
-    </>
     );
   }
 
@@ -273,7 +271,7 @@ class Contacto extends React.Component {
     if(this.state.redirectLogin)
       return <Redirect to = {{ pathname: "/contacto" }} />;
     return (        
-      <div className=" containerCentral">
+      <div className="containerCentral">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-12 col-lg-9">
             <h5>Contactate con nosotros</h5>
