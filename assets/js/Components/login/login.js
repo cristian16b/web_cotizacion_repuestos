@@ -259,11 +259,11 @@ class Login extends React.Component {
                                     alt="Cargando..." 
                                     border="0">
                                 </img>  */}
-                                <h5 className="text-center">Ingresar</h5>
+                                <h5 className="text-center">¡Hola! Ingresá tu e‑mail</h5>
                                 <div className="row justify-content-center">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                                     <img  className="card-img-top img-fluid"
-                                        src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts.png" 
+                                        src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png" 
                                         alt="Cargando..." 
                                         height="100"
                                         border="0"
