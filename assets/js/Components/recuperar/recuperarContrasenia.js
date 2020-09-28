@@ -260,10 +260,9 @@ class RecuperarContrasenia extends React.Component {
     return (
     <div className="row justify-content-center containerCentral">
       <div className="col-12 col-sm-12 col-md-12 col-lg-8">
+      <h5>Recuperar tu contraseña</h5>
         <div className="card shadow-sm p-3 mb-5 bg-white rounded">
           <div className="card-body">
-            <h5>Recuperar tu contraseña</h5>
-              <hr></hr>
                 <form  method="post" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <span className="text-danger error_negrita">
@@ -272,7 +271,7 @@ class RecuperarContrasenia extends React.Component {
                     </div>
                     <div className="row justify-content-center">
                       <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                        <p>Para reestablecer su contraseña debe ingresar el e-mail con el que usted se registro.</p>
+                        <p>Para reestablecer su contraseña debes ingresar el e-mail con el que usted se registro.</p>
                       </div>
                       <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                         <>{this.renderEmail()}</>
@@ -283,12 +282,12 @@ class RecuperarContrasenia extends React.Component {
                       <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                         <>{this.renderCaptcha()}</>
                       </div>
-                      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                        <>{this.renderBotones()}</>
-                      </div>
                     </div>
                 </form>
               </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+              <>{this.renderBotones()}</>
             </div>
         </div>
       </div>
