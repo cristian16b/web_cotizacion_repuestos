@@ -19,7 +19,6 @@ import RecuperarContrasenia from './Components/recuperar/recuperarContrasenia';
 import NotFound from './Components/not found/notfound';
 import {ROL_COMERCIANTE} from './Constantes/constantes';
 import RegistrarML from './Components/registrarML/RegistrarML';
-import HomeUsuario from './Components/home usuario/HomeUsuario';
 
 class App extends React.Component {
 
@@ -98,8 +97,7 @@ class App extends React.Component {
           <NavbarLogueado rol={this.state.rol}/>
           <div>
               <Switch>
-                <Redirect exact from='/login' to='/home'/>
-                <Route exact path="/home" render={() => <HomeUsuario token={this.state.token['token']} rol={this.state.rol}/>} />
+                <Redirect exact from='/login' to='/cotizaciones'/>
                 <Route exact path="/repuesto" render={() => <BuscarRepuesto token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/perfil" render={() => <MiPerfil token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} />
