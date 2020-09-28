@@ -189,6 +189,7 @@ class Contacto extends React.Component {
 
   renderFormulario = () => {
     return(
+                              <form method="post" onSubmit={this.handleSubmit}>
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
         
@@ -198,7 +199,7 @@ class Contacto extends React.Component {
                 <div className="row">
                     {/* <!--Grid column--> */}
                     <div className="col-md-9 mb-md-0 mb-5">
-                        <form method="post" onSubmit={this.handleSubmit}>
+
 
                             {/* <!--Grid row--> */}
                             <div className="row">
@@ -252,7 +253,7 @@ class Contacto extends React.Component {
                                 </div>
                             </div>
                             <>{this.renderCaptcha()}</>
-                        </form>
+
                     </div>
                   </div>
                 </section>
@@ -262,6 +263,12 @@ class Contacto extends React.Component {
             {/* <!--Grid row--> */}
         </div>
       </div>
+              <div className="row justify-content-center">
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                <button type="submit" className="btn btn-primary login-btn btn-block">Enviar</button>
+              </div>
+            </div>
+            </form>
     );
   }
 
@@ -278,11 +285,6 @@ class Contacto extends React.Component {
           </div>
         </div>
         <>{this.renderFormulario()}</>
-        <div className="row">
-          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-            <button type="submit" className="btn btn-primary login-btn btn-block">Enviar</button>
-          </div>
-        </div>
       </div>
     );
   }

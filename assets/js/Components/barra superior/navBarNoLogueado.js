@@ -47,7 +47,7 @@ class NavbarNoLogueado extends React.Component {
                                         </Link>
                                 </li>                
                             </ul>
-                            <ul className="nav navbar-nav navbar-right" align="right">
+                            <ul className="nav navbar-nav navbar-right">
                                 <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/login")}>
                                     <Link to="/login" className="navbar-brand">
                                         <span className="nav-link">                                        <i className="fa fa-sign-in iconoColor">
