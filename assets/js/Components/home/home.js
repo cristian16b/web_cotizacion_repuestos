@@ -36,8 +36,7 @@ class Home extends React.Component {
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
-                    src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts.png"
-                    alt="Third slide"
+                    src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png"
                   />
                 </Carousel.Item>
               </Carousel>
