@@ -75,7 +75,7 @@ class NavbarLogueado extends React.Component {
                             <Link to="/home" className="navbar-brand">
                             <span className="nav-link"><i className="fa fa-car iconoColor">
                             </i>&nbsp;
-                            Cotizaciones</span>
+                            Mis Cotizaciones</span>
                             </Link>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
@@ -84,12 +84,12 @@ class NavbarLogueado extends React.Component {
                                             </i>&nbsp;
                                 Buscar un repuesto</span></Link>
                         </li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
+                        {/* <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/cotizaciones")}>
                             <Link to="/cotizaciones" className="navbar-brand">
                             <span className="nav-link"><i className="fa fa-file-text-o iconoColor">
                                             </i>&nbsp;
                                 Mis pedidos</span></Link>
-                        </li>
+                        </li> */}
                         <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/perfil")}>
                             <Link to="/perfil" className="navbar-brand">                            
                             <span className="nav-link"><i className="fa fa-drivers-license iconoColor">
