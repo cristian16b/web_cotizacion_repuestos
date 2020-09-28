@@ -189,7 +189,7 @@ class Contacto extends React.Component {
 
   renderFormulario = () => {
     return(
-                              <form method="post" onSubmit={this.handleSubmit}>
+    <form method="post" onSubmit={this.handleSubmit}>
       <div className="row justify-content-center">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
         
@@ -260,15 +260,13 @@ class Contacto extends React.Component {
               </div>
               {/* fin del card */}
             </div>
+            <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+        <button type="submit" className="btn btn-primary login-btn btn-block">Enviar</button>
+      </div>
             {/* <!--Grid row--> */}
         </div>
       </div>
-              <div className="row justify-content-center">
-              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                <button type="submit" className="btn btn-primary login-btn btn-block">Enviar</button>
-              </div>
-            </div>
-            </form>
+  </form>
     );
   }
 
