@@ -398,29 +398,38 @@ class BuscarRepuesto extends React.Component {
       return  <Redirect to = {{ pathname: "/cotizaciones" }} />
     else
       return (
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-            <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
-              <div className="card-body">
-                <h5 className="my-4">Buscar un repuesto</h5>
-                <hr/>
-                <h6>Para solicitar cotizaciones sobre un repuesto debe cargar los siguientes datos</h6>
-                    {this.renderSelectPrimerFila()}
-                    {this.renderSelectSegundaFila()}
-                    {this.renderObservaciones()}
-                    {this.renderSubidaPrevisualizacionFotos()}
-                  <form method="post" onSubmit={this.handleSubmit}>
-                    {this.renderBotones()}
-                    <hr/>
-                  </form>
-                {/* FIN CARDBODY */}
-              </div>
-              {/* FIN CARD */}
+        <div>
+          <div className="row justify-content-center">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+            <h5 className="my-4">Buscar un repuesto</h5>
             </div>
-            {/* fin dela columna */}
           </div>
-          {/* fin de la fila */}
+          <div className="row justify-content-center">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+              <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
+                <div className="card-body">
+                  <h6>Para solicitar cotizaciones sobre un repuesto debe cargar los siguientes datos</h6>
+                      {this.renderSelectPrimerFila()}
+                      {this.renderSelectSegundaFila()}
+                      {this.renderObservaciones()}
+                      {this.renderSubidaPrevisualizacionFotos()}
+                  {/* FIN CARDBODY */}
+                </div>
+                {/* FIN CARD */}
+              </div>
+              {/* fin dela columna */}
+            </div>
+            {/* fin de la fila */}
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+                <form method="post" onSubmit={this.handleSubmit}>
+                      {this.renderBotones()}
+                    </form>
+            </div>
+          </div>
         </div>
+       
       );
     }
 }
