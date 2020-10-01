@@ -52,99 +52,119 @@ class Fila extends React.Component {
   armarFilaTabla(elemento){
     const recursos = elemento.recursos;
     return (
-            <Tr key={elemento.id}>
-              <Td>
-                      <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                          <b>Nro de solicitud: </b> {this.formatearNroSolicitud(elemento.id)} 
-                        </div>
-                      </div>
-                <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                          <b>Fecha: </b> {this.formatearFecha(elemento.fecha_alta)} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                          <b>Repuesto solicitado:</b> {elemento.repuesto.name}
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                          <b>Observación:</b> {elemento.observacion}
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                            <Collapsible title="Ver fotos" className="btn btn-secondary">
-                              <hr></hr>
-                              <div className="row">
-                                <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                                  <p>Imagenes adjuntadas en la solicitud.</p>
-                                </div>
-                              </div>
-                              <div className="row justify-content-center"> 
-                              {
-                                recursos.map(e=>{
-                                  return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_REPUESTO)
-                                })
-                              }
-                              </div>
-                              <p>Haga click en las mismas para previsualizar.</p>
-                              <hr></hr>
-                            </Collapsible>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div 
-                          className="col-12 col-sm-12 col-md-12 col-lg-12">
-                              <Collapsible 
-                                title="Ver cotizaciones"  
-                                className="btn btn-warning"                       
-                              >
-                              {/*
-                                  <div className="row" align="center">
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                                      <button type="button" 
-                                        disabled = {this.state.botonHabilitado}
-                                        // onClick={() => this.cancelarSolicitud(elemento.id)} 
-                                        className="btn btn-secondary">
-                                          Actualizar listado
-                                      </button>              
-                                    </div>    
-                                  </div>
-                                */}
-                                <hr></hr> 
-                                {
-                                  elemento.cotizaciones.length == 0 
-                                  ?
-                                  <b>No se encontraron cotizaciones para este pedido</b>
-                                  :
-                                  <>
-                                    {this.renderCotizacionesRecibidas(elemento.cotizaciones)}
-                                  </>
-                                }
-                                <hr></hr>
-                              </Collapsible>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                              <Collapsible title="Cancelar"  className="btn btn-danger">
-                                <hr></hr>
-                                <p>¿Esta seguro de cancelar el pedido de cotizacion?</p>
-                                <button type="button" 
-                                        disabled = {this.state.botonHabilitado}
-                                        onClick={() => this.cancelarSolicitud(elemento.id)} 
-                                        class="btn btn-danger">
-                                          Cancelar pedido
-                                </button>
-                                <hr></hr>
-                              </Collapsible>
-                        </div>
-                      </div>
-            </Td>
-          </Tr>
+          //   <Tr key={elemento.id}>
+          //     <Td>
+          //             <div className="row">
+          //               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                 <b>Nro de solicitud: </b> {this.formatearNroSolicitud(elemento.id)} 
+          //               </div>
+          //             </div>
+          //       <div className="row">
+          //               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                 <b>Fecha: </b> {this.formatearFecha(elemento.fecha_alta)} <b>Auto:</b> {elemento.modelo_auto.marca_auto.name} -  <b>Modelo:</b> {elemento.modelo_auto.name}
+          //               </div>
+          //             </div>
+          //             <div className="row">
+          //               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                 <b>Repuesto solicitado:</b> {elemento.repuesto.name}
+          //               </div>
+          //             </div>
+          //             <div className="row">
+          //               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                 <b>Observación:</b> {elemento.observacion}
+          //               </div>
+          //             </div>
+          //             <div className="row">
+          //               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                   <Collapsible title="Ver fotos" className="btn btn-secondary">
+          //                     <hr></hr>
+          //                     <div className="row">
+          //                       <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                         <p>Imagenes adjuntadas en la solicitud.</p>
+          //                       </div>
+          //                     </div>
+          //                     <div className="row justify-content-center"> 
+          //                     {
+          //                       recursos.map(e=>{
+          //                         return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_REPUESTO)
+          //                       })
+          //                     }
+          //                     </div>
+          //                     <p>Haga click en las mismas para previsualizar.</p>
+          //                     <hr></hr>
+          //                   </Collapsible>
+          //               </div>
+          //             </div>
+          //             <div className="row">
+          //               <div 
+          //                 className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                     <Collapsible 
+          //                       title="Ver cotizaciones"  
+          //                       className="btn btn-warning"                       
+          //                     >
+          //                     {/*
+          //                         <div className="row" align="center">
+          //                           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                             <button type="button" 
+          //                               disabled = {this.state.botonHabilitado}
+          //                               // onClick={() => this.cancelarSolicitud(elemento.id)} 
+          //                               className="btn btn-secondary">
+          //                                 Actualizar listado
+          //                             </button>              
+          //                           </div>    
+          //                         </div>
+          //                       */}
+          //                       <hr></hr> 
+          //                       {
+          //                         elemento.cotizaciones.length == 0 
+          //                         ?
+          //                         <b>No se encontraron cotizaciones para este pedido</b>
+          //                         :
+          //                         <>
+          //                           {this.renderCotizacionesRecibidas(elemento.cotizaciones)}
+          //                         </>
+          //                       }
+          //                       <hr></hr>
+          //                     </Collapsible>
+          //               </div>
+          //             </div>
+          //             <div className="row">
+          //               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+          //                     <Collapsible title="Cancelar"  className="btn btn-danger">
+          //                       <hr></hr>
+          //                       <p>¿Esta seguro de cancelar el pedido de cotizacion?</p>
+          //                       <button type="button" 
+          //                               disabled = {this.state.botonHabilitado}
+          //                               onClick={() => this.cancelarSolicitud(elemento.id)} 
+          //                               class="btn btn-danger">
+          //                                 Cancelar pedido
+          //                       </button>
+          //                       <hr></hr>
+          //                     </Collapsible>
+          //               </div>
+          //             </div>
+          //   </Td>
+          // </Tr>
+          <div>
+            <div className="row">
+              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+              {this.formatearFecha(elemento.fecha_alta)}  - {elemento.repuesto.name} para {elemento.modelo_auto.marca_auto.name}  {elemento.modelo_auto.name}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                {
+                  elemento.cotizaciones.length == 0 
+                  ?
+                  <b>No se encontraron cotizaciones para este pedido</b>
+                  :
+                  <>
+                    {this.renderCotizacionesRecibidas(elemento.cotizaciones)}
+                  </>
+                }
+              </div>
+            </div>
+          </div>
     )
   }
 

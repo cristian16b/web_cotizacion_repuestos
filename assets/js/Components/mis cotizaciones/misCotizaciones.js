@@ -178,18 +178,12 @@ class MisCotizaciones extends React.Component {
         </div>
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-12 col-lg-11">
-            <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
-              <div className="card-body">
                 <Tabla
                       misSolicitudes = {this.state.misSolicitudes}
                       token = {this.props.token}
                       reiniciar = {this.reiniciar}
                     >
                   </Tabla>
-                {/* FIN CARDBODY */}
-              </div>
-              {/* FIN CARD */}
-            </div>
             {/* fin dela columna */}
           </div>
           {/* fin de la fila */}
