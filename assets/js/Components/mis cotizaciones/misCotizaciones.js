@@ -128,7 +128,7 @@ class MisCotizaciones extends React.Component {
                 <span className="input-group-addon"></span>
                   <input type="text" className="form-control" name="repuestoBuscar" 
                                               defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
-                                              placeholder="Buscar las cotizaciones el repuesto que solicitaste..." />	
+                                              placeholder="Escriba el repuesto que solicitaste" />	
                 </div>
                 <span id="buscar" className="text-danger error_negrita">
                   {this.state.errors["buscar"]}
