@@ -12,7 +12,12 @@ class NavbarLogueado extends React.Component {
         if(this.props.rol == ROL_COMERCIANTE)
             return(
                 <nav className="navbar navbar-custom navbar-fixed-top navbar-expand-md">
-                <Link to="/" className="navbar-brand"><span className="navbar-brand"></span></Link>
+                    <Link to="/" className="navbar-brand">
+                        <img src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png"
+                            height="50"
+                        />
+                        <span className="navbar-brand"></span>
+                    </Link>
                 <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -56,7 +61,12 @@ class NavbarLogueado extends React.Component {
             )
         return (
             <nav className="navbar navbar-custom navbar-fixed-top navbar-expand-md">
-                <Link to="/" className="navbar-brand"><span className="navbar-brand"></span></Link>
+                    <Link to="/" className="navbar-brand">
+                        <img src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png"
+                            height="50"
+                        />
+                        <span className="navbar-brand"></span>
+                    </Link>
                 <button className="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
