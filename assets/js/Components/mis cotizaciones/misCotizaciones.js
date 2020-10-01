@@ -156,34 +156,45 @@ class MisCotizaciones extends React.Component {
       return  <Loading></Loading>
     return (  
       <div>
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-        <h5 className="my-4">Cotizaciones recibidas</h5>
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+            <h5>Cotizaciones recibidas</h5>
+          </div>     
         </div>
-      </div>
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-          <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
-            <div className="card-body">
-              <>{ this.renderFilTrosBusqueda() }</>
-              {/* FIN CARDBODY */}
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+            <div className="card  shadow-sm p-2 mb-2">
+              <div className="card-body">         
+                <div className="col-12 col-sm-12 col-md-9 col-lg-9">
+                  <>{ this.renderFilTrosBusqueda() }</>
+                </div> 
+                {/* FIN CARDBODY */}
+              </div>
+              {/* FIN CARD */}
             </div>
-            {/* FIN CARD */}
+            {/* fin dela columna */}
           </div>
-          {/* fin dela columna */}
+          {/* fin de la fila */}
         </div>
-        {/* fin de la fila */}
-      </div>
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+            <div className="card  shadow-sm p-3 mb-5 bg-white rounded">
+              <div className="card-body">
+                <Tabla
+                      misSolicitudes = {this.state.misSolicitudes}
+                      token = {this.props.token}
+                      reiniciar = {this.reiniciar}
+                    >
+                  </Tabla>
+                {/* FIN CARDBODY */}
+              </div>
+              {/* FIN CARD */}
+            </div>
+            {/* fin dela columna */}
+          </div>
+          {/* fin de la fila */}
+        </div>
     </div>
-            // <>
-            //     
-            //     <Tabla
-            //         misSolicitudes = {this.state.misSolicitudes}
-            //         token = {this.props.token}
-            //         reiniciar = {this.reiniciar}
-            //       >
-            //     </Tabla>
-            // </>      
     );
   }
 }
