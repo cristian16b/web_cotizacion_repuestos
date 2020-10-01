@@ -22,11 +22,9 @@ const centrar = {
 
 const h5 = {
     'textTransform': 'uppercase',
-    'color': 'rgb(244,179,27)',
-    'backgroundColor': 'rgba(21, 61, 87)',
+    'color': 'rgba(244,179,27,1)',
+    'backgroundColor': 'rgba(21,61,87,0.9)',
     'paddingLeft': '10%',
-    'borderRadius': '25px',
-    'opacity':'0.9',
 }
 
 const Loading = () => (
