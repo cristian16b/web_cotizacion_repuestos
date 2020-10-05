@@ -4,6 +4,7 @@ import {Collapsible} from '../collapsible/Collapsible';
 import ModalImage from "react-modal-image";
 import {API_OBTENER_FOTO_REPUESTO, API_OBTENER_FOTO_COTIZACION, API_CANCELAR_SOLICITUD,API_MERCADO_PAGO_MOSTRAR_BOTON_PAGO} from '../../Constantes/constantes';
 import axios from 'axios';
+import Carousel from 'react-bootstrap/Carousel';
 
 class Fila extends React.Component {
 
@@ -168,10 +169,6 @@ class Fila extends React.Component {
     )
   }
 
-  prueba (id) {
-    alert('detecto click, id =' + id);
-  }
-
   renderCotizacionesRecibidas = (cotizaciones) => {
     return (
       cotizaciones.map(elemento => {
@@ -244,38 +241,6 @@ class Fila extends React.Component {
     )
   }
 
-  // redirigirMercadoPago = async(id) => {
-
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${this.props.token}` }
-  //   };
-  //   if(id == "") {
-  //     alert('fallo');
-  //     return;
-  //   }
-  //   try 
-  //   {
-  //     this.setState({botonHabilitado: true});
-  //     // Load async data from an inexistent endpoint.
-  //     let url = API_MERCADO_PAGO_REGISTRAR_PAGO + `${id}`;
-  //     let response = await axios.get(url,config);
-
-  //     this.setState({isLoading: false});
-  //     if(response.data.code == 200 && this.state.isMount == true) {
-  //       // this.props.reiniciar();
-  //     }
-  //     this.setState({botonHabilitado: false});
-  //   } 
-  //   catch (e) {
-  //     this.setState({botonHabilitado: false});
-  //     console.log(`😱 Axios request failed: ${e}`);
-  //     // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
-  //     this.setState({
-  //       isLogin : false
-  //     });
-  //   }
-  // }
-
   renderImagenesAdjuntadasCotizacion = (elemento) => {
     if(elemento.length == 0)
       return (
@@ -330,37 +295,6 @@ class Fila extends React.Component {
       });
     }
   } 
-
-  // cancelarSolicitud = async(id) => {
-
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${this.props.token}` }
-  //   };
-  //   if(id == "") {
-  //     alert('fallo');
-  //     return;
-  //   }
-  //   try 
-  //   {
-  //     // Load async data from an inexistent endpoint.
-  //     let url = API_LISTAR_MIS_COTIZACIONES + `${id}`;
-  //     let response = await axios.get(url,config);
-
-  //     this.setState({isLoading: false});
-  //     if(response.data.code == 200 && this.state.isMount == true) {
-  //       // cargo las cotizaciones que se encontraron
-  //       this.setState({misCotizaciones: response.data.data});
-  //     }
-  //   } 
-  //   catch (e) {
-  //     this.setState({botonHabilitado: false});
-  //     console.log(`😱 Axios request failed: ${e}`);
-  //     // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
-  //     this.setState({
-  //       isLogin : false
-  //     });
-  //   }
-  // } 
 
   render() {
     return (
