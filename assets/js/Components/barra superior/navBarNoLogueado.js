@@ -8,7 +8,7 @@ class NavbarNoLogueado extends React.Component {
 
     render() {
         return (
-                <nav className="shadow-sm navbar navbar-custom navbar-fixed-top navbar-expand-md">
+                <nav className="bg-light shadow-sm navbar navbar-custom navbar-fixed-top navbar-expand-md">
                     <Link to="/" className="navbar-brand">
                         <img src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png"
                             height="50"
