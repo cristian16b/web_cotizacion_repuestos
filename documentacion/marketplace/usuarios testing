@@ -1,8 +1,10 @@
 // nota para descaegar los usuarios correr el siguiente comando en el cmd de windows
 // curl -X POST -H "Content-Type: application/json" "https://api.mercadopago.com/users/test_user?access_token=TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015" -d "{'site_id':'MLA'}"
 
-// vendedor
+// vendedor I
 {"id":645936376,"nickname":"TESTGMCH6IVP","password":"qatest5041","site_status":"active","email":"test_user_22790922@testuser.com"}
+// vendedor II
+{"id":655182197,"nickname":"TETE5572805","password":"qatest3921","site_status":"active","email":"test_user_50765246@testuser.com"}
 // comprador
 {"id":645933033,"nickname":"TT354650","password":"qatest9043","site_status":"active","email":"test_user_83229862@testuser.com"}
 // marketplace 
