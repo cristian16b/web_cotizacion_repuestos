@@ -159,9 +159,9 @@ class Fila extends React.Component {
                   ?
                   <b>No se encontraron cotizaciones para este pedido</b>
                   :
-                  <>
+                  <Carousel>
                     {this.renderCotizacionesRecibidas(elemento.cotizaciones)}
-                  </>
+                  </Carousel>
                 }
               </div>
             </div>
@@ -175,66 +175,67 @@ class Fila extends React.Component {
         if(elemento.fecha_baja == null)
         {
           return ( 
-            // <>
-            //   <hr></hr>
-            //   <div className="row">
-            //     <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            //       <b>Monto informado por el vendedor: $ {elemento.monto}</b> <br></br>
-            //       <i>Fecha limite del presupuesto: {this.formatearFecha(elemento.fecha_limite_validez)}</i>
-            //     </div>        
-            //   </div>
-            //   <div className="row">
-            //     <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            //         <p>Observaciones:&nbsp;
-            //           {
-            //             elemento.observacion == undefined
-            //             ?
-            //             <>-</>
-            //             :
-            //             <>{elemento.observacion}</>
-            //           }
-            //         </p>
-            //     </div>
-            //   </div>
-            //     {
-            //       this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
-            //     }
-            //    <div className="row">
-            //       <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            //         <br/>
-            //           <b>Importante</b>
-            //         <br/>
-            //         <p>
-            //           El único medio de pago habilitado actualmente es con MercadoPago.
-            //           Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación.
-            //         </p> 
-            //         <p>
-            //           Una vez completada, le informaremos los datos de contacto (teléfono y domicilio) del vendedor para que pueda retirar su repuesto.
-            //         </p>
-            //       </div>
-            //     </div>
-            //     <div align="right">
-            //       <div className="col-12 col-sm-6 col-md-4 col-lg-4">
-            //         <form action="/procesar-pago" method="POST">
-            //           {/* <a href={'https://www.mercadopago.com.ar/checkout/v1/modal/?preference-id=' + elemento.preferencia } 
-            //             className="btn btn-primary btn-block"
-            //             target="_self">
-            //               PAGAR!
-            //           </a>    */}
-            //           <a href={elemento.preferencia } 
-            //             className="btn btn-primary btn-block"
-            //             target="_self">
-            //               PAGAR!
-            //           </a>   
-            //           <script
-            //             src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-            //             data-preference-id={elemento.preferencia}>
-            //           </script>
-            //         </form>
-            //       </div>
-            //     </div>
-            // </>
-            <></>
+              <Carousel.Item>
+                <>
+                  <hr></hr>
+                  <div className="row">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                      <b>Monto informado por el vendedor: $ {elemento.monto}</b> <br></br>
+                      <i>Fecha limite del presupuesto: {this.formatearFecha(elemento.fecha_limite_validez)}</i>
+                    </div>        
+                  </div>
+                  <div className="row">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <p>Observaciones:&nbsp;
+                          {
+                            elemento.observacion == undefined
+                            ?
+                            <>-</>
+                            :
+                            <>{elemento.observacion}</>
+                          }
+                        </p>
+                    </div>
+                  </div>
+                    {
+                      this.renderImagenesAdjuntadasCotizacion(elemento.recurso_cotizacions)
+                    }
+                  <div className="row">
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <br/>
+                          <b>Importante</b>
+                        <br/>
+                        <p>
+                          El único medio de pago habilitado actualmente es con MercadoPago.
+                          Para adquirir el repuesto, sera dirigido a mercado pago para completar la operación.
+                        </p> 
+                        <p>
+                          Una vez completada, le informaremos los datos de contacto (teléfono y domicilio) del vendedor para que pueda retirar su repuesto.
+                        </p>
+                      </div>
+                    </div>
+                    <div align="right">
+                      <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                        <form action="/procesar-pago" method="POST">
+                          {/* <a href={'https://www.mercadopago.com.ar/checkout/v1/modal/?preference-id=' + elemento.preferencia } 
+                            className="btn btn-primary btn-block"
+                            target="_self">
+                              PAGAR!
+                          </a>    */}
+                          <a href={elemento.preferencia } 
+                            className="btn btn-primary btn-block"
+                            target="_self">
+                              PAGAR!
+                          </a>   
+                          <script
+                            src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                            data-preference-id={elemento.preferencia}>
+                          </script>
+                        </form>
+                      </div>
+                    </div>
+                </>
+              </Carousel.Item>
             )
           }
         }
