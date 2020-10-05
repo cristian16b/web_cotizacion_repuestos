@@ -4,8 +4,8 @@ import Loading from '../loading/loading.js';
 import {API_BUSCAR_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_ULTIMAS_SOLICITUDES} from '../../Constantes/constantes';
 import axios from 'axios';
 import Tabla from './Tabla.js';
-import Salir from '../salir/salir.js';
 import Filtros from './Filtros.js';
+import { Redirect } from 'react-router';
 
 class SolicitudesGeneradas extends React.Component {
 
@@ -81,7 +81,7 @@ class SolicitudesGeneradas extends React.Component {
 
   render() {
     if(this.state.isLogin == false)
-      return <Salir/>
+      return <Redirect to = {{ pathname: "/login" }} />
     if(this.state.isLoading == true)
       return  <Loading></Loading>
     return (        
