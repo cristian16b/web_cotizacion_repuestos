@@ -43,7 +43,7 @@ class MisCotizaciones extends React.Component {
       }
     } 
     catch (e) {
-      console.log(`😱 Axios request failed: ${e}`);
+      console.log(`😱 Axios request failed`);
       // alert('Ocurrio un error inesperado, intente nuevamente mas tarde');
       this.setState({
         isLogin : false

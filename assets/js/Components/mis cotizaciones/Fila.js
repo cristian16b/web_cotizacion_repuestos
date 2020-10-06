@@ -6,6 +6,19 @@ import {API_OBTENER_FOTO_REPUESTO, API_OBTENER_FOTO_COTIZACION, API_CANCELAR_SOL
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 
+const multipreview = {
+  maxWidth: "300px",
+  width: '90%',
+  height: '90%',
+  backgroundPosition: 'center center',
+  background:'url(' + 'http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg' + ')',
+  backgroundColor: '#fff',
+  backgroundSize: 'cover',
+  backgroundRepeat:'no-repeat',
+  display: 'inline-block',
+  boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
+}
+
 class Fila extends React.Component {
 
   constructor(props){
@@ -176,8 +189,17 @@ class Fila extends React.Component {
         {
           return ( 
               <Carousel.Item>
-                <>
-                  <hr></hr>
+                <div className="card">
+                  <div>
+                    <img className="card-img-top" style={multipreview} src="https://www.eisenparts.com/imagenes/Eisen_Aplicativo01.jpg" alt="Card image cap" />
+                    <div className="card-body">
+                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                  </div>
+                </div>
+                {/*
+                  <>
+                   <hr></hr>
                   <div className="row">
                     <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                       <b>Monto informado por el vendedor: $ {elemento.monto}</b> <br></br>
@@ -217,11 +239,6 @@ class Fila extends React.Component {
                     <div align="right">
                       <div className="col-12 col-sm-6 col-md-4 col-lg-4">
                         <form action="/procesar-pago" method="POST">
-                          {/* <a href={'https://www.mercadopago.com.ar/checkout/v1/modal/?preference-id=' + elemento.preferencia } 
-                            className="btn btn-primary btn-block"
-                            target="_self">
-                              PAGAR!
-                          </a>    */}
                           <a href={elemento.preferencia } 
                             className="btn btn-primary btn-block"
                             target="_self">
@@ -234,7 +251,7 @@ class Fila extends React.Component {
                         </form>
                       </div>
                     </div>
-                </>
+                </> */}
               </Carousel.Item>
             )
           }
