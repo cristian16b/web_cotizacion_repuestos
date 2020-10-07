@@ -160,3 +160,10 @@ h1,h2,h3,h4,h5 {
   background-color: black;
 }
 
+.tdFoto {
+    width: 30%;
+}
+
+.tdDescripcion {
+    width: 70%;
+}

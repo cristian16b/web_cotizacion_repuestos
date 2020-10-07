@@ -53,7 +53,12 @@ class Fila extends React.Component {
     const recursos = elemento.recursos;
     return (
             <Tr key={elemento.id}>
-              <Td>
+              <Td className="tdFoto">
+                hola
+              </Td>
+              <Td className="tdDescripcion">
+                chau
+              </Td>
                       {/* <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                           <b>Nro de solicitud: </b> {this.formatearNroSolicitud(elemento.id)} 
@@ -131,7 +136,6 @@ class Fila extends React.Component {
                               </Collapsible>
                         </div>
                       </div> */}
-            </Td>
           </Tr>
     )
   }
