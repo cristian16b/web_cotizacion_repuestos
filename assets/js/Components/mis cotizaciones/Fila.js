@@ -54,7 +54,7 @@ class Fila extends React.Component {
     return (
             <Tr key={elemento.id}>
               <Td>
-                      <div className="row">
+                      {/* <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                           <b>Nro de solicitud: </b> {this.formatearNroSolicitud(elemento.id)} 
                         </div>
@@ -102,18 +102,6 @@ class Fila extends React.Component {
                                 title="Ver cotizaciones"  
                                 className="btn btn-warning"                       
                               >
-                              {/*
-                                  <div className="row" align="center">
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-                                      <button type="button" 
-                                        disabled = {this.state.botonHabilitado}
-                                        // onClick={() => this.cancelarSolicitud(elemento.id)} 
-                                        className="btn btn-secondary">
-                                          Actualizar listado
-                                      </button>              
-                                    </div>    
-                                  </div>
-                                */}
                                 <hr></hr> 
                                 {
                                   elemento.cotizaciones.length == 0 
@@ -142,7 +130,7 @@ class Fila extends React.Component {
                                 <hr></hr>
                               </Collapsible>
                         </div>
-                      </div>
+                      </div> */}
             </Td>
           </Tr>
     )
