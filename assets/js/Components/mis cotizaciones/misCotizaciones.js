@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 
 import Loading from '../loading/loading.js';
-import {API_MIS_SOLICITUDES,API_OBTENER_FOTO_REPUESTO,API_BUSCAR_MIS_SOLICITUDES} from '../../Constantes/constantes';
+import {API_LISTAR_MIS_COTIZACIONES} from '../../Constantes/constantes';
 import axios from 'axios';
 import Tabla from './Tabla.js';
 import { Redirect } from 'react-router';
@@ -34,7 +34,7 @@ class MisCotizaciones extends React.Component {
     try 
     {
       // Load async data from an inexistent endpoint.
-      let response = await axios.get(API_MIS_SOLICITUDES,config);
+      let response = await axios.get(API_LISTAR_MIS_COTIZACIONES,config);
       this.setState({isLoading: false});
       if(response.data.code == 200 && this.state.isMount == true) {
         // console.log('code 200')
@@ -71,7 +71,7 @@ class MisCotizaciones extends React.Component {
     if(repuestoBuscar.length >= 3) {
       this.setState({errors: {}});
       this.setState({isLoading: true});
-      let url = API_BUSCAR_MIS_SOLICITUDES + `?name=${this.state.repuestoBuscar}`;
+      let url = API_LISTAR_MIS_COTIZACIONES + `?name=${this.state.repuestoBuscar}`;
       this.getData(url,config);
     }
     else {
@@ -112,7 +112,7 @@ class MisCotizaciones extends React.Component {
     this.setState({isLoading: true});
     this.setState({repuestoBuscar: ''});
     this.setState({errors: {}});
-    let url = API_MIS_SOLICITUDES;
+    let url = API_LISTAR_MIS_COTIZACIONES;
     if(this.state.isMount == true)
       this.getData(url,config);
   }

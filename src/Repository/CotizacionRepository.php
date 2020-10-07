@@ -19,6 +19,21 @@ class CotizacionRepository extends ServiceEntityRepository
         parent::__construct($registry, Cotizacion::class);
     }
 
+    public function buscarUltimasPorUsuario($usuario) {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.solicitud','s','WITH','s.fechaBaja IS null')
+            ->innerJoin('c.estado','e','WITH','e.fechaBaja IS null')
+            ->where('c.fechaBaja is null')
+            ->andWhere('s.solicitante = :usuario')
+            ->andWhere('e.descripcion like ' ."'ENVIADA'")
+            ->setParameter('usuario', $usuario)
+            ->orderBy('s.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     // /**
     //  * @return Cotizacion[] Returns an array of Cotizacion objects
     //  */

@@ -98,7 +98,7 @@ class SolicitudesController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/repuesto/buscar", name="solicitudes_repuesto_buscar", defaults={"_format":"json"})
+     * @Rest\Get("/", name="cotizaciones_listar", defaults={"_format":"json"})
      *
      * @SWG\Response(
      *     response=200,
