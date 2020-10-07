@@ -19,7 +19,7 @@ class CotizacionRepository extends ServiceEntityRepository
         parent::__construct($registry, Cotizacion::class);
     }
 
-    public function buscarUltimasPorUsuario($usuario) {
+    public function buscarUltimasPorUsuario($usuario,$page = 1, $limit = 3) {
         return $this->createQueryBuilder('c')
             ->innerJoin('c.solicitud','s','WITH','s.fechaBaja IS null')
             ->innerJoin('c.estado','e','WITH','e.fechaBaja IS null')
@@ -28,6 +28,9 @@ class CotizacionRepository extends ServiceEntityRepository
             ->andWhere('e.descripcion like ' ."'ENVIADA'")
             ->setParameter('usuario', $usuario)
             ->orderBy('s.id', 'DESC')
+            // ->setMaxResults(20)
+            // ->setFirstResult($limit * ($page - 1)) // Offset
+            // ->setMaxResults($limit) // Limit
             ->getQuery()
             ->getResult()
         ;
