@@ -74,7 +74,7 @@ h1,h2,h3,h4,h5 {
 .navbar-custom .navbar-brand,
 .navbar-brand,.navbar-nav li a, 
 .navbar-custom .navbar-text { 
-    color: black; 
+    color: rgb(21, 61, 87);
     /* color: rgba(244,179,27); */
     height: 0%;
     line-height: 60%;
@@ -141,4 +141,9 @@ h1,h2,h3,h4,h5 {
 .iconoColor {
     color: rgb(21, 61, 87);
     /* color: black; */
+}
+
+.carousel-indicators li {
+    background-color: rgb(21, 61, 87);
+    padding: 1%;
 }
