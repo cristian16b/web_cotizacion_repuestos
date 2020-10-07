@@ -33,12 +33,12 @@ class Home extends React.Component {
                   />
 
                 </Carousel.Item>
-                <Carousel.Item>
+                {/* <Carousel.Item>
                   <img
                     className="d-block w-100"
                     src="https://www.eisenparts.com/imagenes/Logotipo_Eisen_Parts_icono.png"
                   />
-                </Carousel.Item>
+                </Carousel.Item> */}
               </Carousel>
           </div>
         </div>
