@@ -10,44 +10,31 @@ class Tabla extends React.Component {
 
   renderTabla() {
     return (
-          // <Table className="table">
-          //   <Thead>
-          //     <Tr>
-          //       <Th>Solicitudes realizadas</Th>
-          //     </Tr>
-          //   </Thead>
-          //   <Tbody>
-          //     {
-          //       this.props.misSolicitudes.map(elemento => {
-          //           return (
-          //             <Fila 
-          //                 elemento = {elemento} 
-          //                 token = {this.props.token} 
-          //                 reiniciar = {this.reiniciar}
-          //             />
-          //           )
-          //         }
-          //       )
-          //     }
-          //  </Tbody>
-          // </Table>
-          <>
-            {
-              this.props.misSolicitudes.map(elemento => {
-                    return (
-                      <>
-                        <Fila 
-                              elemento = {elemento} 
-                              token = {this.props.token} 
-                              reiniciar = {this.reiniciar}
-                        />
-                        <hr></hr>
-                      </>
-                  )
-                }
-              )
-            }
-          </>
+            <div class="card">
+              <div class="card-body">
+                <Table className="table">
+                  {/* <Thead>
+                    <Tr>
+                      <Th>Solicitudes realizadas</Th>
+                    </Tr>
+                  </Thead> */}
+                  <Tbody>
+                    {
+                      this.props.misSolicitudes.map(elemento => {
+                          return (
+                            <Fila 
+                                elemento = {elemento} 
+                                token = {this.props.token} 
+                                reiniciar = {this.reiniciar}
+                            />
+                          )
+                        }
+                      )
+                    }
+                  </Tbody>
+                </Table>
+              </div>
+            </div>
     );
   }
 
