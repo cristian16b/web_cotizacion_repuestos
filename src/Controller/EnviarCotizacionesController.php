@@ -30,7 +30,7 @@ use App\Entity\Persona;
 /**
 * @Route("/api/v1/cotizaciones")
 */
-class CotizacionesController extends AbstractController
+class EnviarCotizacionesController extends AbstractController
 {
     // private $accessToken = 'TEST-6864113784926029-082523-64405d2ff4a697e4df1bedc147234d55-167188015';
     private $accessToken = "TEST-6377095623153819-091715-cd70a72465f42ba608c0c7f8abe8fdd6-646196739";
