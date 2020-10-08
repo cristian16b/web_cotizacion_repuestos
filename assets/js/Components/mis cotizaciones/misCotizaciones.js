@@ -157,12 +157,12 @@ class MisCotizaciones extends React.Component {
     return (  
       <div>
         <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
             <h5>Cotizaciones recibidas</h5>
           </div>     
         </div>
         <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
             <div className="card  shadow-sm p-2 mb-2">
               <div className="card-body">         
                 <div className="col-12 col-sm-12 col-md-9 col-lg-9">
@@ -177,7 +177,7 @@ class MisCotizaciones extends React.Component {
           {/* fin de la fila */}
         </div>
         <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-11">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
                 <Tabla
                       misSolicitudes = {this.state.misSolicitudes}
                       token = {this.props.token}
