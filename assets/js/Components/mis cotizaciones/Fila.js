@@ -6,9 +6,6 @@ import {API_OBTENER_FOTO_REPUESTO, API_OBTENER_FOTO_COTIZACION, API_CANCELAR_SOL
 import axios from 'axios';
 
 const multipreview = {
-  maxWidth: "200px",
-  width: '90%',
-  height: '90%',
   backgroundPosition: 'center center',
   background:'url(' + 'http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg' + ')',
   backgroundColor: '#fff',
@@ -41,14 +38,16 @@ class Fila extends React.Component {
 
   armarFilaTabla(elemento){
     const recursos = elemento.recurso_cotizacions;
-    // console.log(recurso);
+    const monto = elemento.monto;
+    const descripcion = elemento.solicitud.repuesto.name;
+    console.log(elemento);
     return (
             <Tr key={elemento.id}>
               <Td className="tdFoto">
                 <>{this.renderFoto(recursos)}</>
               </Td>
               <Td className="tdDescripcion">
-                <>{this.renderDescripcion()}</>
+                <>{this.renderDescripcion(descripcion,monto)}</>
               </Td>
           </Tr>
     )
@@ -59,12 +58,12 @@ class Fila extends React.Component {
       const recurso = recursos[0];
       const url = API_OBTENER_FOTO_COTIZACION + `?fileName=${recurso.nombre_fisico}`;
       return (
-        <img src={url} style={multipreview} alt="Ocurrio un problema al previsualizar..." />
+        <img src={url} width="200" height="200" style={multipreview} alt="Ocurrio un problema al previsualizar..." />
       )
     }
   }
 
-  renderDescripcion = () => {
+  renderDescripcion = (descripcion,monto) => {
     return(
       <p>SOY UNA PRUEBA, ACA DEBE IR LA DESCRIPCION Y EL PRECIO Y ETC</p>
     )
