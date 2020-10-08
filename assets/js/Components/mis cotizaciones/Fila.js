@@ -65,7 +65,10 @@ class Fila extends React.Component {
 
   renderDescripcion = (descripcion,monto) => {
     return(
-      <p>SOY UNA PRUEBA, ACA DEBE IR LA DESCRIPCION Y EL PRECIO Y ETC</p>
+        <div>
+          <h6>Repuesto: {descripcion}</h6>
+          <h5><b>$ {monto}</b></h5>
+        </div>
     )
   }
 
