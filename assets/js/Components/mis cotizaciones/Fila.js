@@ -40,36 +40,44 @@ class Fila extends React.Component {
     const recursos = elemento.recurso_cotizacions;
     const monto = elemento.monto;
     const descripcion = elemento.solicitud.repuesto.name;
+    const id = elemento.id;
+
     console.log(elemento);
     return (
             <Tr key={elemento.id}>
               <Td className="tdFoto">
-                <>{this.renderFoto(recursos)}</>
+                <>{this.renderFoto(id,recursos)}</>
               </Td>
               <Td className="tdDescripcion">
-                <>{this.renderDescripcion(descripcion,monto)}</>
+                <>{this.renderDescripcion(id,descripcion,monto)}</>
               </Td>
           </Tr>
     )
   }
 
-  renderFoto = (recursos) => {
+  renderFoto = (id,recursos) => {
     if(recursos.length > 0) {
       const recurso = recursos[0];
       const url = API_OBTENER_FOTO_COTIZACION + `?fileName=${recurso.nombre_fisico}`;
       return (
-        <img src={url} width="200" height="200" style={multipreview} alt="Ocurrio un problema al previsualizar..." />
+        <img src={url} width="200" height="200" style={multipreview} alt="Ocurrio un problema al previsualizar..." 
+              onClick={() => this.mostrarCotizacion(id)} 
+        />
       )
     }
   }
 
-  renderDescripcion = (descripcion,monto) => {
+  renderDescripcion = (id,descripcion,monto) => {
     return(
         <div>
-          <h6>Repuesto: {descripcion}</h6>
+          <h6 onClick={() => this.mostrarCotizacion(id)}>Repuesto: {descripcion}</h6>
           <h5><b>$ {monto}</b></h5>
         </div>
     )
+  }
+
+  mostrarCotizacion = (id) => {
+    alert('soy un id ' + id);
   }
 
   render() {
