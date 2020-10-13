@@ -1,0 +1,2 @@
+git checkout HEAD~X 
+x: cantidad de commit a los que quiero deshacer
