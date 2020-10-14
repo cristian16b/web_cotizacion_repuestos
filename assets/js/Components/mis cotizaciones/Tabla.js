@@ -1,7 +1,8 @@
 import React , { Component } from 'react';
 import Fila from './Fila.js';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
-import mostrarCotizacion from './mostrarCotizacion.js';
+import MostrarCotizacion from './mostrarCotizacion.js';
+import ModalImage from "react-modal-image";
 
 class Tabla extends React.Component {
 
@@ -60,7 +61,7 @@ class Tabla extends React.Component {
   render() {
     if(this.state.cotizacionSeleccionada != null) {
       return(
-        <mostrarCotizacion></mostrarCotizacion>
+        <MostrarCotizacion></MostrarCotizacion>
       )
     }
     return (
