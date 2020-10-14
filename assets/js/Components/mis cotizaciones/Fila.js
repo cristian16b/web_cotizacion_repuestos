@@ -42,9 +42,9 @@ class Fila extends React.Component {
     const descripcion = elemento.solicitud.repuesto.name;
     const id = elemento.id;
 
-    console.log(elemento);
+    // console.log(elemento);
     return (
-            <Tr key={elemento.id}>
+            <Tr key={id.toString()}>
               <Td className="tdFoto">
                 <>{this.renderFoto(id,recursos)}</>
               </Td>
@@ -76,9 +76,7 @@ class Fila extends React.Component {
     )
   }
 
-  mostrarCotizacion = (id) => {
-    alert('soy un id ' + id);
-  }
+  mostrarCotizacion = (id) => { this.props.mostrarCotizacion(id)  }
 
   render() {
     return (

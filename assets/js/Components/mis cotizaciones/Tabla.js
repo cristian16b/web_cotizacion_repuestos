@@ -6,6 +6,10 @@ class Tabla extends React.Component {
 
   constructor(props){
     super(props);
+
+    this.state = ({
+      cotizacionSeleccionada: null,
+    })
   }
 
   renderTabla() {
@@ -26,6 +30,7 @@ class Tabla extends React.Component {
                                 elemento = {elemento} 
                                 token = {this.props.token} 
                                 reiniciar = {this.reiniciar}
+                                mostrarCotizacion = {this.mostrarCotizacion}
                             />
                           )
                         }
@@ -38,9 +43,25 @@ class Tabla extends React.Component {
     );
   }
 
+  mostrarCotizacion = (id) => { 
+    // alert('soy el padre y me piden mostrar id=' + id);  ç
+    for(let element of this.props.misSolicitudes) {
+        if(element.id == id) {
+          console.log(element); 
+          this.setState({cotizacionSeleccionada: id});
+          break;
+        }
+      }
+  }
+
   reiniciar = () => { this.props.reiniciar(); }
 
   render() {
+    if(this.state.cotizacionSeleccionada != null) {
+      return(
+        <>Se va a mostrar algo aca</>
+      )
+    }
     return (
       <>{ this.renderTabla() }</>
     );
