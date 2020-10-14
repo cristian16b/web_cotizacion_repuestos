@@ -1,6 +1,7 @@
 import React , { Component } from 'react';
 import Fila from './Fila.js';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-Table';
+import mostrarCotizacion from './mostrarCotizacion.js';
 
 class Tabla extends React.Component {
 
@@ -47,8 +48,8 @@ class Tabla extends React.Component {
     // alert('soy el padre y me piden mostrar id=' + id);  ç
     for(let element of this.props.misSolicitudes) {
         if(element.id == id) {
-          console.log(element); 
-          this.setState({cotizacionSeleccionada: id});
+          // console.log(element); 
+          this.setState({cotizacionSeleccionada: element});
           break;
         }
       }
@@ -59,7 +60,7 @@ class Tabla extends React.Component {
   render() {
     if(this.state.cotizacionSeleccionada != null) {
       return(
-        <>Se va a mostrar algo aca</>
+        <mostrarCotizacion></mostrarCotizacion>
       )
     }
     return (
