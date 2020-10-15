@@ -58,10 +58,12 @@ class Tabla extends React.Component {
 
   reiniciar = () => { this.props.reiniciar(); }
 
+  mostrarListado = () => { this.setState({cotizacionSeleccionada: null}); }
+
   render() {
     if(this.state.cotizacionSeleccionada != null) {
       return(
-        <MostrarCotizacion></MostrarCotizacion>
+        <MostrarCotizacion mostrarListado={this.mostrarListado}></MostrarCotizacion>
       )
     }
     return (

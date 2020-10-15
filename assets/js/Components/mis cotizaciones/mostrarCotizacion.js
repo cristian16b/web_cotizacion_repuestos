@@ -19,11 +19,13 @@ class MostrarCotizacion extends React.Component {
     );
   }
 
+  mostrarListado = () => { this.props.mostrarListado(); }
+
   render() {
     return (
       <div className="row">
         <div className="col-12">
-          <a>Volver al listado</a>
+          <a className="btn btn-link" onClick={this.mostrarListado}>Volver al listado</a>
         </div>
         <div className="col-12">
           <div className="card">
