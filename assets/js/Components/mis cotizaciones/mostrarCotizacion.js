@@ -25,7 +25,7 @@ class MostrarCotizacion extends React.Component {
     return (
       <div className="row">
         <div className="col-12">
-          <a className="btn btn-link" onClick={this.mostrarListado}>Volver al listado</a>
+          <button type="button"  className="btn btn-link" onClick={this.mostrarListado}>Volver al listado</button>
         </div>
         <div className="col-12">
           <div className="card">
