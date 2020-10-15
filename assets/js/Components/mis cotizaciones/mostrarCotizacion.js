@@ -11,12 +11,13 @@ class MostrarCotizacion extends React.Component {
   armarPrevisualizacionImagen = (recurso,u) => {
     const url = u + `?fileName=${recurso.nombre_fisico}`;
     return (
-            <div className="col-12 col-sm-12 col-md-3 col-lg-3">
-                    <ModalImage
-                            small={url}
-                            large={url}
-                            alt=""
-                        />
+            <div className="col-12 modal-image">
+              <ModalImage
+                  small={url}
+                  large={url}
+                  alt=""
+                  className="modal-image"       
+              />
             </div>
     );
   }
@@ -37,7 +38,13 @@ class MostrarCotizacion extends React.Component {
   }
 
   renderDescripcion = (cotizacion) => {
-
+    return(
+      <div className="card">
+        <div className="card-body">
+          soy una prueba
+        </div>
+      </div>
+    )
   }
 
   render() {

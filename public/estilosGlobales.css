@@ -167,3 +167,8 @@ h1,h2,h3,h4,h5 {
 .tdDescripcion {
     width: 70%;
 }
+
+.modal-image {
+    height: 200px;
+    width: 200px;
+}
