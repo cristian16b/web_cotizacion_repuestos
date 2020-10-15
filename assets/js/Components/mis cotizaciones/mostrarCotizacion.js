@@ -2,6 +2,18 @@ import React , { Component } from 'react';
 import {API_OBTENER_FOTO_REPUESTO} from '../../Constantes/constantes';
 import ModalImage from "react-modal-image";
 
+const multipreview = {
+  backgroundPosition: 'center center',
+  background:'url(' + 'http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg' + ')',
+  backgroundColor: '#fff',
+  backgroundSize: 'cover',
+  backgroundRepeat:'no-repeat',
+  display: 'inline-block',
+  // boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
+  height: "200px",
+  width: "200px",
+}
+
 class MostrarCotizacion extends React.Component {
 
   constructor(props){
@@ -11,12 +23,11 @@ class MostrarCotizacion extends React.Component {
   armarPrevisualizacionImagen = (recurso,u) => {
     const url = u + `?fileName=${recurso.nombre_fisico}`;
     return (
-            <div className="col-12 modal-image">
+            <div className="col-12 col-md-12 col-lg-6" style={multipreview}>
               <ModalImage
                   small={url}
                   large={url}
                   alt=""
-                  className="modal-image"       
               />
             </div>
     );
