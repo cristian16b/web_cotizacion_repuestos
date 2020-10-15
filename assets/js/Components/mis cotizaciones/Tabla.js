@@ -63,7 +63,7 @@ class Tabla extends React.Component {
   render() {
     if(this.state.cotizacionSeleccionada != null) {
       return(
-        <MostrarCotizacion mostrarListado={this.mostrarListado}></MostrarCotizacion>
+        <MostrarCotizacion mostrarListado={this.mostrarListado} cotizacion={this.state.cotizacionSeleccionada}></MostrarCotizacion>
       )
     }
     return (

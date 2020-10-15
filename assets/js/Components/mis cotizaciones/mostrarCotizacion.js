@@ -1,4 +1,6 @@
 import React , { Component } from 'react';
+import {API_OBTENER_FOTO_REPUESTO} from '../../Constantes/constantes';
+import ModalImage from "react-modal-image";
 
 class MostrarCotizacion extends React.Component {
 
@@ -21,15 +23,25 @@ class MostrarCotizacion extends React.Component {
 
   mostrarListado = () => { this.props.mostrarListado(); }
 
-  renderImagenes = () => {
-
+  renderImagenes = (cotizacion) => {
+    const recursos = cotizacion.recurso_cotizacions;
+    return(
+      <div className="row justify-content-center"> 
+        {
+          recursos.map(e  =>  {
+            return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_REPUESTO)
+          })
+        }
+      </div>
+    )
   }
 
-  renderDescripcion = () => {
-    
+  renderDescripcion = (cotizacion) => {
+
   }
 
   render() {
+    const cotizacion = this.props.cotizacion;
     return (
       <div className="row">
         <div className="col-12">
@@ -40,10 +52,10 @@ class MostrarCotizacion extends React.Component {
             <div className="card-body">
               <div className="row">
                 <div className="col-6">
-                  <>{this.renderImagenes()}</>
+                  <>{this.renderImagenes(cotizacion)}</>
                 </div>
                 <div className="col-6">
-                  <>{this.renderDescripcion()}</>
+                  <>{this.renderDescripcion(cotizacion)}</>
                 </div>
               </div>    
             </div>
