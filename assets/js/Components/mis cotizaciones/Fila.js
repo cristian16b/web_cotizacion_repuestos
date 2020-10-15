@@ -41,6 +41,8 @@ class Fila extends React.Component {
     const monto = elemento.monto;
     const descripcion = elemento.solicitud.repuesto.name;
     const id = elemento.id;
+    const modelo = elemento.solicitud.modelo_auto.name;
+    const marca = elemento.solicitud.modelo_auto.marca_auto.name;
 
     // console.log(elemento);
     return (
@@ -49,7 +51,7 @@ class Fila extends React.Component {
                 <>{this.renderFoto(id,recursos)}</>
               </Td>
               <Td className="tdDescripcion">
-                <>{this.renderDescripcion(id,descripcion,monto)}</>
+                <>{this.renderDescripcion(id,descripcion,monto,marca,modelo)}</>
               </Td>
           </Tr>
     )
@@ -67,10 +69,11 @@ class Fila extends React.Component {
     }
   }
 
-  renderDescripcion = (id,descripcion,monto) => {
+  renderDescripcion = (id,descripcion,monto,marca,modelo) => {
     return(
         <div>
           <h6 onClick={() => this.mostrarCotizacion(id)}>Repuesto: {descripcion}</h6>
+          <h6>Marca del vehículo: {marca} - Modelo: {modelo}</h6>
           <h5><b>$ {monto}</b></h5>
         </div>
     )
