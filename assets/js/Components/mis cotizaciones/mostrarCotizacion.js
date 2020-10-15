@@ -21,6 +21,14 @@ class MostrarCotizacion extends React.Component {
 
   mostrarListado = () => { this.props.mostrarListado(); }
 
+  renderImagenes = () => {
+
+  }
+
+  renderDescripcion = () => {
+    
+  }
+
   render() {
     return (
       <div className="row">
@@ -29,7 +37,15 @@ class MostrarCotizacion extends React.Component {
         </div>
         <div className="col-12">
           <div className="card">
-            <div className="card-body">    
+            <div className="card-body">
+              <div className="row">
+                <div className="col-6">
+                  <>{this.renderImagenes()}</>
+                </div>
+                <div className="col-6">
+                  <>{this.renderDescripcion()}</>
+                </div>
+              </div>    
             </div>
           </div>
         </div>
