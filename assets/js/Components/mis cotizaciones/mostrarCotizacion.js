@@ -21,30 +21,29 @@ class MostrarCotizacion extends React.Component {
   armarPrevisualizacionImagen = (recurso,u) => {
     const url = u + `?fileName=${recurso.nombre_fisico}`;
     return (
-            // <div className="col-6 col-md-6 col-lg-6" style={multipreview}>
-              //             {/* <ModalImage
-              //     small={url}
-              //     large={url}
-              //     alt=""
-              // /> */}
-                <img src={url} width="200" height="200" style={multipreview} alt="Ocurrio un problema al previsualizar..." 
-                      onClick={() => this.mostrarCotizacion(id)} 
-                />
-            // </div>
+            <div className="col-4 col-md-4 col-lg-4">
+              <img src={url} width="100" height="100" style={multipreview} alt="Cargando..." 
+                onClick={() => this.mostrarImagen(url)} 
+              />
+            </div>
     );
   }
 
   mostrarListado = () => { this.props.mostrarListado(); }
 
+  mostrarImagen = (url) => { alert(url); }
+
   renderImagenes = (cotizacion) => {
     const recursos = cotizacion.recurso_cotizacions;
     return(
-      <div className="row justify-content-center"> 
-        {
-          recursos.map(e  =>  {
-            return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_REPUESTO)
-          })
-        }
+      <div className="row" align="left">
+        <div className="col-6 col-md-6 col-lg-6">
+          {
+            recursos.map(e  =>  {
+              return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_REPUESTO)
+            })
+          }
+        </div> 
       </div>
     )
   }
