@@ -12,6 +12,12 @@ const multipreview = {
   boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
 }
 
+const paddingPrevisualizacion = {
+  paddingLeft: "10%",
+  paddingRight: "5%",
+  paddingTop: "0%",
+}
+
 class MostrarCotizacion extends React.Component {
 
   constructor(props){
@@ -55,7 +61,7 @@ class MostrarCotizacion extends React.Component {
             })
           }
         </div>
-        <div className="col-9 col-md-9 col-lg-9">
+        <div className="col-9 col-md-9 col-lg-9" style={paddingPrevisualizacion}>
           {
             <img src={this.state.urlImagenVisualizada} width="300" height="300" style={multipreview} alt="Cargando..." 
             />
