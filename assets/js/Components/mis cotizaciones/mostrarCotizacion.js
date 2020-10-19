@@ -55,6 +55,7 @@ class MostrarCotizacion extends React.Component {
     const id = cotizacion.id;
     const modelo = cotizacion.solicitud.modelo_auto.name;
     const marca = cotizacion.solicitud.modelo_auto.marca_auto.name;
+    const urlPreferencia = cotizacion.preferencia;
 
     return(
       <div className="card">
@@ -62,6 +63,22 @@ class MostrarCotizacion extends React.Component {
           <h6 onClick={() => this.mostrarCotizacion(id)}>Repuesto: {descripcion}</h6>
           <h6>Marca del vehículo: {marca} - Modelo: {modelo}</h6>
           <h5><b>$ {monto}</b></h5>
+          <div align="center">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+              <form action="/procesar-pago" method="POST">
+                <a href={urlPreferencia} 
+                    className="btn btn-warning btn-block btn-sm"
+                    type="button"
+                    target="_self">
+                  Comprar ahora
+                </a>   
+                <script
+                  src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                  data-preference-id={urlPreferencia}>
+                </script>
+              </form>
+            </div>
+          </div> 
         </div>
       </div>
     )
