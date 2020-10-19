@@ -9,9 +9,7 @@ const multipreview = {
   backgroundSize: 'cover',
   backgroundRepeat:'no-repeat',
   display: 'inline-block',
-  // boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
-  height: "200px",
-  width: "200px",
+  boxShadow: '0px -3px 6px 2px rgba(0,0,0,0.2)',
 }
 
 class MostrarCotizacion extends React.Component {
@@ -23,13 +21,16 @@ class MostrarCotizacion extends React.Component {
   armarPrevisualizacionImagen = (recurso,u) => {
     const url = u + `?fileName=${recurso.nombre_fisico}`;
     return (
-            <div className="col-12 col-md-12 col-lg-6" style={multipreview}>
-              <ModalImage
-                  small={url}
-                  large={url}
-                  alt=""
-              />
-            </div>
+            // <div className="col-6 col-md-6 col-lg-6" style={multipreview}>
+              //             {/* <ModalImage
+              //     small={url}
+              //     large={url}
+              //     alt=""
+              // /> */}
+                <img src={url} width="200" height="200" style={multipreview} alt="Ocurrio un problema al previsualizar..." 
+                      onClick={() => this.mostrarCotizacion(id)} 
+                />
+            // </div>
     );
   }
 
@@ -49,10 +50,18 @@ class MostrarCotizacion extends React.Component {
   }
 
   renderDescripcion = (cotizacion) => {
+    const monto = cotizacion.monto;
+    const descripcion = cotizacion.solicitud.repuesto.name;
+    const id = cotizacion.id;
+    const modelo = cotizacion.solicitud.modelo_auto.name;
+    const marca = cotizacion.solicitud.modelo_auto.marca_auto.name;
+
     return(
       <div className="card">
         <div className="card-body">
-          soy una prueba
+          <h6 onClick={() => this.mostrarCotizacion(id)}>Repuesto: {descripcion}</h6>
+          <h6>Marca del vehículo: {marca} - Modelo: {modelo}</h6>
+          <h5><b>$ {monto}</b></h5>
         </div>
       </div>
     )
@@ -65,14 +74,14 @@ class MostrarCotizacion extends React.Component {
         <div className="col-12">
           <button type="button" className="btn btn-link" onClick={this.mostrarListado}>Volver al listado</button>
         </div>
-        <div className="col-12">
+        <div className="col-12 col-md-12 col-lg-12">
           <div className="card">
             <div className="card-body">
               <div className="row">
-                <div className="col-6">
+                <div className="col-12 col-md-12 col-lg-6">
                   <>{this.renderImagenes(cotizacion)}</>
                 </div>
-                <div className="col-6">
+                <div className="col-12 col-md-12 col-lg-6">
                   <>{this.renderDescripcion(cotizacion)}</>
                 </div>
               </div>    
