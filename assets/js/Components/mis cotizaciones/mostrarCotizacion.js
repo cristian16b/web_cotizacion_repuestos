@@ -16,9 +16,20 @@ class MostrarCotizacion extends React.Component {
 
   constructor(props){
     super(props);
+
+    this.state = ({
+      urlImagenVisualizada: null,
+    })
+    
   }
 
-  armarPrevisualizacionImagen = (recurso,u) => {
+  componentDidMount() {
+    const nombreFisico = this.props.cotizacion.recurso_cotizacions[0].nombre_fisico;
+    const url = API_OBTENER_FOTO_REPUESTO + `?fileName=${nombreFisico}`;
+    this.mostrarImagen(url);
+  }
+
+  armarMiniaturaImagen = (recurso,u) => {
     const url = u + `?fileName=${recurso.nombre_fisico}`;
     return (
             <div className="col-4 col-md-4 col-lg-4">
@@ -31,17 +42,23 @@ class MostrarCotizacion extends React.Component {
 
   mostrarListado = () => { this.props.mostrarListado(); }
 
-  mostrarImagen = (url) => { alert(url); }
+  mostrarImagen = (url) => { this.setState({urlImagenVisualizada: url}); }
 
   renderImagenes = (cotizacion) => {
     const recursos = cotizacion.recurso_cotizacions;
     return(
       <div className="row" align="left">
-        <div className="col-6 col-md-6 col-lg-6">
+        <div className="col-3 col-md-3 col-lg-3">
           {
             recursos.map(e  =>  {
-              return this.armarPrevisualizacionImagen(e,API_OBTENER_FOTO_REPUESTO)
+              return this.armarMiniaturaImagen(e,API_OBTENER_FOTO_REPUESTO)
             })
+          }
+        </div>
+        <div className="col-9 col-md-9 col-lg-9">
+          {
+            <img src={this.state.urlImagenVisualizada} width="300" height="300" style={multipreview} alt="Cargando..." 
+            />
           }
         </div> 
       </div>
