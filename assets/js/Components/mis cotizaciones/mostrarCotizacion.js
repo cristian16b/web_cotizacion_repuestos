@@ -18,6 +18,13 @@ const paddingPrevisualizacion = {
   paddingTop: "0%",
 }
 
+const paddingCard = {
+  paddingLeft: "5%",
+  paddingRight: "5%",
+  paddingTop: "0%",
+  marginTop: "1%"
+}
+
 class MostrarCotizacion extends React.Component {
 
   constructor(props){
@@ -63,7 +70,7 @@ class MostrarCotizacion extends React.Component {
         </div>
         <div className="col-9 col-md-9 col-lg-9" style={paddingPrevisualizacion}>
           {
-            <img src={this.state.urlImagenVisualizada} width="300" height="300" style={multipreview} alt="Cargando..." 
+            <img src={this.state.urlImagenVisualizada} width="250" height="250" style={multipreview} alt="Cargando..." 
             />
           }
         </div> 
@@ -81,7 +88,7 @@ class MostrarCotizacion extends React.Component {
 
     return(
       <div className="card">
-        <div className="card-body">
+        <div className="card-body"  style={paddingCard}>
           <h6 onClick={() => this.mostrarCotizacion(id)}>Repuesto: {descripcion}</h6>
           <h6>Marca del vehículo: {marca} - Modelo: {modelo}</h6>
           <h5><b>$ {monto}</b></h5>
@@ -89,7 +96,7 @@ class MostrarCotizacion extends React.Component {
             <div className="col-12 col-sm-12 col-md-12 col-lg-12">
               <form action="/procesar-pago" method="POST">
                 <a href={urlPreferencia} 
-                    className="btn btn-warning btn-block btn-sm"
+                    className="btn btn-primary btn-block btn-sm"
                     type="button"
                     target="_self">
                   Comprar ahora
@@ -109,21 +116,25 @@ class MostrarCotizacion extends React.Component {
   render() {
     const cotizacion = this.props.cotizacion;
     return (
-      <div className="row">
-        <div className="col-12">
-          <button type="button" className="btn btn-link" onClick={this.mostrarListado}>Volver al listado</button>
+      <div>
+        <div className="row">
+          <div className="col-12">
+            <button type="button" className="btn btn-link" onClick={this.mostrarListado}>Volver al listado</button>
+          </div>
         </div>
-        <div className="col-12 col-md-12 col-lg-12">
-          <div className="card">
-            <div className="card-body">
-              <div className="row">
-                <div className="col-12 col-md-12 col-lg-6">
-                  <>{this.renderImagenes(cotizacion)}</>
-                </div>
-                <div className="col-12 col-md-12 col-lg-6">
-                  <>{this.renderDescripcion(cotizacion)}</>
-                </div>
-              </div>    
+        <div className="row">
+          <div className="col-12 col-md-12 col-lg-12">
+            <div className="card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-12 col-md-12 col-lg-6">
+                    <>{this.renderImagenes(cotizacion)}</>
+                  </div>
+                  <div className="col-12 col-md-12 col-lg-6">
+                    <>{this.renderDescripcion(cotizacion)}</>
+                  </div>
+                </div>    
+              </div>
             </div>
           </div>
         </div>
