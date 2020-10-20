@@ -49,7 +49,7 @@ class MercadoPagoController extends AbstractController
      */
     public function index(Request $request)
     {
-        die('proceso de registro de ventas en construccion');
+        // die('proceso de registro de ventas en construccion');
         $idPagoML = $request->query->get('collection_id');
         $estadoPagoML = $request->query->get('collection_status');
         $estadoDetalleML = $request->query->get('merchant_order_id');
@@ -62,6 +62,8 @@ class MercadoPagoController extends AbstractController
         $compra->setEstadoDetalleML($estadoDetalleML);
         $compra->setEstadoPagoML($estadoPagoML);
         $compra->setTipoPagoML($tipoPagoML);
+
+        dump($compra);die;
             
         $em = $this->getDoctrine()->getManager();
         // $cotizacion = $em->getRepository(Solicitud::class)

@@ -89,8 +89,9 @@ class MostrarCotizacion extends React.Component {
     return(
       <div className="card">
         <div className="card-body"  style={paddingCard}>
-          <h6 onClick={() => this.mostrarCotizacion(id)}>Repuesto: {descripcion}</h6>
-          <h6>Marca del vehículo: {marca} - Modelo: {modelo}</h6>
+          <h6>Repuesto: {descripcion}</h6>
+          <h6>Marca del vehículo: {marca}</h6>
+          <h6>Modelo: {modelo}</h6>
           <h5><b>$ {monto}</b></h5>
           <div align="center">
             <div className="col-12 col-sm-12 col-md-12 col-lg-12">
