@@ -34,12 +34,6 @@ class Compra
     private $fechaBaja;
 
     /**
-     * @ORM\Column(type="float")
-     * @Expose
-     */
-    private $monto;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Expose
      */
@@ -98,18 +92,6 @@ class Compra
     public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
-
-        return $this;
-    }
-
-    public function getMonto(): ?float
-    {
-        return $this->monto;
-    }
-
-    public function setMonto(float $monto): self
-    {
-        $this->monto = $monto;
 
         return $this;
     }

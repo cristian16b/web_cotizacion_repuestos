@@ -32,3 +32,4 @@ ALTER TABLE cotizacion ADD comision VARCHAR(255) NOT NULL;
 ALTER TABLE compra DROP referencia_externa_ml;
 --modificacion 20/9
  ALTER TABLE compra DROP estado_ml;  
+ ALTER TABLE compra DROP monto;
