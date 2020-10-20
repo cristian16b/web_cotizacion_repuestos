@@ -65,12 +65,6 @@ class Compra
      * @ORM\Column(type="string", length=255)
      * @Expose
      */
-    private $estadoML;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Expose
-     */
     private $estadoDetalleML;
 
     /**
@@ -189,18 +183,6 @@ class Compra
     public function setReferenciaExternaML(string $referenciaExternaML): self
     {
         $this->referenciaExternaML = $referenciaExternaML;
-
-        return $this;
-    }
-
-    public function getEstadoML(): ?string
-    {
-        return $this->estadoML;
-    }
-
-    public function setEstadoML(string $estadoML): self
-    {
-        $this->estadoML = $estadoML;
 
         return $this;
     }

@@ -62,8 +62,14 @@ class MercadoPagoController extends AbstractController
         $compra->setEstadoDetalleML($estadoDetalleML);
         $compra->setEstadoPagoML($estadoPagoML);
         $compra->setTipoPagoML($tipoPagoML);
-
-        dump($compra);die;
+        // http://localhost/web_cotizacion_repuestos/public/mercadoPago/pagar?
+        // collection_id=1230037994&
+        // collection_status=approved&
+        // payment_id=1230037994&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=1895858639&
+        // preference_id=646196739-578133a6-0655-4b26-bbe4-3454d0973a88&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
+        // 
+        dump($compra);
+        die;
             
         $em = $this->getDoctrine()->getManager();
         // $cotizacion = $em->getRepository(Solicitud::class)
