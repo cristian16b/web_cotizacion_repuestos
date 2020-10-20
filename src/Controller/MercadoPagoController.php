@@ -26,8 +26,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
-use DateTime;
-use MercadoPago;
 use App\Entity\Compra;
 
 /**
@@ -68,14 +66,19 @@ class MercadoPagoController extends AbstractController
         // payment_id=1230037994&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=1895858639&
         // preference_id=646196739-578133a6-0655-4b26-bbe4-3454d0973a88&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
         // 
-        dump($compra);
-        die;
+        // dump($compra);
+        // die;
             
         $em = $this->getDoctrine()->getManager();
-        // $cotizacion = $em->getRepository(Solicitud::class)
-        //         ->buscarUltimasPorId($user);
+        $cotizacion = $em->getRepository(Cotizacion::class)
+                ->buscarPreferenciaId($preference_id);
+
+        $solicitud = $cotizacion->getSolicitud();
+        $solicitud->setCompra($compra);
+        $em->flush();
+        
         return $this->render('mercado_pago/index.html.twig', [
-            'controller_name' => 'MercadoPagoController',
+            'controller_name' => 'se guardo correctamente...todo terminar',
         ]);
     }
 

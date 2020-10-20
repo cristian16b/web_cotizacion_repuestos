@@ -36,6 +36,15 @@ class CotizacionRepository extends ServiceEntityRepository
         ;
     }
 
+    public function buscarPreferenciaId($preference_id) {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.preferencia LIKE :val')
+            ->setParameter('val', '%'.$preference_id.'%')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 
     // /**
     //  * @return Cotizacion[] Returns an array of Cotizacion objects
