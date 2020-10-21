@@ -239,7 +239,7 @@ class MiPerfil extends React.Component {
             <hr></hr>
             <>{this.renderConstanciasAsociadas()}</>
             <hr></hr>
-            <>{this.renderBotones()}</>
+            {/* <>{this.renderBotones()}</> */}
         </>
       );
     }   
@@ -261,7 +261,7 @@ class MiPerfil extends React.Component {
               ocultarCampos={this.state.ocultarPass}
             >
           </FormularioDatosComunes>
-          <>{this.renderBotones()}</>
+          {/* <>{this.renderBotones()}</> */}
         </>
       );
     }
@@ -288,13 +288,13 @@ class MiPerfil extends React.Component {
     return (        
       <div className="row justify-content-center containerCentral">
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
+        <h5>Mi perfil</h5>
             <div className="card shadow-sm p-3 mb-5 bg-white rounded">
               <div className="card-body">
-                <h5>Mi perfil</h5>
-                <hr/>
                 <>{this.renderDatosPerfil()}</>
             </div>
           </div>
+          <>{this.renderBotones()}</>
         </div>
       </div>
     );

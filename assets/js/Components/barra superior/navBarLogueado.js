@@ -88,6 +88,13 @@ class NavbarLogueado extends React.Component {
                             Mis Cotizaciones</span>
                             </Link>
                         </li>
+                        <li data-toggle="collapse" data-target=".navbar-collapse" className={this.getNavLinkClass("/home")}>
+                            <Link to="/compras" className="navbar-brand">
+                            <span className="nav-link"><i className="fa fa-sticky-note-o iconoColor">
+                            </i>&nbsp;
+                            Mis compras</span>
+                            </Link>
+                        </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse"  className={this.getNavLinkClass("/repuesto")}>
                             <Link to="/repuesto" className="navbar-brand">
                             <span className="nav-link"><i className="fa fa-search iconoColor">

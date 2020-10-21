@@ -85,6 +85,7 @@ class MostrarCotizacion extends React.Component {
     const modelo = cotizacion.solicitud.modelo_auto.name;
     const marca = cotizacion.solicitud.modelo_auto.marca_auto.name;
     const urlPreferencia = cotizacion.preferencia;
+    const observacion = cotizacion.observacion;
 
     return(
       <div className="card">
@@ -93,6 +94,10 @@ class MostrarCotizacion extends React.Component {
           <h6>Marca del vehículo: {marca}</h6>
           <h6>Modelo: {modelo}</h6>
           <h5><b>$ {monto}</b></h5>
+          <h6>
+            Observacion:&nbsp; 
+            { observacion == '' ? '-' : observacion }
+          </h6>
           <div align="center">
             <div className="col-12 col-sm-12 col-md-12 col-lg-12">
               <form action="/procesar-pago" method="POST">
