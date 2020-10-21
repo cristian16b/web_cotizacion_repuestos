@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import {API_OBTENER_FOTO_REPUESTO} from '../../Constantes/constantes';
+import {API_OBTENER_FOTO_COTIZACION} from '../../Constantes/constantes';
 import ModalImage from "react-modal-image";
 
 const multipreview = {
@@ -38,7 +38,7 @@ class MostrarCotizacion extends React.Component {
 
   componentDidMount() {
     const nombreFisico = this.props.cotizacion.recurso_cotizacions[0].nombre_fisico;
-    const url = API_OBTENER_FOTO_REPUESTO + `?fileName=${nombreFisico}`;
+    const url = API_OBTENER_FOTO_COTIZACION + `?fileName=${nombreFisico}`;
     this.mostrarImagen(url);
   }
 
@@ -64,7 +64,7 @@ class MostrarCotizacion extends React.Component {
         <div className="col-3 col-md-3 col-lg-3">
           {
             recursos.map(e  =>  {
-              return this.armarMiniaturaImagen(e,API_OBTENER_FOTO_REPUESTO)
+              return this.armarMiniaturaImagen(e,API_OBTENER_FOTO_COTIZACION)
             })
           }
         </div>
