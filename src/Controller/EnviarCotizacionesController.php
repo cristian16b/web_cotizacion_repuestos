@@ -279,9 +279,9 @@ class EnviarCotizacionesController extends AbstractController
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
         $preference->back_urls = array(
-            "success" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar",
-            "failure" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar",
-            "pending" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar"
+            "success" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar/aprobado",
+            "failure" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar/rechazado",
+            "pending" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar/pendiente"
         );
         // $preference->auto_return = "approved";
         $preference->payment_methods = array(
