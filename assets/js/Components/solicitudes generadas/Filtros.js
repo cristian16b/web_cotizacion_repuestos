@@ -103,12 +103,12 @@ class Filtros extends React.Component {
           </div>
           <br></br>
           <div className="row">
-              <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+              <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                 <button type="submit" onClick={this.buscarRepuestoSolicitado}
                   className="btn btn-primary btn-block">Buscar
                 </button>
           </div>
-          <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
               <button 
                 onClick={this.reiniciar}
                 className="btn btn-light btn-block">Actualizar listado</button>
