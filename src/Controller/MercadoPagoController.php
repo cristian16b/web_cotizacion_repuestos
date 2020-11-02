@@ -42,10 +42,100 @@ class MercadoPagoController extends AbstractController
         return array_merge(parent::getSubscribedServices(), [ 'jms_serializer' => '?'.SerializerInterface::class, ]); 
     }
 
+    // $preference->back_urls = array(
+    //     "success" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar/aprobado",
+    //     "failure" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar/rechazado",
+    //     "pending" =>  $this->container->get('router')->getContext()->getBaseUrl() . "/mercadoPago/pagar/pendiente"
+    // );
+
     /**
-     * @Route("/pagar", name="_pagar")
+     * @Route("/pagar/rechazado", name="mercadopago_rechazado")
+    */
+    public function registrarPagoRechazadoAction(Request $request)
+    {
+        // die('proceso de registro de ventas en construccion');
+        $idPagoML = $request->query->get('collection_id');
+        $estadoPagoML = $request->query->get('collection_status');
+        $estadoDetalleML = $request->query->get('merchant_order_id');
+        $tipoPagoML = $request->query->get('payment_type');
+        $preference_id = $request->query->get('preference_id');
+
+        $compra = new Compra();
+        $compra->setIdPagoML($idPagoML);
+        $compra->setPreferenciaIdML($preference_id);
+        $compra->setEstadoDetalleML($estadoDetalleML);
+        $compra->setEstadoPagoML($estadoPagoML);
+        $compra->setTipoPagoML($tipoPagoML);
+        // http://localhost/web_cotizacion_repuestos/public/mercadoPago/pagar?
+        // collection_id=1230037994&
+        // collection_status=approved&
+        // payment_id=1230037994&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=1895858639&
+        // preference_id=646196739-578133a6-0655-4b26-bbe4-3454d0973a88&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
+        // 
+        // dump($compra);
+        // die;
+            
+        $em = $this->getDoctrine()->getManager();
+        $cotizacion = $em->getRepository(Cotizacion::class)
+                ->buscarPreferenciaId($preference_id);
+
+        // NOTA: si sale rechazado por los motivos que fuera se registra pero no se asocia en la solicitud
+        // como una compra efectiva (lo que pasa en los otros casos) 
+        $em->persist($compra);
+        // $solicitud = $cotizacion->getSolicitud();
+        // $solicitud->setCompra($compra);
+        $em->flush();
+        
+        return $this->render('mercado_pago/index.html.twig', [
+            'controller_name' => 'se guardo correctamente...todo terminar',
+        ]);
+    }
+
+
+    /**
+     * @Route("/pagar/pendiente", name="mercadopago_pendiente")
+    */
+    public function registrarPagoPendienteAction(Request $request)
+    {
+        // die('proceso de registro de ventas en construccion');
+        $idPagoML = $request->query->get('collection_id');
+        $estadoPagoML = $request->query->get('collection_status');
+        $estadoDetalleML = $request->query->get('merchant_order_id');
+        $tipoPagoML = $request->query->get('payment_type');
+        $preference_id = $request->query->get('preference_id');
+
+        $compra = new Compra();
+        $compra->setIdPagoML($idPagoML);
+        $compra->setPreferenciaIdML($preference_id);
+        $compra->setEstadoDetalleML($estadoDetalleML);
+        $compra->setEstadoPagoML($estadoPagoML);
+        $compra->setTipoPagoML($tipoPagoML);
+        // http://localhost/web_cotizacion_repuestos/public/mercadoPago/pagar?
+        // collection_id=1230037994&
+        // collection_status=approved&
+        // payment_id=1230037994&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=1895858639&
+        // preference_id=646196739-578133a6-0655-4b26-bbe4-3454d0973a88&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
+        // 
+        // dump($compra);
+        // die;
+            
+        $em = $this->getDoctrine()->getManager();
+        $cotizacion = $em->getRepository(Cotizacion::class)
+                ->buscarPreferenciaId($preference_id);
+
+        $solicitud = $cotizacion->getSolicitud();
+        $solicitud->setCompra($compra);
+        $em->flush();
+        
+        return $this->render('mercado_pago/index.html.twig', [
+            'controller_name' => 'se guardo correctamente...todo terminar',
+        ]);
+    }
+
+    /**
+     * @Route("/pagar/aprobado", name="mercadopago_aprobado")
      */
-    public function index(Request $request)
+    public function registrarPagoAprobadoAction(Request $request)
     {
         // die('proceso de registro de ventas en construccion');
         $idPagoML = $request->query->get('collection_id');
