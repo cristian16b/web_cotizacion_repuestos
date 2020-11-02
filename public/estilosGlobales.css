@@ -167,3 +167,15 @@ h1,h2,h3,h4,h5 {
 .tdDescripcion {
     width: 70%;
 }
+
+p {
+    font-weight: 400;
+}
+
+small {
+    font-weight: 400;
+}
+
+.btn btn-link {
+    font-weight: 400;
+}
