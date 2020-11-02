@@ -90,7 +90,9 @@ class Fila extends React.Component {
         "idSolicitud":id,
         "monto":this.state.monto,
         "imagenes":this.state.listadoImagenes,
-        "observaciones":this.state.observaciones,
+        // "observaciones":this.state.observaciones,
+        // 2/11/2020 porque pedido de Lucas se ocultan los campos de observacion
+        "observaciones":""
       }
       const config = {
           headers: { 
@@ -223,14 +225,14 @@ class Fila extends React.Component {
         <Collapsible title="Enviar cotización"  className="btn btn-warning">
         <hr></hr>
         <div className="row">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-12">
-            <p>Ingrese el monto que sera notificado al solicitante</p>
+          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+            <p><b>Ingrese el monto que sera notificado al solicitante</b></p>
           </div>
-          <div className="col-10 col-sm-6 col-md-6 col-lg-6">
+          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
             <div className="form-group">
-              <label htmlFor="monto">Monto en pesos (ingresarlo sin seperador de miles)</label>
+              {/* <label htmlFor="monto">Monto en pesos (ingresarlo sin seperador de miles)</label> */}
               <div className="input-group">
-                <span className="input-group-addon"><i className="fa fa-lock"></i></span>
+                <span className="input-group-addon"></span>
                   <input type="number" min="1" step="0.1" className="form-control" name="monto" 
                           defaultValue = {this.state.monto} onChange={this.handleChangeInput}
                           placeholder="Ej: 2100,50" />	
@@ -241,15 +243,15 @@ class Fila extends React.Component {
             </div>
           </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12">
             <p><b>Se informará que la cotización vence el {this.props.fechaVencimiento}</b></p>
           </div>
-        </div>
-        <>{this.renderObservaciones()}</>
+        </div> */}
+        {/* <>{this.renderObservaciones()}</> */}
         <>{this.renderSubidaPrevisualizacionFotos()}</>
         <div className="row">
-          <div className="col-6 col-sm-6 col-md-3 col-lg-2">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-6">
             <button
               disabled = {this.state.botonHabilitado}
               type="submit" 
@@ -290,7 +292,7 @@ class Fila extends React.Component {
             <div className="row justify-content-center">
               <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                   <div className="form-group">
-                    <p>Debe adjuntar al menos una foto del repuesto que usted esta necesitando.</p> 
+                    <p>Debe adjuntar al menos una foto del repuesto que usted esta cotizando.</p> 
                     <p><b>Como máximo se aceptarán hasta cuatro y cada archivo no puede exeder los 5 megabytes.</b></p>
                     <p><i>Si el archivo no es cargado, se debe a que no es el formato valido(.jpg o .png) o que su tamaño es mayor al especificado</i></p>
                       <MultipleImageUploadComponent onChangeI={this.getImagen}></MultipleImageUploadComponent>
