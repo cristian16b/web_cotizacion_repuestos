@@ -27,6 +27,7 @@ use AppBundle\Validator\Constraints as AppAssert;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
 use App\Entity\Compra;
+use App\Entity\EstadoCotizacion;
 
 /**
  * @Route("/mercadoPago", name="mercadopago")
@@ -164,12 +165,32 @@ class MercadoPagoController extends AbstractController
                 ->buscarPreferenciaId($preference_id);
 
         $solicitud = $cotizacion->getSolicitud();
-        $solicitud->setCompra($compra);
+        $solicitud->addCompra($compra);
+        $solicitud->setEstado($this->obtenerEstadoFinalizadaSolicitud());
+
+        $compra->setSolicitud($solicitud);
+        $cotizacion->setEstado($this->obtenerEstadoAceptadoCotizacion());
+
+        $em->persist($compra);
         $em->flush();
         
         return $this->render('mercado_pago/index.html.twig', [
             'controller_name' => 'se guardo correctamente...todo terminar',
         ]);
+    }
+
+    private function obtenerEstadoAceptadoCotizacion() {
+        return $this->getDoctrine()->getManager()->getRepository(EstadoCotizacion::class)->findOneBy(array(
+            'descripcion' => 'ACEPTADA'
+        ));
+    }
+
+    private function obtenerEstadoFinalizadaSolicitud() {
+        return $this->getDoctrine()->getRepository(EstadoSolicitud::class)->findOneBy(
+            array(
+                'descripcion' => 'FINALIZADA'
+            )
+        );
     }
 
     /**
