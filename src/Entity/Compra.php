@@ -67,6 +67,12 @@ class Compra
      */
     private $tipoPagoML;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Solicitud", inversedBy="compras")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $solicitud;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,6 +195,18 @@ class Compra
     public function setTipoPagoML(?string $tipoPagoML): self
     {
         $this->tipoPagoML = $tipoPagoML;
+
+        return $this;
+    }
+
+    public function getSolicitud(): ?Solicitud
+    {
+        return $this->solicitud;
+    }
+
+    public function setSolicitud(?Solicitud $solicitud): self
+    {
+        $this->solicitud = $solicitud;
 
         return $this;
     }

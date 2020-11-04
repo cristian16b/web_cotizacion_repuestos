@@ -18,7 +18,6 @@ use JMS\Serializer\Annotation\Expose;
  *   @ORM\Index(name="solicitante_id", columns={"solicitante_id"}),
  *   @ORM\Index(name="repuesto_id", columns={"repuesto_id"}),
  *   @ORM\Index(name="estado_id", columns={"estado_id"}),
- *   @ORM\Index(name="compra_id", columns={"compra_id"})
  * })
  */
 class Solicitud
@@ -62,10 +61,6 @@ class Solicitud
      */
     private $modeloAuto;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Compra", cascade={"persist", "remove"})
-     */
-    private $compra;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\RecursoSolicitud", mappedBy="solicitud", orphanRemoval=true, cascade={"persist", "remove"})
@@ -100,10 +95,16 @@ class Solicitud
      */
     private $estado;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Compra", mappedBy="solicitud")
+     */
+    private $compras;
+
     public function __construct()
     {
         $this->recursos = new ArrayCollection();
         $this->cotizaciones = new ArrayCollection();
+        $this->compras = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,18 +156,6 @@ class Solicitud
     public function setModeloAuto(?ModeloAuto $modeloAuto): self
     {
         $this->modeloAuto = $modeloAuto;
-
-        return $this;
-    }
-
-    public function getCompra(): ?Compra
-    {
-        return $this->compra;
-    }
-
-    public function setCompra(?Compra $compra): self
-    {
-        $this->compra = $compra;
 
         return $this;
     }
@@ -278,6 +267,37 @@ class Solicitud
     public function setEstado(?EstadoSolicitud $estado): self
     {
         $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Compra[]
+     */
+    public function getCompras(): Collection
+    {
+        return $this->compras;
+    }
+
+    public function addCompra(Compra $compra): self
+    {
+        if (!$this->compras->contains($compra)) {
+            $this->compras[] = $compra;
+            $compra->setSolicitud($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompra(Compra $compra): self
+    {
+        if ($this->compras->contains($compra)) {
+            $this->compras->removeElement($compra);
+            // set the owning side to null (unless already changed)
+            if ($compra->getSolicitud() === $this) {
+                $compra->setSolicitud(null);
+            }
+        }
 
         return $this;
     }

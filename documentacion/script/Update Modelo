@@ -1,3 +1,14 @@
+CAMBIOS 2/11/2020
+
+     ALTER TABLE compra ADD CONSTRAINT FK_9EC131FF1CB9D6E4 FOREIGN KEY (solicitud_id) REFERENCES solicitud (id);
+     CREATE INDEX IDX_9EC131FF1CB9D6E4 ON compra (solicitud_id);
+     ALTER TABLE solicitud DROP FOREIGN KEY FK_96D27CC0F2E704D7;
+     DROP INDEX compra_id ON solicitud;
+     DROP INDEX UNIQ_96D27CC0F2E704D7 ON solicitud;
+     ALTER TABLE solicitud DROP compra_id;
+     
+---
+LO SIGUIENTE YA FUE EJECUTADO ANTERIORMENTE
 Correr en produccion los siguientes comandos:
 --
 ALTER TABLE compra ADD id_pago_ml VARCHAR(255) NOT NULL, 
