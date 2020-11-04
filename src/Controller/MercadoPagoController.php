@@ -125,7 +125,13 @@ class MercadoPagoController extends AbstractController
                 ->buscarPreferenciaId($preference_id);
 
         $solicitud = $cotizacion->getSolicitud();
-        $solicitud->setCompra($compra);
+        $solicitud->addCompra($compra);
+        $solicitud->setEstado($this->obtenerEstadoFinalizadaSolicitud());
+
+        $compra->setSolicitud($solicitud);
+        $cotizacion->setEstado($this->obtenerEstadoAceptadoCotizacion());
+
+        $em->persist($compra);
         $em->flush();
         
         return $this->render('mercado_pago/index.html.twig', [
