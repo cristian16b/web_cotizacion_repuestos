@@ -2,12 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\MarcaAuto;
-use App\Entity\ModeloAuto;
-use App\Entity\Repuesto;
-use App\Entity\RecursoSolicitud;
-use App\Entity\Solicitud;
-use App\Entity\EstadoSolicitud;
+use App\Entity\Compra;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -29,7 +24,7 @@ use DateTime;
 
 
 /**
-* @Route("/api/v1/listar/")
+* @Route("/api/v1/listar")
 */
 class ComprasController extends AbstractController
 {
@@ -44,20 +39,20 @@ class ComprasController extends AbstractController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Retorna las ultimas 20 cotizaciones realizadas."
+     *     description="Retorna las ultimas 20 compras realizadas."
      * )
      *
      * @SWG\Response(
      *     response=500,
-     *     description="Un error ocurrio en la busqueda de mis cotizaciones."
+     *     description="Un error ocurrio en la busqueda de mis compras."
      * )
      *
-     * @SWG\Tag(name="MisCotizacionesRecibidas")
+     * @SWG\Tag(name="MiscomprasRecibidas")
      */
     public function listarComprasAction(Request $request)
     {
         $serializer = $this->container->get('jms_serializer');
-        $cotizaciones = [];
+        $compras = [];
         $message = "";
 
         try {
@@ -71,11 +66,11 @@ class ComprasController extends AbstractController
             $error = false;
 
             $em = $this->getDoctrine()->getManager();
-            $cotizaciones= $em->getRepository(Compras::class)
+            $compras= $em->getRepository(Compras::class)
                     ->buscarUltimasPorUsuario($user);
 
-            if (is_null($cotizaciones)) {
-                $cotizaciones = [];
+            if (is_null($compras)) {
+                $compras = [];
             }
 
 
@@ -88,7 +83,7 @@ class ComprasController extends AbstractController
         $response = [
             'code' => $code,
             'error' => $error,
-            'data' => $code == 200 ? $cotizaciones : $message,
+            'data' => $code == 200 ? $compras : $message,
         ];
         
         return new Response(

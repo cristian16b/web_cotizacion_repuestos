@@ -30,7 +30,7 @@ class CompraRepository extends ServiceEntityRepository
             ->andWhere('es.descripcion like ' ."'FINALIZADA'")
             ->setParameter('usuario', $usuario)
             ->orderBy('s.id', 'DESC')
-            ->setMaxResults(100)
+            ->setMaxResults(20)
             // ->setFirstResult($limit * ($page - 1)) // Offset
             // ->setMaxResults($limit) // Limit
             ->getQuery()
