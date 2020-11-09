@@ -27,7 +27,7 @@ class CotizacionRepository extends ServiceEntityRepository
             ->where('c.fechaBaja is null')
             ->andWhere('s.solicitante = :usuario')
             ->andWhere('e.descripcion like ' ."'ENVIADA'")
-            ->andWhere('es.descripcion like ' ."'FINALIZADA'")
+            ->andWhere('es.descripcion like ' ."'INICIADA'")
             ->setParameter('usuario', $usuario)
             ->orderBy('s.id', 'DESC')
             ->setMaxResults(100)
