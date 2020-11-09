@@ -66,7 +66,7 @@ class ComprasController extends AbstractController
             $error = false;
 
             $em = $this->getDoctrine()->getManager();
-            $compras= $em->getRepository(Compras::class)
+            $compras= $em->getRepository(Compra::class)
                     ->buscarUltimasPorUsuario($user);
 
             if (is_null($compras)) {
