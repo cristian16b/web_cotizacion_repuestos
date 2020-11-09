@@ -31,7 +31,7 @@ class Tabla extends React.Component {
                         <Td><b>No se encontraron cotizaciones</b></Td>
                       </Tr>
                       :
-                      <>{this.mostrarCotizacion()}</>
+                      <>{this.mostrarCotizaciones()}</>
                     }
                   </Tbody>
                 </Table>
