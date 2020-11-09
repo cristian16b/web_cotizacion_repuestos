@@ -294,7 +294,7 @@ class MiPerfil extends React.Component {
                 <>{this.renderDatosPerfil()}</>
             </div>
           </div>
-          <>{this.renderBotones()}</>
+          {/* <>{this.renderBotones()}</> */}
         </div>
       </div>
     );
