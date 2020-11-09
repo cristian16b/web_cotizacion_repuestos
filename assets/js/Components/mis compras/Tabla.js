@@ -28,7 +28,7 @@ class Tabla extends React.Component {
                     {
                       this.props.misSolicitudes.length == 0 ?
                       <Tr>
-                        <Td><b>No se encontraron compras</b></Td>
+                        <Td><b>No se encontraron compras realizadas</b></Td>
                       </Tr>
                       :
                       <>{this.mostrarCotizacion()}</>
