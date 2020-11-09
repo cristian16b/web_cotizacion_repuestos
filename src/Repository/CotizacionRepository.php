@@ -30,7 +30,7 @@ class CotizacionRepository extends ServiceEntityRepository
             ->andWhere('es.descripcion like ' ."'FINALIZADA'")
             ->setParameter('usuario', $usuario)
             ->orderBy('s.id', 'DESC')
-            // ->setMaxResults(20)
+            ->setMaxResults(100)
             // ->setFirstResult($limit * ($page - 1)) // Offset
             // ->setMaxResults($limit) // Limit
             ->getQuery()

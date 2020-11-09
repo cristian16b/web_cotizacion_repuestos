@@ -59,7 +59,9 @@ class SolicitudRepository extends ServiceEntityRepository
                             rc.fechaBaja IS NULL
                     ORDER BY c.monto ASC
                 )
+                LIMIT 100
                 ORDER BY s.id DESC
+                
         ";
 
         return $em->createQuery($dql)->setParameter('usuario', $usuario)->getResult();
@@ -72,7 +74,7 @@ class SolicitudRepository extends ServiceEntityRepository
             ->andWhere('s.solicitante = :usuario')
             ->setParameter('usuario', $usuario)
             ->orderBy('s.id', 'DESC')
-            ->setMaxResults(20)
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
@@ -88,7 +90,7 @@ class SolicitudRepository extends ServiceEntityRepository
             ->setParameter('usuario', $usuario)
             ->setParameter('repuestoIngresado','%' . $name . '%')
             ->orderBy('s.fechaAlta', 'DESC')
-            ->setMaxResults(20)
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
