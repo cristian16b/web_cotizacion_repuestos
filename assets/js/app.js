@@ -19,6 +19,7 @@ import RecuperarContrasenia from './Components/recuperar/recuperarContrasenia';
 import NotFound from './Components/not found/notfound';
 import {ROL_COMERCIANTE} from './Constantes/constantes';
 import RegistrarML from './Components/registrarML/RegistrarML';
+import MisCompras from './Components/mis compras/misCompras';
 
 class App extends React.Component {
 
@@ -103,6 +104,7 @@ class App extends React.Component {
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} />
                 {/* <Route exact path="/contacto" component={Contacto} /> */}
                 <Route exact path="/salir" render={() => <Salir obtenerToken={this.obtenerToken}/>} />
+                <Route exact path="/compras" render={() => <MisCompras obtenerToken={this.obtenerToken}/>} />
                 <Route component={NotFound}/>
               </Switch>
             </div>
