@@ -59,12 +59,10 @@ class SolicitudRepository extends ServiceEntityRepository
                             rc.fechaBaja IS NULL
                     ORDER BY c.monto ASC
                 )
-                LIMIT 100
                 ORDER BY s.id DESC
-                
         ";
 
-        return $em->createQuery($dql)->setParameter('usuario', $usuario)->getResult();
+        return $em->createQuery($dql)->setMaxResults(100)->setParameter('usuario', $usuario)->getResult();
     }
 
     public function buscarUltimasPorId($usuario) {
