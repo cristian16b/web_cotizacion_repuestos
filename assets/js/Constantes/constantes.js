@@ -17,6 +17,8 @@ export const API_BUSCAR_SOLICITUDES = API_BASE_URL + '/api/v1/solicitudes/buscar
 export const API_ENVIAR_COTIZACION = API_BASE_URL + '/api/v1/cotizaciones/enviar';
 export const API_CANCELAR_SOLICITUD = API_BASE_URL + '/api/v1/solicitud/repuesto/cancelar/';
 export const API_LISTAR_MIS_COTIZACIONES = API_BASE_URL + '/api/v1/listar/cotizaciones/';
+export const API_LISTAR_MIS_COMPRAS = API_BASE_URL + '/api/v1/listar/compras/';
+export const API_LISTAR_MIS_VENTAS = API_BASE_URL + '/api/v1/listar/ventas/';
 export const API_MERCADO_PAGO_MOSTRAR_BOTON_PAGO = API_BASE_URL + '/api/v1/mercadoPago/pagar';
 // las siguientes son apis publicas
 export const API_OBTENER_FOTO_COTIZACION = API_BASE_URL + '/recurso/get/foto/cotizacion'
