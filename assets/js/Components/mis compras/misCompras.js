@@ -117,37 +117,37 @@ class MisCompras extends React.Component {
       this.getData(url,config);
   }
 
-  renderFilTrosBusqueda() {
-    return(
-      <>
-        <div className="row">
-          <div className="col-6 col-sm-6 col-md-6 col-lg-6">
-            <div className="form-group">
-              {/* <label htmlFor="password">Buscar repuesto solicitado</label> */}
-              <div className="input-group">
-                <span className="input-group-addon"></span>
-                  <input type="text" className="form-control" name="repuestoBuscar" 
-                                              defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
-                                              placeholder="Escriba el repuesto que solicitaste" />	
-                </div>
-                <span id="buscar" className="text-danger error_negrita">
-                  {this.state.errors["buscar"]}
-                </span> 
-            </div>
-          </div>
-          <div className="col-3 col-sm-3 col-md-3 col-lg-3">
-              <button type="submit" onClick={this.buscarRepuestoSolicitado}
-                className="btn btn-primary btn-block">Buscar</button>
-          </div>
-          <div className="col-3 col-sm-3 col-md-3 col-lg-3">
-              <button 
-                onClick={this.reiniciar}
-                className="btn btn-light btn-block">Reiniciar</button>
-          </div>
-        </div>
-      </>
-    );
-  }
+  // renderFilTrosBusqueda() {
+  //   return(
+  //     <>
+  //       <div className="row">
+  //         <div className="col-6 col-sm-6 col-md-6 col-lg-6">
+  //           <div className="form-group">
+  //             {/* <label htmlFor="password">Buscar repuesto solicitado</label> */}
+  //             <div className="input-group">
+  //               <span className="input-group-addon"></span>
+  //                 <input type="text" className="form-control" name="repuestoBuscar" 
+  //                                             defaultValue = {this.state.repuestoBuscar} onChange={this.handleChangeInput}
+  //                                             placeholder="Escriba el repuesto que solicitaste" />	
+  //               </div>
+  //               <span id="buscar" className="text-danger error_negrita">
+  //                 {this.state.errors["buscar"]}
+  //               </span> 
+  //           </div>
+  //         </div>
+  //         <div className="col-3 col-sm-3 col-md-3 col-lg-3">
+  //             <button type="submit" onClick={this.buscarRepuestoSolicitado}
+  //               className="btn btn-primary btn-block">Buscar</button>
+  //         </div>
+  //         <div className="col-3 col-sm-3 col-md-3 col-lg-3">
+  //             <button 
+  //               onClick={this.reiniciar}
+  //               className="btn btn-light btn-block">Reiniciar</button>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   render() {
     if(this.state.isLogin == false)
@@ -158,23 +158,8 @@ class MisCompras extends React.Component {
       <div>
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-            <h5>Cotizaciones recibidas</h5>
+            <h5>Mis compras</h5>
           </div>     
-        </div>
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-            <div className="card  shadow-sm p-2 mb-2">
-              <div className="card-body">         
-                <div className="col-12 col-sm-12 col-md-9 col-lg-9">
-                  <>{ this.renderFilTrosBusqueda() }</>
-                </div> 
-                {/* FIN CARDBODY */}
-              </div>
-              {/* FIN CARD */}
-            </div>
-            {/* fin dela columna */}
-          </div>
-          {/* fin de la fila */}
         </div>
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-12 col-lg-9">
@@ -184,9 +169,7 @@ class MisCompras extends React.Component {
                       reiniciar = {this.reiniciar}
                     >
                   </Tabla>
-            {/* fin dela columna */}
           </div>
-          {/* fin de la fila */}
         </div>
     </div>
     );

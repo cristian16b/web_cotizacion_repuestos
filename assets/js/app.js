@@ -104,7 +104,7 @@ class App extends React.Component {
                 <Route exact path="/cotizaciones" render={() => <MisCotizaciones token={this.state.token['token']} rol={this.state.rol}/>} />
                 {/* <Route exact path="/contacto" component={Contacto} /> */}
                 <Route exact path="/salir" render={() => <Salir obtenerToken={this.obtenerToken}/>} />
-                <Route exact path="/compras" render={() => <MisCompras obtenerToken={this.obtenerToken}/>} />
+                <Route exact path="/compras" render={() => <MisCompras token={this.state.token['token']} rol={this.state.rol}/>} />
                 <Route component={NotFound}/>
               </Switch>
             </div>
