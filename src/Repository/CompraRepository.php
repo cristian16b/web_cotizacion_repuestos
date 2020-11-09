@@ -19,6 +19,25 @@ class CompraRepository extends ServiceEntityRepository
         parent::__construct($registry, Compra::class);
     }
 
+    public function buscarUltimasPorUsuario($usuario,$page = 1, $limit = 3) {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.solicitud','s','WITH','s.fechaBaja IS null')
+            ->innerJoin('s.estado','es','WITH','es.fechaBaja IS null')
+            ->innerJoin('c.estado','e','WITH','e.fechaBaja IS null')
+            ->where('c.fechaBaja is null')
+            ->andWhere('s.solicitante = :usuario')
+            ->andWhere('e.descripcion like ' ."'ENVIADA'")
+            ->andWhere('es.descripcion like ' ."'FINALIZADA'")
+            ->setParameter('usuario', $usuario)
+            ->orderBy('s.id', 'DESC')
+            ->setMaxResults(100)
+            // ->setFirstResult($limit * ($page - 1)) // Offset
+            // ->setMaxResults($limit) // Limit
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Compra[] Returns an array of Compra objects
     //  */
