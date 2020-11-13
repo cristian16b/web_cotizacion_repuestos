@@ -8,9 +8,13 @@ Integracion de las siguientes tecnologias:
 * Symfony
 
 Ejecutar 
+
 composer install
+
 npm install
+
 
 En documentacion/script/repuestos_db copiar sql de la base de datos 
 Puede que falte actualizar el modelo, por lo cual corremos esto:
+
 php bin/console d:s:u --force
